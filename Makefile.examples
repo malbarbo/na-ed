@@ -1,0 +1,7 @@
+.PHONY: check
+
+SOURCES := $(shell fd -e py )
+
+check:
+	mypy --check-untyped-defs ${SOURCES}
+	python -B -m doctest ${SOURCES}
