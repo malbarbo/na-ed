@@ -1,6 +1,8 @@
 ---
 # vim: set spell spelllang=pt_br:
-title: Motivação
+title: Estruturas de Dados
+subtitle: Motivação
+# TODO: adiciona tabela/gráfico dos tempos de execução
 ---
 
 
@@ -8,25 +10,76 @@ title: Motivação
 
 \small
 
-Um sítio de conteúdo pretende fazer uma serie de postagens com as palavras e expressões mais comuns em diversos idiomas, incluindo também listas especializadas para determinadas áreas (como engenharia, culinária, etc).
+Um sítio de conteúdo pretende fazer uma série de postagens com as palavras/expressões mais comuns em diversos idiomas, incluindo também listas especializadas para determinadas áreas (como engenharia, culinária, etc).
 
-Para criar as listas foi levantado diversos corpus (coleções de textos) para cada possível postagem. Também foi contratado especialistas em cada idioma / área. Para ajudar os especialistas existe a necessidade de processar os textos e gerar uma lista preliminar das palavras mais frequentes.
+Para criar as listas foi levantado diversos corpus (coleções de textos) para cada possível postagem. Também foi contratado especialistas em cada idioma / área. Para ajudar os especialistas existe a necessidade de processar os textos e gerar uma lista preliminar das palavras/expressões mais frequentes.
 
-Uma equipe já pré-processou os corpus e gerou um arquivo texto contendo uma palavra/expressão por linha. Cada arquivo tem entre 1000 e 1000000 de palavras. Essa equipe também já criou uma função para ler o arquivo e devolver uma lista com cada palavra/expressão de um arquivo.
+Uma equipe já pré-processou os corpus e gerou arquivos textos contendo uma palavra/expressão em minúsculo por linha. Cada arquivo tem entre 1.000 e 1.000.000 de palavras. A equipe também já criou uma função para ler o arquivo e devolver uma lista com cada palavra/expressão de um arquivo.
 
-Agora é preciso um programa que analise uma lista e gere uma tabela com as palavras/expressões com o número de vezes (frequência) que cada uma aparece na lista (com as que mais aparecem primeiro).
+Agora é preciso um programa que analise uma lista e gere uma tabela com as palavras/expressões mais frequentes. A quantidade de itens na tabela pode variar, dependendo do corpus e da equipe de especialistas que vai usar o programa.
 
 
-# Dinâmica
+# Análise
+
+Determinar um número específico de palavras/expressões mais frequentes em uma lista de palavras/expressões.
+
+
+# Definição de tipos de dados
+
+Cada palavra/expressão será representada por uma strings.
+
+A saída será uma lista de valores `PalavraVezes`.
+
+\small
+
+```python
+@dataclass
+class PalavraVezes:
+    '''
+    Representa uma palavra e quantidade de vezes
+    que ela apareceu em um lista.
+    '''
+    palavra: str
+    vezes: int
+```
+
+
+# Especificação
+
+\footnotesize
+
+```python
+def encontra_mais_frequentes(palavras: list[str], m: int) -> list[PalavraVezes]:
+    '''
+    Encontra as *m* palavras mais frequentes em *palavras*.
+    Se a frequência de duas palavras for a mesma, então a
+    que vem primeiro em ordem alfabética aparece primeiro.
+    Se *m* for menor que a quantidade de palavras distintas,
+    então devolve a frequência de todas as palavras.
+    Requer que m > 0.
+
+    Exemplos
+    >>> encontra_mais_frequentes(['casa', 'de', 'a', 'ti', 'de', \
+                                 'a', 'casa', 'a', 'de'], 3)
+    [PalavraVezes(palavra='a', vezes=3),
+     PalavraVezes(palavra='de', vezes=3),
+     PalavraVezes(palavra='casa', vezes=2)]
+    '''
+```
+
+
+# Implementação - Dinâmica de grupo
+
+Agora precisamos fazer a implementação! \pause
 
 Forme equipes de até 5 pessoas. \pause
 
-Proponha um algoritmo para resolver esse problema. \pause
+Proponha um algoritmo para resolver o problema. \pause
 
 Apresente o algoritmo usando um exemplo.
 
 
-# Estratégias
+# Estratégias de implementação
 
 Abordagem incremental direta:
 
@@ -38,48 +91,234 @@ Abordagem incremental direta:
     - Senão adicionamos na lista a palavra com a frequência 1.
 
 
+# Implementação da abordagem incremental
+
+\footnotesize
+
+```python
+def encontra_mais_frequentes(palavras: list[str], m: int) -> list[PalavraVezes]:
+    contagem: list[PalavraVezes] = []
+    for p in palavras:
+        # Procura o índice i de p na contagem
+        i = 0
+        while i < len(contagem) and contagem[i].palavra != p:
+            i = i + 1
+        # Encontrou o índice de p? Ou seja, p está na contagem?
+        if i < len(contagem):
+            contagem[i].vezes = contagem[i].vezes + 1
+        else:
+            contagem.append(PalavraVezes(p, 1))
+        # Ajusta contagem para manter a ordem
+        while i > 0 and contagem[i - 1] < contagem[i]:
+            troca(contagem, i - 1, i)
+            i = i - 1
+    return contagem[:m]
+```
+
+
 # Estratégias
 
-Abordagem usado um plano: \pause
+Abordagem usado um plano (etapas): \pause
 
-- Calculamos a frequência de cada palavra e criamos uma lista \pause
+- Calculamos a frequência de cada palavra \pause
 
-- Ordenamos a lista \pause
+    - Podemos usar o método incremental: começamos sem nenhuma palavra e analisamos uma palavra por vez. Se a palavra já aparece, aumentamos sua frequência em 1, senão adiciona a palavra com frequência inicial de 1 \pause
 
+- Ordenamos as palavras em ordem de maior frequência \pause
 
-Como calcular a frequência de cada palavra? \pause
-
-- Usando o método incremental \pause
-
-- Ordenando a lista e contando as palavras iguais consecutivas \pause
+    - Podemos usar a ordenação por seleção: encontramos a palavra com maior frequência e colocamos na posição 0 da lista, repetimos o processo para as posições 1, 2, ... até a última posição da lista.
 
 
-Como ordenar a lista por frequência? \pause
+# Implementação da abordagem de etapas
 
-- Usando a ordenação por seleção. Encontramos a palavra com maior frequência e colocamos na posição 0 da lista, repetimos o processo para as posições 1, 2, ... até a última posição da lista.
+\scriptsize
+
+```python
+def encontra_mais_frequentes(palavras: list[str], m: int) -> list[PalavraVezes]:
+    # Calcula a frequência de cada palavra
+    contagem: list[PalavraVezes] = []
+    for p in palavras:
+        i = 0 # Procura o índice i de p na contagem
+        while i < len(contagem) and contagem[i].palavra != p:
+            i = i + 1
+        # Encontrou o índice de p? Ou seja, p está na contagem?
+        if i < len(contagem):
+            contagem[i].vezes = contagem[i].vezes + 1
+        else:
+            contagem.append(PalavraVezes(p, 1))
+    # Ordena por maior frequência
+    for i in range(len(contagem)):
+        m = i
+        for j in range(i + 1, len(contagem)):
+            if contagem[m] < contagem[j]:
+                m = j
+        troca(contagem, i, m)
+    return contagem[:m]
+```
 
 
 # Perguntas
 
-Como avaliar quais desses algoritmos é mais viável? \pause
+Como avaliar qual desses algoritmos é mais adequado? \pause
 
-Como avaliar se _algum_ desses algoritmos é viável? \pause
+Se os algoritmos funcionam corretamente, porque algum seria mais adequado do que outro?
 
-Se os algoritmos funcionam corretamente, porque algum pode não ser viável? \pause
 
-Vamos ver as implementações e como elas funcionam para dados reais.
+# Avaliação experimental
+
+A implementação da abordagem incremental está disponível no arquivo `mais-frequentes-inc.py`. \pause
+
+Encontra as 20 palavras mais frequentes entre as primeiras 10.000 primeiras palavras do arquivo `palavras.txt`
+
+```
+$ python mais-frequentes-inc.py 20 10000 palavras.txt
+Palavras mais frequentes:
+the 620
+of 340
+...
+Tempo de execução: 0.57 segundos
+```
+
+\pause
+
+Parece bom!
+
+
+# Avaliação experimental
+
+Encontra as 20 palavras mais frequentes entre as primeiras 200.000 primeiras palavras do arquivo `palavras.txt`
+
+```
+$ python mais-frequentes-inc.py 20 200000 palavras.txt
+Palavras mais frequentes:
+the 13143
+of 6228
+...
+Tempo de execução: 31.49 segundos
+```
+
+\pause
+
+Demorou muito para executar...
+
+
+# Avaliação experimental
+
+A implementação da abordagem com etapas está disponível no arquivo `mais-frequentes-etapas.py`. \pause
+
+Encontra as 20 palavras mais frequentes entre as primeiras 10.000 primeiras palavras do arquivo `palavras.txt`
+
+```
+$ python mais-frequentes-etapas.py 20 10000 palavras.txt
+Palavras mais frequentes:
+the 620
+of 340
+....
+Tempo de execução: 0.59 segundos
+```
+
+\pause
+
+Parece bom!
+
+
+# Avaliação
+
+Encontra as 20 palavras mais frequentes entre as primeiras 200.000 primeiras palavras do arquivo `palavras.txt`
+
+```
+$ python mais-frequentes-etapas.py 20 200000 palavras.txt
+Palavras mais frequentes:
+the 620
+of 340
+....
+Tempo de execução: 28.32 segundos
+```
+
+\pause
+
+Demorou muito para executar...
+
+
+# Considerações
+
+Nenhum das duas abordagens é viável... \pause
+
+Podemos fazer melhor? \pause Sim! \pause Mas precisamos de estruturas de dados e métodos de ordenação eficientes, que é o que vamos estudar nessa disciplina!
+
+
+# Considerações
+
+Dentre as várias estruturas de dados e algoritmos que vamos estudar podemos destacar: \pause
+
+- Árvores binárias balanceadas de busca: mantêm uma coleção de itens ordenados que podem ser pesquisados e alterados de forma eficiente. Permitirá que o algoritmo incremental que nós vimos seja implementado de forma eficiente. \pause
+
+- Tabelas de dispersão: mantêm uma coleção de itens que podem ser pesquisados e alterados de forma eficiente. \pause
+
+- Algoritmo de ordenação por particionamento: ordena uma coleção de itens de forma eficiente. Junto com tabelas de dispersão permitirá que o algoritmo por etapa que nós vimos seja implementado de forma eficiente.
+
+
+# Considerações
+
+Tá, mas quão eficiente podemos deixar os algoritmos que implementados? \pause
+
+A biblioteca do Python disponibiliza um tipo chamado `dict`{.python} (dicionário), que é implementado com uma tabela de dispersão. Além disso, também temos a função `sort`{.python}, que é implementada com um algoritmo mais eficiente do que aquele que fizemos. \pause
+
+Podemos implementar nosso algoritmo por etapas com `dict` e `sort`. \pause
+
+**Note que** não vamos utilizar as coisas prontas do Python durante a disciplina, a ideia aqui é apenas mostrar qual eficiente pode ser alcançada usando estruturas de dados e algoritmos de ordenação adequados.
+
+
+# Implementação eficiente
+
+\scriptsize
+
+```python
+def encontra_mais_frequentes(palavras: list[str], m: int) -> list[PalavraVezes]:
+    # Calcula a frequência de cada palavra
+    contagem: dict[str, int] = {}
+    for p in palavras:
+        if p in contagem:
+            contagem[p] = contagem[p] + 1
+        else:
+            contagem[p] = 1
+
+    # Cria uma lista de PalavrasVezes
+    freqs = []
+    for p, vezes in contagem.items():
+        freqs.append(PalavraVezes(p, vezes))
+
+    # Ordena a lista
+    freqs.sort(reverse=True)
+
+    return freqs[:m]
+```
+
+
+# Avaliação experimental
+
+Essa implementação está disponível no arquivo `mais-frequentes-etapas-dict-sort.py`. \pause
+
+Encontra as 20 palavras mais frequentes entre as primeiras 200.000 primeiras palavras do arquivo `palavras.txt`
+
+```
+$ python mais-frequentes-etapas.py 20 200000 palavras.txt
+Palavras mais frequentes:
+the 13143
+of 6228
+...
+Tempo de execução: 0.037 segundos
+```
 
 
 # Conclusões
 
 Conclusões
 
-- Mesmo que um algoritmo funcione corretamente, ele pode ser inviável devido ao seu tempo de execução. \pause
+- Mesmo que um algoritmo funcione corretamente e seja rápido para algumas entradas, ele pode ser inviável devido ao seu tempo de execução para entradas maiores. \pause
 
 - Precisamos de uma forma para determinar o tempo de execução de um algoritmo sem precisar implementá-lo. \pause
 
 - As estruturas de dados são essenciais para algoritmos eficientes. \pause
-
-- Os tipos abstratos de dados nos ajudam na decomposição do problema. \pause
 
 - Algoritmos de ordenação eficientes são importantes para a computação.
