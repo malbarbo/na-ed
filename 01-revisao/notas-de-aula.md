@@ -1,6 +1,7 @@
 ---
 # vim: set spell spelllang=pt_br:
 title: Revisão
+# TODO: falar de variáveis e tipos explicitamente
 ---
 
 Introdução
@@ -73,7 +74,7 @@ Para aprender uma linguagem de programação, temos que, de maneira simplificada
 
 - Estruturas de controle \pause
 
-- Definir de novos tipos de dados
+- Definição de novos tipos de dados
 
 
 ## Instalação
@@ -913,7 +914,7 @@ IndexError: list index out of range
 
 - Estruturas de controle
 
-- Definir de novos tipos de dados
+- Definição de novos tipos de dados
 
 
 ## Definições de funções
@@ -953,7 +954,6 @@ Uso da nova função
 
 ## Aprendizagem de uma nova linguagem
 
-
 - ~~Tipos primitivos de dados~~
 
 - ~~Operações primitivas~~
@@ -962,12 +962,14 @@ Uso da nova função
 
 - Estruturas de controle
 
-- Definir de novos tipos de dados
+- Definição de novos tipos de dados
 
 
 ## Seleção
 
 A forma geral do `if else`{.python} é:
+
+\small
 
 ```python
 if condição:
@@ -978,17 +980,25 @@ else:
 
 ## Exemplo seleção
 
+<div class="columns">
+<div class="column" width="48%">
 \small
 
 ```python
 def maximo(a: int, b: int) -> int:
-    '''Devolve o valor máximo entre *a* e *b*.'''
+    '''
+    Devolve o valor máximo
+    entre *a* e *b*.
+    '''
     if a > b:
         m = a
     else:
         m = b
     return m
 ```
+
+</div>
+<div class="column" width="48%">
 
 \pause
 
@@ -1002,6 +1012,9 @@ Exemplos
 >>> maximo(-2, -1)
 -1
 ```
+
+</div>
+</div>
 
 
 ## Seleção aninhada
@@ -1077,6 +1090,25 @@ Ou seja, o "para cada" executa as mesmas instruções atribuindo cada valor de `
 
 ## Exemplo do "para cada"
 
+\small
+
+```python
+>>> for x in [6, 1, 4, 5]:
+...     print(x)
+```
+
+\pause
+
+```python
+6
+1
+4
+5
+```
+
+
+## Exemplo do "para cada"
+
 <div class="columns">
 <div class="column" width="45%">
 \small
@@ -1084,7 +1116,10 @@ Ou seja, o "para cada" executa as mesmas instruções atribuindo cada valor de `
 ```python
 def soma(lst: list[int]) -> int:
     '''Soma os elementos de *lst*.'''
-    return 0
+    soma = 0
+    for n in lst:
+        soma = soma + n
+    return soma
 ```
 
 \pause
@@ -1108,6 +1143,382 @@ Exemplos
 ```
 </div>
 </div>
+
+
+## Exemplo de execução passa a passo do "para cada"
+
+<div class="columns">
+<div class="column" width="48%">
+\footnotesize
+
+```{.python .number-lines}
+def soma(lst: list[int]) -> int:
+    soma = 0
+    for n in lst:
+        soma = soma + n
+    return soma
+
+soma([5, 1, 4])
+```
+
+</div>
+<div class="column" width="48%">
+Vamos exercitar mais uma vez a execução passo a passo. \pause
+
+Qual é a ordem que as linhas são executadas? \pause
+
+\footnotesize
+
+7, \pause 2 (`soma = 0`{.python}), \pause
+
+3 (`n = 5`{.python}), \pause 4 (`soma = 5`{.python}), \pause
+
+3 (`n = 1`{.python}), \pause 4 (`soma = 6`{.python}), \pause
+
+3 (`n = 4`{.python}), \pause 4 (`soma = 10`{.python}), \pause
+
+3 (identifica que não tem mais elementos), \pause 5 (devolve `10`{.python}), \pause
+
+7
+</div>
+</div>
+
+
+## Repetição com "para cada no intervalo"
+
+Podemos escrever o "para cada" com a seguinte forma alternativa: \pause
+
+\small
+
+```python
+for var in range(inicio, fim):
+    instruções
+```
+
+\pause
+
+\normalsize
+
+O funcionamento dessa forma é a seguinte: \pause
+
+- `var` é inicializado com `inicio` \pause
+- Se `var < fim`, as `instruções` são executadas, `var` é incrementado de `1`{.python} e esse processo é executado novamente \pause
+- Senão, o "para cada" é finalizado \pause
+
+O valor `inicio` pode ser omitido, nesse caso, `var` é inicializado com `0`{.python}.
+
+
+## Exemplo do "para cada no intervalo"
+
+<div class="columns">
+<div class="column" width="48%">
+\small
+
+```python
+>>> for i in range(3, 7):
+...     print(i)
+```
+
+\pause
+
+```python
+3
+4
+5
+6
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+\small
+
+```python
+>>> lst = [4, 1, 5, 2]
+>>> for i in range(len(lst)):
+...     print(i, lst[i])
+```
+
+\pause
+
+```python
+0 4
+1 1
+2 5
+3 2
+```
+</div>
+</div>
+
+
+## Exemplo do "para cada no intervalo"
+
+Função que soma os valores de uma lista
+
+<div class="columns">
+<div class="column" width="48%">
+
+\footnotesize
+
+```python
+def soma(lst: list[int]) -> int:
+    soma = 0
+    for n in lst:
+        soma = soma + n
+    return soma
+```
+
+</div>
+<div class="column" width="48%">
+
+\footnotesize
+
+```python
+def soma(lst: list[int]) -> int:
+    soma = 0
+    for i in range(len(lst)):
+        soma = soma + lst[i]
+    return soma
+```
+
+</div>
+</div>
+
+\normalsize
+
+\ 
+
+Qual das duas formas é mais simples? \pause A da esquerda!
+
+
+## Exemplo do "para cada no intervalo"
+
+Função que encontra o índice da primeira ocorrência do valor máximo de uma lista não vazia.
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def indice_maximo(lst: list[int]) -> int:
+    assert len(lst) != 0
+    i = 0
+    imax = 0
+    for n in lst:
+        if n > lst[imax]:
+            imax = i
+        i = i + 1
+    return imax
+```
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def indice_maximo(lst: list[int]) -> int:
+    assert len(lst) != 0
+    imax = 0
+    for i in range(1, len(lst)):
+        if lst[i] > lst[imax]:
+            imax = i
+    return imax
+```
+
+</div>
+</div>
+
+\ 
+
+Qual das duas soluções é mais simples? \pause A da direita! \pause
+
+Devemos usar o "para cada no intervalo" apenas quando precisamos do índice.
+
+
+## Repetição com "enquanto"
+
+A forma geral do `while`{.python} é: \pause
+
+\small
+
+```python
+while condição:
+    instruções
+```
+
+\pause
+
+\normalsize
+
+O funcionamento do `while`{.python} é o seguinte: \pause
+
+- A `condição` é avaliada \pause
+
+- Se ela for `True`{.python}, as `instruções` são executadas e o processo se repete \pause
+
+- Senão, o `while`{.python} termina
+
+
+## Exemplo do "enquanto"
+
+<div class="columns">
+<div class="column" width="48%">
+\small
+
+```python
+>>> i = 4
+>>> while i < 10:
+...     print(i)
+...     i = 2 * i
+```
+
+\pause
+
+```python
+4
+8
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+\small
+
+```python
+>>> i = 0
+>>> x = 12
+>>> while x >= 3:
+...     x = x - 3
+...     i = i + 1
+>>> i
+```
+
+\pause
+
+```python
+4
+```
+</div>
+</div>
+
+
+## Exemplo de execução passo a passo do "enquanto"
+
+<div class="columns">
+<div class="column" width="48%">
+
+\footnotesize
+
+```{.python .number-lines}
+def nao_decrescente(lst: list[int]) -> bool:
+    em_ordem = True
+    i = 1
+    while i < len(lst) and em_ordem:
+        if lst[i - 1] > lst[i]:
+            em_ordem = False
+        i = i + 1
+    return em_ordem
+
+nao_decrescente([1, 3, 3, 2, 7, 8])
+```
+
+</div>
+<div class="column" width="48%">
+Qual é a ordem que as linhas são executadas? \pause
+
+\small
+
+10 \pause
+
+2 (`em_ordem = True`{.python}) \pause
+
+3 (`i = 1`{.python}) \pause
+
+4 \pause, 5 \pause, 7 (`i = 2`{.python}) \pause
+
+4 \pause, 5 \pause, 7 (`i = 3`{.python}) \pause
+
+4 \pause, 5 \pause, 6 (`em_ordem = False`{.python}) \pause, 7 (`i = 4`{.python}) \pause
+
+4 \pause
+
+8 (produz `False`{.python})\pause
+
+10
+
+</div>
+</div>
+
+
+## Aprendizagem de uma nova linguagem
+
+- ~~Tipos primitivos de dados~~
+
+- ~~Operações primitivas~~
+
+- ~~Definição de novas operações~~
+
+- ~~Estruturas de controle~~
+
+- Definição de novos tipos de dados
+
+
+## Tipo de dado
+
+Um **tipo de dado** é o conjunto de valores que uma variável pode assumir. \pause
+
+Exemplos \pause
+
+- `bool`{.python} $= \{$ `True`{.python} , `False`{.python} $\}$ \pause
+- `int`{.python} = $\{\dots, -2, -1, 0, 1, 2, \dots \}$ \pause
+- `float`{.python} = $\{\dots, -0.1, -0.0, 0.0, 0.1, \dots \}$ \pause
+- `str`{.python} = $\{$ `''`{.python}, `'a'`{.python}, `'b'`{.python}, $\dots \}$
+
+
+## Tipo de dados
+
+Durante a etapa de definição de tipos de dados (do processo de projeto de funções) temos que determinar quais são as informações e como elas serão representadas. \pause
+
+Algumas informações podem ser representas diretamente com os tipos primitivos da linguagem. Para outras informações, precisamos definir novos tipos de dados. \pause
+
+Quais as características devemos considerar no projeto/definição de um tipo de dado? \pause
+
+- Que o tipo de dado permita que informações válidas sejam representáveis.
+
+- Que o tipo de dado não permita que informações inválidas sejam representáveis.
+
+
+## Tipos de dados
+
+Temos que fazer um software de simulação e precisamos representar a cor de um semáforo (que pode ser verde, vermelha ou amarela). \pause
+
+Qual tipo de dados podemos utilizar? \pause
+
+Uma string é um tipo adequado? \pause Não, pois permite que informações inválidas sejam representadas.
+
+
+## Tipos enumerados
+
+Em um **tipo enumerado** todos os valores válidos para o tipo são enumerados explicitamente. \pause
+
+A forma geral para definir tipos enumerados é
+
+\small
+
+```python
+from enum import Enum, auto
+
+class NomeDoTipo(Enum):
+    VALOR1 = auto()
+    ...
+    VALORN = auto()
+```
+
 
 
 Projeto de programas na linguagem Python
