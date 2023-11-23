@@ -65,13 +65,15 @@ A linguagem Python
 
 Para aprender uma linguagem de programação, temos que, de maneira simplificada, aprender: \pause
 
-- Quais os tipos primitivos de dados \pause
+- Tipos primitivos de dados \pause
 
-- Quais as operações primitivas \pause
+- Operações primitivas \pause
 
-- Como definir novos tipos de dados \pause
+- Definição de novas operações \pause
 
-- Como definir novas operações
+- Estruturas de controle \pause
+
+- Definir de novos tipos de dados
 
 
 ## Instalação
@@ -445,6 +447,71 @@ IndexError: string index out of range
 </div>
 
 
+## Formas de expressões
+
+Inicialmente as expressões que vimos usavam apenas operadores matemáticos \pause
+
+```python
+30 * 2
+```
+
+\pause
+
+Depois vimos que as expressões podem conter chamadas de funções \pause
+
+```python
+round(3.5)
+```
+
+\pause
+
+e chamadas de métodos
+
+```python
+'José'.lower()
+```
+
+\pause
+
+Por fim, vimos que strings podem ser indexadas \pause
+
+```python
+'veja isso'[2:6]
+```
+
+
+## Formas de expressões
+
+Embora a forma de utilizar operadores, funções, métodos e indexação seja diferente, o propósito dessas construções é o mesmo: computar valores de saída a partir de valores de entrada.
+
+
+## Formas de expressões
+
+<div class="columns">
+<div class="column" width="50%">
+![](imagens/operacoes-entrada-saida.pdf){width=6cm}
+\pause
+</div>
+<div class="column" width="50%">
+\small
+Se o propósito é o mesmo, por que não usar a mesma forma? \pause
+
+Por conveniência! \pause
+
+Por exemplo, se não tivéssemos a forma de operadores e apenas a forma de chamada de funções, então deveríamos escrever
+
+```python
+from operator import add, mull
+add(mul(30, 2), 3)
+```
+
+ao invés de `30 * 2 + 3`{.python}, o que seria inconveniente. \pause
+
+Além da conveniência de escrita, a forma de chamada métodos e indexação tem outras vantagens, vamos discutir isso ao longo da disciplina.
+</div>
+</div>
+
+
 ## Operações relacionais
 
 <div class="columns">
@@ -699,29 +766,161 @@ False
 
 ## Operadores relacionais
 
-Quem tem maior prioridade, o `and`{.python} ou o `or`{.python}? \pause O `and`{.python}. \pause Vamos criar uma expressão que mostre que isso é verdade. \pause
+Quem tem maior prioridade, o `and`{.python} ou o `or`{.python}? \pause O `and`{.python}.
 
 \small
 
 ```python
->>> # A expressão é equivalente a
->>> # (False and False) or True
->>> # que produz True
 >>> False and False or True
 True
->>> # Se o or tivesse prioridade
->>> # sobre o and, então a expressão
->>> # seria equivalente a
->>> # False and (False or True)
->>> # que produz False
+```
+
+\pause
+
+
+```python
+>>> # É equivalente a expressão anterior
+>>> (False and False) or True
+True
+```
+
+\pause
+
+
+```python
+>>> # Se o or tivesse prioridade...
 >>> False and (False or True)
 False
 ```
 
 
+## Listas
+
+Os arranjos em Python são dinâmicos, isto é, podem mudar de tamanho, e são representados pelo tipo `list`{.python}.
+
+
+## Listas - inicialização e indexação
+
+<div class="columns">
+<div class="column" width="48%">
+
+\footnotesize
+
+```python
+>>> # Inicialização
+>>> x: list[int] = [9 + 1, 1, 7, 2]
+>>> x
+[10, 1, 7, 2]
+```
+
+\pause
+
+```python
+>>> # Lista vazia
+>>> y = [] # ou list()
+>>> y
+[]
+```
+
+\pause
+
+```python
+>>> # Número de elementos
+>>> len(x)
+4
+>>> len(y)
+0
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+\footnotesize
+
+```python
+>>> # Indexação
+>>> nomes = ['Maria', 'João', 'Paulo']
+>>> nomes[1]
+'João'
+>>> # Acesso fora da faixa
+>>> nomes[3]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: list index out of range
+```
+
+\pause
+
+```python
+>>> # Sublistas
+>>> x = [4, 1, 5, 7, 3]
+>>> x[:2]
+[4, 1]
+>>> x[2:]
+[5, 7, 3]
+```
+
+</div>
+</div>
+
+
+## Listas - alteração, acréscimo e concatenação
+
+<div class="columns">
+<div class="column" width="45%">
+
+\footnotesize
+
+```python
+>>> # Substituição de um elemento
+>>> y = [4, 2]
+>>> y[1] = 7
+>>> y
+[4, 7]
+```
+
+\pause
+
+```python
+>>> # Acrésimo de um elemento
+>>> y.append(5) # list.append(y, 5)
+>>> y
+[4, 7, 5]
+>>> y.append(3)
+>>> y
+[4, 7, 5, 3]
+```
+
+\pause
+
+```python
+>>> # Concatenação
+>>> [1, 2, 3] + [4, 5]
+[1, 2, 3, 4, 5]
+```
+
+
+## Aprendizagem de uma nova linguagem
+
+
+- ~~Tipos primitivos de dados~~
+
+- ~~Operações primitivas~~
+
+- Definição de novas operações
+
+- Estruturas de controle
+
+- Definir de novos tipos de dados
+
+
 ## Definições de funções
 
 A forma geral para definição de funções em Python é?
+
+\small
 
 ```python
 def nome(entrada1: tipo, entrada2: tipo, ...) -> tipo:
@@ -729,17 +928,186 @@ def nome(entrada1: tipo, entrada2: tipo, ...) -> tipo:
     return exp
 ```
 
-\pause
-
-Vamos definir uma função que calcule o quadrado de um número inteiro.
-
 
 ## Definições de funções
 
+\small
+
 ```python
-def quadrado(x: int) -> int:
-    return x * x
+def soma_quadrados(a: int, b: int) -> int:
+    '''Calcula a soma de *a* ao quadrado e *b* ao quadrado'''
+    a2 = a ** 2
+    return a2 + b * b
 ```
+
+
+\pause
+
+Uso da nova função
+
+```python
+>>> soma_quadrados(3, 4)
+25
+```
+
+
+## Aprendizagem de uma nova linguagem
+
+
+- ~~Tipos primitivos de dados~~
+
+- ~~Operações primitivas~~
+
+- ~~Definição de novas operações~~
+
+- Estruturas de controle
+
+- Definir de novos tipos de dados
+
+
+## Seleção
+
+A forma geral do `if else`{.python} é:
+
+```python
+if condição:
+    instruções então
+else:
+    instruções senão
+```
+
+## Exemplo seleção
+
+\small
+
+```python
+def maximo(a: int, b: int) -> int:
+    '''Devolve o valor máximo entre *a* e *b*.'''
+    if a > b:
+        m = a
+    else:
+        m = b
+    return m
+```
+
+\pause
+
+Exemplos
+
+\small
+
+```python
+>>> maximo(10, 8)
+10
+>>> maximo(-2, -1)
+-1
+```
+
+
+## Seleção aninhada
+
+<div class="columns">
+<div class="column" width="48%">
+\footnotesize
+
+```python
+def maximo3(a: int, b: int, c: int) -> int:
+    '''
+    Encontra o valor máximo entre
+    *a*, *b* e *c*.
+    '''
+    if a >= b and a >= c:
+        m = a
+    else:
+        if b >= a and b >= c:
+            m = b
+        else: # c >= a and c >= b
+            m = c
+    return m
+```
+
+</div>
+<div class="column" width="48%">
+
+\footnotesize
+
+```python
+def maximo3(a: int, b: int, c: int) -> int:
+    '''
+    Encontra o valor máximo entre
+    *a*, *b* e *c*.
+    '''
+    if a >= b and a >= c:
+        m = a
+    elif b >= a and b >= c:
+        m = b
+    else: # c >= a and c >= b
+        m = c
+    return m
+```
+
+</div>
+</div>
+
+
+## Repetição com "para cada"
+
+A forma geral do "para cada" é \pause
+
+\small
+
+```python
+for var in lista:
+    instruções
+```
+
+\pause
+
+\normalsize
+
+O "para cada" funciona da seguinte maneira: \pause
+
+- O primeiro valor de `lista` é atribuído para `var` e as `instruções` são executadas; \pause
+- O segundo valor de `lista` é atribuído para `var` e as `instruções` são executadas; \pause
+- ... \pause
+- E assim por diante até que todos os valores de `lista` tenham sidos atribuídos para `var`. \pause
+
+Ou seja, o "para cada" executa as mesmas instruções atribuindo cada valor de `lista` para `var`, por isso ele chama "para cada"!
+
+
+## Exemplo do "para cada"
+
+<div class="columns">
+<div class="column" width="45%">
+\small
+
+```python
+def soma(lst: list[int]) -> int:
+    '''Soma os elementos de *lst*.'''
+    return 0
+```
+
+\pause
+
+</div>
+<div class="column" width="50%">
+
+Exemplos
+
+\small
+
+```python
+>>> soma([])
+0
+>>> soma([3])
+3
+>>> soma([3, 7])
+10
+>>> soma([3, 7, 2])
+12
+```
+</div>
+</div>
 
 
 Projeto de programas na linguagem Python
