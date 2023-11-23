@@ -1486,11 +1486,11 @@ Durante a etapa de definição de tipos de dados (do processo de projeto de fun�
 
 Algumas informações podem ser representas diretamente com os tipos primitivos da linguagem. Para outras informações, precisamos definir novos tipos de dados. \pause
 
-Quais as características devemos considerar no projeto/definição de um tipo de dado? \pause
+Quais características são desejáveis no projeto/definição de um tipo de dado? \pause
 
-- Que o tipo de dado permita que informações válidas sejam representáveis.
+- Que as informações válidas possam representadas.
 
-- Que o tipo de dado não permita que informações inválidas sejam representáveis.
+- Que as informações inválidas não possam ser representadas representáveis.
 
 
 ## Tipos de dados
@@ -1499,7 +1499,9 @@ Temos que fazer um software de simulação e precisamos representar a cor de um 
 
 Qual tipo de dados podemos utilizar? \pause
 
-Uma string é um tipo adequado? \pause Não, pois permite que informações inválidas sejam representadas.
+String é um tipo adequado? \pause Não, pois `'casa'`{.python} é uma string mas não representa uma informação (cor) válida. \pause
+
+Como fazemos nesse caso? \pause Criamos um tipo enumerado.
 
 
 ## Tipos enumerados
@@ -1519,6 +1521,78 @@ class NomeDoTipo(Enum):
     VALORN = auto()
 ```
 
+
+## Definição de um tipo enumerado
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+from enum import Enum, auto
+
+class Cor(Enum):
+    '''O cor de um semáforo de trânsito'''
+    VERDE = auto()
+    VERMELHO = auto()
+    AMARELO = auto()
+```
+
+</div>
+<div class="column" width="48%">
+
+\small
+
+```python
+>>> c = Cor.VERDE
+>>> c.value
+1
+>>> c.name
+'VERDE'
+>>> c == Cor.VERDE
+True
+>>> Cor.VERDE == Cor.VERMELHO
+False
+```
+</div>
+</div>
+
+
+## Função com tipo enumerado
+
+<div class="columns">
+<div class="column" width="48%">
+
+```python
+def proxima_cor(atual: Cor) -> Cor:
+    '''
+    Produz a próxima cor de uma semáfaro que
+    está na cor *atual*.
+    '''
+    if atual == Cor.VERDE:
+        proxima = Cor.AMARELO
+    elif atual == Cor.AMARELO:
+        proxima = Cor.VERMELHO
+    elif atual == Cor.VERMELHO:
+        proxima = Cor.VERDE
+    return proxima
+```
+</div>
+<div class="column" width="48%">
+
+Exemplos
+
+```python
+>>> proxima_cor(Cor.VERDE).name
+'AMARELO'
+>>> proxima_cor(Cor.AMARELO).name
+'VERMELHO'
+>>> proxima_cor(Cor.VERMELHO).name
+'VERDE'
+```
+
+</div>
+</div>
 
 
 Projeto de programas na linguagem Python
