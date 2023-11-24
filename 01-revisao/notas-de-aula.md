@@ -1495,7 +1495,7 @@ Quais características são desejáveis no projeto/definição de um tipo de dad
 
 ## Tipos de dados
 
-Temos que fazer um software de simulação e precisamos representar a cor de um semáforo (que pode ser verde, vermelha ou amarela). \pause
+Em um programa de simulação precisamos representar a cor de um semáforo (que pode ser verde, vermelha ou amarela) e projetar uma função que indique qual deve ser a próxima cor de uma semáforo a partir da cor atual. \pause
 
 Qual tipo de dados podemos utilizar? \pause
 
@@ -1522,21 +1522,26 @@ class NomeDoTipo(Enum):
 ```
 
 
-## Definição de um tipo enumerado
+## Exemplo tipo enumerado
 
 <div class="columns">
 <div class="column" width="48%">
-\scriptsize
+\small
 
 ```python
 from enum import Enum, auto
 
 class Cor(Enum):
-    '''O cor de um semáforo de trânsito'''
+    '''
+    A cor de um semáforo
+    de trânsito.
+    '''
     VERDE = auto()
     VERMELHO = auto()
     AMARELO = auto()
 ```
+
+\pause
 
 </div>
 <div class="column" width="48%">
@@ -1545,6 +1550,8 @@ class Cor(Enum):
 
 ```python
 >>> c = Cor.VERDE
+>>> c
+<Cor.VERDE: 1>
 >>> c.value
 1
 >>> c.name
@@ -1558,16 +1565,45 @@ False
 </div>
 
 
-## Função com tipo enumerado
+## Exemplo tipo enumerado
 
 <div class="columns">
 <div class="column" width="48%">
 
+\footnotesize
+
+```python
+def proxima_cor(atual: str) -> str:
+    '''
+    Produz a próxima cor de uma semáfaro
+    que está na cor *atual*.
+    '''
+    if atual == 'verde':
+        proxima = 'amarelo'
+    elif atual == 'amarelo':
+        proxima = 'vermelho'
+    elif atual == 'vermelho':
+        proxima = 'verde'
+    return proxima
+```
+
+Exemplos
+
+```python
+>>> proxima_cor('verde')
+'amarelo'
+```
+
+</div>
+<div class="column" width="48%">
+
+\footnotesize
+
 ```python
 def proxima_cor(atual: Cor) -> Cor:
     '''
-    Produz a próxima cor de uma semáfaro que
-    está na cor *atual*.
+    Produz a próxima cor de uma semáfaro
+    que está na cor *atual*.
     '''
     if atual == Cor.VERDE:
         proxima = Cor.AMARELO
@@ -1577,22 +1613,199 @@ def proxima_cor(atual: Cor) -> Cor:
         proxima = Cor.VERDE
     return proxima
 ```
-</div>
-<div class="column" width="48%">
 
 Exemplos
 
 ```python
 >>> proxima_cor(Cor.VERDE).name
 'AMARELO'
->>> proxima_cor(Cor.AMARELO).name
-'VERMELHO'
->>> proxima_cor(Cor.VERMELHO).name
-'VERDE'
 ```
 
 </div>
 </div>
+
+
+## Tipos compostos
+
+Em um determinado programa o tempo de uma atividade é medida em segundos, mas é preciso exibir esse tempo em horas, minutos e segundos. Para isso precisamos projetar uma função que converte uma quantidade de segundos para uma quantidade de horas, minutos e segundos equivalentes. \pause
+
+Os segundos da entrada da função pode ser representados comum número inteiro positivo, mas como representar a saída (o tempo em h, m, s)?
+
+
+## Tipos de dados
+
+Vamos relembrar alguns tipos de dados que utilizamos até agora:
+
+- Tipos atômicos pré-definidos na linguagem: `int, float, bool, str`{.python}
+- Tipos enumerados definidos pelo usuário: `Cor`
+
+\pause
+
+Os tipos atômicos têm esse nome porque não são compostos por partes. \pause
+
+Podemos criar novos tipos agregando partes (campos) de tipos já existentes. \pause
+
+Uma forma de fazer isso é através de tipos compostos (estruturas).
+
+
+## Tipos compostos
+
+Um **tipo composto** é um tipo de dado composto por um conjunto fixo de campos com nome e tipo.
+
+\pause
+
+A forma geral para definir um tipo composto é
+
+\small
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class NomeDoTipo:
+    campo1: Tipo1
+    ...
+    campon: TipoN
+```
+
+
+## Exemplo tipos compostos
+
+\small
+
+Podemos definir um novo tipo para representar um tempo da seguinte forma
+
+```python
+@dataclass
+class Tempo:
+    '''
+    Representa o tempo de duração de um evento.
+    horas, minutos e segundos devem ser positivos.
+    minutos e segundos devem ser menores que 60.
+    '''
+    horas: int
+    minutos: int
+    segundos: int
+```
+
+\pause
+
+Assim como para definição de tipos enumerados, sempre vamos adicionar um comentário sobre o propósito do tipo.
+
+
+## Exemplo tipos compostos
+
+Para inicializar uma variável de um tipo composto, chamamos o construtor (função) para o tipo e especificamos os valores dos campos na ordem que eles foram declarados. \pause
+
+\small
+
+```python
+>>> t1: Tempo = Tempo(0, 20, 10)
+>>> t1
+Tempo(horas=0, minutos=20, segundos=10)
+```
+
+\pause
+
+```python
+>>> # A anotação do tipo é opcional
+>>> t2 = Tempo(4, 0, 20)
+>>> t2
+Tempo(horas=4, minutos=0, segundos=20)
+```
+
+
+## Exemplo tipos compostos
+
+Como valores do tipo `Tempo` são compostos de outros valores (campos), podemos acessar e alterar cada campo de forma separada. \pause
+
+<div class="columns">
+<div class="column" width="48%">
+\small
+
+```python
+>>> t1 = Tempo(0, 20, 10)
+>>> t1.segundos
+10
+>>> t1.minutos
+20
+>>> t1.horas
+0
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+\small
+
+```python
+>>> t1.horas = 3
+>>> t1
+Tempo(horas=3, minutos=20, segundos=10)
+>>> # Podemos deixar o valor em um
+>>> # estado inconsistente...
+>>> t1.segundos = 70
+Tempo(horas=3, minutos=20, segundos=70)
+```
+
+</div>
+</div>
+
+
+## Exemplo tipos compostos
+
+<div class="columns">
+<div class="column" width="55%">
+\scriptsize
+
+```python
+def segundos_para_tempo(segundos: int) -> Tempo:
+    '''
+    Converte a quantidade *segundos* para o tempo
+    equivalente em horas, minutos e segundos.
+    A quantidade de segundos e minutos da resposta
+    é sempre menor que 60.
+
+    Requer que segundos seja não negativo.
+    '''
+    assert segundos >= 0
+    h = segundos / 3600
+    # segundos que não foram
+    # convertidos para hora
+    restantes = segundos % 3600
+    m = restantes / 60
+    s = restantes % 60
+    return Tempo(h, m, s)
+```
+
+</div>
+<div class="column" width="45%">
+
+\scriptsize
+
+Exemplos
+
+```python
+>>> segundos_para_tempo(160)
+Tempo(horas=0, minutos=2, segundos=40)
+>>> segundos_para_tempo(3760)
+Tempo(horas=1, minutos=2, segundos=40)
+```
+
+</div>
+</div>
+
+
+## Revisão
+
+- ~~Processo de projeto de programas~~
+
+- ~~A linguagem Python~~
+
+- Projeto de programas na linguagem Python
+
 
 
 Projeto de programas na linguagem Python
