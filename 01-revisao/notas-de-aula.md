@@ -1811,12 +1811,229 @@ Tempo(horas=1, minutos=2, segundos=40)
 Projeto de programas na linguagem Python
 ========================================
 
-## Como projetar programas em uma linguagem?
+## Projeto de programas
 
-Para projetar um programa em uma linguagem precisamos
+Um projeto de programa envolve
 
-- Uma forma de fazer a especificação \pause
+- Análise (identificar o problema)
 
-- Uma forma de fazer a implementação \pause
+- Especificação (descrever o que o programa deve fazer)
 
-- Uma forma de fazer verificação
+- Implementação (implementar o programa)
+
+- Verificação (verificar se a implementação atende a especificação)
+
+
+## Como projetar programas em Python
+
+Antes de projetar programas em Python ainda precisamos saber como
+
+- Fazer a especificação
+
+- Fazer a verificação
+
+
+## Especificação
+
+O que é a especificação? \pause
+
+Uma descrição precisa do que a função faz (deve fazer). \pause
+
+Note que escrevemos a especificação **antes de fazer a implementação**. \pause
+
+Como fazer a implementação se não sabemos exatamente o que precisa ser feito!?
+
+
+## Especificação em Python
+
+<div class="columns">
+<div class="column" width="48%">
+
+A especificação de uma função consiste de \pause
+
+- Assinatura (nome, entradas e saída) \pause
+- Propósito (o que a função faz) \pause
+- Exemplos \pause
+
+Em Python, escrevemos o propósito e os exemplos em um comentário dentro da função. \pause
+
+Vamos escrever a especificação de uma função que calcula a quantidade de vezes que um inteiro aparece em uma lista. \pause
+
+</div>
+<div class="column" width="48%">
+
+\footnotesize
+
+```python
+def conta(lst: list[int], n: int) -> int:
+    '''
+    Conta a quantidade de vezes que o
+    valor de *n* aparece em *lst*.
+
+    Exemplos
+    >>> conta([], 3)
+    0
+    >>> conta([5, 1, 3], 3)
+    1
+    >>> conta([4, 1, 2, 4], 4)
+    2
+    '''
+    return 0
+```
+
+</div>
+</div>
+
+\footnotesize
+
+Note que para o código ficar bem formado deixamos um `return`{.python} com um valor padrão.
+
+
+## Propósito
+
+O que escrever no propósito? \pause
+
+No propósito escrevemos **o que** a função faz (deve fazer). \pause
+
+Devemos usar o nome dos parâmetros na descrição do propósito para que a relação da entrada e da saída fique clara. \pause
+
+Para diferenciar o nome do parâmetro de uma palavra "normal", colocamos um asterisco antes e depois do nome do parâmetro: \pause
+
+
+```python
+   '''
+   Conta a quantidade de vezes que o valor de *n* aparece em *lst*.
+   '''
+```
+
+
+## Propósito
+
+No propósito também escrevemos as **restrições** da entrada. Por exemplo, em uma função que encontra o valor máximo de uma lista, a lista não pode ser vazia: \pause
+
+\small
+
+```python
+def maximo(lst: list[int]) -> int:
+    '''
+    Encontra o valor máximo de **lst**.
+
+    Requer que *lst* não seja vazia.
+    '''
+    return 0
+```
+
+
+## Erros comuns na escrita do propósito
+
+Escrever **como** a função faz ao invés de escrever **o que** a função faz. \pause
+
+```python
+   '''
+   Analisa cada elemento de **lst** e soma 1 em um contador
+   caso o elemento seja igual a **n**. No final, devolve
+   o contador.
+   '''
+```
+
+\pause
+
+O como a função faz está na implementação! \pause
+
+Em geral, é mais útil para o leitor do código saber o que a função faz do que como a função faz. \pause
+
+Vamos ver ao longo da disciplina a importância de separar a interface (o que) da implementação (como).
+
+
+## Erros comuns na escrita do propósito
+
+Não referenciar os parâmetros. \pause
+
+```python
+   '''
+   Conta quantas vezes um número aparece em uma lista.
+   '''
+```
+
+\pause
+
+Qual Número? Qual lista?
+
+
+## Erros comuns na escrita do propósito
+
+Usar palavras desnecessárias. \pause
+
+```python
+   '''
+   A função conta...
+
+   Esta função...
+   '''
+```
+
+
+## Erros comuns na escrita do propósito
+
+Usar verbo no infinitivo. \pause
+
+```python
+   '''
+   Contar quantas vezes...
+   '''
+```
+
+A função não contar, a função conta!
+
+
+## Exemplos
+
+Qual o propósito dos exemplos? \pause
+
+O primeiro propósito é ajudar o projetista a entender como a saída será determinada a partir das entradas. \pause
+
+Depois os exemplos são usados para verificar se a implementação gera as respostas corretas para os exemplos.
+
+
+## Exemplos
+
+Como escrever os exemplos? \pause
+
+O exemplos são escritos na forma de uma sessão iterativa do Python. Escrevemos `>>>` para dizer qual a instrução e depois escrevemos a resposta esperada:
+
+\small
+
+```python
+    '''
+    Conta a quantidade de vezes que o
+    valor de *n* aparece em *lst*.
+
+    Exemplos
+    >>> conta([], 3)
+    0
+    >>> conta([5, 1, 3], 3)
+    1
+    >>> conta([4, 1, 2, 4], 4)
+    2
+    '''
+```
+
+
+## Exemplos
+
+Quantos exemplos escrever? \pause
+
+Pelo menos um exemplos para cada "forma" de calcular a saída. \pause
+
+Note que devemos evitar escrever muitos exemplos "iguais". Por exemplo, para uma função que indica se um número natural é par ou ímpar, basta fazer um ou dois exemplos de número par e ímpar, não é preciso fazer cinco exemplos de números pares.
+
+
+## Verificação em Python
+
+O que é a verificação? \pause
+
+É a determinação se a implementação está de acordo com a especificação.
+
+
+Continua...
+===========
