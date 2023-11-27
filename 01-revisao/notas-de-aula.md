@@ -2,6 +2,7 @@
 # vim: set spell spelllang=pt_br:
 title: Revisão
 # TODO: falar de variáveis e tipos explicitamente
+# TODO: falar de modificação de parâmetros
 ---
 
 Introdução
@@ -15,7 +16,7 @@ Antes de começarmos o conteúdo da disciplina, vamos fazer uma revisão: \pause
 
 - A linguagem Python \pause
 
-- Projeto de programas na linguagem Python
+- Projeto de programas em Python
 
 
 
@@ -26,13 +27,13 @@ Projeto de programas
 
 Quais são as principais atividades no projeto de um programa? \pause
 
-- Análise (identificar o problema) \pause
+- Análise (identificação o problema) \pause
 
-- Especificação (descrever o que o programa deve fazer) \pause
+- Especificação (descrição do que o programa deve fazer) \pause
 
-- Implementação (implementar o programa) \pause
+- Implementação \pause
 
-- Verificação (verificar se a implementação atende a especificação)
+- Verificação (a implementação atende a especificação?)
 
 
 ## Projeto de funções
@@ -81,7 +82,7 @@ Para aprender uma linguagem de programação, temos que, de maneira simplificada
 
 O Python é um software livre e pode ser baixado e instalado de <https://python.org>. \pause
 
-Apesar do Python vir com um ambiente de desenvolvimento e aprendizado chamado IDLE, nessa disciplina vamos usá-lo. \pause
+Apesar do Python vir com um ambiente de desenvolvimento e aprendizado chamado IDLE, nessa disciplina não vamos usá-lo. \pause
 
 Para desenvolver os nossos programas vamos utilizar o [vscode](https://code.visualstudio.com/).
 
@@ -171,7 +172,7 @@ Ponto flutuante (`float`{.python}), representação aproximada de números reais
 >>> # Resto da divisão
 >>> 14 % 3
 2
->>> # Experávamos obter exatamente
+>>> # Esperávamos obter exatamente
 >>> # 1.1, mas float é apenas
 >>> # uma aproximação dos reais...
 >>> 5 % 1.3
@@ -592,8 +593,8 @@ False
 </div>
 <div class="column" width="50%">
 ```python
->>> 'André' < 'Paulo'
-True
+>>> 'Abacaxi' < 'Abacate'
+False
 >>> 'André' < 'paulo'
 True
 >>> 'casa' == 'Casa'
@@ -772,7 +773,7 @@ Quem tem maior prioridade, o `and`{.python} ou o `or`{.python}? \pause O `and`{.
 \small
 
 ```python
->>> False and False or True
+>>> True or False and False
 True
 ```
 
@@ -781,7 +782,7 @@ True
 
 ```python
 >>> # É equivalente a expressão anterior
->>> (False and False) or True
+>>> True or (False and False)
 True
 ```
 
@@ -790,7 +791,7 @@ True
 
 ```python
 >>> # Se o or tivesse prioridade...
->>> False and (False or True)
+>>> (True or False) and False
 False
 ```
 
@@ -919,13 +920,13 @@ IndexError: list index out of range
 
 ## Definições de funções
 
-A forma geral para definição de funções em Python é?
+A forma geral para definição de funções em Python é:
 
 \small
 
 ```python
 def nome(entrada1: tipo, entrada2: tipo, ...) -> tipo:
-    instruções...
+    instruções
     return exp
 ```
 
@@ -1163,8 +1164,6 @@ soma([5, 1, 4])
 
 </div>
 <div class="column" width="48%">
-Vamos exercitar mais uma vez a execução passo a passo. \pause
-
 Qual é a ordem que as linhas são executadas? \pause
 
 \footnotesize
@@ -1335,8 +1334,6 @@ def indice_maximo(lst: list[int]) -> int:
 
 Qual das duas soluções é mais simples? \pause A da direita! \pause
 
-Devemos usar o "para cada no intervalo" apenas quando precisamos do índice.
-
 
 ## Repetição com "enquanto"
 
@@ -1362,7 +1359,7 @@ O funcionamento do `while`{.python} é o seguinte: \pause
 - Senão, o `while`{.python} termina
 
 
-## Exemplo do "enquanto"
+## Exemplos do "enquanto"
 
 <div class="columns">
 <div class="column" width="48%">
@@ -1455,6 +1452,29 @@ Qual é a ordem que as linhas são executadas? \pause
 </div>
 
 
+## Quando utilizar cada forma de repetição?
+
+Para cada
+
+- Quando queremos processar todos os elementos de uma sequência na ordem que eles aparecem
+
+\pause
+
+Para cada no intervalo
+
+- Quando queremos processar um intervalo dos elementos de uma sequência; ou
+
+- Quando precisamos dos índices dos elementos da sequência; ou
+
+- Quando precisamos de uma sequência de números em progressão aritmética
+
+\pause
+
+Enquanto
+
+- Quando o uso do "para cada" e do "para cada no intervalo" não são adequados
+
+
 ## Aprendizagem de uma nova linguagem
 
 - ~~Tipos primitivos de dados~~
@@ -1490,7 +1510,7 @@ Quais características são desejáveis no projeto/definição de um tipo de dad
 
 - Que as informações válidas possam representadas.
 
-- Que as informações inválidas não possam ser representadas representáveis.
+- Que as informações inválidas não possam ser representadas.
 
 
 ## Tipos de dados
@@ -1587,8 +1607,6 @@ def proxima_cor(atual: str) -> str:
     return proxima
 ```
 
-Exemplos
-
 ```python
 >>> proxima_cor('verde')
 'amarelo'
@@ -1614,8 +1632,6 @@ def proxima_cor(atual: Cor) -> Cor:
     return proxima
 ```
 
-Exemplos
-
 ```python
 >>> proxima_cor(Cor.VERDE).name
 'AMARELO'
@@ -1625,11 +1641,28 @@ Exemplos
 </div>
 
 
+## Tipos enumerados
+
+Observe que o uso de tipo enumerado deixa a intenção do código mais clara:
+
+- Entrada e saída do tipo `str`{.python} pode ser qualquer string!
+
+- Entrada e saída do tipo `Cor`{.python} deixa claro quais valores são válidos.
+
+\pause
+
+O uso de tipo enumerado também permite a detecção de erros mais facilmente:
+
+- Se digitarmos `'amarela'`{.python} ao invés de `'amarelo'`{.python} o programa ainda é "válido".
+
+- Se digitarmos `Cor.AMARELA`{.python} ao invés de `Cor.AMARELO`{.python} o `mypy` identifica o erro.
+
+
 ## Tipos compostos
 
 Em um determinado programa o tempo de uma atividade é medida em segundos, mas é preciso exibir esse tempo em horas, minutos e segundos. Para isso precisamos projetar uma função que converte uma quantidade de segundos para uma quantidade de horas, minutos e segundos equivalentes. \pause
 
-Os segundos da entrada da função pode ser representados comum número inteiro positivo, mas como representar a saída (o tempo em h, m, s)?
+Os segundos da entrada da função pode ser representados com um número inteiro positivo, mas como representar a saída (o tempo em h, m, s)?
 
 
 ## Tipos de dados
@@ -1808,29 +1841,46 @@ Tempo(horas=1, minutos=2, segundos=40)
 
 
 
-Projeto de programas na linguagem Python
-========================================
+Projeto de programas em Python
+==============================
 
 ## Projeto de programas
 
-Um projeto de programa envolve
+O projeto de programa envolve:
 
-- Análise (identificar o problema)
+- Análise (identificação o problema)
 
-- Especificação (descrever o que o programa deve fazer)
+- Especificação (descrição do que o programa deve fazer)
 
-- Implementação (implementar o programa)
+- Implementação
 
-- Verificação (verificar se a implementação atende a especificação)
+- Verificação (a implementação atende a especificação?)
 
 
-## Como projetar programas em Python
+## Projeto de funções
 
-Antes de projetar programas em Python ainda precisamos saber como
+Podemos detalhar esse processo para o projeto de uma função específica: \pause
 
-- Fazer a especificação
+- Análise: identificar o problema a ser resolvido \pause
 
-- Fazer a verificação
+- Definição dos tipos de dados: identificar e definir como as informações serão representadas \pause
+
+- Especificação: especificar com precisão o que a função deve fazer \pause
+
+- Implementação: implementar a função de acordo com a especificação \pause
+
+- Verificação: verificar se a implementação está de acordo com a especificação \pause
+
+- Revisão: identificar e fazer melhorias
+
+
+## Projeto de funções em Python
+
+O que é específico da linguagem e ainda não vimos como fazer em Python é:
+
+- Especificação
+
+- Verificação
 
 
 ## Especificação
@@ -1852,7 +1902,7 @@ Como fazer a implementação se não sabemos exatamente o que precisa ser feito!
 A especificação de uma função consiste de \pause
 
 - Assinatura (nome, entradas e saída) \pause
-- Propósito (o que a função faz) \pause
+- Propósito (o que a função deve fazer / faz) \pause
 - Exemplos \pause
 
 Em Python, escrevemos o propósito e os exemplos em um comentário dentro da função. \pause
@@ -1893,7 +1943,7 @@ Note que para o código ficar bem formado deixamos um `return`{.python} com um v
 
 O que escrever no propósito? \pause
 
-No propósito escrevemos **o que** a função faz (deve fazer). \pause
+No propósito escrevemos **o que** a função deve fazer / faz. \pause
 
 Devemos usar o nome dos parâmetros na descrição do propósito para que a relação da entrada e da saída fique clara. \pause
 
@@ -1916,7 +1966,7 @@ No propósito também escrevemos as **restrições** da entrada. Por exemplo, em
 ```python
 def maximo(lst: list[int]) -> int:
     '''
-    Encontra o valor máximo de **lst**.
+    Encontra o valor máximo de *lst*.
 
     Requer que *lst* não seja vazia.
     '''
@@ -1924,23 +1974,39 @@ def maximo(lst: list[int]) -> int:
 ```
 
 
+## Propósito
+
+A seguir discutimos alguns **erros comuns** na escrita do propósito.
+
+
 ## Erros comuns na escrita do propósito
 
-Escrever **como** a função faz ao invés de escrever **o que** a função faz. \pause
+Escrever **como** a função faz ao invés de escrever **o que** a função faz: \pause
 
 ```python
    '''
-   Analisa cada elemento de **lst** e soma 1 em um contador
-   caso o elemento seja igual a **n**. No final, devolve
+   Analisa cada elemento de *lst* e soma 1 em um contador
+   caso o elemento seja igual a *n*. No final, devolve
    o contador.
    '''
 ```
 
 \pause
 
-O como a função faz está na implementação! \pause
+Isto é como a função faz e pode ser visto na implementação, não é preciso "narrar" o que está na implementação! \pause
 
-Em geral, é mais útil para o leitor do código saber o que a função faz do que como a função faz. \pause
+Compare com o que a função faz:
+
+```python
+   '''
+   Conta a quantidade de vezes que o valor de *n* aparece em *lst*.
+   '''
+```
+
+
+## Erros comuns na escrita do propósito
+
+Normalmente existe mais de uma forma de implementar uma função, e para usar uma função, em geral, é mais útil saber o que a função faz do que como a função faz. \pause
 
 Vamos ver ao longo da disciplina a importância de separar a interface (o que) da implementação (como).
 
@@ -1983,6 +2049,8 @@ Usar verbo no infinitivo. \pause
    '''
 ```
 
+\pause
+
 A função não contar, a função conta!
 
 
@@ -1990,24 +2058,21 @@ A função não contar, a função conta!
 
 Qual o propósito dos exemplos? \pause
 
-O primeiro propósito é ajudar o projetista a entender como a saída será determinada a partir das entradas. \pause
+O primeiro propósito é ajudar o projetista a entender como a saída será determinada a partir das entradas. \pause Por isso escrevemos os exemplos **antes de fazer a implementação**. \pause
 
-Depois os exemplos são usados para verificar se a implementação gera as respostas corretas para os exemplos.
+Depois os exemplos são usados como parte da verificação.
 
 
 ## Exemplos
 
 Como escrever os exemplos? \pause
 
-O exemplos são escritos na forma de uma sessão iterativa do Python. Escrevemos `>>>` para dizer qual a instrução e depois escrevemos a resposta esperada:
+O exemplos são escritos na forma de uma sessão iterativa do Python. Uma linha que inicia com `>>>` indica uma instrução, as seguintes (até uma linha sem nada) indicam a reposta esperada:
 
 \small
 
 ```python
     '''
-    Conta a quantidade de vezes que o
-    valor de *n* aparece em *lst*.
-
     Exemplos
     >>> conta([], 3)
     0
@@ -2032,8 +2097,205 @@ Note que devemos evitar escrever muitos exemplos "iguais". Por exemplo, para uma
 
 O que é a verificação? \pause
 
-É a determinação se a implementação está de acordo com a especificação.
+É o processo para determinar se a implementação está de acordo com a especificação. \pause
+
+A verificação pode ser: \pause
+
+- Estática: sem executar o programa \pause
+
+- Dinâmica: executando o programa
 
 
-Continua...
-===========
+## Verificação estática
+
+Apesar de ser possível provar, usando verificação estática, que um programa está de acordo com a sua especificação, este processo é custoso e inviável para a maioria dos programas. \pause
+
+No entanto, podemos usar a verificação estática para identificar diversas inconsistências entre a especificação e a implementação, principalmente em relação aos tipos de dados. \pause
+
+Para fazer a verificação estática dos tipos vamos utilizar o programa [`mypy`](https://mypy-lang.org/).
+
+
+## Verificação estática
+
+Instalação do `mypy`:
+
+```
+pip install mypy
+```
+
+\pause
+
+Execução do `mypy`:
+
+```
+mypy arquivo.py
+```
+
+
+## Verificação estática
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```{.python .number-lines}
+def conta(lst: list[int], n: int) -> int:
+    '''
+    Conta a quantidade de vezes que o
+    valor de *n* aparece em *lst*.
+
+    Exemplos
+    >>> conta([], 3)
+    0
+    >>> conta([4, 1, 2, 4], 4)
+    2
+    '''
+    vezes = 0.0
+    for x in lst:
+        if x == n:
+            vezes = vezes + 1
+    return vezes
+```
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```
+conta.py:16: error: Incompatible return
+value type (got "float", expected "int")
+Found 1 error in 1 file (checked 1 source file)
+```
+
+</div>
+</div>
+
+
+## Verificação dinâmica
+
+Existem muitas estratégias de verificação dinâmica, a que vamos utilizar inicialmente é verificar se chamadas de funções com entradas específicas produzem as saídas esperadas (que já é conhecida). \pause
+
+Como já temos exemplos de entradas e saídas na especificação, podemos usar inicialmente esses exemplos para fazer a verificação dinâmica. \pause
+
+O módulo `doctest`{.python}, que já vem com o Python, analisa os comentários das funções, identifica e executa automaticamente os exemplos indicando caso haja divergências entre os valores esperados e os valores obtidos com a execução dos exemplos. \pause
+
+Execução do `doctest`:
+
+```
+python -m doctest -v arquivo.py
+```
+
+
+## Verificação dinâmica
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```{.python .number-lines}
+def conta(lst: list[int], n: int) -> int:
+    '''
+    Conta a quantidade de vezes que o
+    valor de *n* aparece em *lst*.
+
+    Exemplos
+    >>> conta([], 3)
+    0
+    >>> conta([4, 1, 2, 4], 4)
+    2
+    '''
+    vezes = 0
+    for x in lst:
+        if x == n:
+            vezes = vezes + 10
+    return vezes
+```
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```
+Trying:
+    conta([4, 1, 2, 4], 4)
+Expecting:
+    2
+***************************************
+File "conta.py", line 9, in conta.conta
+Failed example:
+    conta([4, 1, 2, 4], 4)
+Expected:
+    2
+Got:
+    20
+1 items had no tests:
+    conta
+***************************************
+1 items had failures:
+   1 of   2 in conta.conta
+2 tests in 2 items.
+1 passed and 1 failed.
+***Test Failed*** 1 failures.
+```
+
+</div>
+</div>
+
+## Verificação dinâmica
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def conta(lst: list[int], n: int) -> int:
+    '''
+    Conta a quantidade de vezes que o
+    valor de *n* aparece em *lst*.
+
+    Exemplos
+    >>> conta([], 3)
+    0
+    >>> conta([4, 1, 2, 4], 4)
+    2
+    '''
+    vezes = 0
+    for x in lst:
+        if x == n:
+            vezes = vezes + 1
+    return vezes
+```
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```
+Trying:
+    conta([], 3)
+Expecting:
+    0
+ok
+Trying:
+    conta([4, 1, 2, 4], 4)
+Expecting:
+    2
+ok
+1 items had no tests:
+    conta
+1 items passed all tests:
+   2 tests in conta.conta
+2 tests in 2 items.
+2 passed and 0 failed.
+Test passed.
+```
+
+</div>
+</div>
+
+
+Continua
+========
