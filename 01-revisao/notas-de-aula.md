@@ -1,8 +1,11 @@
 ---
 # vim: set spell spelllang=pt_br:
 title: Revisão
+linkcolor: Black
+urlcolor: Blue
 # TODO: falar de variáveis e tipos explicitamente
 # TODO: falar de modificação de parâmetros
+# TODO: falar que a verificação dinâmica não garante que o programa funciona corretamente
 ---
 
 Introdução
@@ -1876,7 +1879,7 @@ Podemos detalhar esse processo para o projeto de uma função específica: \paus
 
 ## Projeto de funções em Python
 
-O que é específico da linguagem e ainda não vimos como fazer em Python é:
+O que é específico da linguagem e ainda não vimos como fazer em Python:
 
 - Especificação
 
@@ -2058,7 +2061,7 @@ A função não contar, a função conta!
 
 Qual o propósito dos exemplos? \pause
 
-O primeiro propósito é ajudar o projetista a entender como a saída será determinada a partir das entradas. \pause Por isso escrevemos os exemplos **antes de fazer a implementação**. \pause
+O primeiro propósito é ajudar o projetista a entender como a saída pode ser determinada a partir das entradas. \pause Por isso escrevemos os exemplos **antes de fazer a implementação**. \pause
 
 Depois os exemplos são usados como parte da verificação.
 
@@ -2174,7 +2177,7 @@ Found 1 error in 1 file (checked 1 source file)
 
 ## Verificação dinâmica
 
-Existem muitas estratégias de verificação dinâmica, a que vamos utilizar inicialmente é verificar se chamadas de funções com entradas específicas produzem as saídas esperadas (que já é conhecida). \pause
+Existem muitas estratégias de verificação dinâmica, a que vamos utilizar inicialmente é verificar se chamadas de funções com entradas específicas produzem as saídas esperadas (que já são conhecidas). \pause
 
 Como já temos exemplos de entradas e saídas na especificação, podemos usar inicialmente esses exemplos para fazer a verificação dinâmica. \pause
 
@@ -2297,5 +2300,189 @@ Test passed.
 </div>
 
 
-Continua
-========
+## Exemplo
+
+A seguir vamos ver um problema e o projeto de uma função para resolver o problema.
+
+Para exemplos mais detalhados, veja [esse](https://malbarbo.pro.br/arquivos/2023/6879/06-projeto-de-programas-notas-de-aula.pdf) documento.
+
+
+## Exemplo
+
+Considere um jogo onde o personagem está em um tabuleiro (semelhante a um tabuleiro de jogo de xadrez). As linhas e colunas do tabuleiro são enumeradas de 1 a 10, dessa forma, é possível representar a posição (casa) do personagem pelo número da linha e da coluna que ele se encontra. O personagem fica virado para uma das direções: norte, sul, leste ou oeste. O jogador pode avançar o seu personagem qualquer número de casas na direção que ele está virado, mas é claro, não pode sair do tabuleiro. Projete uma função que indique a partir das informações do personagem, qual é o número máximo de casas que ele pode avançar na direção que ele está virado.
+
+
+## Análise
+
+**Objetivo**: identificar o problema que deve ser resolvido.
+
+Um personagem de um jogo está em um tabuleiro com 10 linhas e 10 colunas (enumeradas de 1 a 10) e está virado para das direções: norte, sul, leste ou oeste.
+
+Para o norte aumenta o número da linha (sul diminui) -- essa é uma decisão que tomamos pois não é informado no enunciado.
+
+Para o leste aumenta o número da coluna (oeste diminui).
+
+Determinar quantas casas no máximo um personagem pode avançar a partir da sua posição e direção (o personagem não pode sair do tabuleiro)
+
+
+## Tipos de dados
+
+**Objetivo**: identificar e definir como as informações serão representadas.
+
+Informações: direção, posição, personagem.
+
+
+## Tipos de dados
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+class Direcao(Enum):
+    '''
+    A direção em que o personagem está virado.
+    Para o norte o número da linha aumenta,
+    para o sul diminui.
+    Para o leste o número da coluna aumenta,
+    para o sul diminui.
+
+    ^
+    |     N
+    |     |
+    | O -   - L
+    |     |
+    |     S
+    --------------->
+    '''
+    NORTE = auto()
+    LESTE = auto()
+    SUL = auto()
+    OESTE = auto()
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+
+
+@dataclass
+class Personagem:
+    '''
+    A posição e direção que um personagem se
+    encontra no tabuleiro.
+    '''
+    # A linha, deve estar entre 1 e 10
+    lin: int
+    # A coluna, deve estar entre 1 e 10
+    col: int
+    dir: Direcao
+```
+</div>
+</div>
+
+
+## Especificação
+
+**Objetivo**: especificar com precisão e com exemplos o que o programa deve fazer. \pause
+
+Para cada direção precisamos dois exemplos: um que é possível avançar e outro que não.
+
+
+## Especificação
+
+\scriptsize
+
+```python
+def maximo_casas(p: Personagem) -> int:
+    ''' Determina o número máximo de casas que o personagem *p* pode avançar
+    considerando a sua posição atual e a direção que ele está virado.
+    >>> maximo_casas(Personagem(lin=4, col=2, dir=Direcao.NORTE))
+    6
+    >>> maximo_casas(Personagem(lin=10, col=2, dir=Direcao.NORTE))
+    0
+    >>> maximo_casas(Personagem(lin=4, col=2, dir=Direcao.SUL))
+    3
+    >>> maximo_casas(Personagem(lin=1, col=2, dir=Direcao.SUL))
+    0
+    >>> maximo_casas(Personagem(lin=4, col=2, dir=Direcao.LESTE))
+    8
+    >>> maximo_casas(Personagem(lin=4, col=10, dir=Direcao.LESTE))
+    0
+    >>> maximo_casas(Personagem(lin=4, col=2, dir=Direcao.OESTE))
+    1
+    >>> maximo_casas(Personagem(lin=4, col=1, dir=Direcao.OESTE))
+    0
+    '''
+```
+
+
+## Implementação
+
+**Objetivo**: escrever o corpo da função para que ela faça o que está na especificação. \pause
+
+A forma da resposta da função depende da direção, então fazemos um caso para cada direção.
+
+\pause
+
+\scriptsize
+
+```python
+def maximo_casas(p: Personagem) -> int:
+    if p.dir == Direcao.NORTE:
+        casas = 10 - p.lin
+    elif p.dir == Direcao.SUL:
+        casas = p.lin - 1
+    elif p.dir == Direcao.LESTE:
+        casas = 10 - p.col
+    elif p.dir == Direcao.OESTE:
+        casas = p.col - 1
+    return casas
+```
+
+
+## Implementação
+
+**Objetivo**: verificar se a implementação está de acordo com a especificação. \pause
+
+Usamos o `mypy` para fazer um uma verificação estática:
+
+\scriptsize
+
+```
+$ mypy maximo_casas.py
+Success: no issues found in 1 source file
+```
+
+\normalsize
+
+\pause
+
+Usamos o `doctest` para verificar se os exemplos produzem as respostas esperadas (verificação dinâmica).
+
+\scriptsize
+
+```
+$ python -m doctest -v maximo_casas.py
+...
+1 items passed all tests:
+   8 tests in maximo_casas.maximo_casas
+8 tests in 7 items.
+8 passed and 0 failed.
+Test passed.
+```
+
+
+## Revisão
+
+**Objetivo**: alterar a organização do programa para que fique mais fácil de ser lido, entendido e modificado.
+
+
+## Referências
+
+Veja o material da página \url{https://malbarbo.pro.br/ensino/2023/6879/}.
+
+Faça os exercícios da página \url{https://malbarbo.pro.br/ensino/2023/6879/}.

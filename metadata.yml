@@ -1,11 +1,11 @@
 author: |
     Marco A L Barbosa
     \newline
-    \href{http://malbarbo.pro.br}{malbarbo.pro.br}
+    \href{https://malbarbo.pro.br}{\color{black}{malbarbo.pro.br}}
 institute: |
-    \href{http://din.uem.br}{Departamento de Informática}
+    \href{http://din.uem.br}{\color{black}{Departamento de Informática}}
     \newline
-    \href{http://www.uem.br}{Universidade Estadual de Maringá}
+    \href{http://www.uem.br}{\color{black}{Universidade Estadual de Maringá}}
 lang: pt-BR
 # Usa as fontes disponíveis no tectonic
 # Evita warnings no slide de título (devido a informação da licensa)

@@ -3,7 +3,7 @@ from enum import Enum, auto
 
 # Análise
 #
-# Um personagem de um jogo está em um tabulero com 10 linhas e 10 colunas
+# Um personagem de um jogo está em um tabuleiro com 10 linhas e 10 colunas
 # (enumeradas de 1 a 10) e está virado para das direções: norte, sul, leste ou oeste.
 #
 # Para o norte aumenta o número da linha (sul diminui)
