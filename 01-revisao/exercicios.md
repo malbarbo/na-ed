@@ -48,6 +48,8 @@ urlcolor: Blue
 
 \LARGE Para todos os programas que você escrever, execute o `mypy` e o `doctest`!
 
+\LARGE Veja a solução de alguns exercícios na página da disciplina (os nomes dos arquivos estão no final desse documento).
+
 \normalsize
 
 \newpage
@@ -247,3 +249,42 @@ urlcolor: Blue
 @. Uma lista de números é chamada de lista binária se todos os seus elementos são 0 ou 1. Projete uma função recursiva que verifique se uma lista é binária.
 
 @. Projete uma função recursiva que receba como entrada uma string e um número inteiro positivo $n$ e gere uma nova string adicionando $n$ vezes o símbolo de exclamação no final da string da entrada. Por exemplo, se a string for `'Gol'`{.python} e $n = 4$, a saída deve ser `'Gol!!!!'`{.python}. Não use o operador de repetição de string (`*`{.python})!.
+
+
+# Soluções
+
+A seguir os nomes dos arquivos de soluções de alguns exercícios.
+
+2: `isento_tarifa.py`
+
+3: `dma_para_amd.py`
+
+4: `sem_espacos.py`
+
+5: `sinal.py`
+
+6: `muda_num_chars.py`
+
+7: `imposto.py`
+
+9: `direcao.py`
+
+12: `futebol.py`
+
+13: `maximo_casas.py`
+
+16: `negativos_antes_positivos.py`
+
+18: `insere_pos.py`
+
+20: `campeonato.py`
+
+22: `dobrada.py`
+
+24: `string_ints.py`
+
+26: `remove_indice.py`
+
+28: `concatena.py`
+
+30: `exclama.py`
