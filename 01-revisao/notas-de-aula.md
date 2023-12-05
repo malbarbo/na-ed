@@ -4,7 +4,8 @@ title: Revisão
 linkcolor: Black
 urlcolor: Blue
 # TODO: falar de variáveis e tipos explicitamente
-# TODO: falar de modificação de parâmetros
+# TODO: falar de modificação de parâmetros (imagens pythontutor)
+# TODO: exercícios sobre passagem de parêmetros
 # TODO: falar que a verificação dinâmica não garante que o programa funciona corretamente
 ---
 
@@ -954,6 +955,15 @@ Uso da nova função
 >>> soma_quadrados(3, 4)
 25
 ```
+
+
+## Memória e passagem de parâmetros
+
+Veja o material de Memória e passagem de parâmetros na página <https://malbarbo.pro.br/ensino/2023/6879/>.
+
+Veja o arquivo `parametros.py` no arquivo com os exemplos para download na página da disciplina.
+
+Use a página <https://pythontutor.com/visualize.html> para executar os exemplos (lembre-se de remover as anotações de tipo).
 
 
 ## Aprendizagem de uma nova linguagem
