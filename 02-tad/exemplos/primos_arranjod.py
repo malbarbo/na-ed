@@ -5,16 +5,16 @@ def primos(lim: int) -> ArranjoD:
     Encontra todos os números primos menores que *lim*.
 
     Exemplos:
-    >>> lst = primos(12)
-    >>> lst[0]
+    >>> a = primos(12)
+    >>> arranjod_get(a, 0)
     2
-    >>> lst[1]
+    >>> arranjod_get(a, 1)
     3
-    >>> lst[2]
+    >>> arranjod_get(a, 2)
     5
-    >>> lst[3]
+    >>> arranjod_get(a, 3)
     7
-    >>> lst[4]
+    >>> arranjod_get(a, 4)
     11
     '''
     primos = arranjod_vazio()
@@ -23,7 +23,7 @@ def primos(lim: int) -> ArranjoD:
         eh_primo = True
         i = 0
         while eh_primo and i < arranjod_len(primos):
-            if n % arranjod_pos(primos, i) == 0:
+            if n % arranjod_get(primos, i) == 0:
                 eh_primo = False
             i = i + 1
 

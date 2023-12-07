@@ -7,9 +7,132 @@ urlcolor: Blue
 
 ## Introdução
 
+Você acaba de chegar em uma empresa e a sua primeira atividade é concluir um código que havia sido iniciado pelo Roberto, que foi transferido para outra equipe. \pause
+
+Roberto é um bom desenvolvedor e costuma fazer a especificação antes de fazer a implementação, então o seu trabalho é escrever a implementação e fazer a verificação. \pause
+
+Note que a empresa usa uma convenção particular para nomear as funções.
+
+
+## Especificação Robô
+
+\scriptsize
+
+```python
+from dataclasses importo dataclass
+
+@dataclass
+class Robo
+    '''Um robo que está em uma posição da linha do
+    jogo, que deve ser um valor entre 1 e 10.'''
+
+def robo_cria() -> Robo:
+    '''Cria um novo robo na posição 1.'''
+
+def robo_posicao(r: Robo) -> int:
+    '''Devolve a posição atual do robo *r*.'''
+
+def robo_move(r: Robo, ):
+    '''
+    Altera a posição de *r* avançando *n* posições (até no máximo a posição 10)
+    se *n* for positivo, ou recuando -*n* posições (até no mínimo a posição 1)
+    se *n* for negativo. O robo *r* permanece na mesma posição se *n* for 0.
+    '''
+```
+
+
+## Especificação Robô
+
+<div class="columns">
+<div class="column" width="50%">
+\scriptsize
+
+```python
+def robo_cria() -> Robo:
+    '''
+    Cria um novo robo na posição 1.
+
+    Exemplos
+    >>> r = robo_cria()
+    >>> robo_posicao(r)
+    1
+    '''
+
+def robo_posicao(r: Robo) -> int:
+    '''
+    Devolve a posição atual do robo *r*.
+
+    Exemplos
+    >>> r = robo_cria()
+    >>> robo_move(r, 2)
+    >>> robo_posicao(r)
+    3
+    '''
+```
+
+</div>
+<div class="column" width="50%">
+\scriptsize
+
+```python
+def robo_posicao(r: Robo) -> int:
+    '''
+    Devolve a posição atual do robo *r*.
+
+    Exemplos
+    >>> r = robo_cria()
+    >>> robo_move(r, 2)
+    >>> robo_posicao(r)
+    3
+    '''
+```
+</div>
+</div>
+
+
+## Especificação Robô
+
+\scriptsize
+
+```python
+def robo_move(r: Robo, ):
+    '''
+    Altera a posição de *r* avançando *n* posições (até no máximo a posição 10)
+    se *n* for positivo, ou recuando -*n* posições (até no mínimo a posição 1) se *n* for negativo...
+    Exemplos
+    >>> r = robo_cria()
+    >>> # Avança
+    >>> robo_move(r, 5)
+    >>> robo_posicao(r)
+    6
+    >>> robo_move(r, 6)
+    >>> robo_posicao(r)
+    10
+    >>> # Recua
+    >>> robo_move(r, -3)
+    >>> robo_posicao(r)
+    7
+    >>> robo_move(r, -8)
+    >>> robo_posicao(r)
+    1
+    '''
+
+```
+
+
+## Atividade
+
+Forme uma dupla e implemente a definição e operações do tipo `Robo` e confira se a implementação funciona corretamente. \pause
+
+Faça o download do arquivo `robo.py` da página da disciplina.
+
+
+## Primos
+
 Projete uma função que encontre todos os números primos menores que um determinado valor.
 
-## Introdução
+
+## Primos
 
 <div class="columns">
 <div class="column" width="50%">
@@ -40,7 +163,7 @@ Implementação
 \scriptsize
 
 ```python
-def primos(n: int) -> list[int]:
+def primos(lim: int) -> list[int]:
     primos = []
     n = 2
     while n < lim:
@@ -62,7 +185,7 @@ def primos(n: int) -> list[int]:
 </div>
 
 
-## Introdução
+## Arranjos dinâmicos
 
 Para implementar a função `primos` utilizamos o tipo `list`{.python}, que é pré-definido em Python.
 
@@ -107,7 +230,7 @@ array([10, 0, 0, 0, 2])
 
 \scriptsize
 
-```python
+```
 >>> x.append(5)
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
@@ -135,7 +258,7 @@ AttributeError: 'array' object has no attribute 'pop'
 \scriptsize
 
 ```{.python .number-lines}
-def primos(n: int) -> list[int]:
+def primos(lim: int) -> list[int]:
     primos = []
     n = 2
     while n < lim:
@@ -172,7 +295,7 @@ Essas operações usam formas diferentes, mas a ideia de operação é a mesma, 
 
 Vamos reescrever o código da função `primo` considerando que o tipo `list` e suas operações não existam. \pause
 
-Vamos considerar que queremos criar um novo tipo, chamado `ArranjoD` (um arranjo dinâmico de inteiros), que tenha as mesmas quatro operações que identificamos, mas que use a forma de chamada de função.
+Vamos considerar que queremos criar um novo tipo, chamado `ArranjoD` (arranjo dinâmico de inteiros), que tenha as mesmas quatro operações que identificamos, mas que use a forma de chamada de função.
 
 
 ## Operações de arranjo dinâmico
@@ -180,7 +303,7 @@ Vamos considerar que queremos criar um novo tipo, chamado `ArranjoD` (um arranjo
 \scriptsize
 
 ```python
-def primos(n: int) -> list[int]:
+def primos(lim: int) -> list[int]:
     primos = []
     n = 2
     while n < lim:
@@ -208,7 +331,7 @@ def primos(n: int) -> list[int]:
 \scriptsize
 
 ```python
-def primos(n: int) -> ArranjoD:
+def primos(lim: int) -> ArranjoD:
     primos = []
     n = 2
     while n < lim:
@@ -250,7 +373,7 @@ class ArranjoD:
 \scriptsize
 
 ```python
-def primos(n: int) -> ArranjoD:
+def primos(lim: int) -> ArranjoD:
     primos = arranjod_vazio()
     n = 2
     while n < lim:
@@ -284,7 +407,7 @@ class ArranjoD:
 
 ```python
 def arranjod_vazio() -> ArranjoD:
-    ...
+    '''Cria um novo arranjo com zero elementos'''
 ```
 
 </div>
@@ -299,7 +422,7 @@ def arranjod_vazio() -> ArranjoD:
 \scriptsize
 
 ```python
-def primos(n: int) -> ArranjoD:
+def primos(lim: int) -> ArranjoD:
     primos = arranjod_vazio()
     n = 2
     while n < lim:
@@ -331,14 +454,14 @@ class ArranjoD:
 
 ```python
 def arranjod_vazio() -> ArranjoD:
-    ...
+    '''Cria um novo arranjo com zero elementos'''
 ```
 
 \pause
 
 ```python
 def arranjod_len(a: ArranjoD) -> int:
-    ...
+    '''Devolve a quantidade de elementos em *a*'''
 ```
 
 </div>
@@ -353,7 +476,7 @@ def arranjod_len(a: ArranjoD) -> int:
 \scriptsize
 
 ```python
-def primos(n: int) -> ArranjoD:
+def primos(lim: int) -> ArranjoD:
     primos = arranjod_vazio()
     n = 2
     while n < lim:
@@ -361,7 +484,7 @@ def primos(n: int) -> ArranjoD:
         i = 0
         while eh_primo and \
               i < arranjod_len(primos):
-            if n % arranjod_pos(primos, i) == 0:
+            if n % arranjod_get(primos, i) == 0:
                 eh_primo = False
             i = i + 1
 
@@ -385,19 +508,19 @@ class ArranjoD:
 
 ```python
 def arranjod_vazio() -> ArranjoD:
-    ...
+    '''Cria um novo arranjo com zero elementos'''
 ```
 
 ```python
 def arranjod_len(a: ArranjoD) -> int:
-    ...
+    '''Devolve a quantidade de elementos em *a*'''
 ```
 
 \pause
 
 ```python
-def arranjod_pos(a: ArranjoD, i: int) -> int:
-    ...
+def arranjod_get(a: ArranjoD, i: int) -> int:
+    '''Devolve o elemento da posição *i* de *a*'''
 ```
 
 </div>
@@ -412,7 +535,7 @@ def arranjod_pos(a: ArranjoD, i: int) -> int:
 \scriptsize
 
 ```python
-def primos(n: int) -> ArranjoD:
+def primos(lim: int) -> ArranjoD:
     primos = arranjod_vazio()
     n = 2
     while n < lim:
@@ -420,7 +543,7 @@ def primos(n: int) -> ArranjoD:
         i = 0
         while eh_primo and \
               i < arranjod_len(primos):
-            if n % arranjod_pos(primos, i) == 0:
+            if n % arranjod_get(primos, i) == 0:
                 eh_primo = False
             i = i + 1
 
@@ -444,28 +567,29 @@ class ArranjoD:
 
 ```python
 def arranjod_vazio() -> ArranjoD:
-    ...
+    '''Cria um novo arranjo com zero elementos'''
 ```
 
 ```python
 def arranjod_len(a: ArranjoD) -> int:
-    ...
+    '''Devolve a quantidade de elementos em *a*'''
 ```
 
 ```python
-def arranjod_pos(a: ArranjoD, i: int) -> int:
-    ...
+def arranjod_get(a: ArranjoD, i: int) -> int:
+    '''Devolve o elemento da posição *i* de *a*'''
 ```
 
 \pause
 
 ```python
 def arranjod_acrescenta(a: ArranjoD, item: int):
-    ...
+    '''Acrescenta *item* no final *a*'''
 ```
 
 </div>
 </div>
+
 
 ## Operações de arranjo dinâmico
 
@@ -475,22 +599,78 @@ def arranjod_acrescenta(a: ArranjoD, item: int):
 \scriptsize
 
 ```python
-def primos(n: int) -> ArranjoD:
+def primos(lim: int) -> ArranjoD:
     '''
     Encontra todos os números primos
     menores que *lim*.
 
     Exemplos:
-    >>> lst = primos(12)
-    >>> lst[0]
+    >>> primos(2)
+    []
+    >>> primos(20)
+    [2, 3, 5, 7, 11, 13, 17, 19]
+    '''
+```
+
+</div>
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+@dataclass
+class ArranjoD:
+    ...
+```
+
+```python
+def arranjod_vazio() -> ArranjoD:
+    '''Cria um novo arranjo com zero elementos'''
+```
+
+```python
+def arranjod_len(a: ArranjoD) -> int:
+    '''Devolve a quantidade de elementos em *a*'''
+```
+
+```python
+def arranjod_get(a: ArranjoD, i: int) -> int:
+    '''Devolve o elemento da posição *i* de *a*'''
+```
+
+```python
+def arranjod_acrescenta(a: ArranjoD, item: int):
+    '''Acrescenta *item* no final *a*'''
+```
+
+</div>
+</div>
+
+
+## Operações de arranjo dinâmico
+
+<div class="columns">
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+def primos(lim: int) -> ArranjoD:
+    '''
+    Encontra todos os números primos
+    menores que *lim*.
+
+    Exemplos:
+    >>> a = primos(12)
+    >>> arranjod_get(a, 0)
     2
-    >>> lst[1]
+    >>> arranjod_get(a, 1)
     3
-    >>> lst[2]
+    >>> arranjod_get(a, 2)
     5
-    >>> lst[3]
+    >>> arranjod_get(a, 3)
     7
-    >>> lst[4]
+    >>> arranjod_get(a, 4)
     11
     '''
 ```
@@ -508,27 +688,30 @@ class ArranjoD:
 
 ```python
 def arranjod_vazio() -> ArranjoD:
-    ...
+    '''Cria um novo arranjo com zero elementos'''
 ```
 
 ```python
 def arranjod_len(a: ArranjoD) -> int:
-    ...
+    '''Devolve a quantidade de elementos em *a*'''
 ```
 
 ```python
-def arranjod_pos(a: ArranjoD, i: int) -> int:
-    ...
+def arranjod_get(a: ArranjoD, i: int) -> int:
+    '''Devolve o elemento da posição *i* de *a*'''
 ```
 
 ```python
 def arranjod_acrescenta(a: ArranjoD, item: int):
-    ...
+    '''Acrescenta *item* no final *a*'''
 ```
 
 </div>
 </div>
 
+
 ## Atividade
 
-Forme uma dupla e implemente a definição e operações do tipo `ArranjoD` e confira se a implementação funciona corretamente na função `primos`.
+Forme uma dupla e implemente a definição e operações do tipo `ArranjoD` e confira se a implementação funciona corretamente na função `primos`. \pause
+
+Faça o download dos arquivos `array.pyc`, `arranjod.py` e `primos_arranjod.py` da página da disciplina.

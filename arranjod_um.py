@@ -1,21 +1,30 @@
+from array import array
 from dataclasses import dataclass
+
 
 @dataclass
 class ArranjoD:
-    # TODO: definir!
-    pass
+    '''
+    Um aranjo dinâmico implementado com um arranjo de tamanho fixo. O arranjo
+    *valores* sempre tem exatamente os elementos do arranjo dinâmico.
+
+    Quando um elemento é adicionado, um novo arranjo de tamanho fixo com uma
+    posição a mais que *valores* é criado. Os elementos de *valores* são
+    copiados para o novo arranjo e o novo elemento é colocado na última
+    posição.
+    '''
+    valores: array
 
 
 def arranjod_vazio() -> ArranjoD:
     '''
-    Cria um novo arranho com zero elementos.
+    Cria um arranjo com zero elementos
 
     >>> a = arranjod_vazio()
     >>> arranjod_len(a)
     0
     '''
-    # TODO: implementar
-    return ArranjoD()
+    return ArranjoD(array(0))
 
 
 def arranjod_len(a: ArranjoD) -> int:
@@ -32,13 +41,12 @@ def arranjod_len(a: ArranjoD) -> int:
     >>> arranjod_len(a)
     3
     '''
-    # TODO: implementar
-    return 0
+    return len(a.valores)
 
 
 def arranjod_get(a: ArranjoD, i: int) -> int:
     '''
-    Devolve o elemento da posição *i* de *a*.
+    Devolve o elementos que está na posição *i* de *a*.
 
     Exemplos
     >>> a = arranjod_vazio()
@@ -55,8 +63,7 @@ def arranjod_get(a: ArranjoD, i: int) -> int:
     >>> arranjod_get(a, 3)
     -1
     '''
-    # TODO: implementar
-    return 0
+    return a.valores[i]
 
 
 def arranjod_acrescenta(a: ArranjoD, item: int):
@@ -74,5 +81,9 @@ def arranjod_acrescenta(a: ArranjoD, item: int):
     >>> arranjod_get(a, 999)
     1000
     '''
-    # TODO: implementar
-    pass
+    n = arranjod_len(a)
+    novo = array(n + 1)
+    for i in range(n):
+        novo[i] = a.valores[i]
+    novo[n] = item
+    a.valores = novo
