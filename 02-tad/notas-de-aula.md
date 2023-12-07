@@ -22,7 +22,7 @@ Note que a empresa usa uma convenção particular para nomear as funções.
 from dataclasses importo dataclass
 
 @dataclass
-class Robo
+class Robo:
     '''Um robo que está em uma posição da linha do
     jogo, que deve ser um valor entre 1 e 10.'''
 
@@ -32,7 +32,7 @@ def robo_cria() -> Robo:
 def robo_posicao(r: Robo) -> int:
     '''Devolve a posição atual do robo *r*.'''
 
-def robo_move(r: Robo, ):
+def robo_move(r: Robo, n: int):
     '''
     Altera a posição de *r* avançando *n* posições (até no máximo a posição 10)
     se *n* for positivo, ou recuando -*n* posições (até no mínimo a posição 1)
@@ -43,8 +43,6 @@ def robo_move(r: Robo, ):
 
 ## Especificação Robô
 
-<div class="columns">
-<div class="column" width="50%">
 \scriptsize
 
 ```python
@@ -70,32 +68,13 @@ def robo_posicao(r: Robo) -> int:
     '''
 ```
 
-</div>
-<div class="column" width="50%">
-\scriptsize
-
-```python
-def robo_posicao(r: Robo) -> int:
-    '''
-    Devolve a posição atual do robo *r*.
-
-    Exemplos
-    >>> r = robo_cria()
-    >>> robo_move(r, 2)
-    >>> robo_posicao(r)
-    3
-    '''
-```
-</div>
-</div>
-
 
 ## Especificação Robô
 
 \scriptsize
 
 ```python
-def robo_move(r: Robo, ):
+def robo_move(r: Robo, n: int):
     '''
     Altera a posição de *r* avançando *n* posições (até no máximo a posição 10)
     se *n* for positivo, ou recuando -*n* posições (até no mínimo a posição 1) se *n* for negativo...

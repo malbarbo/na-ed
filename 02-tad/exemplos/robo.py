@@ -35,7 +35,7 @@ def robo_posicao(r: Robo) -> int:
     ...
 
 
-def robo_move(r: Robo, ):
+def robo_move(r: Robo, n: int):
     '''
     Altera a posição de *r* avançando *n* posições (até no máximo a posição 10)
     se *n* for positivo, ou recuando -*n* posições (até no mínimo a posição 1)
