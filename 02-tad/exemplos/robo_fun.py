@@ -7,7 +7,8 @@ class Robo:
     Um robo com um nome que está em uma posição da linha do jogo, que deve
     ser um valor entre 1 e 10.
     '''
-    ...
+    nome: str
+    posicao: int
 
 
 def robo_cria(nome: str) -> Robo:
@@ -19,7 +20,7 @@ def robo_cria(nome: str) -> Robo:
     >>> robo_info(r)
     'r2d2 (1)'
     '''
-    ...
+    return Robo(nome, 1)
 
 
 def robo_posicao(r: Robo) -> int:
@@ -27,12 +28,12 @@ def robo_posicao(r: Robo) -> int:
     Devolve a posição atual do robo *r*.
 
     Exemplos
-    >>> r = robo_cria()
+    >>> r = robo_cria('rob')
     >>> robo_move(r, 2)
     >>> robo_posicao(r)
     3
     '''
-    ...
+    return r.posicao
 
 
 def robo_info(r: Robo) -> str:
@@ -43,9 +44,10 @@ def robo_info(r: Robo) -> str:
     Exemplos
     >>> r = robo_cria('rob')
     >>> robo_move(r, 2)
-    >>> robo_posicao(r)
+    >>> robo_info(r)
     'rob (3)'
     '''
+    return r.nome + ' (' + str(r.posicao) + ')'
 
 
 def robo_move(r: Robo, n: int):
@@ -55,7 +57,7 @@ def robo_move(r: Robo, n: int):
     se *n* for negativo. O robo *r* permanece na mesma posição se *n* for 0.
 
     Exemplos
-    >>> r = robo_cria()
+    >>> r = robo_cria('rob')
     >>> # Avança
     >>> robo_move(r, 5)
     >>> robo_posicao(r)
@@ -75,4 +77,4 @@ def robo_move(r: Robo, n: int):
     >>> robo_posicao(r)
     1
     '''
-    ...
+    r.posicao = max(1, min(10, r.posicao + n))
