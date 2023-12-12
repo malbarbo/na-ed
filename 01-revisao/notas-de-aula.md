@@ -7,6 +7,8 @@ urlcolor: Blue
 # TODO: falar de modificação de parâmetros (imagens pythontutor)
 # TODO: exercícios sobre passagem de parêmetros
 # TODO: falar que a verificação dinâmica não garante que o programa funciona corretamente
+# TODO: exemplo campo dado composto sendo dado composto a.b.c
+# TODO: exemplo lista de dados compostos lst[i].a
 ---
 
 Introdução
