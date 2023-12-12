@@ -1,4 +1,4 @@
-from arranjod_um import *
+from arranjod import *
 
 def primos(lim: int) -> ArranjoD:
     '''

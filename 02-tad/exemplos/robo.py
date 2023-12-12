@@ -4,20 +4,20 @@ from dataclasses import dataclass
 @dataclass
 class Robo:
     '''
-    Um robo que está em uma posição da linha do
-    jogo, que deve ser um valor entre 1 e 10.
+    Um robo com um nome que está em uma posição da linha do jogo, que deve
+    ser um valor entre 1 e 10.
     '''
     ...
 
 
-def robo_cria() -> Robo:
+def robo_cria(nome: str) -> Robo:
     '''
-    Cria um novo robo na posição 1.
+    Cria um novo robo com o *nome* e que está na posição 1.
 
     Exemplos
-    >>> r = robo_cria()
-    >>> robo_posicao(r)
-    1
+    >>> r = robo_cria('r2d2')
+    >>> robo_info(r)
+    'r2d2 (1)'
     '''
     ...
 
@@ -33,6 +33,19 @@ def robo_posicao(r: Robo) -> int:
     3
     '''
     ...
+
+
+def robo_info(r: Robo) -> str:
+    '''
+    Devolve um texto com o nome do robo *r*
+    seguido da sua posição entre parêntes.
+
+    Exemplos
+    >>> r = robo_cria('rob')
+    >>> robo_move(r, 2)
+    >>> robo_posicao(r)
+    'rob (3)'
+    '''
 
 
 def robo_move(r: Robo, n: int):
