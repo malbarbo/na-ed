@@ -4,6 +4,7 @@ title: Tipos abstratos de dados
 linkcolor: Black
 urlcolor: Blue
 # TODO: vantagens e desvantagens de tipos abstratos de dados e concretos
+# TODO: falar do dataclass
 ---
 
 ## Introdução
@@ -463,3 +464,69 @@ class Robo:
 ```
 </div>
 </div>
+
+
+## dataclass
+
+Usamos `@dataclass`{.python} quando queremos um dado composto simples, sem operações operações associadas (ou com operações simples). \pause
+
+Quando usamos `@dataclass`{.python} um construtor que recebe um argumento para cada campo é criado, dessa forma não precisamos criar o método `__init__`. \pause
+
+Além do construtor as funções `__eq___`, `__repr__`, `__str__`, `__hash__` são criadas automaticamente.
+
+
+## dataclass
+
+<div class="columns">
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+@dataclass
+class Ponto:
+    x: int
+    y: int
+```
+
+\normalsize
+
+Essa construção é mais ou menos equivalente ao código ao lado!
+
+Não se preocupe com essas funções "estranhas", a única que vamos utilizar por enquanto é o `__init__`.
+
+</div>
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+class Ponto:
+    x: int
+    y: int
+
+    def __init__(self, x: int, y: int):
+        self.x = x
+        self.y = y
+
+    def __str__(self) -> str: ...
+
+    def __repr__(self) -> str: ...
+
+    def __hash__(self) -> int: ...
+
+    def __eq__(self, other: Ponto) -> bool:...
+```
+</div>
+</div>
+
+
+## dataclass
+
+Porque não usar `@dataclass`{.python} na classe `Robo`? \pause
+
+Porque essas coisas geradas automaticamente não são adequadas para a classe `Robo`! \pause
+
+Pode parecer confuso quando usar ou não o `@dataclass`{.python}, mas não se preocupe, isso vai ficar mais claro com a prática! \pause
+
+O importante por enquanto é saber como usar classes para especificar e implementar TADs.
