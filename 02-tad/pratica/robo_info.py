@@ -13,6 +13,7 @@ class Robo:
         >>> r.info()
         'r2d2 (1)'
         '''
+        return
 
     def posicao(self) -> int:
         '''
