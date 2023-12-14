@@ -371,3 +371,8 @@ $f(n) = \Theta(g(n))$ semelhante a $a = b$
 | $O(n^3)$     | Cúbico      |
 | $O(2^n)$     | Exponencial |
 | $O(n!)$      | Fatorial    |
+
+
+## Tempos de execução comuns
+
+![Fonte: <https://www.geeksforgeeks.org/what-is-logarithmic-time-complexity/>](imagens/time-complexity.jpg){width=10cm}
