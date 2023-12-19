@@ -10,16 +10,14 @@ urlcolor: Blue
 
 Uma **estrutura de dados** é uma forma de organizar e armazenar dados para facilitar a sua manipulação (operações). \pause
 
-Usamos estruturas de dados para implementar TAD. \pause
-
-A estrutura de dados mais adequada para implementar um TAD depende das operações e de como elas são utilizadas.
+Usamos estruturas de dados para implementar TADs.
 
 
 ## Estrutura de dados lineares
 
 Em uma **estruturas de dados linear**, os elementos são organizados de forma sequencial, um após o outro. \pause Cada elemento possui no máximo um predecessor e um sucessor.\pause
 
-A estrutura de dados linear mais comum é o arranjo.
+A estrutura de dados linear mais comum é o **arranjo**.
 
 
 ## Arranjos
@@ -32,9 +30,9 @@ As duas principais características dos arranjos são: \pause
 
 Os arranjos podem ser: \pause
 
-- Estáticos: a quantidade de elementos não muda
+- Estáticos: a quantidade de elementos não muda.
 
-- Dinâmicos: a quantidade de elementos pode mudar
+- Dinâmicos: a quantidade de elementos pode mudar.
 
 
 ## Arranjos estáticos em Python
@@ -43,7 +41,7 @@ O tipo `list`{.python} do Python é de fato um arranjo dinâmico. \pause
 
 Diferente de outras linguagens, o Python não oferece um tipo pré-defino para arranjos estáticos. \pause
 
-Por hora não vamos mais utilizar o tipo `list`{.python}, e sim o tipo `array`{.py}, definido na biblioteca `array` que está disponível na página da disciplina, que "simula" um arranjo de tamanho fixo.
+Por hora não vamos mais utilizar o tipo `list`{.python}, e sim o tipo `arranjo`{.py}, definido na biblioteca `ed` que está disponível na página da disciplina, que "simula" um arranjo de tamanho fixo.
 
 
 ## Arranjos estáticos em Python
@@ -53,7 +51,7 @@ Por hora não vamos mais utilizar o tipo `list`{.python}, e sim o tipo `array`{.
 \scriptsize
 
 ```python
->>> from array import array
+>>> from ed import array
 >>> # Cria um arranjo com 5 zeros
 >>> x: array[int] = array(5, 0)
 >>> x
@@ -104,7 +102,7 @@ AttributeError: 'array' object has no attribute 'pop'
 
 ## Conteúdo
 
-A seguir veremos três TAD e como eles podem ser implementados usando arranjos. \pause
+A seguir veremos três TADs e como eles podem ser implementados usando arranjos. \pause
 
 A apresentação de cada TAD é precedida de um exemplo de uso.
 
@@ -160,8 +158,7 @@ Ideia da implementação:
 
 - Analisar a string um caractere por vez.
 - Manter um contador de parênteses que foram abertos mas ainda não foram fechados.
-- O contador é incrementado a cada abre parênteses e decrementado a cada fecha parênteses.
-- O contador não pode ficar negativo.
+- Incrementar o contador a cada abre parênteses e decrementar a cada fecha parênteses (o contador não pode ficar negativo).
 - No final, se o contador for 0 e não ficou negativo, os parênteses estão corretos.
 
 </div>
@@ -227,7 +224,7 @@ def parenteses_corretos(expr: str) -> bool:
 
 ## Exemplo agrupamento
 
-Projete uma função que verifique se os parênteses, colchetes e chaves em uma expressão aritmética (representada por uma string) estão corretos. \pause
+Projete uma função que verifique se os parênteses, colchetes e chaves em uma expressão aritmética (representada por uma string) estão corretos.
 
 
 ## Projeto
@@ -258,26 +255,77 @@ def grupos_corretos(expr: str) -> bool:
     '''
 ```
 
+\pause
+
 </div>
 <div class="column" width="50%">
 
-Usar um contador (ou mais) não é suficiente. Precisamos saber não apenas quantos "grupos" foram abertos e ainda não foram fechados, mas também qual é o tipo do grupo (parênteses, colchetes ou chaves). \pause
+Usar um contador (ou mais) não é suficiente. Precisamos saber não apenas quantos "grupos" foram abertos e ainda não foram fechados, mas também qual é a ordem e o tipo do grupo (parênteses, colchetes ou chaves).
+</div>
+</div>
+
+
+## Projeto
+
+<div class="columns">
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+def grupos_corretos(expr: str) -> bool:
+    '''
+    Produz True se os parênteses,
+    colchetes e chaves de *expr*
+    estão corretos, False caso contrário.
+
+    Exemplos:
+    >>> parenteses_corretos('([{}])')
+    True
+    >>> parenteses_corretos('[](){}')
+    True
+    >>> parenteses_corretos('({)}')
+    False
+    >>> parenteses_corretos('(2*[3*{5+2]})')
+    False
+    >>> parenteses_corretos('([a*{(b)-c}]-[10])')
+    True
+    '''
+```
+
+</div>
+<div class="column" width="50%">
 
 Ideia da implementação: \pause
 
 - Analisar a string um caractere por vez.
-- Matemos uma coleção com as ocorrências dos grupos que foram abertos mas ainda não foram fechados.
-- Quando um caractere de início de grupo é encontrado ele é armazenado na coleção.
-- Quando um caractere de fim de grupo é encontrado verificamos se ele fecha o grupo _mais recentemente aberto_.
+- Manter uma coleção com as ocorrências dos grupos que foram abertos mas ainda não foram fechados.
+- Quando um caractere de início de grupo é encontrado ele é _adicionado_ na coleção.
+- Quando um caractere de fim de grupo é encontrado ele precisa fechar (_remover_ da coleção) o grupo _mais recentemente aberto_ que ainda não foi fechado.
 - No final, se todos os grupos foram abertos e fechados corretamente, a expressão está correta.
 
 </div>
 </div>
 
 
+## Observando a necessidade de um TAD
+
+A ideia de implementação que acabamos de ver requer o uso de uma coleção de valores que tem operações específicas. \pause
+
+Note que no momento não estamos interessados em _como_ implementar essas operações. Nós queremos _utilizar_ essas operações para resolver o problema em questão. \pause
+
+Então podemos definir um TAD com essas operações, resolver o problema que estamos interessados e implementar o TAD depois. \pause
+
+De fato, o TAD que precisamos já é conhecido e é chamado de pilha.
+
+
 ## Pilha
 
-Uma pilha é uma coleção de itens que segue a política LIFO (Last In, First Out), isto é, o elemento mais recentemente inserido na pilha é o primeiro a ser removido.
+Uma **pilha** é uma coleção de itens que é mantida de acordo com a regra: \pause
+
+- O elemento mais _recentemente inserido_ é o primeiro a ser removido. \pause
+
+Em inglês essa política é chamada de LIFO (_Last In_, _First Out_).
 
 
 ## Pilha
@@ -290,16 +338,16 @@ Uma pilha é uma coleção de itens que segue a política LIFO (Last In, First O
 ```python
 class Pilha:
     '''Uma coleção de strings que segue a
-    política LIFO, o elemento mais recente-
+    política LIFO: o elemento mais recente-
     mente inserido é o primeiro a ser
     removido.'''
 
     def empilha(self, item: str):
-        '''Adiciona o *item* ao topo da
-        pilha.'''
+        '''Adiciona o *item* na pilha.'''
 
     def desempilha(self) -> str:
-        '''Devolve o elemento que está no topo
+        '''Devolve o elemento mais
+        recentemente adicionado
         da pilha.
         Requer que a pilha não esteja vazia.'''
 
@@ -361,7 +409,14 @@ O
 
 ## Exemplo agrupamento
 
-Use uma pilha para fazer a implementação da função que verifica se os parênteses, colchetes e chaves em uma expressão aritmética estão corretos.
+O arquivo `pilha.pyc`, disponível na página da disciplina, contém uma implementação (compilada) para Pilha.
+
+Faça o download do arquivo e use uma Pilha para fazer a implementação da função que verifica se os parênteses, colchetes e chaves em uma expressão aritmética estão corretos.
+
+
+## Implementação de Pilha usando arranjo estático
+
+Faça uma implementação de Pilha usando arranjo estático.
 
 <!--
 
