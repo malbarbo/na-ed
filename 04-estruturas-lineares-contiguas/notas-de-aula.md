@@ -6,6 +6,273 @@ linkcolor: Black
 urlcolor: Blue
 ---
 
+## Introdução
+
+Uma **estrutura de dados** é uma forma de organizar e armazenar dados para facilitar a sua manipulação (operações). \pause
+
+Usamos estruturas de dados para implementar TAD. \pause
+
+A estrutura de dados mais adequada para implementar um TAD depende das operações e de como elas são utilizadas.
+
+
+## Estrutura de dados lineares
+
+Em uma **estruturas de dados linear**, os elementos são organizados de forma sequencial, um após o outro. \pause Cada elemento possui no máximo um predecessor e um sucessor.\pause
+
+A estrutura de dados linear mais comum é o arranjo.
+
+
+## Arranjos
+
+As duas principais características dos arranjos são: \pause
+
+- Os elementos são armazenados de forma contígua na memória, ou seja, em posições consecutivas. \pause
+
+- Cada elemento do arranjo pode ser acessado diretamente em tempo constante. \pause
+
+Os arranjos podem ser: \pause
+
+- Estáticos: a quantidade de elementos não muda
+
+- Dinâmicos: a quantidade de elementos pode mudar
+
+
+## Arranjos estáticos em Python
+
+O tipo `list`{.python} do Python é de fato um arranjo dinâmico. \pause
+
+Diferente de outras linguagens, o Python não oferece um tipo pré-defino para arranjos estáticos. \pause
+
+Por hora não vamos mais utilizar o tipo `list`{.python}, e sim o tipo `array`{.py}, definido na biblioteca `array` que está disponível na página da disciplina, que "simula" um arranjo de tamanho fixo.
+
+
+## Arranjos estáticos em Python
+
+<div class="columns">
+<div class="column" width="40%">
+\scriptsize
+
+```python
+>>> from array import array
+>>> # Cria um arranjo com 5 zeros
+>>> x: array[int] = array(5, 0)
+>>> x
+array([0, 0, 0, 0, 0])
+>>> x[0] = 10
+>>> x[4] = 2
+>>> x
+array([10, 0, 0, 0, 2])
+>>> len(x)
+5
+>>> x[5]
+Traceback (most recent call last):
+...
+IndexError: list index out of range
+```
+
+\pause
+
+</div>
+<div class="column" width="58%">
+
+\scriptsize
+
+```python
+>>> soma = 0
+>>> for v in x:
+...     soma = soma + v
+>>> soma
+12
+```
+
+\pause
+
+```python
+>>> x.append(10)
+Traceback (most recent call last):
+...
+AttributeError: 'array' object has no attribute 'append'
+>>> x.pop()
+Traceback (most recent call last):
+...
+AttributeError: 'array' object has no attribute 'pop'
+```
+
+</div>
+</div>
+
+
+## Conteúdo
+
+A seguir veremos três TAD e como eles podem ser implementados usando arranjos. \pause
+
+A apresentação de cada TAD é precedida de um exemplo de uso.
+
+
+## Exemplo parênteses
+
+Projete uma função que verifique se os parênteses em uma expressão aritmética (representada por uma string) estão corretos, isso é: \pause
+
+- Cada `'('`{.python} tem um `')'`{.python} correspondente \pause
+
+- Um `')'`{.python} não pode aparecer antes do `'('`{.python} correspondente
+
+
+
+## Especificação
+
+<div class="columns">
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+def parenteses_corretos(expr: str) -> bool:
+    '''
+    Produz True se os parênteses de *expr*
+    estão corretos, False caso contrário.
+    '''
+```
+
+\pause
+
+```python
+    '''
+    Exemplos:
+    >>> parenteses_corretos('()')
+    True
+    >>> parenteses_corretos('(')
+    False
+    >>> parenteses_corretos(')')
+    False
+    >>> parenteses_corretos('())')
+    False
+    >>> parenteses_corretos('((a)*(b-c)-10)*((4-2)/8)')
+    True
+    '''
+```
+
+\pause
+
+</div>
+<div class="column" width="50%">
+\scriptsize
+
+```python
+def parenteses_corretos(expr: str) -> bool:
+    abertos = 0
+    balanceados = True
+    i = 0
+    while i < len(expr) and balanceados:
+        if expr[i] == '(':
+            abertos = abertos + 1
+        elif expr[i] == ')':
+            abertos = abertos - 1
+            if abertos < 0:
+                balanceados = False
+        i = i + 1
+    return abertos == 0 and balanceados
+```
+
+</div>
+</div>
+
+
+## Exemplo agrupamento
+
+Projete uma função que verifique se os parênteses, colchetes e chaves em uma expressão aritmética (representada por uma string) estão corretos. \pause
+
+A implementação parece complicada...
+
+
+## Pilha
+
+Uma pilha é uma coleção de itens que segue a política LIFO (Last In, First Out), isto é, o elemento mais recentemente inserido na pilha é o primeiro a ser removido.
+
+
+## Pilha
+
+<div class="columns">
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+class Pilha:
+    '''Uma coleção de strings que segue a
+    política LIFO, o elemento mais recente-
+    mente inserido é o primeiro a ser
+    removido.'''
+
+    def empilha(self, item: str):
+        '''Adiciona o *item* ao topo da
+        pilha.'''
+
+    def desempilha(self) -> str:
+        '''Devolve o elemento que está no topo
+        da pilha.
+        Requer que a pilha não esteja vazia.'''
+
+    def vazia(self) -> bool:
+        '''Devolve True se a pilha está vazia,
+        False caso contrário.'''
+```
+
+\pause
+
+</div>
+<div class="column" width="50%">
+\scriptsize
+
+```python
+>>> p = Pilha()
+>>> p.vazia()
+True
+>>> p.empilha('O')
+>>> p.empilha('que')
+>>> p.empilha('escrever?')
+>>> p.vazia()
+False
+```
+
+\pause
+
+```python
+>>> p.desempinha()
+```
+
+```python
+'escrever?'
+>>> p.empinha('fazer')
+>>> p.empinha('agora?')
+```
+
+\pause
+
+```python
+>>> while not p.vazia():
+...    print(p.desempilha())
+```
+
+\pause
+
+```python
+agora?
+fazer
+que
+O
+```
+
+</div>
+</div>
+
+
+## Exemplo agrupamento
+
+Use uma pilha para fazer a implementação da função que verifica se os parênteses, colchetes e chaves em uma expressão aritmética estão corretos.
+
+<!--
+
 ## Primos
 
 Projete uma função que encontre todos os números primos menores que um determinado valor.
@@ -594,3 +861,5 @@ def arranjod_acrescenta(a: ArranjoD, item: int):
 Forme uma dupla e implemente a definição e operações do tipo `ArranjoD` e confira se a implementação funciona corretamente na função `primos`. \pause
 
 Faça o download dos arquivos `array.pyc`, `arranjod.py` e `primos_arranjod.py` da página da disciplina.
+
+-->
