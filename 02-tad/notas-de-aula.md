@@ -5,6 +5,7 @@ linkcolor: Black
 urlcolor: Blue
 # TODO: vantagens e desvantagens de tipos abstratos de dados e concretos
 # TODO: falar do dataclass
+# TODO: falar de modulos
 ---
 
 ## Introdução

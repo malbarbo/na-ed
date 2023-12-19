@@ -4,6 +4,7 @@ title: Noções de complexidade de algoritmos
 linkcolor: Black
 urlcolor: Blue
 # TODO: falar de análise de um algoritmo particular vs uma classe de algoritmos
+# TODO: destacar o propósito da notação assintótica e suas limitações
 ---
 
 
@@ -181,7 +182,7 @@ Portanto, para o caso geral, a complexidade de tempo da função é $n$.
 \scriptsize
 
 ```python
-def ordena(lst: list[int]):
+def ordena_selecao(lst: list[int]):
     '''Ordena os elementos de *lst*
     em ordem não decrescente.
     Exemplos
