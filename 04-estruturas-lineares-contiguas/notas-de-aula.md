@@ -118,8 +118,7 @@ Projete uma função que verifique se os parênteses em uma expressão aritméti
 - Um `')'`{.python} não pode aparecer antes do `'('`{.python} correspondente
 
 
-
-## Especificação
+## Projeto
 
 <div class="columns">
 <div class="column" width="50%">
@@ -156,22 +155,70 @@ def parenteses_corretos(expr: str) -> bool:
 
 </div>
 <div class="column" width="50%">
+
+Ideia da implementação:
+
+- Analisar a string um caractere por vez.
+- Manter um contador de parênteses que foram abertos mas ainda não foram fechados.
+- O contador é incrementado a cada abre parênteses e decrementado a cada fecha parênteses.
+- O contador não pode ficar negativo.
+- No final, se o contador for 0 e não ficou negativo, os parênteses estão corretos.
+
+</div>
+</div>
+
+
+## Projeto
+
+<div class="columns">
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+def parenteses_corretos(expr: str) -> bool:
+    '''
+    Produz True se os parênteses de *expr*
+    estão corretos, False caso contrário.
+    '''
+```
+
+
+```python
+    '''
+    Exemplos:
+    >>> parenteses_corretos('()')
+    True
+    >>> parenteses_corretos('(')
+    False
+    >>> parenteses_corretos(')')
+    False
+    >>> parenteses_corretos('())')
+    False
+    >>> parenteses_corretos('((a)*(b-c)-10)*((4-2)/8)')
+    True
+    '''
+```
+
+</div>
+<div class="column" width="50%">
+
 \scriptsize
 
 ```python
 def parenteses_corretos(expr: str) -> bool:
     abertos = 0
-    balanceados = True
+    corretos = True
     i = 0
-    while i < len(expr) and balanceados:
+    while i < len(expr) and corretos:
         if expr[i] == '(':
             abertos = abertos + 1
         elif expr[i] == ')':
             abertos = abertos - 1
             if abertos < 0:
-                balanceados = False
+                corretos = False
         i = i + 1
-    return abertos == 0 and balanceados
+    return abertos == 0 and corretos
 ```
 
 </div>
@@ -182,7 +229,50 @@ def parenteses_corretos(expr: str) -> bool:
 
 Projete uma função que verifique se os parênteses, colchetes e chaves em uma expressão aritmética (representada por uma string) estão corretos. \pause
 
-A implementação parece complicada...
+
+## Projeto
+
+<div class="columns">
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+def grupos_corretos(expr: str) -> bool:
+    '''
+    Produz True se os parênteses,
+    colchetes e chaves de *expr*
+    estão corretos, False caso contrário.
+
+    Exemplos:
+    >>> parenteses_corretos('([{}])')
+    True
+    >>> parenteses_corretos('[](){}')
+    True
+    >>> parenteses_corretos('({)}')
+    False
+    >>> parenteses_corretos('(2*[3*{5+2]})')
+    False
+    >>> parenteses_corretos('([a]*{b-c}-[10])*({(4-2)/8})')
+    True
+    '''
+```
+
+</div>
+<div class="column" width="50%">
+
+Usar um contador (ou mais) não é suficiente. Precisamos saber não apenas quantos "grupos" foram abertos e ainda não foram fechados, mas também qual é o tipo do grupo (parênteses, colchetes ou chaves). \pause
+
+Ideia da implementação: \pause
+
+- Analisar a string um caractere por vez.
+- Matemos uma coleção com as ocorrências dos grupos que foram abertos mas ainda não foram fechados.
+- Quando um caractere de início de grupo é encontrado ele é armazenado na coleção.
+- Quando um caractere de fim de grupo é encontrado verificamos se ele fecha o grupo _mais recentemente aberto_.
+- No final, se todos os grupos foram abertos e fechados corretamente, a expressão está correta.
+
+</div>
+</div>
 
 
 ## Pilha
@@ -240,6 +330,8 @@ False
 ```python
 >>> p.desempinha()
 ```
+
+\pause
 
 ```python
 'escrever?'
