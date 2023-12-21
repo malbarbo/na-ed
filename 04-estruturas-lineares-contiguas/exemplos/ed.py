@@ -1,6 +1,7 @@
-from typing import TypeVar, Iterator, Generic
+from typing import TypeVar, Iterator, Generic, overload, Union, Tuple
 
 T = TypeVar('T')
+
 
 class array(Generic[T]):
     '''
@@ -35,7 +36,15 @@ class array(Generic[T]):
     'oi de novo oi'
     '''
 
-    def __init__(self, n: int, val: T):
+    valores: list[T]
+
+    @overload
+    def __init__(self, n_values: list[T]) -> None: ...
+
+    @overload
+    def __init__(self, n_values: int, val: T) -> None: ...
+
+    def __init__(self, n_values: int | list[T], val: T | None = None) -> None:
         '''
         Cria um novo arranjo com *n* cópias de *val*.
 
@@ -73,7 +82,12 @@ class array(Generic[T]):
         >>> pontos
         array([Ponto(x=10, y=4), Ponto(x=3, y=4)])
         '''
-        self.valores = [val] * n
+        if isinstance(n_values, int):
+            assert val is not None
+            self.valores = [val] * n_values
+        else:
+            assert val is None
+            self.valores = n_values[:]
 
     def __len__(self) -> int:
         return len(self.valores)
@@ -92,3 +106,57 @@ class array(Generic[T]):
 
     def __str__(self) -> str:
         return 'array(' + str(self.valores) + ')'
+
+
+class array2d(Generic[T]):
+    lins: int
+    cols: int
+    valores: list[T]
+
+    @overload
+    def __init__(self, lins_values: list[list[T]]): ...
+
+    @overload
+    def __init__(self, lins_values: int, cols: int, val: T): ...
+
+    def __init__(self, lins_values: int | list[list[T]], cols: int | None = None, val: T | None = None):
+        if isinstance(lins_values, int):
+            assert cols is not None
+            assert val is not None
+            self.lins = lins_values
+            self.cols = cols
+            self.valores = [val] * (self.lins * self.cols)
+        else:
+            assert cols is None
+            assert val is None
+            self.lins = len(lins_values)
+            self.cols = len(lins_values[0])
+            self.valores = []
+            for lin in lins_values:
+                assert len(lin) == self.cols
+                for val in lin:
+                    self.valores.append(val)
+
+    def __getitem__(self, index: Tuple[int, int]) -> T:
+        lin, col = index
+        assert lin < self.lins
+        assert col < self.cols
+        return self.valores[lin * self.cols + col]
+
+    def __setitem__(self, index: Tuple[int, int], value: T):
+        lin, col = index
+        assert lin < self.lins
+        assert col < self.cols
+        self.valores[lin * self.cols + col] = value
+
+    def __repr__(self) -> str:
+        s = 'array2d(['
+        sep = ''
+        for lin in range(self.lins):
+            i = lin * self.cols
+            s += sep + repr(self.valores[i:(i + self.cols)])
+            sep = '\n' + ' ' * 9
+        return s + '])'
+
+    def __str__(self) -> str:
+        return repr(self)
