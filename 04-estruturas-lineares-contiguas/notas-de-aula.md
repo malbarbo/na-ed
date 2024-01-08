@@ -376,15 +376,15 @@ False
 \pause
 
 ```python
->>> p.desempinha()
+>>> p.desempilha()
 ```
 
 \pause
 
 ```python
 'escrever?'
->>> p.empinha('fazer')
->>> p.empinha('agora?')
+>>> p.empilha('fazer')
+>>> p.empilha('agora?')
 ```
 
 \pause
