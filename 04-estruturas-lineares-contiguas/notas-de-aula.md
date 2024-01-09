@@ -41,7 +41,9 @@ O tipo `list`{.python} do Python é de fato um arranjo dinâmico. \pause
 
 Diferente de outras linguagens, o Python não oferece um tipo pré-defino para arranjos estáticos. \pause
 
-Por hora não vamos mais utilizar o tipo `list`{.python}, e sim o tipo `arranjo`{.py}, definido na biblioteca `ed` que está disponível na página da disciplina, que "simula" um arranjo de tamanho fixo.
+Por hora não vamos mais utilizar o tipo `list`{.python}, e sim o tipo `arranjo`{.py}, que "simula" um arranjo de tamanho fixo. \pause
+
+O tipo arranjo está definido na biblioteca `ed`, que está disponível para download na página da disciplina.
 
 
 ## Arranjos estáticos em Python
@@ -76,11 +78,13 @@ IndexError: list index out of range
 \scriptsize
 
 ```python
+>>> # cria um arranjo a partir de uma lista
+>>> x = array([5, 1, 3, 8])
 >>> soma = 0
 >>> for v in x:
 ...     soma = soma + v
 >>> soma
-12
+17
 ```
 
 \pause
@@ -391,16 +395,16 @@ False
 
 ```python
 >>> while not p.vazia():
-...    print(p.desempilha())
+...    p.desempilha()
 ```
 
 \pause
 
 ```python
-agora?
-fazer
-que
-O
+'agora?'
+'fazer'
+'que'
+'O'
 ```
 
 </div>
@@ -409,14 +413,179 @@ O
 
 ## Exemplo agrupamento
 
-O arquivo `pilha.pyc`, disponível na página da disciplina, contém uma implementação (compilada) para Pilha.
+O arquivo `pilha.py`, disponível na página da disciplina, contém uma implementação para `Pilha`.
 
 Faça o download do arquivo e use uma Pilha para fazer a implementação da função que verifica se os parênteses, colchetes e chaves em uma expressão aritmética estão corretos.
+
+
+## Exemplo agrupamento
+
+<div class="columns">
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+def grupos_corretos(expr: str) -> bool:
+    '''
+    Produz True se os parênteses,
+    colchetes e chaves de *expr*
+    estão corretos, False caso contrário.
+
+    Exemplos:
+    >>> parenteses_corretos('([{}])')
+    True
+    >>> parenteses_corretos('[](){}')
+    True
+    >>> parenteses_corretos('({)}')
+    False
+    >>> parenteses_corretos('(2*[3*{5+2]})')
+    False
+    >>> parenteses_corretos('([a*{(b)-c}]-[10])')
+    True
+    '''
+```
+
+</div>
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+def grupos_corretos(expr: str) -> bool:
+    p = Pilha()
+    corretos = True
+    i = 0
+    while i < len(expr) and corretos:
+        if expr[i] in '([{':
+            p.empilha(expr[i])
+        elif expr[i] in ')]}':
+            if p.vazia() or \
+                    not par(p.desempilha(), expr[i]):
+                corretos = False
+        i = i + 1
+    return p.vazia() and corretos
+
+def par(a: str, b: str) -> bool:
+    return a == '(' and b == ')' or \
+            a == '[' and b == ']' or \
+            a == '{' and b == '}'
+```
+
+</div>
+</div>
+
+
+## Comparação parênteses e agrupamento
+
+<div class="columns">
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+def parenteses_corretos(expr: str) -> bool:
+    abertos = 0
+    corretos = True
+    i = 0
+    while i < len(expr) and corretos:
+        if expr[i] == '(':
+            abertos = abertos + 1
+        elif expr[i] == ')':
+            abertos = abertos - 1
+            if abertos < 0:
+                corretos = False
+        i = i + 1
+    return abertos == 0 and corretos
+```
+
+</div>
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+def grupos_corretos(expr: str) -> bool:
+    p = Pilha()
+    corretos = True
+    i = 0
+    while i < len(expr) and corretos:
+        if expr[i] in '([{':
+            p.empilha(expr[i])
+        elif expr[i] in ')]}':
+            if p.vazia() or \
+                    not par(p.desempilha(), expr[i]):
+                corretos = False
+        i = i + 1
+    return p.vazia() and corretos
+```
+
+</div>
+</div>
 
 
 ## Implementação de Pilha usando arranjo estático
 
 Faça uma implementação de Pilha usando arranjo estático.
+
+
+## Implementação de Pilha usando arranjo estático
+
+<div class="columns">
+<div class="column" width="50%">
+\scriptsize
+
+```python
+class Pilha:
+    valores: array[str]
+    # O índice do elemento que está no topo
+    # da pilha
+    topo: int
+
+    def __init__(self):
+        '''Cria uma nova pilha com capacidade
+        para armazenar MAX_TAM elementos.'''
+        self.valores = array(MAX_TAM, '')
+        self.topo = -1
+```
+
+\small
+
+Qual a complexidade de tempo da função `Pilha.__init__`{.python}? \pause
+
+$O($MAX_TAM$)$, \pause cada um dos `MAX_TAM` elementos deve ser inicializado com `''`{.python} (o que é feito pela função `array`).
+
+</div>
+<div class="column" width="50%">
+
+\scriptsize
+
+\pause
+
+```python
+    def empilha(self, item: str):
+        assert self.topo < MAX_TAM - 1
+        self.topo = self.topo + 1
+        self.valores[self.topo] = item
+
+    def desempilha(self) -> str:
+        assert not self.vazia()
+        item = self.valores[self.topo]
+        self.topo = self.topo - 1
+        return item
+
+    def vazia(self) -> bool:
+        return self.topo == -1
+```
+
+\small
+
+\pause
+
+Qual a complexidade de tempo das funções `empilha`, `desempinha` e `vazia`? \pause $O(1)$, \pause todas as operações dessas funções têm tempo constante.
+
+</div>
+</div>
 
 <!--
 
