@@ -1,6 +1,6 @@
 from ed import array
 
-MAX_TAM = 100
+CAPACIDADE = 100
 
 
 class Pilha:
@@ -29,23 +29,38 @@ class Pilha:
     '''
 
     valores: array[str]
-    # O índice do elemento que está no topo da pilha
+    # O índice do elemento que está no topo da pilha,
     # -1 se a pilha está vazia.
     topo: int
 
     def __init__(self):
-        self.valores = array(MAX_TAM, '')
+        '''
+        Cria uma nova pilha com capacidade para armazenar *CAPACIDADE*
+        elementos.
+        '''
+        self.valores = array(CAPACIDADE, '')
         self.topo = -1
 
     def empilha(self, item: str):
         '''
         Adiciona o *item* na pilha.
 
-        Requer que a quantidade de elementos
-        na pilha seja menor que MAX_TAM.
+        Requer que a quantidade de elementos na pilha seja menor que
+        *CAPACIDADE*.
+
+        Exemplos
+        >>> p = Pilha()
+        >>> for i in range(CAPACIDADE):
+        ...     p.empilha(str(i))
+        >>> p.empilha('a')
+        Traceback (most recent call last):
+        ...
+        ValueError: pilha cheia
+        >>> p.desempilha() == str(CAPACIDADE - 1)
+        True
         '''
-        if self.topo >= MAX_TAM - 1:
-            raise ValueError('a pilha está cheia')
+        if self.topo >= CAPACIDADE - 1:
+            raise ValueError('pilha cheia')
         self.topo = self.topo + 1
         self.valores[self.topo] = item
 
@@ -60,7 +75,7 @@ class Pilha:
         >>> p.desempilha()
         Traceback (most recent call last):
         ...
-        ValueError: a pilha está vazia
+        ValueError: pilha vazia
         >>> p.empilha('casa')
         >>> p.empilha('na')
         >>> p.empilha('árvore')
@@ -68,7 +83,7 @@ class Pilha:
         'árvore'
         '''
         if self.vazia():
-            raise ValueError('a pilha está vazia')
+            raise ValueError('pilha vazia')
         item = self.valores[self.topo]
         self.topo = self.topo - 1
         return item
