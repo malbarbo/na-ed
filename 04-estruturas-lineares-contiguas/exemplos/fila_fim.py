@@ -1,6 +1,7 @@
 from ed import array
 
-MAX_TAM = 100
+CAPACIDADE = 100
+
 
 class Fila:
     '''
@@ -29,20 +30,64 @@ class Fila:
     '''
 
     valores: array[str]
-    # Indíce do último elemento da fila, -1 se a fila está vazia
+    # Indíce do último elemento da fila, -1 se a fila está vazia.
     fim: int
 
+    # O início da fila é sempre na posição 0. Em enfileira o fim é incrementado
+    # e em desenfileira decrementado e todos os elementos são movidos para a
+    # posição anterior.
+
     def __init__(self):
-        self.valores = array(MAX_TAM, '')
+        '''
+        Cria uma nova fila com capacidade para armazenar *CAPACIDADE*
+        elementos.
+        '''
+        self.valores = array(CAPACIDADE, '')
         self.fim = -1
 
     def enfileira(self, item: str):
-        if self.fim >= MAX_TAM - 1:
+        '''
+        Adiciona *item* no final da fila.
+
+        Requer que a quantidade de elementos na fila seja menor que
+        *CAPACIDADE*.
+
+        Exemplos
+        >>> f = Fila()
+        >>> for i in range(CAPACIDADE):
+        ...     f.enfileira(str(i))
+        >>> f.enfileira('a')
+        Traceback (most recent call last):
+        ...
+        ValueError: fila cheia
+        >>> f.desenfileira()
+        '0'
+        >>> f.desenfileira()
+        '1'
+        '''
+        if self.fim >= CAPACIDADE - 1:
             raise ValueError('fila cheia')
         self.fim += 1
         self.valores[self.fim] = item
 
     def desenfileira(self) -> str:
+        '''
+        Remove e devolve o primeiro elemento da fila.
+
+        Requer que a fila não esteja vazia.
+
+        Exemplos
+        >>> f = Fila()
+        >>> f.desenfileira()
+        Traceback (most recent call last):
+        ...
+        ValueError: fila vazia
+        >>> f.enfileira('Márcia')
+        >>> f.enfileira('João')
+        >>> f.enfileira('Pedro')
+        >>> f.desenfileira()
+        'Márcia'
+        '''
         if self.vazia():
             raise ValueError('fila vazia')
         item = self.valores[0]
@@ -52,4 +97,15 @@ class Fila:
         return item
 
     def vazia(self) -> bool:
+        '''
+        Devolve True se a fila está vazia, False caso contrário.
+
+        Exemplos
+        >>> f = Fila()
+        >>> f.vazia()
+        True
+        >>> f.enfileira('Jorge')
+        >>> f.vazia()
+        False
+        '''
         return self.fim == -1
