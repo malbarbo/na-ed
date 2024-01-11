@@ -577,7 +577,7 @@ Faça uma implementação de Pilha usando arranjo estático.
 \scriptsize
 
 ```python
-MAX_TAM = 100
+CAPACIDADE = 100
 class Pilha:
     valores: array[str]
     # O índice do elemento que está no topo
@@ -586,8 +586,8 @@ class Pilha:
 
     def __init__(self):
         '''Cria uma nova pilha com capacidade
-        para armazenar MAX_TAM elementos.'''
-        self.valores = array(MAX_TAM, '')
+        para armazenar CAPACIDADE elementos.'''
+        self.valores = array(CAPACIDADE, '')
         self.topo = -1
 ```
 
@@ -595,7 +595,7 @@ class Pilha:
 
 Qual a complexidade de tempo da função `Pilha.__init__`{.python}? \pause
 
-$O($MAX_TAM$)$, \pause cada um dos `MAX_TAM` elementos deve ser inicializado com `''`{.python} (o que é feito pela função `array`).
+$O($CAPACIDADE$)$, \pause cada um dos `CAPACIDADE` elementos deve ser inicializado com `''`{.python} (o que é feito pela função `array`).
 
 </div>
 <div class="column" width="50%">
@@ -606,7 +606,7 @@ $O($MAX_TAM$)$, \pause cada um dos `MAX_TAM` elementos deve ser inicializado com
 
 ```python
     def empilha(self, item: str):
-        assert self.topo < MAX_TAM - 1
+        assert self.topo < CAPACIDADE - 1
         self.topo = self.topo + 1
         self.valores[self.topo] = item
 
@@ -653,7 +653,7 @@ Veremos posteriormente como superar essas limitações.
 ```python
 class Pilha:
     def empilha(self, item: str):
-        assert self.topo < MAX_TAM - 1
+        assert self.topo < CAPACIDADE - 1
         self.topo = self.topo + 1
         self.valores[self.topo] = item
 
@@ -693,14 +693,14 @@ O resultado final das duas abordagens é semelhante: a falha do programa. No ent
 ```python
 class Pilha:
     def empilha(self, item: str):
-        if self.topo >= MAX_TAM - 1:
-            raise ValueError('a pilha está cheia')
+        if self.topo >= CAPACIDADE - 1:
+            raise ValueError('pilha cheia')
         self.topo = self.topo + 1
         self.valores[self.topo] = item
 
     def desempilha(self) -> str:
         if self.vazia():
-            raise ValueError('a pilha está vazia')
+            raise ValueError('pilha vazia')
         item = self.valores[self.topo]
         self.topo = self.topo - 1
         return item
@@ -912,7 +912,7 @@ class Fila:
     fim: int
 
     def enfileira(self, item: str):
-        if self.fim >= MAX_TAM - 1:
+        if self.fim >= CAPACIDADE - 1:
             raise ValueError('fila cheia')
         self.fim += 1
         self.valores[self.fim] = item
@@ -942,7 +942,7 @@ class Fila:
     fim: int
 
     def enfileira(self, item: str):
-        if self.fim >= MAX_TAM - 1:
+        if self.fim >= CAPACIDADE - 1:
             raise ValueError('fila cheia')
         self.fim += 1
         self.valores[self.fim] = item
@@ -991,7 +991,7 @@ class Fila:
     inicio: int
 
     def enfileira(self, item: str):
-        if self.fim >= MAX_TAM - 1:
+        if self.fim >= CAPACIDADE - 1:
             raise ValueError('fila cheia')
         self.fim += 1
         self.valores[self.fim] = item
@@ -1022,7 +1022,7 @@ class Fila:
     inicio: int
 
     def enfileira(self, item: str):
-        if self.fim >= MAX_TAM - 1:
+        if self.fim >= CAPACIDADE - 1:
             raise ValueError('fila cheia')
         self.fim += 1
         self.valores[self.fim] = item
