@@ -41,7 +41,7 @@ O tipo `list`{.python} do Python é de fato um arranjo dinâmico. \pause
 
 Diferente de outras linguagens, o Python não oferece um tipo pré-defino para arranjos estáticos. \pause
 
-Por hora não vamos mais utilizar o tipo `list`{.python}, e sim o tipo `arranjo`{.py}, que "simula" um arranjo de tamanho fixo. \pause
+Por hora não vamos mais utilizar o tipo `list`{.python}, e sim o tipo `array`{.py}, que "simula" um arranjo de tamanho fixo. \pause
 
 O tipo arranjo está definido na biblioteca `ed`, que está disponível para download na página da disciplina.
 
@@ -106,9 +106,7 @@ AttributeError: 'array' object has no attribute 'pop'
 
 ## Conteúdo
 
-A seguir veremos três TADs e como eles podem ser implementados usando arranjos. \pause
-
-A apresentação de cada TAD é precedida de um exemplo de uso.
+A seguir veremos três TADs e como eles podem ser implementados usando arranjos.
 
 
 ## Exemplo parênteses
@@ -364,6 +362,49 @@ class Pilha:
 
 </div>
 <div class="column" width="50%">
+
+![](imagens/stack.pdf)
+
+\small
+
+O método empilha é chamado de _push_ em inglês.
+
+O método desempilha é chamado de _pop_ em inglês.
+
+</div>
+</div>
+
+
+## Pilha
+
+<div class="columns">
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+class Pilha:
+    '''Uma coleção de strings que segue a
+    política LIFO: o elemento mais recente-
+    mente inserido é o primeiro a ser
+    removido.'''
+
+    def empilha(self, item: str):
+        '''Adiciona o *item* na pilha.'''
+
+    def desempilha(self) -> str:
+        '''Devolve o elemento mais
+        recentemente adicionado
+        da pilha.
+        Requer que a pilha não esteja vazia.'''
+
+    def vazia(self) -> bool:
+        '''Devolve True se a pilha está vazia,
+        False caso contrário.'''
+```
+
+</div>
+<div class="column" width="50%">
 \scriptsize
 
 ```python
@@ -415,7 +456,7 @@ False
 
 O arquivo `pilha.py`, disponível na página da disciplina, contém uma implementação para `Pilha`.
 
-Faça o download do arquivo e use uma Pilha para fazer a implementação da função que verifica se os parênteses, colchetes e chaves em uma expressão aritmética estão corretos.
+Faça o download do arquivo e use uma pilha para fazer a implementação da função que verifica se os parênteses, colchetes e chaves em uma expressão aritmética estão corretos.
 
 
 ## Exemplo agrupamento
@@ -536,10 +577,11 @@ Faça uma implementação de Pilha usando arranjo estático.
 \scriptsize
 
 ```python
+MAX_TAM = 100
 class Pilha:
     valores: array[str]
     # O índice do elemento que está no topo
-    # da pilha
+    # da pilha, -1 para pilha vazia.
     topo: int
 
     def __init__(self):
@@ -586,6 +628,133 @@ Qual a complexidade de tempo das funções `empilha`, `desempinha` e `vazia`? \p
 
 </div>
 </div>
+
+
+## Limitações
+
+Qual a limitação dessa implementação? \pause
+
+- A capacidade fixa, o que gera um estouro da pilha (_stack overflow_) quando o usuário tenta empilhar um elemento e a pilha está cheia (o TAD Pilha tem capacidade ilimitada). \pause
+
+Qual a limitação da definição do TAD pilha? \pause
+
+- A possibilidade de estouro (negativo) da pilha (_stack underflow_), isso é, a tentativa de remover um elemento quando a pilha está vazia. \pause
+
+Veremos posteriormente como superar essas limitações.
+
+
+## Revisão
+
+<div class="columns">
+<div class="column" width="45%">
+\scriptsize
+
+```python
+class Pilha:
+    def empilha(self, item: str):
+        assert self.topo < MAX_TAM - 1
+        self.topo = self.topo + 1
+        self.valores[self.topo] = item
+
+    def desempilha(self) -> str:
+        assert not self.vazia()
+        item = self.valores[self.topo]
+        self.topo = self.topo - 1
+        return item
+
+    def vazia(self) -> bool:
+        return self.topo == -1
+```
+
+</div>
+<div class="column" width="55%">
+
+\small
+
+Podemos melhor o código? \pause
+
+Em geral, usamos o `assert`{.python} para verificar condições que devem ser verdadeiras durante a execução do programa e cuja a correção depende apenas do projetista do código. Adicionamos o `assert`{.python} como uma rede de segurança, mas esperamos que ele não falhe. \pause
+
+Para condições que devem ser verdadeiras mas a correção depende do usuário do código, usamos uma condicional para fazer a verificação e uma exceção para indicar erro. \pause
+
+O resultado final das duas abordagens é semelhante: a falha do programa. No entanto, o uso de exceções torna claro que o erro é esperado e permite a recuperação e a continuação de execução do programa (não veremos como fazer isso).
+
+</div>
+</div>
+
+
+## Revisão
+
+<div class="columns">
+<div class="column" width="55%">
+\scriptsize
+
+```python
+class Pilha:
+    def empilha(self, item: str):
+        if self.topo >= MAX_TAM - 1:
+            raise ValueError('a pilha está cheia')
+        self.topo = self.topo + 1
+        self.valores[self.topo] = item
+
+    def desempilha(self) -> str:
+        if self.vazia():
+            raise ValueError('a pilha está vazia')
+        item = self.valores[self.topo]
+        self.topo = self.topo - 1
+        return item
+
+    def vazia(self) -> bool:
+        return self.topo == -1
+```
+
+</div>
+<div class="column" width="43%">
+
+\scriptsize
+
+```python
+>>> p = Pilha()
+>>> p.desempilha()
+Traceback (most recent call last):
+...
+ValueError: a pilha está vazia
+```
+
+\pause
+
+\normalsize
+
+Podemos fazer mais melhorias? \pause
+
+Podemos escrever
+
+\scriptsize
+
+```python
+self.topo += 1
+```
+
+\normalsize
+
+Ao invés de
+
+\scriptsize
+
+```python
+self.topo = self.topo + 1
+```
+
+\pause
+
+\normalsize
+
+Essa forma funciona para qualquer operador binário, mas qual é a vantagem?
+
+</div>
+</div>
+
+
 
 <!--
 

@@ -30,6 +30,7 @@ class Pilha:
 
     valores: array[str]
     # O índice do elemento que está no topo da pilha
+    # -1 se a pilha está vazia.
     topo: int
 
     def __init__(self):
@@ -43,7 +44,8 @@ class Pilha:
         Requer que a quantidade de elementos
         na pilha seja menor que MAX_TAM.
         '''
-        assert self.topo < MAX_TAM - 1
+        if self.topo >= MAX_TAM - 1:
+            raise ValueError('a pilha está cheia')
         self.topo = self.topo + 1
         self.valores[self.topo] = item
 
@@ -55,13 +57,18 @@ class Pilha:
 
         Exemplos
         >>> p = Pilha()
+        >>> p.desempilha()
+        Traceback (most recent call last):
+        ...
+        ValueError: a pilha está vazia
         >>> p.empilha('casa')
         >>> p.empilha('na')
         >>> p.empilha('árvore')
         >>> p.desempilha()
         'árvore'
         '''
-        assert not self.vazia()
+        if self.vazia():
+            raise ValueError('a pilha está vazia')
         item = self.valores[self.topo]
         self.topo = self.topo - 1
         return item
