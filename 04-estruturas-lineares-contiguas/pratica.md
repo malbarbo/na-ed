@@ -63,3 +63,15 @@ urlcolor: Blue
 @) Projete uma função que receba como parâmetro duas pilhas e troque os elementos de uma pilha com os elementos da outra pilha.
 
 @) (Desafio) Faça uma implementação alternativa do TAD Pilha que use uma única string para armazenar todos os elementos da pilha.
+
+<!-- Fila -->
+
+@) Modifique a implementação de `Fila` circular adicionando um método para verificar se a pilha está cheia.
+
+@) Modifique a implementação de `File` (do exercício anterior) para que o construtor receba como parâmetro a quantidade máxima de elementos (capacidade) que a fila pode armazenar. Adicione também um método que devolve a capacidade da fila.
+
+@) Implemente uma fila usando duas pilhas.
+
+@) Implemente uma pilha usando duas filas.
+
+@) (Desafio) Faça uma implementação alternativa do TAD Fila que use uma única string para armazenar todos os elementos da fila.

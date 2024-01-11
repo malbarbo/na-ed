@@ -323,7 +323,7 @@ De fato, o TAD que precisamos já é conhecido e é chamado de pilha.
 
 ## Pilha
 
-Uma **pilha** é uma coleção de itens que é mantida de acordo com a regra: \pause
+Uma **pilha** (_stack_ em inglês) é uma coleção de itens que é mantida de acordo com a regra: \pause
 
 - O elemento mais _recentemente inserido_ é o primeiro a ser removido. \pause
 
@@ -421,20 +421,20 @@ False
 \pause
 
 ```python
->>> p.desempilha()
+>>> f.desempilha()
 ```
 
 \pause
 
 ```python
 'escrever?'
->>> p.empilha('fazer')
->>> p.empilha('agora?')
 ```
 
 \pause
 
 ```python
+>>> p.empilha('fazer')
+>>> p.empilha('agora?')
 >>> while not p.vazia():
 ...    p.desempilha()
 ```
@@ -634,7 +634,8 @@ Qual a complexidade de tempo das funções `empilha`, `desempinha` e `vazia`? \p
 
 Qual a limitação dessa implementação? \pause
 
-- A capacidade fixa, o que gera um estouro da pilha (_stack overflow_) quando o usuário tenta empilhar um elemento e a pilha está cheia (o TAD Pilha tem capacidade ilimitada). \pause
+- O TAD Pilha não tem capacidade máxima;
+- A implementação tem capacidade fixa, o que gera um estouro da pilha (_stack overflow_) quando o usuário tenta empilhar um elemento e a pilha está cheia. \pause
 
 Qual a limitação da definição do TAD pilha? \pause
 
@@ -755,9 +756,298 @@ Essa forma funciona para qualquer operador binário, mas qual é a vantagem?
 </div>
 
 
+## Fila
+
+Vimos que um pilha usa a política LIFO (_Last In_, _First out_).
+
+Uma **fila** (_queue_ em inglês) é uma coleção de itens que é mantido de acordo com a política FIFO (_First in_, _First out_):
+
+- O primeiro elemento inserido é o primeiro a ser removido.
+
+
+## Fila
+
+<div class="columns">
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+class Fila:
+    '''Uma coleção de strings que segue a
+    política FIFO: o primeiro a ser
+    inserido é o primeiro a ser removido'''
+
+    def enfileira(self, item: str):
+        '''Adiciona o *item* no final da
+        fila.'''
+
+    def desenfileira(self) -> str:
+        '''Remove e devolve o primeiro
+        elemento da fila.
+        Requer que a fila não esteja
+        vazia.'''
+
+    def vazia(self) -> bool:
+        '''Devolve True se a fila está
+        vazia, False caso contrário.'''
+```
+
+\pause
+
+</div>
+<div class="column" width="50%">
+
+![](imagens/queue.pdf){width=4cm}
+
+\small
+
+O método enfileira é chamado de _enqueue_ em inglês.
+
+O método desenfileira é chamado de _dequeue_ em inglês.
+
+</div>
+</div>
+
+
+## Fila
+
+<div class="columns">
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+class Fila:
+    '''Uma coleção de strings que segue a
+    política FIFO: o primeiro a ser
+    inserido é o primeiro a ser removido.'''
+
+    def enfileira(self, item: str):
+        '''Adiciona o *item* no final da
+        fila.'''
+
+    def desenfileira(self) -> str:
+        '''Remove e devolve o primeiro
+        elemento da fila.
+        Requer que a fila não esteja
+        vazia.'''
+
+    def vazia(self) -> bool:
+        '''Devolve True se a fila está
+        vazia, False caso contrário.'''
+```
+
+\pause
+
+</div>
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+>>> f = Fila()
+>>> f.vazia()
+True
+>>> f.enfileira('Amanda')
+>>> f.enfileira('Fernando')
+>>> f.enfileira('Márcia')
+>>> f.vazia()
+False
+```
+
+\pause
+
+```python
+>>> p.desenfileira()
+```
+
+\pause
+
+```python
+'Amanda'
+```
+
+\pause
+
+```python
+>>> f.enfileira('Pedro')
+>>> f.enfileira('Alberto')
+>>> while not f.vazia():
+...     f.desenfileira()
+```
+
+\pause
+
+```python
+'Fernando'
+'Márcia'
+'Pedro'
+'Alberto'
+```
+
+</div>
+</div>
+
+
+## Implementação de fila usando arranjo estático
+
+<div class="columns">
+<div class="column" width="48%">
+Como implementar uma fila usando um arranjo estático? \pause
+
+Usando um inteiro para indicar o `fim` da fila: \pause
+
+- Construtor: inicializa o arranjo e o `fim` com `-1`{.python}. \pause
+- Vazia: verifica se `fim == -1`{.python} \pause
+- Enfileira: incrementa `fim` e armazena o item na posição `fim`. \pause
+- Desenfileira: devolve o item na posição 0, move os itens (1 $\rightarrow$ 0, 2 $\rightarrow$ 1, etc) e decrementa o `fim`. \pause
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Fila:
+    valores: array[str]
+    fim: int
+
+    def enfileira(self, item: str):
+        if self.fim >= MAX_TAM - 1:
+            raise ValueError('fila cheia')
+        self.fim += 1
+        self.valores[self.fim] = item
+
+    def desenfileira(self) -> str:
+        if self.vazia():
+            raise ValueError('fila vazia')
+        item = self.valores[0]
+        for i in range(1, self.fim + 1):
+            self.valores[i - 1] = self.valores[i]
+        self.fim -= 1
+        return item
+```
+</div>
+</div>
+
+
+## Implementação de fila usando arranjo estático
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Fila:
+    valores: array[str]
+    fim: int
+
+    def enfileira(self, item: str):
+        if self.fim >= MAX_TAM - 1:
+            raise ValueError('fila cheia')
+        self.fim += 1
+        self.valores[self.fim] = item
+
+    def desenfileira(self) -> str:
+        if self.vazia():
+            raise ValueError('fila vazia')
+        item = self.valores[0]
+        for i in range(1, self.fim + 1):
+            self.valores[i - 1] = self.valores[i]
+        self.fim -= 1
+        return item
+```
+</div>
+<div class="column" width="48%">
+Qual a complexidade de tempo do método `enfileira`? \pause $O(1)$. \pause
+
+Qual a complexidade de tempo do método `desenfileira`? \pause $O(n)$, onde $n$ é a quantidade de elementos da fila. \pause Os elementos das posições $1, 2, 3, \dots, n - 1$ são movidos para as posições $0, 1, 2, \dots, n - 2$. \pause
+
+Podemos fazer melhor? \pause Sim!
+
+</div>
+</div>
+
+
+## Implementação de fila usando arranjo estático
+
+<div class="columns">
+<div class="column" width="48%">
+Podemos usar inteiros para indicar o `inicio` e o `fim` da fila da seguinte maneira: \pause
+
+- Construtor: inicializa o arranjo, `inicio` com 0 e `fim` com `-1`{.python}. \pause
+- Vazia: verifica se `fim < inicio`{.python} \pause
+- Enfileira: incrementa `fim` e armazena o item na posição `fim`. \pause
+- Desenfileira: devolve o item na posição `inicio` e incrementa `inicio`. \pause
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Fila:
+    valores: array[str]
+    # Indíce do último elemento da fila
+    fim: int
+    # Indíce do primeiro elemento da fila
+    inicio: int
+
+    def enfileira(self, item: str):
+        if self.fim >= MAX_TAM - 1:
+            raise ValueError('fila cheia')
+        self.fim += 1
+        self.valores[self.fim] = item
+
+    def desenfileira(self) -> str:
+        if self.vazia():
+            raise ValueError('fila vazia')
+        item = self.valores[self.inicio]
+        self.inicio += 1
+        return item
+```
+</div>
+</div>
+
+
+## Implementação de fila usando arranjo estático
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Fila:
+    valores: array[str]
+    # Indíce do último elemento da fila
+    fim: int
+    # Indíce do primeiro elemento da fila
+    inicio: int
+
+    def enfileira(self, item: str):
+        if self.fim >= MAX_TAM - 1:
+            raise ValueError('fila cheia')
+        self.fim += 1
+        self.valores[self.fim] = item
+
+    def desenfileira(self) -> str:
+        if self.vazia():
+            raise ValueError('fila vazia')
+        item = self.valores[self.inicio]
+        self.inicio += 1
+        return item
+```
+</div>
+<div class="column" width="48%">
+Qual a complexidade de tempo do método `enfileira`? \pause $O(1)$. \pause
+
+Qual a complexidade de tempo do método `desenfileira`? \pause $O(1)$. \pause
+
+Existe alguma limitação nessa implementação? \pause Sim, a fila pode estar cheia e vazia ao mesmo tempo! \pause
+
+Podemos fazer melhor? \pause Sim!
+</div>
+</div>
+
 
 <!--
-
 ## Primos
 
 Projete uma função que encontre todos os números primos menores que um determinado valor.
