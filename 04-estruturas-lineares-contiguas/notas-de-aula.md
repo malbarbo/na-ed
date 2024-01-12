@@ -1040,12 +1040,61 @@ Qual a complexidade de tempo do método `enfileira`? \pause $O(1)$. \pause
 
 Qual a complexidade de tempo do método `desenfileira`? \pause $O(1)$. \pause
 
-Existe alguma limitação nessa implementação? \pause Sim, a fila pode estar cheia e vazia ao mesmo tempo! \pause
+Existe alguma limitação nessa implementação? \pause Sim, a fila pode estar vazia e não ser possível enfileirar um novo item! \pause
 
 Podemos fazer melhor? \pause Sim!
 </div>
 </div>
 
+
+## Implementação de fila circular
+
+Usamos índices `inicio` e `fim` que avançam de forma "circular", isto é, são incrementados até chegarem no final do arranjo e depois voltam para 0. O `fim` representa o índice onde o próximo elemento será inserido.
+
+Para uma fila com capacidade $C$ alocamos um arranjo de tamanho $C + 1$. Isto permite diferenciar entre fila vazia (`inicio == fim`{.python}) e fila cheia (o próximo valor de `fim` é igual ao `inicio`.
+
+## {.plain}
+
+![](imagens/fila-circular.pdf)
+
+
+## Implementação de fila circular
+
+<div class="columns">
+<div class="column" width="48%">
+Descrição da implementação dos métodos
+
+- Construtor: inicializa o arranjo, `inicio` e `fim` com `0`{.python}. \pause
+- Vazia: verifica se `inicio == fim`{.python} \pause
+- Enfileira: armazena o item na posição `fim` e avança `fim`. \pause
+- Desenfileira: devolve o item na posição `inicio` e avança `inicio`. \pause
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Fila:
+    def enfileira(self, item: str):
+        if self.cheia():
+            raise ValueError('fila cheia')
+        self.valores[self.fim] = item
+        if self.fim == CAPACIDADE:
+            self.fim = 0
+        else:
+            self.fim += 1
+
+    def desenfileira(self) -> str:
+        if self.vazia():
+            raise ValueError('fila vazia')
+        item = self.valores[self.inicio]
+        if self.inicio == CAPACIDADE:
+            self.inicio = 0
+        else:
+            self.inicio += 1
+        return item
+```
+</div>
+</div>
 
 <!--
 ## Primos
