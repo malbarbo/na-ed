@@ -1,6 +1,7 @@
 ---
 title: Estruturas de dados lineares - Alocação contígua - Prática
 urlcolor: Blue
+# TODO: remover alguns exercícios de pilha, eles são muito iguais
 ---
 
 <!-- Pilha -->
@@ -97,7 +98,7 @@ urlcolor: Blue
 
     Execute o arquivo com o comando `python arquivo.py` e veja na saída os tempos de execução da função `tempo_fila` para $n = 1000, 2000, 4000$.
 
-    Troque a implementação de fila usada no arquivo comentando a linha `from fila_inicio_fim import Fila` e descomentando a linha `from fila_fim import Fila`.
+    Troque a implementação de fila usada no arquivo comentando a linha `from fila_inicio_fim import`{.python} `Fila` e descomentando a linha `from fila_fim import Fila`{.python}.
 
     Execute novamente o arquivo e observe os tempos de execução.
 
@@ -108,3 +109,39 @@ urlcolor: Blue
 @) Implemente uma pilha usando duas filas.
 
 @) (Desafio) Faça uma implementação alternativa do TAD Fila que use uma única string para armazenar todos os elementos da fila.
+
+@) Defina um TAD para fila dupla com métodos para inserir e remover da esquerda e direita. Implemente o TAD usando a estratégia de arranjo circular.
+
+@) Crie um programa (semelhante ao exercício do `tempo_fila`) que mostre a diferença do tempo de execução do método `popleft` da classe `collections.deque` e do método `pop(0)` da classe `list` (pré-definidos em Python).
+
+@) Implemente o TAD lista do arquivo `lista.py` usando um arranjo estático. Diga a complexidade de tempo de cada método.
+
+@) Altere a seguinte função para usar uma `lista` (implementada no exercício anterior) ao invés do `list` do Python.
+
+    ```python
+    def primos(lim: int) -> list[int]:
+        '''
+        Encontra todos os números primos menores que *lim*.
+
+        Exemplos:
+        >>> primos(2)
+        []
+        >>> primos(20)
+        [2, 3, 5, 7, 11, 13, 17, 19]
+        '''
+        primos: list[int] = []
+        n = 2
+        while n < lim:
+            eh_primo = True
+            i = 0
+            while eh_primo and i < len(primos):
+                if n % primos[i] == 0:
+                    eh_primo = False
+                i = i + 1
+
+            if eh_primo:
+                primos.append(n)
+
+            n = n + 1
+        return primos
+    ```
