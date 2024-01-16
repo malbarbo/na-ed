@@ -531,3 +531,10 @@ Porque essas coisas geradas automaticamente não são adequadas para a classe `R
 Pode parecer confuso quando usar ou não o `@dataclass`{.python}, mas não se preocupe, isso vai ficar mais claro com a prática! \pause
 
 O importante por enquanto é saber como usar classes para especificar e implementar TADs.
+
+
+## Referências
+
+Capítulo 2 - Visão geral das coleções - [Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert.](https://app.minhabiblioteca.com.br/reader/books/9786555584288/pageid/0)
+
+Seção 1.2 - Interfaces - [Open Data Structures (in pseudocode)](https://opendatastructures.org/ods-python.pdf)
