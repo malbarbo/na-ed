@@ -323,7 +323,7 @@ De fato, o TAD que precisamos já é conhecido e é chamado de pilha.
 
 ## Pilha
 
-Uma **pilha** (_stack_ em inglês) é uma coleção de itens que é mantida de acordo com a regra: \pause
+Uma **pilha** (_stack_ em inglês) é tipo abstrato de dados que representa uma coleção de itens que é mantida de acordo com a regra: \pause
 
 - O elemento mais _recentemente inserido_ é o primeiro a ser removido. \pause
 
@@ -593,7 +593,7 @@ class Pilha:
 
 \small
 
-Qual a complexidade de tempo da função `Pilha.__init__`{.python}? \pause
+Qual é a complexidade de tempo da função `Pilha.__init__`{.python}? \pause
 
 $O($CAPACIDADE$)$, \pause cada um dos `CAPACIDADE` elementos deve ser inicializado com `''`{.python} (o que é feito pela função `array`).
 
@@ -624,7 +624,7 @@ $O($CAPACIDADE$)$, \pause cada um dos `CAPACIDADE` elementos deve ser inicializa
 
 \pause
 
-Qual a complexidade de tempo das funções `empilha`, `desempinha` e `vazia`? \pause $O(1)$, \pause todas as operações dessas funções têm tempo constante.
+Qual é a complexidade de tempo das funções `empilha`, `desempilha` e `vazia`? \pause $O(1)$, \pause todas as operações dessas funções têm tempo constante.
 
 </div>
 </div>
@@ -632,12 +632,12 @@ Qual a complexidade de tempo das funções `empilha`, `desempinha` e `vazia`? \p
 
 ## Limitações
 
-Qual a limitação dessa implementação? \pause
+Qual é a limitação dessa implementação? \pause
 
 - O TAD Pilha não tem capacidade máxima;
 - A implementação tem capacidade fixa, o que gera um estouro da pilha (_stack overflow_) quando o usuário tenta empilhar um elemento e a pilha está cheia. \pause
 
-Qual a limitação da definição do TAD pilha? \pause
+Qual é a limitação da definição do TAD pilha? \pause
 
 - A possibilidade de estouro (negativo) da pilha (_stack underflow_), isso é, a tentativa de remover um elemento quando a pilha está vazia. \pause
 
@@ -758,9 +758,7 @@ Essa forma funciona para qualquer operador binário, mas qual é a vantagem?
 
 ## Fila
 
-Vimos que um pilha usa a política LIFO (_Last In_, _First out_).
-
-Uma **fila** (_queue_ em inglês) é uma coleção de itens que é mantido de acordo com a política FIFO (_First in_, _First out_):
+Uma **fila** (_queue_ em inglês) é uma estrutura de dados que representa uma coleção de itens que é mantida de acordo com a política FIFO (_First in_, _First out_):
 
 - O primeiro elemento inserido é o primeiro a ser removido.
 
@@ -837,8 +835,6 @@ class Fila:
         '''Devolve True se a fila está
         vazia, False caso contrário.'''
 ```
-
-\pause
 
 </div>
 <div class="column" width="50%">
@@ -958,9 +954,9 @@ class Fila:
 ```
 </div>
 <div class="column" width="48%">
-Qual a complexidade de tempo do método `enfileira`? \pause $O(1)$. \pause
+Qual é a complexidade de tempo do método `enfileira`? \pause $O(1)$. \pause
 
-Qual a complexidade de tempo do método `desenfileira`? \pause $O(n)$, onde $n$ é a quantidade de elementos da fila. \pause Os elementos das posições $1, 2, 3, \dots, n - 1$ são movidos para as posições $0, 1, 2, \dots, n - 2$. \pause
+Qual é a complexidade de tempo do método `desenfileira`? \pause $O(n)$, onde $n$ é a quantidade de elementos da fila. \pause Os elementos das posições $1, 2, 3, \dots, n - 1$ são movidos para as posições $0, 1, 2, \dots, n - 2$. \pause
 
 Podemos fazer melhor? \pause Sim!
 
@@ -1036,9 +1032,9 @@ class Fila:
 ```
 </div>
 <div class="column" width="48%">
-Qual a complexidade de tempo do método `enfileira`? \pause $O(1)$. \pause
+Qual é a complexidade de tempo do método `enfileira`? \pause $O(1)$. \pause
 
-Qual a complexidade de tempo do método `desenfileira`? \pause $O(1)$. \pause
+Qual é a complexidade de tempo do método `desenfileira`? \pause $O(1)$. \pause
 
 Existe alguma limitação nessa implementação? \pause Sim, a fila pode estar vazia e não ser possível enfileirar um novo item! \pause
 
@@ -1095,6 +1091,258 @@ class Fila:
 ```
 </div>
 </div>
+
+
+## Implementação de fila circular
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Fila:
+    def enfileira(self, item: str):
+        if self.cheia():
+            raise ValueError('fila cheia')
+        self.valores[self.fim] = item
+        if self.fim == CAPACIDADE:
+            self.fim = 0
+        else:
+            self.fim += 1
+
+    def desenfileira(self) -> str:
+        if self.vazia():
+            raise ValueError('fila vazia')
+        item = self.valores[self.inicio]
+        if self.inicio == CAPACIDADE:
+            self.inicio = 0
+        else:
+            self.inicio += 1
+        return item
+```
+</div>
+<div class="column" width="48%">
+\pause
+
+Qual é a complexidade de tempo de `enfileira` e `desenfileira`? \pause $O(1)$.
+
+\pause
+
+A implementação "circular" de fila não tem as limitações das duas implementações anteriores, e por isso é bastante utilizada na prática, mas na forma de uma fila dupla.
+
+</div>
+</div>
+
+
+## Fila dupla
+
+Uma **fila dupla** (_double ended queue_ - _deque_ em inglês) é uma sequência linear onde os itens podem ser inseridos e removidos dos dois extremos, o que de certa forma é uma generalização de pilha e fila. \pause
+
+Muitas linguagens não oferecem na biblioteca padrão uma implementação separada para pilha, fila e fila dupla, mas apenas uma implementação de fila dupla. Este é o caso do Python (`collections.deque`), do Rust (`std::collections::VecDeque`), entre outras. \pause
+
+Como os termos início e fim podem parecer confusos para uma fila dupla, alguns autores usam os termos esquerda e direita.
+
+
+## Lista
+
+Uma **lista** é um tipo abstrato de dados que representa uma sequência de itens. \pause
+
+Na pilha e fila a inserção e remoção dos elementos segue uma política específica, já em uma lista, os elementos podem ser inseridos e removidos sem restrições. \pause Além disso, os elementos de uma lista podem ser consultados sem serem removidos. \pause
+
+Para uma lista que representa a sequência $x_0, x_1, ..., x_{n-1}$: \pause
+
+- O tamanho da lista é $n$ \pause
+- O elemento $x_i$ está na posição (índice) $i$ \pause
+- Para $n > 0$, $x_0$ é o primeiro elemento e $x_{n-1}$ é o último elemento \pause
+- $x_i$ precede (é o predecessor) de $x_{i+1}$ para $i = 0, 1, \dots, n - 2$ \pause
+- $x_i$ sucede (é sucessor) $x_{i - 1}$ para $i = 1, 2, \dots, n - 1$
+
+
+## Operações com lista
+
+As definições de operações para o TAD lista dependem da aplicação, mas as seguintes operações são comuns: \pause
+
+- Consulta da quantidade de itens \pause
+- Acesso e modificação de um item de uma posição (indexação) \pause
+- Inserção de um item em uma posição \pause
+- Remoção de um item em uma posição \pause
+- Remoção de um item pelo valor do item \pause
+- Localização de um item \pause
+- Geração de uma representação em string da lista
+
+
+## Lista
+
+\scriptsize
+
+```python
+class Lista:
+    '''Uma sequência de números.'''
+
+    def num_itens(self) -> int:
+        '''Devolve a quantidade de itens da lista.'''
+
+    def get(self, i: int) -> str:
+        '''Devolve o item que está na posição *i* da lista.
+        Requer que 0 <= i < self.num_itens().'''
+
+    def set(self, i: int, item: str):
+        '''Armazena *item* na posição **i** da lista.
+        Requer que 0 <= i < self.num_itens().'''
+
+    def insere(self, i: int, item: str):
+        '''Insere *item* na posição *i* da lista. Os itens que estavam iniciamente
+        nas posiçõe i, i+1, ..., passam a ficar nas posições i+1, i+2, ...
+        Requer que 0 <= i <= self.num_itens().'''
+```
+
+
+## Lista
+
+\scriptsize
+
+```python
+class Lista:
+    def remove(self, i: int) ->:
+        '''Remove e devolve o item na posição *i* da lista. Os itens que estavam
+        inicialmente nas posições i, i+1, ..., passam a ficar nas posições
+        i-1, i, ...
+        Requer que 0 <= i < self.num_itens().'''
+
+    def remove_item(self, item: str) ->:
+        '''Remove a primeira ocorrência de *item* da lista. Se i é a posição do
+        *item*, então os itens que estavam inicialmente nas posições i, i+1,
+        ..., passam a ficar nas posições i-1, i, ...
+        Requer que o item esteja na lista.'''
+
+    def indice(self, item: str) -> int:
+        '''Devolve a posição da primeira ocorrência de *item* na lista.
+        Requer que *item* esteja presente na lista.'''
+
+    def str(self) -> str:
+        '''Gera uma representação em string da lista.'''
+```
+
+
+## Lista - Exemplos
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+>>> lst = Lista()
+>>> lst.str()
+[]
+>>> lst.insere(0, 7)
+>>> lst.insere(1, 20)
+>>> lst.insere(2, 5)
+>>> lst.get(0)
+7
+>>> lst.get(2)
+5
+>>> lst.num_itens()
+3
+>>> lst.str()
+[7, 20, 5]
+```
+
+\pause
+
+```python
+>>> lst.set(0, 10)
+>>> lst.str()
+```
+
+\pause
+
+```python
+[10, 20, 5]
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+>>> lst.insere(1, 8)
+>>> lst.str()
+```
+
+\pause
+
+```python
+[10, 8, 20, 5]
+```
+
+\pause
+
+```python
+>>> lst.remove(2)
+>>> lst.str()
+```
+
+\pause
+
+```python
+[10, 8, 5]
+```
+
+\pause
+
+```python
+>>> lst.insere(lst.num_itens(), 8)
+>>> lst.str()
+```
+
+\pause
+
+```python
+[10, 8, 5, 8]
+```
+
+\pause
+
+```python
+>>> lst.indice(8)
+```
+
+\pause
+
+```python
+1
+```
+
+\pause
+
+```python
+>>> lst.remove(5)
+>>> lst.str()
+```
+
+\pause
+
+```python
+[10, 8, 8]
+```
+
+</div>
+</div>
+
+
+## Lista
+
+![](imagens/arranjo.pdf)
+
+
+## Referências
+
+Capítulo 7, 8, 9 - Pilhas, filas e listas - [Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert.](https://app.minhabiblioteca.com.br/reader/books/9786555584288/pageid/0)
+
+Seção 10.1 - Pilhas e filas - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
+
 
 <!--
 ## Primos
