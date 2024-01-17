@@ -1355,7 +1355,7 @@ Por fim, a remoção de um item pode ser feita com uma busca seguido da remoçã
 
 \small
 
-A implementação e as complexidades de tempo ficam como exercício!
+A implementação e as complexidades de tempo ficam como exercícios!
 </div>
 </div>
 

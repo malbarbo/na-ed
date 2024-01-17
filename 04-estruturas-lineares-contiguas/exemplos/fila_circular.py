@@ -40,7 +40,7 @@ class Fila:
     #
     # A fila está vazia se inicio == fim e está cheia se o próximo valor para
     # fim é igual ao inicio. Dessa forma, nunca podemos preencher todos os
-    # elementos de valores, pois senão não seria possível distinguir entre fila
+    # elementos de *valores*, pois senão não seria possível distinguir entre fila
     # cheia e fila vazia. Para horar o valor de CAPACIDADE, inicializamos
     # *valores* com CAPACIDADE + 1 itens.
 
