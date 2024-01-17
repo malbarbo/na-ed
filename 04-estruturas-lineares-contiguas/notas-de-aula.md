@@ -1191,7 +1191,7 @@ class Lista:
         Requer que 0 <= i < self.num_itens().'''
 
     def insere(self, i: int, item: int):
-        '''Insere *item* na posição *i* da lista. Os itens que estavam iniciamente
+        '''Insere *item* na posição *i* da lista. Os itens que estavam inicialmente
         nas posiçõe i, i+1, ..., passam a ficar nas posições i+1, i+2, ...
         Requer que 0 <= i <= self.num_itens().'''
 ```

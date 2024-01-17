@@ -41,23 +41,23 @@ class Lista:
         Devolve a quantidade de itens da lista.
         '''
 
-    def get(self, i: int) -> str:
+    def get(self, i: int) -> int:
         '''
         Devolve o item que está na posição *i* da lista.
 
         Requer que 0 <= i < self.num_itens().
         '''
 
-    def set(self, i: int, item: str):
+    def set(self, i: int, item: int):
         '''
         Armazena *item* na posição **i** da lista.
 
         Requer que 0 <= i < self.num_itens().
         '''
 
-    def insere(self, i: int, item: str):
+    def insere(self, i: int, item: int):
         '''
-        Insere *item* na posição *i* da lista. Os itens que estavam iniciamente
+        Insere *item* na posição *i* da lista. Os itens que estavam inicialmente
         nas posiçõe i, i+1, ..., passam a ficar nas posições i+1, i+2, ...
 
         Requer que 0 <= i <= self.num_itens().
@@ -72,20 +72,20 @@ class Lista:
         Requer que 0 <= i < self.num_itens().
         '''
 
-    def remove_item(self, item: str) ->:
+    def remove_item(self, item: int):
         '''
         Remove a primeira ocorrência de *item* da lista. Se i é a posição do
         *item*, então os itens que estavam inicialmente nas posições i, i+1,
         ..., passam a ficar nas posições i-1, i, ...
 
-        Requer que o item esteja na lista.
+        Requer que *item* esteja na lista.
         '''
 
-    def indice(self, item: str) -> int:
+    def indice(self, item: int) -> int:
         '''
         Devolve a posição da primeira ocorrência de *item* na lista.
 
-        Requer que *item* esteja presente na lista.
+        Requer que *item* esteja na lista.
         '''
 
     def str(self) -> str:
