@@ -1335,7 +1335,7 @@ class Lista:
 ## Lista
 
 <div class="columns">
-<div class="column" width="58%">
+<div class="column" width="55%">
 \small
 Como implementar o TAD lista usando um arranjo estático? \pause
 
@@ -1350,14 +1350,53 @@ A busca por um elemento e a representação por string é feita com uma repetiç
 Por fim, a remoção de um item pode ser feita com uma busca seguido da remoção por posição. \pause
 
 </div>
-<div class="column" width="40%">
-![](imagens/arranjo.pdf)
+<div class="column" width="43%">
+![](imagens/arranjo.pdf){width=4cm}
 
 \small
 
-Vamos fazer implementação e determinar as complexidades de tempo juntos! \pause
+Vamos fazer implementação e determinar as complexidades de tempo juntos!
 
-Feito em sala.
+</div>
+</div>
+
+
+## Lista
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Lista:
+    def insere(self, i: int, item: int):
+        for j in range(self.tamanho, i, -1):
+            self.valores[j] = self.valores[j - 1]
+        self.valores[i] = item
+        self.tamanho += 1
+
+    def remove(self, i: int):
+        for j in range(i + 1, self.tamanho):
+            self.valores[j - 1] = self.valores[j]
+        self.tamanho -= 1
+
+    def str(self) -> str:
+        s = '['
+        if self.num_itens() != 0:
+            s += str(self.valores[0])
+            for i in range(1, self.num_itens()):
+                s += ', ' + str(self.valores[i])
+        return s + ']'
+```
+
+</div>
+<div class="column" width="45%">
+
+\small
+
+Veja o código completo (e verificação dos erros!) no arquivo `lista.py`. \pause
+
+A complexidade de tempo de `str`, `insere`, `remove`, `remove_item` e `indice` é $O(n)$. No caso especial de inserção e remoção por posição do final a complexidade é $O(1)$. As demais operações são constantes.
 </div>
 </div>
 
@@ -1414,18 +1453,58 @@ Apesar do bloco de memória reservado para o arranjo não poder mudar de tamanho
 </div>
 
 
-## Arranjos dinâmicos
+## Arranjo dinâmico
 
 Como podemos utilizar esse fato para superar a limitação de capacidade máxima de itens? \pause
 
-Alocando um arranjo maior toda vez que a coleção ficar cheia. \pause
+Substituindo o arranjo por um com maior capacidade toda vez que a coleção ficar cheia! \pause
 
-Algumas perguntas perguntas: \pause
+- Alocamos um arranjo maior \pause
+- Copiamos os itens do arranjo cheio para o novo arranjo \pause
+- Atribuímos o novo arranjo para a variável \pause
 
-- Quanto maior? \pause
-- Como isso afeta a complexidade de tempo das operações? \pause
-- E se a coleção ficar com poucos elementos?
+Veja a implementação dos métodos `Lista.insere` e `Lista.__cresce` do arquivo `lista.py`. \pause
 
+Essa é a forma mais comum utilizada para implementar arranjos dinâmicos. Essa é a forma que `list`{.python} do Python é implementado!
+
+
+## Arranjo dinâmico
+
+Algumas perguntas: \pause
+
+- Quanto maior? \pause Muitas implementações dobram o tamanho. \pause
+- Como isso afeta a complexidade de tempo das operações? \pause Inserir no fim, que era constante, fica com tempo _amortizado_ de $O(1)$ (a maior parte das inserções no final é constante, mas algumas -- quanto o arranjo está cheio -- são $O(n)$). \pause
+- E se a coleção ficar com poucos itens? \pause Podemos substituir o arranjo por um novo com menor capacidade! (veja a lista de exercícios)
+
+
+## Revisão
+
+Vimos 4 tipos abstratos de dados e como implementá-los usando arranjos: \pause
+
+- Pilha (inserção e remoção do mesmo extremo) \pause
+- Fila (inserção em um extremo e remoção do outro) \pause
+- Fila Dupla (inserção e remoção dos dois extremos) \pause
+- Lista (inserção e remoção em qualquer posição) \pause
+
+Se usarmos arranjos estáticos, então é preciso definir uma capacidade máxima, o que pode não ser adequado para algumas aplicações.
+
+Se usarmos arranjos dinâmicos, então a capacidade não é limitada mas o tempo de execução de algumas operações é alterada.
+
+
+## Resumo
+
+Estrutura / Operação | inserção | remoção
+---------------------|----------|----------
+Pilha                |  $O(1)$  | $O(1)$
+Fila                 |  $O(1)$  | $O(1)$
+Fila Dupla           |  $O(1)$  | $O(1)$
+Lista                |  $O(n)$ -- $O(1)$ no fim  | $O(n)$ -- $O(1)$ no fim
+
+\pause
+
+Os tempos $O(1)$ são amortizados para as implementações com arranjos dinâmicos. \pause
+
+Veremos a seguir como fazer as implementações desses TADs de maneira que o tempo de execução dessas operações sejam $O(1)$ no pior caso.
 
 ## Referências
 

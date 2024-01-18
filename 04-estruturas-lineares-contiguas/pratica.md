@@ -114,7 +114,7 @@ urlcolor: Blue
 
 @) Crie um programa (semelhante ao exercício do `tempo_fila`) que mostre a diferença do tempo de execução do método `popleft` da classe `collections.deque` e do método `pop(0)` da classe `list` (pré-definidos em Python).
 
-@) Implemente o TAD lista do arquivo `lista.py` usando um arranjo estático. Diga a complexidade de tempo de cada método.
+@) Altere a implementação do método `lista.remove` para que `valores` nunca fique com menos que 25% da sua capacidade utilizada (exceto quanto a capacidade for menor ou igual a 10). Como isso afeta a complexidade de tempo? Dica: veja o método `__cresce__` e seu uso em `insere`. Escreve um método auxiliar `__diminui__`, que reduz a capacidade de `valores` pela metade.
 
 @) Altere a seguinte função para usar uma `lista` (implementada no exercício anterior) ao invés do `list` do Python.
 
