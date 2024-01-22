@@ -1,7 +1,3 @@
-from dataclasses import dataclass
-
-
-@dataclass
 class Selecao:
     '''
     Um intervalo de células selecionadas de uma linha de uma panilha.
@@ -23,7 +19,6 @@ class Selecao:
         '''
         return
 
-
     def inicio(self) -> int:
         '''
         Devolve o início da seleção *s*.
@@ -38,7 +33,6 @@ class Selecao:
         '''
         return 0
 
-
     def fim(self) -> int:
         '''
         Devolve o fim da seleção *s*.
@@ -52,7 +46,6 @@ class Selecao:
         5
         '''
         return 0
-
 
     def move_direita(self):
         '''
@@ -93,7 +86,6 @@ class Selecao:
         4
         '''
         return
-
 
     def move_esquerda(self):
         '''

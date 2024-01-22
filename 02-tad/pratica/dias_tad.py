@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Dia(Enum):
     '''
     Um dia da semana.
