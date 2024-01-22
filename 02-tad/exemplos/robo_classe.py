@@ -6,7 +6,6 @@ class Robo:
     nome: str
     pos: int
 
-
     def __init__(self, nome: str):
         '''
         Cria um novo robo com o *nome* e que está na posição 1.
@@ -18,7 +17,6 @@ class Robo:
         '''
         self.nome = nome
         self.pos = 1
-
 
     def posicao(self) -> int:
         '''
@@ -32,7 +30,6 @@ class Robo:
         '''
         return self.pos
 
-
     def info(self) -> str:
         '''
         Devolve um texto com o nome do robo *r*
@@ -45,7 +42,6 @@ class Robo:
         'rob (3)'
         '''
         return self.nome + ' (' + str(self.pos) + ')'
-
 
     def move(self, n: int):
         '''
