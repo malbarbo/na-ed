@@ -11,7 +11,7 @@ urlcolor: Blue
 
 Como podemos implementar os TAD's Pilha, Fila, Fila Dupla e Lista sem usar arranjos? \pause
 
-Como podemos representar coleções de dados sem usar arranjos? \pause
+Como podemos representar uma quantidade arbitrária de dados sem arranjos? \pause
 
 É isso que vamos ver agora! \pause
 
@@ -63,7 +63,7 @@ Agora temos que projetar a função `faz_aniversario`.
 ## Valores opcionais
 
 <div class="columns">
-<div class="column" width="40%">
+<div class="column" width="48%">
 \scriptsize
 
 ```python
@@ -94,21 +94,28 @@ def faz_aniversario(p: Pessoa):
 \pause
 
 </div>
-<div class="column" width="58%">
+<div class="column" width="48%">
 
 \small
 
 O que aconteceria se esquecêssemos de fazer a verificação se a idade está presente? \pause O teste iria falhar... \pause
 
-E se não tivéssemos teste? \pause O programa executaria mas produziria resultados incorretos. \pause
+E se não tivéssemos teste? \pause O programa executaria mas produziria resultados incorretos.
+</div>
+</div>
+
+
+## Valores opcionais
+
+Porque esse erro possível? \pause
 
 Esse tipo de erro só é possível porque estamos usando um valor do mesmo tipo para representar a ausência de valor, então, qualquer operação válida para os valores do tipo também é válida para o valor que representa a ausência de valor! \pause
 
-Note também que o leitor vê a definição `idade: int`{.python} e supõe que a idade é requerida, só entendendo que é opcional se isso estiver escrito como comentário. \pause
+Existe mais algum problema com essa estratégia? \pause
+
+Sim, o leitor vê a definição `idade: int`{.python} e supõe que a idade é requerida, só entendendo que é opcional se isso estiver escrito como comentário. \pause
 
 Podemos fazer melhor? \pause Sim!
-</div>
-</div>
 
 
 ## Valores opcionais
@@ -227,7 +234,7 @@ Antes era possível cometer um erro incrementando a idade quando ela não estive
 
 ## Encadeamento
 
-Vamos voltar a questão inicial: como representar uma coleção de valores sem utilizar arranjos? \pause
+Como podemos representar uma quantidade arbitrária de dados sem arranjos? \pause
 
 Suponha que queremos representar uma coleção de nomes de pessoas. \pause Podemos fazer isso usando estruturas. \pause A ideia é criar uma estrutura com um nome de uma pessoa e uma referência para outra instância da mesma estrutura, que conterá o nome da próxima pessoa e uma referência para outra instância da mesma estrutura...
 
@@ -238,6 +245,7 @@ Suponha que queremos representar uma coleção de nomes de pessoas. \pause Podem
 \scriptsize
 
 ```python
+from __future__ import annotations
 @dataclass
 class Seq:
     nome: str
@@ -265,6 +273,8 @@ O que está faltando? \pause Uma forma de encerrar a sequência!
 
 ## Encadeamento
 
+<div class="columns">
+<div class="column" width="35%">
 \scriptsize
 
 ```python
@@ -274,10 +284,161 @@ class Seq:
     proximo: Seq | None
 ```
 
+</div>
+<div class="column" width="60%">
+
 \pause
+
+\scriptsize
 
 ```python
 >>> # Queremos representar a coleção
 >>> # com os nomes 'Joao', 'Pedro' e 'Ana'.
 >>> seq = Seq('Joao', Seq('Pedro', Seq('Ana', None)))
 ```
+
+</div>
+</div>
+
+\pause
+
+\ 
+
+Na representação gráfica podemos utilizar `/` para indicar uma referência para `None`{.python}
+
+\ 
+
+![](imagens/seq-com-fim.pdf)
+
+
+\pause
+
+O que têm de diferente na declaração de `Seq` em relação as classes que definimos anteriormente? \pause  Uma **autorreferência**, ou seja, a utilização da classe em sua própria definição.
+
+
+## Encadeamento
+
+Os tipos com autorreferência (ou recursivos) permitem a representação de quantidade de dados arbitrárias pelo **encadeamento** de instâncias do tipo. \pause Usamos `None`{.python} para representar o fim do encadeamento. \pause
+
+O tipo utilizado no encadeamento é comumente chamado de `No`, dessa forma, usamos um encadeamento de nós para criar uma coleção de valores.
+
+
+## Manipulação de encadeamento
+
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+@dataclass
+class No:
+    item: int
+    prox: No | None
+```
+
+\pause
+
+\small
+
+Defina uma variável `p` com um encadeamento de nós com os valores 10, 4, 1.
+
+\pause
+
+\scriptsize
+
+```python
+>>> p = No(10, No(4, No(1, None)))
+```
+
+\pause
+
+\small
+
+Escreva expressões para acessar o primeiro, o segundo e o terceiro item do encadeamento.
+
+\pause
+
+\scriptsize
+
+```python
+>>> p.item
+10
+>>> p.prox.item
+4
+>>> p.prox.prox.item
+1
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+\small
+
+Modifique o segundo item para 7.
+
+\pause
+
+\scriptsize
+
+```python
+>>> p.prox.item = 7
+```
+
+\pause
+
+\small
+
+Adicione um `No` com o item 2 no início.
+
+\scriptsize
+
+\pause
+
+```python
+>>> p = No(2, p)
+```
+
+\pause
+
+\small
+
+Adicione um `No` com o item 20 no final.
+
+\scriptsize
+
+\pause
+
+```python
+>>> p.prox.prox.prox.prox = No(20, None)
+```
+
+\pause
+
+\small
+
+Usando repetição!
+
+\scriptsize
+
+\pause
+
+```python
+>>> q = p
+>>> while q.prox is not None:
+...     q = q.prox
+>>> q.prox = No(20, None)
+```
+
+
+</div>
+</div>
+
+
+## Implementação de pilha e fila
+
+Implemente o TAD Pilha usando encadeamento. \pause
+
+Implemente o TAD fila usando encadeamento.
