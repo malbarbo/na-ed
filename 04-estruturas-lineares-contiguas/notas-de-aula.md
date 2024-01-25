@@ -567,7 +567,14 @@ def grupos_corretos(expr: str) -> bool:
 
 ## Implementação de Pilha usando arranjo estático
 
-Faça uma implementação de Pilha usando arranjo estático.
+Como implementar uma pilha usando um arranjo estáticos? \pause
+
+Usamos um inteiro para armazenar o `topo` da pilha, isso é, o índice no arranjo do último elemento que foi inserido na pilha: \pause
+
+- Construtor: inicializa o arranjo e o `topo` com `-1`{.python} \pause
+- Vazia: verifica se `topo == -1`{.python} \pause
+- Empilha: incrementa `topo` e armazena o item na posição `topo` \pause
+- Desempilha: devolve o item na posição `topo` e decrementa `topo`
 
 
 ## Implementação de Pilha usando arranjo estático
@@ -1508,6 +1515,6 @@ Veremos a seguir como fazer as implementações desses TADs de maneira que o tem
 
 ## Referências
 
-Capítulo 7, 8, 9 - Pilhas, filas e listas - [Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert.](https://app.minhabiblioteca.com.br/reader/books/9786555584288/pageid/0)
+Capítulo 7, 8, 9 - Pilhas, filas e listas - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na Minha Biblioteca na UEM).
 
 Seção 10.1 - Pilhas e filas - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
