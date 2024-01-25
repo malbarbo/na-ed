@@ -67,19 +67,19 @@ urlcolor: Blue
 
 <!-- Fila -->
 
-@) Modifique a implementação de `Fila` do aquivo `fila_fim.py` adicionando um método para verificar se a fila está cheia. Use o novo método para simplificar a implementação de `enfileira`.
+@) Modifique a implementação de `Fila` do aquivo `fila_arranjo_fim.py` adicionando um método para verificar se a fila está cheia. Use o novo método para simplificar a implementação de `enfileira`.
 
-@) Modifique a implementação de `Fila` do aquivo `fila_inicio_fim.py` adicionando um método para verificar se a fila está cheia. Use o novo método para simplificar a implementação de `enfileira`.
+@) Modifique a implementação de `Fila` do aquivo `fila_arranjo_inicio_fim.py` adicionando um método para verificar se a fila está cheia. Use o novo método para simplificar a implementação de `enfileira`.
 
-@) Modifique a implementação de `Fila` dos arquivos `fila_fim.py`, `fila_inicio_fim.py` e `fila_circular.py` para que o construtor receba como parâmetro a quantidade máxima de elementos que a fila pode armazenar. Adicione um método que devolve a capacidade da fila e ajuste os exemplos para funcionarem com essas modificações.
+@) Modifique a implementação de `Fila` dos arquivos `fila_arranjo_fim.py`, `fila_arranjo_inicio_fim.py` e `fila_arranjo_circular.py` para que o construtor receba como parâmetro a quantidade máxima de elementos que a fila pode armazenar. Adicione um método que devolve a capacidade da fila e ajuste os exemplos para funcionarem com essas modificações.
 
-@) A implementação de `Fila` do arquivo `fila_circular.py` usa a ideia de "índice circular", quando o índice chega no final no arranjo, ele volta para o início. Essa ideia é usada nos métodos `enfileira`, `desenfileira` e `cheia`. Crie um método auxiliar para calcular o próximo índice a partir de um índice qualquer e use esse método para simplificar a implementação dos métodos `enfileira`, `desenfileira` e `cheia`.
+@) A implementação de `Fila` do arquivo `fila_arranjo_circular.py` usa a ideia de "índice circular", quando o índice chega no final no arranjo, ele volta para o início. Essa ideia é usada nos métodos `enfileira`, `desenfileira` e `cheia`. Crie um método auxiliar para calcular o próximo índice a partir de um índice qualquer e use esse método para simplificar a implementação dos métodos `enfileira`, `desenfileira` e `cheia`.
 
 @) Implemente a função chamada `tempo_fila` do arquivo abaixo:
 
     ```python
-    from fila_inicio_fim import Fila
-    # from fila_fim import Fila
+    from fila_arranjo_inicio_fim import Fila
+    # from fila_arranjo_fim import Fila
 
     def tempo_fila(n: int):
         # Criar uma fila com capacidade para n elementos
@@ -98,7 +98,7 @@ urlcolor: Blue
 
     Execute o arquivo com o comando `python arquivo.py` e veja na saída os tempos de execução da função `tempo_fila` para $n = 1000, 2000, 4000$.
 
-    Troque a implementação de fila usada no arquivo comentando a linha `from fila_inicio_fim import`{.python} `Fila` e descomentando a linha `from fila_fim import Fila`{.python}.
+    Troque a implementação de fila usada no arquivo comentando a linha `from fila_arranjo_inicio_fim import`{.python} `Fila` e descomentando a linha `from fila_arranjo_fim import Fila`{.python}.
 
     Execute novamente o arquivo e observe os tempos de execução.
 
@@ -114,7 +114,7 @@ urlcolor: Blue
 
 @) Crie um programa (semelhante ao exercício do `tempo_fila`) que mostre a diferença do tempo de execução do método `popleft` da classe `collections.deque` e do método `pop(0)` da classe `list` (pré-definidos em Python).
 
-@) Altere a implementação do método `lista.remove` para que `valores` nunca fique com menos que 25% da sua capacidade utilizada (exceto quanto a capacidade for menor ou igual a 10). Como isso afeta a complexidade de tempo? Dica: veja o método `__cresce__` e seu uso em `insere`. Escreve um método auxiliar `__diminui__`, que reduz a capacidade de `valores` pela metade.
+@) Altere a implementação do método `lista.remove` para que `valores` nunca fique com menos que 25% da sua capacidade utilizada (exceto quanto a capacidade for menor ou igual a 10). Como isso afeta a complexidade de tempo? Dica: veja o método `__cresce` e seu uso em `insere`. Escreve um método auxiliar `__diminui`, que reduz a capacidade de `valores` pela metade.
 
 @) Altere a seguinte função para usar uma `lista` (implementada no exercício anterior) ao invés do `list` do Python.
 
