@@ -570,6 +570,8 @@ Adicione um `No` com o item 20 no final.
 >>> p.prox.prox.prox.prox = No(20, None)
 ```
 
+\normalsize
+
 Usando repetição!
 
 \scriptsize
@@ -608,9 +610,6 @@ Usamos uma variável `topo` para armazenar o primeiro nó no encadeamento ou `No
 class Pilha:
     topo: No | None
 
-    def __init__(self):
-        self.topo = None
-
     def empilha(self, item: str):
         self.topo = No(item, self.topo)
 
@@ -621,10 +620,14 @@ class Pilha:
             return item
         else:
             raise ValueError('pilha vazia')
-
-    def vazia(self) -> bool:
-        return self.topo is None
 ```
+
+\pause
+
+\normalsize
+
+Qual a complexidade de tempo de `empilha` e `desempilha`? \pause $O(1)$.
+
 </div>
 </div>
 
@@ -668,5 +671,52 @@ class Fila:
         else:
             raise ValueError('fila vazia')
 ```
+
+</div>
+</div>
+
+
+## Implementação de Fila
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Fila:
+    inicio: No | None
+
+    def enfileira(self, item: str):
+        if self.inicio is None:
+            self.inicio = No(item, None)
+        else:
+            # Encontra o último nó
+            p = self.inicio
+            while p.prox is not None:
+                p = p.prox
+            p.prox = No(item, None)
+
+    def desenfileira(self) -> str:
+        if self.inicio is not None:
+            item = self.inicio.item
+            self.inicio = self.inicio.prox
+            return item
+        else:
+            raise ValueError('fila vazia')
+```
+
+</div>
+<div class="column" width="48%">
+
+\pause
+
+\normalsize
+
+Qual a complexidade de tempo de `desenfileira`? \pause $O(1)$. \pause
+
+Qual a complexidade de tempo de `enfileira`? \pause $O()$... \pause
+
+Podemo fazer melhor? \pause Sim!
+
 </div>
 </div>
