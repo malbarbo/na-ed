@@ -1,0 +1,1 @@
+../../04-estruturas-lineares-contiguas/exemplos/pilha_tad.py

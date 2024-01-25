@@ -4,6 +4,7 @@ title: Estruturas de dados lineares
 subtitle: Alocação encadeada
 linkcolor: Black
 urlcolor: Blue
+# TODO: trocar os exemplos de lista de pessoas para exemplos de mulher com mãe, ou inscrito com quem indicou
 ---
 
 
@@ -320,11 +321,165 @@ O que têm de diferente na declaração de `Seq` em relação as classes que def
 
 Os tipos com autorreferência (ou recursivos) permitem a representação de quantidade de dados arbitrárias pelo **encadeamento** de instâncias do tipo. \pause Usamos `None`{.python} para representar o fim do encadeamento. \pause
 
-O tipo utilizado no encadeamento é comumente chamado de `No`, dessa forma, usamos um encadeamento de nós para criar uma coleção de valores.
+O tipo utilizado no encadeamento é comumente chamado de `No`, dessa forma, usamos um encadeamento de nós para criar uma coleção de valores. \pause
+
+<div class="columns">
+<div class="column" width="35%">
+\scriptsize
+
+```python
+@dataclass
+class No:
+    item: int
+    prox: No | None
+
+```
+
+</div>
+<div class="column" width="65%">
+\scriptsize
+
+```python
+>>> p = No('Joao', No('Pedro', No('Ana', None)))
+```
+
+</div>
+</div>
+
+\pause
+
+\normalsize
+
+Antes de prosseguirmos, vamos revisar o uso de múltiplas referências para a mesma célula de memória.
+
+
+## Múltiplas referências
+
+Vimos que em Python toda variável referencia uma célula de memória. Em algumas situações, como quando atribuímos uma variável para outra ou passamos uma variável como parâmetro, temos mais de uma variável referenciando a mesma célula de memória. \pause
+
+Essa situação pode gerar alguns dificuldades para a escrita e entendimento do código, mas é necessária para manipulação de encadeamentos. \pause
+
+Vamos usar o [Python Tutor](https://pythontutor.com/) para visualizar algumas situações de múltiplas referências. \pause
+
+O Python Tutor não aceita o uso de `@dataclass`{.python}, então vamos definir uma classe "normal" e definir um construtor manualmente.
+
+
+## Múltiplas referências
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+@dataclass
+class Ponto:
+    x: int
+    y: int
+
+@dataclass
+class Retangulo:
+    canto: Ponto
+    largura: int
+    altura: int
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Ponto:
+    def __init__(self, x: int, y: int):
+        self.x = x
+        self.y = y
+
+class Retangulo:
+    def __init__(self, canto: Ponto,
+                       largura: int,
+                       altura: int):
+        self.canto = canto
+        self.largura = largura
+        self.altura = altura
+```
+</div>
+</div>
+
+Acesse esse exemplos no [Python Tutor](https://pythontutor.com/render.html#code=class%20Ponto%3A%0A%20%20%20%20def%20__init__%28self,%20x%3A%20int,%20y%3A%20int%29%3A%0A%20%20%20%20%20%20%20%20self.x%20%3D%20x%0A%20%20%20%20%20%20%20%20self.y%20%3D%20y%0A%0Aclass%20Retangulo%3A%0A%20%20%20%20def%20__init__%28self,%20canto%3A%20Ponto,%20largura%3A%20int,%20altura%3A%20int%29%3A%0A%20%20%20%20%20%20%20%20self.canto%20%3D%20canto%0A%20%20%20%20%20%20%20%20self.largura%20%3D%20largura%0A%20%20%20%20%20%20%20%20self.altura%20%3D%20altura%0A%0Ap%20%3D%20Ponto%2810,%2050%29%0Al%20%3D%20200%0Aa%20%3D%20450%0A%0Ar1%20%3D%20Retangulo%28p,%20l,%20a%29%0Ar2%20%3D%20Retangulo%28p,%20l,%20a%29%0A%0A%23%20Quais%20valores%20ser%C3%A3o%20exibidos%3F%0Al%20%3D%20300%0Aprint%28r1.largura%29%0Aprint%28r2.largura%29%0A%0A%23%20Quais%20valores%20ser%C3%A3o%20exibidos%3F%0Ap.x%20%3D%2020%0Aprint%28r1.canto.x,%20r1.canto.y%29%0Aprint%28r2.canto.x,%20r2.canto.y%29%0A%0A%23%20Quais%20valores%20ser%C3%A3o%20exibidos%3F%0Ar1.canto.y%20%3D%2070%0Aprint%28p.x,%20p.y%29%0Aprint%28r2.canto.x,%20r2.canto.y%29%0A%0A%23%20Quais%20valores%20ser%C3%A3o%20exibidos%3F%0Ar2.canto%20%3D%20Ponto%283,%2017%29%0Aprint%28p.x,%20p.y%29%0Aprint%28r1.canto.x,%20r1.canto.y%29&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false).
+
+
+## Múltiplas referências
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Ponto:
+    def __init__(self, x: int, y: int):
+        self.x = x
+        self.y = y
+
+class Retangulo:
+    def __init__(self, canto: Ponto,
+                       largura: int,
+                       altura: int):
+        self.canto = canto
+        self.largura = largura
+        self.altura = altura
+
+p = Ponto(10, 50)
+l = 200
+a = 450
+
+r1 = Retangulo(p, l, a)
+r2 = Retangulo(p, l, a)
+```
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+# Quais valores serão exibidos?
+l = 300
+print(r1.largura)
+print(r2.largura)
+```
+
+\pause
+
+```python
+# Quais valores serão exibidos?
+p.x = 20
+print(r1.canto.x, r1.canto.y)
+print(r2.canto.x, r2.canto.y)
+```
+
+\pause
+
+```python
+# Quais valores serão exibidos?
+r1.canto.y = 70
+print(p.x, p.y)
+print(r2.canto.x, r2.canto.y)
+```
+
+\pause
+
+```python
+# Quais valores serão exibidos?
+r2.canto = Ponto(3, 17)
+print(p.x, p.y)
+print(r1.canto.x, r1.canto.y)
+```
+
+</div>
+</div>
 
 
 ## Manipulação de encadeamento
-
 
 <div class="columns">
 <div class="column" width="48%">
@@ -415,10 +570,6 @@ Adicione um `No` com o item 20 no final.
 >>> p.prox.prox.prox.prox = No(20, None)
 ```
 
-\pause
-
-\small
-
 Usando repetição!
 
 \scriptsize
@@ -432,13 +583,90 @@ Usando repetição!
 >>> q.prox = No(20, None)
 ```
 
-
 </div>
 </div>
 
 
-## Implementação de pilha e fila
+## Implementação de pilha
 
-Implemente o TAD Pilha usando encadeamento. \pause
+<div class="columns">
+<div class="column" width="48%">
+Como podemos implementar uma pilha usando um encadeamento de nós? \pause
 
-Implemente o TAD fila usando encadeamento.
+Usamos uma variável `topo` para armazenar o primeiro nó no encadeamento ou `None`{.python} se a pilha estiver vazia: \pause
+
+- Construtor: inicializa `topo` com `None`{.python} \pause
+- Vazia: verifica se `topo` é `None`{.python} \pause
+- Empilha: insere um novo nó com o item no início do encadeamento e muda `topo` para o novo início \pause
+- Desempilha: remove o primeiro nó do encadeamento e muda `topo` para o novo início \pause
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Pilha:
+    topo: No | None
+
+    def __init__(self):
+        self.topo = None
+
+    def empilha(self, item: str):
+        self.topo = No(item, self.topo)
+
+    def desempilha(self) -> str:
+        if self.topo is not None:
+            item = self.topo.item
+            self.topo = self.topo.prox
+            return item
+        else:
+            raise ValueError('pilha vazia')
+
+    def vazia(self) -> bool:
+        return self.topo is None
+```
+</div>
+</div>
+
+
+## Implementação de Fila
+
+<div class="columns">
+<div class="column" width="48%">
+Como podemos implementar uma fila usando um encadeamento de nós? \pause
+
+Usamos uma variável `inicio` para armazenar o primeiro nó no encadeamento ou `None`{.python} se a fila estiver vazia: \pause
+
+- Construtor: inicializa `inicio` com `None`{.python} \pause
+- Vazia: verifica se `inicio` é `None`{.python} \pause
+- Enfileira: insere um novo nó com o item no final do encadeamento \pause
+- Desenfileira: remove o primeiro nó do encadeamento e muda `inicio` para o novo início \pause
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Fila:
+    inicio: No | None
+
+    def enfileira(self, item: str):
+        if self.inicio is None:
+            self.inicio = No(item, None)
+        else:
+            # Encontra o último nó
+            p = self.inicio
+            while p.prox is not None:
+                p = p.prox
+            p.prox = No(item, None)
+
+    def desenfileira(self) -> str:
+        if self.inicio is not None:
+            item = self.inicio.item
+            self.inicio = self.inicio.prox
+            return item
+        else:
+            raise ValueError('fila vazia')
+```
+</div>
+</div>
