@@ -1,1 +1,0 @@
-../../04-estruturas-lineares-contiguas/exemplos/lista.py
