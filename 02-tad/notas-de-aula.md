@@ -535,6 +535,6 @@ O importante por enquanto é saber como usar classes para especificar e implemen
 
 ## Referências
 
-Capítulo 2 - Visão geral das coleções - [Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert.](https://app.minhabiblioteca.com.br/reader/books/9786555584288/pageid/0)
+Capítulo 2 - Visão geral das coleções - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na Minha Biblioteca da UEM)
 
 Seção 1.2 - Interfaces - [Open Data Structures (in pseudocode)](https://opendatastructures.org/ods-python.pdf)

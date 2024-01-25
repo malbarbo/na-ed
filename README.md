@@ -10,7 +10,7 @@ e [tectonic](http://tectonic-typesetting.github.io/).
 
 - [Pilha](04-estruturas-lineares-contiguas/exemplos/pilha_tad.py)
   - Arranjo estático e topo ([`pilha_arranjo.py`](/04-estruturas-lineares-contiguas/exemplos/pilha_arranjo.py))
-  - Com encadeamento ([`pilha_arranjo.py`](/05-estruturas-lineares-encadeadas/exemplos/pilha_encadeada.py))
+  - Com encadeamento ([`pilha_encadeada.py`](/05-estruturas-lineares-encadeadas/exemplos/pilha_encadeada.py))
 - [Fila](04-estruturas-lineares-contiguas/exemplos/fila_tad.py)
   - Arranjo estático e fim ([`fila_arranjo_fim.py`](04-estruturas-lineares-contiguas/exemplos/fila_arranjo_fim.py))
   - Arranjo estático, início e fim ([`fila_arranjo_inicio_fim.py`](04-estruturas-lineares-contiguas/exemplos/fila_arranjo_inicio_fim.py))
