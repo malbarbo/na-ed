@@ -1,7 +1,10 @@
 ---
 title: Estruturas de dados lineares - Alocação contígua - Prática
 urlcolor: Blue
+# TODO: começar com exercícios mais simples
 # TODO: remover alguns exercícios de pilha, eles são muito iguais
+# TODO: modificar tempo_fila para não ser preciso comentar/descomentar nenhuma linha
+# TODO: adicionar exercícios para usar fila
 ---
 
 <!-- Pilha -->
