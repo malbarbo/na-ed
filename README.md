@@ -10,13 +10,13 @@ e [tectonic](http://tectonic-typesetting.github.io/).
 
 - [Pilha](04-estruturas-lineares-contiguas/exemplos/pilha_tad.py)
   - Arranjo estático e topo ([`pilha_arranjo.py`](/04-estruturas-lineares-contiguas/exemplos/pilha_arranjo.py))
-  - Com encadeamento ([`pilha_encadeada.py`](/05-estruturas-lineares-encadeadas/exemplos/pilha_encadeada.py))
+  - Encadeamento ([`pilha_encadeada.py`](/05-estruturas-lineares-encadeadas/exemplos/pilha_encadeada.py))
 - [Fila](04-estruturas-lineares-contiguas/exemplos/fila_tad.py)
   - Arranjo estático e fim ([`fila_arranjo_fim.py`](04-estruturas-lineares-contiguas/exemplos/fila_arranjo_fim.py))
   - Arranjo estático, início e fim ([`fila_arranjo_inicio_fim.py`](04-estruturas-lineares-contiguas/exemplos/fila_arranjo_inicio_fim.py))
   - Arranjo estático circular ([`fila_arranjo_circular.py`](04-estruturas-lineares-contiguas/exemplos/fila_arranjo_circular.py))
-  - Com encadeamento ([`fila_encadeada_inicio.py`](/05-estruturas-lineares-encadeadas/exemplos/fila_encadeada_inicio.py))
-  - Com encadeamento e referência para o fim ([`fila_encadeada_inicio_fim.py`](/05-estruturas-lineares-encadeadas/exemplos/fila_encadeada_inicio_fim.py))
+  - Encadeamento e referência para o início([`fila_encadeada_inicio.py`](/05-estruturas-lineares-encadeadas/exemplos/fila_encadeada_inicio.py))
+  - Encadeamento e referência para o início e fim ([`fila_encadeada_inicio_fim.py`](/05-estruturas-lineares-encadeadas/exemplos/fila_encadeada_inicio_fim.py))
 - [Lista](04-estruturas-lineares-contiguas/exemplos/lista_tad.py)
   - Arranjo estático com redimensionamento ([`lista_arranjo.py`](04-estruturas-lineares-contiguas/exemplos/lista_arranjo.py))
 
