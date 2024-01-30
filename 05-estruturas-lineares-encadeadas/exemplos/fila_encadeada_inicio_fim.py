@@ -45,7 +45,7 @@ class Fila:
         '''
         Adiciona *item* no final da fila.
         '''
-        if self.inicio is None:
+        if self.fim is None:
             self.inicio = No(item, None)
             self.fim = self.inicio
         else:
@@ -58,14 +58,13 @@ class Fila:
 
         Requer que a fila não esteja vazia.
         '''
-        if self.inicio is not None:
-            item = self.inicio.item
-            self.inicio = self.inicio.prox
-            if self.inicio is None:
-                self.fim = None
-            return item
-        else:
+        if self.inicio is None:
             raise ValueError('fila vazia')
+        item = self.inicio.item
+        self.inicio = self.inicio.prox
+        if self.inicio is None:
+            self.fim = None
+        return item
 
     def vazia(self) -> bool:
         '''

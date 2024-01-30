@@ -595,7 +595,7 @@ Usando repetição!
 <div class="column" width="48%">
 Como podemos implementar uma pilha usando um encadeamento de nós? \pause
 
-Usamos uma variável `topo` para armazenar o primeiro nó no encadeamento ou `None`{.python} se a pilha estiver vazia: \pause
+Usamos uma variável `topo` para armazenar o primeiro nó do encadeamento ou `None`{.python} se a pilha estiver vazia: \pause
 
 - Construtor: inicializa `topo` com `None`{.python} \pause
 - Vazia: verifica se `topo` é `None`{.python} \pause
@@ -614,12 +614,11 @@ class Pilha:
         self.topo = No(item, self.topo)
 
     def desempilha(self) -> str:
-        if self.topo is not None:
-            item = self.topo.item
-            self.topo = self.topo.prox
-            return item
-        else:
+        if self.topo is None:
             raise ValueError('pilha vazia')
+        item = self.topo.item
+        self.topo = self.topo.prox
+        return item
 ```
 
 \pause
@@ -638,7 +637,7 @@ Qual a complexidade de tempo de `empilha` e `desempilha`? \pause $O(1)$.
 <div class="column" width="48%">
 Como podemos implementar uma fila usando um encadeamento de nós? \pause
 
-Usamos uma variável `inicio` para armazenar o primeiro nó no encadeamento ou `None`{.python} se a fila estiver vazia: \pause
+Usamos uma variável `inicio` para armazenar o primeiro nó do encadeamento ou `None`{.python} se a fila estiver vazia: \pause
 
 - Construtor: inicializa `inicio` com `None`{.python} \pause
 - Vazia: verifica se `inicio` é `None`{.python} \pause
@@ -664,12 +663,11 @@ class Fila:
             p.prox = No(item, None)
 
     def desenfileira(self) -> str:
-        if self.inicio is not None:
-            item = self.inicio.item
-            self.inicio = self.inicio.prox
-            return item
-        else:
+        if self.inicio is None:
             raise ValueError('fila vazia')
+        item = self.inicio.item
+        self.inicio = self.inicio.prox
+        return item
 ```
 
 </div>
@@ -697,12 +695,11 @@ class Fila:
             p.prox = No(item, None)
 
     def desenfileira(self) -> str:
-        if self.inicio is not None:
-            item = self.inicio.item
-            self.inicio = self.inicio.prox
-            return item
-        else:
+        if self.inicio is None:
             raise ValueError('fila vazia')
+        item = self.inicio.item
+        self.inicio = self.inicio.prox
+        return item
 ```
 
 </div>
@@ -714,9 +711,154 @@ class Fila:
 
 Qual a complexidade de tempo de `desenfileira`? \pause $O(1)$. \pause
 
-Qual a complexidade de tempo de `enfileira`? \pause $O()$... \pause
+Qual a complexidade de tempo de `enfileira`? \pause $O(n)$... \pause
 
-Podemo fazer melhor? \pause Sim!
+Podemo fazer melhor? \pause Sim! \pause
+
+Vamos manter uma variável `fim` que referencia o último nó do encadeamento ou é `None`{.python} se a fila estiver vazia. \pause Isso permite acessar o fim em tempo constante. \pause
+
+Ambos `inicio` e `fim` são considerados em `enfileira` e `desenfileira`.
 
 </div>
 </div>
+
+
+## Implementação de Fila
+
+<div class="columns">
+<div class="column" width="48%">
+![](imagens/fila-simples.pdf){height=7cm}
+\pause
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Fila:
+    inicio: No | None
+    fim: No | None
+
+    def enfileira(self, item: str):
+        if self.fim is None:
+            self.inicio = No(item, None)
+            self.fim = self.inicio
+        else:
+            self.fim.prox = No(item, None)
+            self.fim = self.fim.prox
+
+    def desenfileira(self) -> str:
+        if self.inicio is None:
+            raise ValueError('fila vazia')
+        item = self.inicio.item
+        self.inicio = self.inicio.prox
+        return item
+```
+</div>
+</div>
+
+## Implementação de Fila
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class Fila:
+    inicio: No | None
+    fim: No | None
+
+    def enfileira(self, item: str):
+        if self.fim is None:
+            self.inicio = No(item, None)
+            self.fim = self.inicio
+        else:
+            self.fim.prox = No(item, None)
+            self.fim = self.fim.prox
+
+    def desenfileira(self) -> str:
+        if self.inicio is None:
+            raise ValueError('fila vazia')
+        item = self.inicio.item
+        self.inicio = self.inicio.prox
+        return item
+```
+
+</div>
+<div class="column" width="48%">
+
+\pause
+
+\normalsize
+
+Qual a complexidade de tempo de `desenfileira`? \pause $O(1)$. \pause
+
+Qual a complexidade de tempo de `enfileira`? \pause $O(1)$.
+
+</div>
+</div>
+
+
+## Implementação de Fila Dupla
+
+<div class="columns">
+<div class="column" width="55%">
+\small
+Como podemos implementar uma fila dupla usando um encadeamento de nós? \pause
+
+Precisamos implementar inserção e remoção nos dois extremos. \pause
+
+Mantendo `inicio` e `fim`, quais são as complexidades de tempos das operações? \pause
+
+Inserir no início: \pause $O(1)$ \pause (como `Pilha.empiha` -- atualiza `fim` se necessário) \pause
+
+Remover do início: \pause $O(1)$ \pause (como `Fila.desenfileira`) \pause
+
+Inserir no fim: \pause $O(1)$ \pause (como `Fila.enfileira`) \pause
+
+Remover do fim: \pause $O(n)$! \pause É preciso localizar, a partir do início, o predecessor do fim no encadeamento. \pause
+
+</div>
+<div class="column" width="42%">
+\scriptsize
+
+```python
+def remove_fim(self) -> str:
+    if self.fim is None:
+        raise ValueError('fila vazia')
+
+    # Salva o último elemento
+    item = self.fim.item
+
+    p = self.inicio
+    assert p is not None
+    if p.prox is None: # Único elemento?
+        self.inicio = None
+        self.fim = None
+    else:
+        # Encontra o penúltimo
+        while p.prox is not self.fim:
+            p = p.prox
+        p.prox = None
+        self.fim = p
+    # Devolve o item
+    return item
+```
+
+</div>
+</div>
+
+
+## Implementação de Fila Dupla
+
+Podemos fazer melhor? Ou seja, podemo fazer uma implementação que a remoção do fim seja constante? \pause Sim! \pause
+
+Precisamos de um encadeamento duplo. Cada nó mantém, além de uma referência opcional para o próximo,também uma referência opcional para o nó anterior no encadeamento. \pause
+
+\scriptsize
+
+```python
+class No:
+    prox: No | None
+    item: str
+    ante: No | None
+```

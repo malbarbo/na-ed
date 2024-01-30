@@ -60,12 +60,11 @@ class Fila:
 
         Requer que a fila não esteja vazia.
         '''
-        if self.inicio is not None:
-            item = self.inicio.item
-            self.inicio = self.inicio.prox
-            return item
-        else:
+        if self.inicio is None:
             raise ValueError('fila vazia')
+        item = self.inicio.item
+        self.inicio = self.inicio.prox
+        return item
 
     def vazia(self) -> bool:
         '''

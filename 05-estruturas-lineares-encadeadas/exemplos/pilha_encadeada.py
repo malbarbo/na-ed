@@ -52,12 +52,11 @@ class Pilha:
 
         Requer que a pilha não esteja vazia.
         '''
-        if self.topo is not None:
-            item = self.topo.item
-            self.topo = self.topo.prox
-            return item
-        else:
+        if self.topo is None:
             raise ValueError('pilha vazia')
+        item = self.topo.item
+        self.topo = self.topo.prox
+        return item
 
     def vazia(self) -> bool:
         '''
