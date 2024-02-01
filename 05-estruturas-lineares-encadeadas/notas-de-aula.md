@@ -1013,3 +1013,70 @@ def remove_fim(self) -> str:
 
 </div>
 </div>
+
+
+## Fila dupla
+
+Com encadeamento duplo e referência para início e fim, os métodos do TAD de fila dupla têm complexidade de tempo de $O(1)$. \pause
+
+Cada um dos quadro métodos tem dois casos distintos. \pause
+
+Podemos simplificar o código? \pause O que faz com que seja necessário dois casos? \pause
+
+Vamos supor por um momento que todos os nós tenham antecessor e sucessor. \pause
+
+Como remove um nó `p` sabendo que existe um antecessor e um sucessor de `p`? \pause
+
+Como inserir um nó `novo` após um nó `p` sabendo que p tem um sucessor? \pause
+
+Como inserir um nó `novo` antes de um nó `p` sabendo que p tem um antecessor? \pause
+
+
+## Fila dupla
+
+<div class="columns">
+<div class="column" width="48%">
+
+![](imagens/insercao-remocao.pdf)
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def remove(p: No):
+    p.prox.ante = p.ante
+    p.ante.prox = p.prox
+```
+
+\pause
+
+```python
+def insere_depois(p: No, novo: No):
+    novo.ante = p
+    novo.prox = p.prox
+    p.prox.ante = novo
+    p.prox = novo
+```
+
+\pause
+
+```python
+def insere_antes(p: No, novo: No):
+    novo.ante = p.ante
+    novo.prox = p
+    p.ante.prox = novo
+    p.ante = novo
+```
+
+</div>
+</div>
+
+
+## Sentinela
+
+![](imagens/Fig-10-4.pdf)
+

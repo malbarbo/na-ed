@@ -108,7 +108,7 @@ class FilaDupla:
     def __insere(self, p: No, novo: No):
         novo.prox = p.prox
         novo.ante = p
-        novo.prox.ante = novo
+        p.prox.ante = novo
         p.prox = novo
 
     def __remove(self, p: No) -> str:
