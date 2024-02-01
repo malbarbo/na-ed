@@ -2,14 +2,20 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
-@dataclass
 class No:
     '''
     Um nó no encademaneto.
     '''
-    ante: No | None
+    prox: No
     item: str
-    prox: No | None
+    ante: No
+
+    def __init__(self, item: str):
+        # Quando um nó é criado, os valores prox e ante devem ser inicializados
+        # para não permanecerem em um estado inválido.
+        self.prox = None  # type: ignore
+        self.item = item
+        self.ante = None  # type: ignore
 
 
 class FilaDupla:
@@ -52,26 +58,18 @@ class FilaDupla:
     ValueError: fila vazia
     '''
 
-    inicio: No | None
-    fim: No | None
+    sentinela: No
 
     def __init__(self):
-        '''
-        Cria uma nova fila vazia.
-        '''
-        self.inicio = None
-        self.fim = None
+        self.sentinela = No('')
+        self.sentinela.prox = self.sentinela
+        self.sentinela.ante = self.sentinela
 
     def insere_inicio(self, item: str):
         '''
         Insere *item* no início da fila.
         '''
-        if self.inicio is None:
-            self.inicio = No(None, item, None)
-            self.fim = self.inicio
-        else:
-            self.inicio.ante = No(None, item, self.inicio)
-            self.inicio = self.inicio.ante
+        self.__insere(self.sentinela, No(item))
 
     def remove_inicio(self) -> str:
         '''
@@ -79,31 +77,16 @@ class FilaDupla:
 
         Requer que a fila não esteja vazia.
         '''
-        if self.inicio is None:
+        if self.vazia():
             raise ValueError('fila vazia')
 
-        item = self.inicio.item
-
-        # Só tem um nó?
-        if self.inicio.prox is None:
-            self.inicio = None
-            self.fim = None
-        else:
-            self.inicio = self.inicio.prox
-            self.inicio.ante = None
-
-        return item
+        return self.__remove(self.sentinela.prox)
 
     def insere_fim(self, item: str):
         '''
         Insere *item* no fim da fila.
         '''
-        if self.fim is None:
-            self.inicio = No(None, item, None)
-            self.fim = self.inicio
-        else:
-            self.fim.prox = No(self.fim, item, None)
-            self.fim = self.fim.prox
+        self.__insere(self.sentinela.ante, No(item))
 
     def remove_fim(self) -> str:
         '''
@@ -111,24 +94,25 @@ class FilaDupla:
 
         Requer que a fila não esteja vazia.
         '''
-        if self.fim is None:
+        if self.vazia():
             raise ValueError('fila vazia')
 
-        item = self.fim.item
-
-        # Só tem um nó?
-        if self.fim.ante is None:
-            self.inicio = None
-            self.fim = None
-        else:
-            self.fim = self.fim.ante
-            self.fim.prox = None
-
-        return item
-
+        return self.__remove(self.sentinela.ante)
 
     def vazia(self) -> bool:
         '''
         Devolve True e a fila está vazia, False caso contrário.
         '''
-        return self.inicio is None
+        return self.sentinela.prox == self.sentinela
+
+    def __insere(self, p: No, novo: No):
+        novo.prox = p.prox
+        novo.ante = p
+        novo.prox.ante = novo
+        p.prox = novo
+
+    def __remove(self, p: No) -> str:
+        item = p.item
+        p.ante.prox = p.prox
+        p.prox.ante = p.ante
+        return p.item

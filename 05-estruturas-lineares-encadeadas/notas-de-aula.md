@@ -751,6 +751,8 @@ class Fila:
             raise ValueError('fila vazia')
         item = self.inicio.item
         self.inicio = self.inicio.prox
+        if self.inicio is None:
+            self.fim = None
         return item
 ```
 </div>
@@ -780,6 +782,8 @@ class Fila:
             raise ValueError('fila vazia')
         item = self.inicio.item
         self.inicio = self.inicio.prox
+        if self.inicio is None:
+            self.fim = None
         return item
 ```
 
@@ -850,15 +854,162 @@ def remove_fim(self) -> str:
 
 ## Implementação de Fila Dupla
 
-Podemos fazer melhor? Ou seja, podemo fazer uma implementação que a remoção do fim seja constante? \pause Sim! \pause
+Podemos fazer melhor? Ou seja, podemos fazer uma implementação em que a remoção do fim seja constante? \pause Sim! \pause
 
-Precisamos de um encadeamento duplo. Cada nó mantém, além de uma referência opcional para o próximo,também uma referência opcional para o nó anterior no encadeamento. \pause
+Precisamos de um encadeamento duplo. Cada nó mantém, além de uma referência opcional para o próximo, também uma referência opcional para o nó anterior no encadeamento. \pause Dessa forma é possível encontrar o antecessor de um nó em tempo constante. \pause
+
 
 \scriptsize
 
 ```python
+@dataclass
 class No:
-    prox: No | None
-    item: str
     ante: No | None
+    item: str
+    prox: No | None
 ```
+
+
+## Encadeamento duplo
+
+Trabalhar com encadeamento duplo requer ainda mais cuidado do que com encadeamento simples! Por isso é importante **fazer desenhos**! \pause
+
+Escreva o código para criar o seguinte encadeamento
+
+![](imagens/encadeamento-duplo.pdf)
+
+\pause
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+>>> a = No(None, 'A', None)
+>>> b = No(None, 'B', None)
+>>> c = No(None, 'C', None)
+>>> a.prox = b
+>>> b.ante = a
+>>> b.prox = c
+>>> c.prev = b
+>>> p = a
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+Note que como o encadeamento tem ciclos, ele não pode ser criado todo de uma vez. A estratégia que usamos foi criar os nós separados e depois ligá-los.
+</div>
+</div>
+
+
+## Encadeamento duplo
+
+Na hora de exibir um encadeamento com ciclos, o Python usa `...` para evitar exibir o mesmo nó mais que uma vez.
+
+\scriptsize
+
+```python
+>>> p
+No(ante=None, item='A', prox=No(ante=..., item='B', prox=No(ante=..., item='C', prox=None)))
+>>> b
+No(ante=No(ante=None, item='A', prox=...), item='B', prox=No(ante=..., item='C', prox=None))
+>>> c
+No(ante=No(ante=No(ante=None, item='A', prox=...), item='B', prox=...), item='C', prox=None)
+```
+
+\pause
+
+\normalsize
+
+Agora vamos implementar uma fila dupla usando encadeamento duplo mantendo referências para o início e fim do encadeamento.
+
+
+## Fila dupla -  Inserção e remoção no início
+
+<div class="columns">
+<div class="column" width="45%">
+
+![](imagens/inicio-insercao-remocao.pdf)
+
+\pause
+
+</div>
+<div class="column" width="52%">
+\scriptsize
+
+```python
+def insere_inicio(self, item: str):
+    if self.inicio is None:
+        self.inicio = No(None, item, None)
+        self.fim = self.inicio
+    else:
+        self.inicio.ante = No(None, item, self.inicio)
+        self.inicio = self.inicio.ante
+```
+
+\pause
+
+```python
+def remove_inicio(self) -> str:
+    if self.inicio is None:
+        raise ValueError('fila vazia')
+    item = self.inicio.item
+    # Só tem um nó?
+    if self.inicio.prox is None:
+        self.inicio = None
+        self.fim = None
+    else:
+        self.inicio = self.inicio.prox
+        self.inicio.ante = None
+    return item
+```
+
+</div>
+</div>
+
+
+## Fila dupla -  Inserção e remoção no fim
+
+<div class="columns">
+<div class="column" width="45%">
+
+![](imagens/fim-insercao-remocao.pdf)
+
+\pause
+
+</div>
+<div class="column" width="52%">
+
+\scriptsize
+
+```python
+def insere_fim(self, item: str):
+    if self.fim is None:
+        self.inicio = No(None, item, None)
+        self.fim = self.inicio
+    else:
+        self.fim.prox = No(self.fim, item, None)
+        self.fim = self.fim.prox
+```
+
+\pause
+
+```python
+def remove_fim(self) -> str:
+    if self.fim is None:
+        raise ValueError('fila vazia')
+    item = self.fim.item
+    # Só tem um nó?
+    if self.fim.ante is None:
+        self.inicio = None
+        self.fim = None
+    else:
+        self.fim = self.fim.ante
+        self.fim.prox = None
+    return item
+```
+
+</div>
+</div>
