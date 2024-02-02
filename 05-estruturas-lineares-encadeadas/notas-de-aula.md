@@ -1262,12 +1262,12 @@ Devemos usar encadeamento simples ou duplo para implementar o TAD Lista? \pause
 
 Se o TAD de Lista não define função específica para remoção do fim, então o encadeamento simples é suficiente. \pause
 
-Qual o tempo de execução para operações de inserção e remoção em posição? \pause $O(n)$ pois é preciso seguir o encadeamento até a posição especificada, que pode ser a última. \pause
+Qual o tempo de execução para operações de inserção e remoção em posição? \pause $O(n)$, pois é preciso seguir o encadeamento até a posição especificada, que pode ser a última. \pause
 
 A implementação do TAD Lista fica como exercício!
 
 
-## Alocação contígua versus encadeada
+## Revisão
 
 Vimos quatro TAD's e como implementá-los usando arranjos (alocação contígua) e encadeamento de nós (alocação encadeada)
 
@@ -1277,12 +1277,12 @@ Vimos quatro TAD's e como implementá-los usando arranjos (alocação contígua)
 - Lista
 
 
-## Alocação contígua versus encadeada
+## Revisão
 
 Estrutura / Operação   | get/set | ins/rem início | ins/rem fim    | ins/rem       | busca |
------------------------|---------|----------------|----------------|---------------|-------|
+-------------------------|---------|----------------|----------------|---------------|-------|
 Encadeamento Simples   |  $O(n)$ | $O(1)$ / $O(1)$ | $O(1)$ / $O(n)$ | $O(n)$      | $O(n)$ |
-Encadeamento Dupla     |  $O(n)$ | $O(1)$ / $O(1)$ | $O(1)$ / $O(1)$ | $O(n)$ -- $O(1)$ [^1] | $O(n)$ |
+Encadeamento Duplo     |  $O(n)$ | $O(1)$ / $O(1)$ | $O(1)$ / $O(1)$ | $O(n)$ -- $O(1)$ [^1] | $O(n)$ |
 Arranjo Dinâmico       |  $O(1)$ | $O(n)$ / $O(n)$ | $O(1)$[^2] / $O(1)$ | $O(n)$  | $O(n)$ |
 
 [^1]: Com a referência para o nó
@@ -1292,12 +1292,12 @@ Arranjo Dinâmico       |  $O(1)$ | $O(n)$ / $O(n)$ | $O(1)$[^2] / $O(1)$ | $O(n
 ## Alocação contígua versus encadeada
 
 
-| Característica   | Contígua                  | Encadeada
-|------------------|---------------------------|---------------------------
-| Implementação    | Simples                   | Elaborada
-| Aumento          | Realocação                | Criação de nó
-| Diminuição       | Deslocamento / realocação | Remoção de nó
-| Acesso aleatório | Sim                       | Não
+| Característica            | Contígua                  | Encadeada
+|---------------------------|---------------------------|---------------------------
+| Implementação             | Simples                   | Elaborada
+| Aumento                   | Realocação                | Criação de nó
+| Diminuição                | Deslocamento / realocação | Remoção de nó
+| Acesso aleatório          | Sim                       | Não
 
 
 ## Referências
