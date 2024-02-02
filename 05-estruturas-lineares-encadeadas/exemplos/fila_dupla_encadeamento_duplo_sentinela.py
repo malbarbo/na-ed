@@ -11,8 +11,8 @@ class No:
     ante: No
 
     def __init__(self, item: str):
-        # Quando um nó é criado, os valores prox e ante devem ser inicializados
-        # para não permanecerem em um estado inválido.
+        # Após a criação de um nó temos a responsabilidade
+        # de alterar ante e prox para valores válidos!
         self.prox = None  # type: ignore
         self.item = item
         self.ante = None  # type: ignore
@@ -60,7 +60,7 @@ class FilaDupla:
 
     sentinela: No
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.sentinela = No('')
         self.sentinela.prox = self.sentinela
         self.sentinela.ante = self.sentinela
@@ -103,7 +103,7 @@ class FilaDupla:
         '''
         Devolve True e a fila está vazia, False caso contrário.
         '''
-        return self.sentinela.prox == self.sentinela
+        return self.sentinela.prox is self.sentinela
 
     def __insere(self, p: No, novo: No):
         novo.prox = p.prox

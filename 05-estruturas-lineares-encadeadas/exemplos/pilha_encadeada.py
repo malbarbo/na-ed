@@ -34,7 +34,7 @@ class Pilha:
 
     topo: No | None
 
-    def __init__(self):
+    def __init__(self) -> None:
         '''
         Cria uma pilha vazia
         '''

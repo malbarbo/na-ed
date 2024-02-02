@@ -35,7 +35,7 @@ class Fila:
 
     inicio: No | None
 
-    def __init__(self):
+    def __init__(self) -> None:
         '''
         Cria uma fila vazia
         '''

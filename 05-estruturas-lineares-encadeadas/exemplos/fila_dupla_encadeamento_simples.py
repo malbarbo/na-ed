@@ -52,7 +52,7 @@ class FilaDupla:
     inicio: No | None
     fim: No | None
 
-    def __init__(self):
+    def __init__(self) -> None:
         '''
         Cria uma nova fila vazia.
         '''
