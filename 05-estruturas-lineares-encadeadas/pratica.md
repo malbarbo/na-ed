@@ -158,7 +158,7 @@ urlcolor: Blue
 
 <!-- Lista -->
 
-@) Implemente o TAD Lista usando encadeamento simples.
+@) Implemente o TAD Lista usando encadeamento simples. Dica: use um nó sentinela.
 
 @) Implemente o TAD Lista usando encadeamento duplo com sentinela. Mantenha um campo com a quantidade de elementos na lista e use essa informação para implementar as funções de inserção e remoção em posição navegando pela menor quantidade de nós possível.
 

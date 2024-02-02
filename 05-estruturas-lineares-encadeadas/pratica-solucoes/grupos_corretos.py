@@ -2,6 +2,44 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
+def grupos_corretos(expr: str) -> bool:
+    '''
+    Produz True se os parênteses,
+    colchetes e chaves de *expr*
+    estão corretos, False caso contrário.
+
+    Exemplos:
+    >>> grupos_corretos('([{}])')
+    True
+    >>> grupos_corretos('[](){}')
+    True
+    >>> grupos_corretos('({)}')
+    False
+    >>> grupos_corretos('(2*[3*{5+2]})')
+    False
+    >>> grupos_corretos('([a]*{b-c}-[10])*({(4-2)/8})')
+    True
+    '''
+    p = Pilha()
+    corretos = True
+    i = 0
+    while i < len(expr) and corretos:
+        if expr[i] in '([{':
+            p.empilha(expr[i])
+        elif expr[i] in ')]}':
+            item = p.desempilha()
+            if item is None or not par(item, expr[i]):
+                corretos = False
+        i = i + 1
+    return p.vazia() and corretos
+
+
+def par(a: str, b: str) -> bool:
+    return a == '(' and b == ')' or \
+        a == '[' and b == ']' or \
+        a == '{' and b == '}'
+
+
 @dataclass
 class No:
     '''Um nó em um encadeamento'''
@@ -51,11 +89,10 @@ class Pilha:
     def desempilha(self) -> str:
         '''
         Devolve o elemento mais recentemente adicionado da pilha.
-
-        Requer que a pilha não esteja vazia.
+        Se a pilha está vazia, devolve None.
         '''
         if self.topo is None:
-            raise ValueError('pilha vazia')
+            return None
         item = self.topo.item
         self.topo = self.topo.prox
         return item
