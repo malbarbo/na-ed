@@ -47,7 +47,7 @@ class Lista:
     valores: array[int]
     tamanho: int
 
-    def __init__(self):
+    def __init__(self) -> None:
         '''
         Cria uma nova lista vazia.
         '''

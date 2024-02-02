@@ -44,7 +44,7 @@ class Fila:
     # cheia e fila vazia. Para horar o valor de CAPACIDADE, inicializamos
     # *valores* com CAPACIDADE + 1 itens.
 
-    def __init__(self):
+    def __init__(self) -> None:
         '''
         Cria uma nova fila com capacidade para armazenar *CAPACIDADE*
         elementos.

@@ -38,7 +38,7 @@ class Fila:
     # O início é incrementado em desenfileira e o fim é incrementado em enfileira.
     # A fila está vazia se fim < inicio.
 
-    def __init__(self):
+    def __init__(self) -> None:
         '''
         Cria uma nova fila com capacidade para armazenar *CAPACIDADE*
         elementos.

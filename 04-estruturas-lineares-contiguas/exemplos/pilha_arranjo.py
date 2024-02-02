@@ -33,7 +33,7 @@ class Pilha:
     # -1 se a pilha está vazia.
     topo: int
 
-    def __init__(self):
+    def __init__(self) -> None:
         '''
         Cria uma nova pilha com capacidade para armazenar *CAPACIDADE*
         elementos.

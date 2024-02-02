@@ -37,7 +37,7 @@ class Fila:
     # e em desenfileira decrementado e todos os elementos são movidos para a
     # posição anterior.
 
-    def __init__(self):
+    def __init__(self) -> None:
         '''
         Cria uma nova fila com capacidade para armazenar *CAPACIDADE*
         elementos.
