@@ -7,7 +7,7 @@ class BancoHoras:
     # Total de minutos
     minutos: int
 
-    def __init__(self):
+    def __init__(self) -> None:
         '''
         Cria um novo banco de horas com zero horas.
 

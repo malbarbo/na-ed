@@ -23,7 +23,7 @@ class Dias:
     # True o dia está seleciona, False não está
     dias: list[bool]
 
-    def __init__(self):
+    def __init__(self) -> None:
         '''
         Cria um novo conjunto vazio de dias.
 

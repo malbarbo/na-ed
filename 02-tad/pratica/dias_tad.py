@@ -19,7 +19,7 @@ class Dias:
     Um conjunto de dias da semana que um evento deve se repetir.
     '''
 
-    def __init__(self):
+    def __init__(self) -> None:
         '''
         Cria um novo conjunto vazio de dias.
 
