@@ -1279,11 +1279,11 @@ Vimos quatro TAD's e como implementá-los usando arranjos (alocação contígua)
 
 ## Alocação contígua versus encadeada
 
-Estrutura / Operação   | get/set  | ins/rem início  | ins/rem fim     | ins/rem meio   | busca |
------------------------|----------|-----------------|-----------------|----------------|-------|
-Lista Encadeada Simples|  $O(n)$  | $O(1)$ / $O(1)$ | $O(1)$ / $O(n)$ | $O(n)$         | $O(n) |
-Lista Encadeada Dupla  |  $O(n)$  | $O(1)$ / $O(1)$ | $O(1)$ / $O(1)$ | $O(n)$ -- $O(1)$ [^1] \ | $O(n) |
-Arranjo Dinâmico       |  $O(1)$  | $O(n)$ / $O(n)$ | $O(1)$[^2] / $O(1)$ | $O(n)$         | $O(n) |
+Estrutura / Operação   | get/set | ins/rem início | ins/rem fim    | ins/rem       | busca |
+-----------------------|---------|----------------|----------------|---------------|-------|
+Encadeamento Simples   |  $O(n)$ | $O(1)$ / $O(1)$ | $O(1)$ / $O(n)$ | $O(n)$      | $O(n)$ |
+Encadeamento Dupla     |  $O(n)$ | $O(1)$ / $O(1)$ | $O(1)$ / $O(1)$ | $O(n)$ -- $O(1)$ [^1] | $O(n)$ |
+Arranjo Dinâmico       |  $O(1)$ | $O(n)$ / $O(n)$ | $O(1)$[^2] / $O(1)$ | $O(n)$  | $O(n)$ |
 
 [^1]: Com a referência para o nó
 [^2]: Amortizado
@@ -1291,14 +1291,13 @@ Arranjo Dinâmico       |  $O(1)$  | $O(n)$ / $O(n)$ | $O(1)$[^2] / $O(1)$ | $O(
 
 ## Alocação contígua versus encadeada
 
-Cada estratégia tem implementação tem usas vantagens e desvantagens
 
-| Característica | Contígua       | Encadeada
-|----------------|----------------|----------------
-| Implementação  | Mais simples   | Mais complicado
-| Inserção       | Pode ser necessário realocação | Criação de um novo nó
-| Remoção        | Requer deslocamento dos itens  | Remoção do nó
-| Acesso aleatório | Tempo constante | Nescessário seguir o encadeamento
+| Característica   | Contígua                  | Encadeada
+|------------------|---------------------------|---------------------------
+| Implementação    | Simples                   | Elaborada
+| Aumento          | Realocação                | Criação de nó
+| Diminuição       | Deslocamento / realocação | Remoção de nó
+| Acesso aleatório | Sim                       | Não
 
 
 ## Referências
