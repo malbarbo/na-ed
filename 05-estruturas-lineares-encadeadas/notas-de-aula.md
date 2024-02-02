@@ -5,6 +5,7 @@ subtitle: Alocação encadeada
 linkcolor: Black
 urlcolor: Blue
 # TODO: trocar os exemplos de lista de pessoas para exemplos de mulher com mãe, ou inscrito com quem indicou
+# TODO: adicionar discussão vantagens e desvantagens do uso de sentinela (ver o cormen)
 ---
 
 
@@ -1019,17 +1020,17 @@ def remove_fim(self) -> str:
 
 Com encadeamento duplo e referência para início e fim, os métodos do TAD de fila dupla têm complexidade de tempo de $O(1)$. \pause
 
-Cada um dos quadro métodos tem dois casos distintos. \pause
+No entanto, \pause a implementação parece complicada, cada um dos quadro métodos tem dois casos distintos. \pause
 
 Podemos simplificar o código? \pause O que faz com que seja necessário dois casos? \pause
 
 Vamos supor por um momento que todos os nós tenham antecessor e sucessor. \pause
 
-Como remove um nó `p` sabendo que existe um antecessor e um sucessor de `p`? \pause
+Como remover um nó `p` sabendo que existe um antecessor e um sucessor de `p`? \pause
 
-Como inserir um nó `novo` após um nó `p` sabendo que p tem um sucessor? \pause
+Como inserir um nó `novo` após um nó `p` sabendo que `p` tem um sucessor? \pause
 
-Como inserir um nó `novo` antes de um nó `p` sabendo que p tem um antecessor? \pause
+Como inserir um nó `novo` antes de um nó `p` sabendo que `p` tem um antecessor?
 
 
 ## Fila dupla
@@ -1072,11 +1073,236 @@ def insere_antes(p: No, novo: No):
     p.ante = novo
 ```
 
+\pause
+
+\normalsize
+
+Não precisamos de dois métodos para inserir!
+
+\scriptsize
+
+```python
+def insere_antes(p: No, novo: No):
+    insere_depois(p.ante, novo)
+```
+
 </div>
 </div>
 
 
 ## Sentinela
 
-![](imagens/Fig-10-4.pdf)
+Como podemos fazer para que cada nó tenha um antecessor e um sucessor? \pause
 
+Usamos uma **sentinela**, um nó especial, que é usando onde o valor `None`{.python} seria usado normalmente. Ou seja, a sentinela fica entre o primeiro e o último nó do encadeamento. \pause
+
+O resultado é comumente chamado de **lista circular duplamente encadeada com sentinela**! \pause Na figura abaixo a `L` e o `self` e a sentinela é o `nil`. \pause
+
+![](imagens/Fig-10-4.pdf){width=11cm}
+
+
+## Fila Dupla com sentinela
+
+<div class="columns">
+<div class="column" width="48%">
+Como implementar o TAD de fila dupla com esse esquema? \pause
+
+Nesse esquema o `ante` e o `prox` não podem ser `None`{.python}, então precisamos mudar a definição de `No`: \pause
+
+\scriptsize
+
+```python
+@dataclass
+class No:
+    ante: No
+    item: str
+    prox: No
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+Mas isso cria um problema, que é a impossibilidade de instanciar um `No`! \pause Conforme discutimos em sala, vamos usar uma inicialização em duas etapas, na primeira um `No` é criado com valores temporários `None`{.python} para `ante` e `prox` (usamos `# type: ignore`{.python} para que o `mypy` não indique o erro) e depois mudamos para os valores corretos.
+
+\pause
+
+</div>
+</div>
+
+\scriptsize
+
+```python
+    def __init__(self, item: str) -> None:
+        # Após a criação de um nó temos a responsabilidade
+        # de alterar ante e prox para valores válidos!
+        self.ante = None # type: ignore
+        self.item = item
+        self.prox = None # type: ignore
+```
+
+
+## Fila Dupla com sentinela
+
+<div class="columns">
+<div class="column" width="48%">
+
+\small
+
+Tendo as funções auxiliares de inserção e remoção de um nó, como podemos implementar inserção e remoção do início e fim de uma fila com sentinela?
+
+\pause
+
+\scriptsize
+
+```python
+def remove(p: No) -> str:
+    '''Remove *p* do seu encademaneto
+       e devolve o item em *p*.'''
+    item = p.item
+    p.prox.ante = p.ante
+    p.ante.prox = p.prox
+    return item
+```
+
+```python
+def insere_depois(p: No, novo: No):
+    '''Insere *novo* após *p* no
+       encademaneto.'''
+    novo.ante = p
+    novo.prox = p.prox
+    p.prox.ante = novo
+    p.prox = novo
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+class FilaDupla:
+    sentinela: No
+    def __init__(self) -> None:
+        self.sentinela = No('')
+        self.sentinela.ante = self.sentinela
+        self.sentinela.prox = self.sentinela
+    def vazia(self) -> bool:
+        return self.sentinela.prox is self.sentinela
+```
+
+\pause
+
+```python
+    def insere_inicio(self, item: str):
+```
+
+\pause
+
+\vspace{-0.2cm}
+
+```python
+        insere_depois(self.sentinela, No(item))
+```
+
+\pause
+
+```python
+    def insere_fim(self, item: str):
+```
+
+\pause
+
+\vspace{-0.2cm}
+
+```python
+        insere_depois(self.sentinela.ante, No(item))
+```
+
+\pause
+
+```python
+    def remove_inicio(self, item: str) -> str:
+```
+
+\pause
+
+\vspace{-0.2cm}
+
+```python
+        assert not self.vazia()
+        return remove(self.sentinela.prox)
+```
+
+\pause
+
+```python
+    def remove_fim(self, item: str) -> str:
+```
+
+\pause
+
+\vspace{-0.2cm}
+
+```python
+        assert not self.vazia()
+        return remove(self.sentinela.ante)
+```
+
+
+</div>
+</div>
+
+
+## Lista
+
+Devemos usar encadeamento simples ou duplo para implementar o TAD Lista? \pause
+
+Se o TAD de Lista não define função específica para remoção do fim, então o encadeamento simples é suficiente. \pause
+
+Qual o tempo de execução para operações de inserção e remoção em posição? \pause $O(n)$ pois é preciso seguir o encadeamento até a posição especificada, que pode ser a última. \pause
+
+A implementação do TAD Lista fica como exercício!
+
+
+## Alocação contígua versus encadeada
+
+Vimos quatro TAD's e como implementá-los usando arranjos (alocação contígua) e encadeamento de nós (alocação encadeada)
+
+- Pilha
+- Fila
+- Fila Dupla
+- Lista
+
+
+## Alocação contígua versus encadeada
+
+Estrutura / Operação   | get/set  | ins/rem início  | ins/rem fim     | ins/rem meio   | busca |
+-----------------------|----------|-----------------|-----------------|----------------|-------|
+Lista Encadeada Simples|  $O(n)$  | $O(1)$ / $O(1)$ | $O(1)$ / $O(n)$ | $O(n)$         | $O(n) |
+Lista Encadeada Dupla  |  $O(n)$  | $O(1)$ / $O(1)$ | $O(1)$ / $O(1)$ | $O(n)$ -- $O(1)$ [^1] \ | $O(n) |
+Arranjo Dinâmico       |  $O(1)$  | $O(n)$ / $O(n)$ | $O(1)$[^2] / $O(1)$ | $O(n)$         | $O(n) |
+
+[^1]: Com a referência para o nó
+[^2]: Amortizado
+
+
+## Alocação contígua versus encadeada
+
+Cada estratégia tem implementação tem usas vantagens e desvantagens
+
+| Característica | Contígua       | Encadeada
+|----------------|----------------|----------------
+| Implementação  | Mais simples   | Mais complicado
+| Inserção       | Pode ser necessário realocação | Criação de um novo nó
+| Remoção        | Requer deslocamento dos itens  | Remoção do nó
+| Acesso aleatório | Tempo constante | Nescessário seguir o encadeamento
+
+
+## Referências
+
+Capítulo 7, 8, 9 - Pilhas, filas e listas - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na Minha Biblioteca na UEM).
+
+Seção 10.2 - Listas ligadas - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
