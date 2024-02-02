@@ -113,3 +113,53 @@ urlcolor: Blue
 <!-- Fila -->
 
 @) Modifique a especificação do TAD Fila e a implementação que usa encadeamento com início e fim para que a função `desenfileira` devolva `None`{.python} caso a fila esteja vazia.
+
+@) O professor Confuso da Silva apresentou a seguinte implementação de Fila para os alunos
+
+    ```python
+    class Fila:
+        inicio: No | None
+        fim: No | None
+
+        def __init__(self) -> None:
+            self.inicio = None
+            self.fim = None
+
+        def enfileira(self, item: str):
+            if self.fim is None:
+                self.inicio = No(item, None)
+                self.fim = self.inicio
+            else:
+                self.fim.prox = No(item, None)
+                self.fim = self.fim.prox
+
+        def desenfileira(self) -> str:
+            if self.inicio is None:
+                raise ValueError('fila vazia')
+            item = self.inicio.item
+            self.inicio = self.inicio.prox
+            return item
+
+        def vazia(self) -> bool:
+            return self.inicio is None
+    ```
+
+
+    Crie um exemplo de uso de fila que demostre que implementação está incorreta. Explique e corrija a implementação.
+
+<!-- Encadeamento duplo -->
+
+@) Projete uma função que receba como parâmetro uma lista de números (`list[int]`{.python}) e devolva um encadeamento duplo com os mesmos itens da lista.
+
+@) Projete uma função que receba como parâmetro um nó `p` de um encadeamento duplo, onde `p.prox` não é `None`{.python}, e troque de lugar os nós `p` e `p.prox`.
+
+@) Projete uma função que receba como parâmetro um nó `p` de um encadeamento duplo, onde `p.ante` não é `None`{.python}, e troque de lugar os nós `p` e `p.ante`.
+
+
+<!-- Lista -->
+
+@) Implemente o TAD Lista usando encadeamento simples.
+
+@) Implemente o TAD Lista usando encadeamento duplo com sentinela. Mantenha um campo com a quantidade de elementos na lista e use essa informação para implementar as funções de inserção e remoção em posição navegando pela menor quantidade de nós possível.
+
+@) (Desafio) Suponha que o Python não permitisse estruturas com autorreferência e crie um esquema para fazer encadeamento duplo usando arranjos. Implemente uma fila dupla usando esse esquema. Dica: crie um arranjo de nós, onde os campos `ante` e `prox` de cada nó são índices para elementos do arranjo.
