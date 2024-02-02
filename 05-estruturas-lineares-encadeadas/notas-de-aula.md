@@ -927,7 +927,7 @@ No(ante=No(ante=No(ante=None, item='A', prox=...), item='B', prox=...), item='C'
 Agora vamos implementar uma fila dupla usando encadeamento duplo mantendo referências para o início e fim do encadeamento.
 
 
-## Fila dupla -  Inserção e remoção no início
+## Fila dupla -  Inserção e remoção no início (versão didática)
 
 <div class="columns">
 <div class="column" width="45%">
@@ -971,7 +971,47 @@ def remove_inicio(self) -> str:
 </div>
 
 
-## Fila dupla -  Inserção e remoção no fim
+## Fila dupla -  Inserção e remoção no início (versão direta)
+
+<div class="columns">
+<div class="column" width="45%">
+
+![](imagens/inicio-insercao-remocao.pdf)
+
+</div>
+<div class="column" width="52%">
+\scriptsize
+
+```python
+def insere_inicio(self, item: str):
+    self.inicio = No(None, item, self.inicio)
+    if self.inicio.prox is None:
+        self.fim = self.inicio
+    else:
+        self.inicio.prox.ante = self.inicio
+```
+
+```python
+def remove_inicio(self) -> str:
+    if self.inicio is None:
+        raise ValueError('fila vazia')
+
+    item = self.inicio.item
+
+    self.inicio = self.inicio.prox
+    if self.inicio is None:
+        self.fim = None
+    else:
+        self.inicio.ante = None
+
+    return item
+```
+
+</div>
+</div>
+
+
+## Fila dupla -  Inserção e remoção no fim (versão didática)
 
 <div class="columns">
 <div class="column" width="45%">
@@ -1009,6 +1049,47 @@ def remove_fim(self) -> str:
     else:
         self.fim = self.fim.ante
         self.fim.prox = None
+    return item
+```
+
+</div>
+</div>
+
+
+## Fila dupla -  Inserção e remoção no fim (versão direta)
+
+<div class="columns">
+<div class="column" width="45%">
+
+![](imagens/fim-insercao-remocao.pdf)
+
+</div>
+<div class="column" width="52%">
+
+\scriptsize
+
+```python
+def insere_fim(self, item: str):
+    self.fim = No(self.fim, item, None)
+    if self.fim.ante is None:
+        self.inicio = self.fim
+    else:
+        self.fim.ante.prox = self.fim
+```
+
+```python
+def remove_fim(self) -> str:
+    if self.fim is None:
+        raise ValueError('fila vazia')
+
+    item = self.fim.item
+
+    self.fim = self.fim.ante
+    if self.fim is None:
+        self.inicio = None
+    else:
+        self.fim.prox = None
+
     return item
 ```
 
