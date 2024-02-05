@@ -15,10 +15,15 @@ e [tectonic](http://tectonic-typesetting.github.io/).
   - Arranjo estático e fim ([`fila_arranjo_fim.py`](04-estruturas-lineares-contiguas/exemplos/fila_arranjo_fim.py))
   - Arranjo estático, início e fim ([`fila_arranjo_inicio_fim.py`](04-estruturas-lineares-contiguas/exemplos/fila_arranjo_inicio_fim.py))
   - Arranjo estático circular ([`fila_arranjo_circular.py`](04-estruturas-lineares-contiguas/exemplos/fila_arranjo_circular.py))
-  - Encadeamento e referência para o início([`fila_encadeada_inicio.py`](/05-estruturas-lineares-encadeadas/exemplos/fila_encadeada_inicio.py))
+  - Encadeamento e referência para o início ([`fila_encadeada_inicio.py`](/05-estruturas-lineares-encadeadas/exemplos/fila_encadeada_inicio.py))
   - Encadeamento e referência para o início e fim ([`fila_encadeada_inicio_fim.py`](/05-estruturas-lineares-encadeadas/exemplos/fila_encadeada_inicio_fim.py))
+- [Fila Dupla](04-estruturas-lineares-contiguas/pratica-solucoes/fila_dupla_tad.py)
+  - Encadeamento simples ([fila_dupla_encadeamento_simples.py](05-estruturas-lineares-encadeadas/exemplos/fila_dupla_encadeamento_simples.py))
+  - Encadeamento duplo ([fila_dupla_encadeamento_duplo_direta.py](05-estruturas-lineares-encadeadas/exemplos/fila_dupla_encadeamento_duplo_direta.py))
+  - Encadeamento duplo com sentinela ([fila_dupla_encadeamento_duplo_sentinela.py](05-estruturas-lineares-encadeadas/exemplos/fila_dupla_encadeamento_duplo_sentinela.py))
 - [Lista](04-estruturas-lineares-contiguas/exemplos/lista_tad.py)
   - Arranjo estático com redimensionamento ([`lista_arranjo.py`](04-estruturas-lineares-contiguas/exemplos/lista_arranjo.py))
+  - Encadeamento simples ([lista_encadeamento_simples.py](05-estruturas-lineares-encadeadas/pratica-solucoes/lista_encadeamento_simples.py))
 
 # Licença
 
