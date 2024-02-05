@@ -17,6 +17,24 @@ class No:
         self.item = item
         self.ante = None  # type: ignore
 
+def insere(p: No, novo: No):
+    '''
+    Insere o nó *novo* após o nó *p*.
+    '''
+    novo.prox = p.prox
+    novo.ante = p
+    p.prox.ante = novo
+    p.prox = novo
+
+def remove(p: No) -> str:
+    '''
+    Remove o nó *p* do encadeamento e devolve o valor do item armazenado nele.
+    '''
+    item = p.item
+    p.ante.prox = p.prox
+    p.prox.ante = p.ante
+    return p.item
+
 
 class FilaDupla:
     '''
@@ -69,7 +87,7 @@ class FilaDupla:
         '''
         Insere *item* no início da fila.
         '''
-        self.__insere(self.sentinela, No(item))
+        insere(self.sentinela, No(item))
 
     def remove_inicio(self) -> str:
         '''
@@ -80,13 +98,13 @@ class FilaDupla:
         if self.vazia():
             raise ValueError('fila vazia')
 
-        return self.__remove(self.sentinela.prox)
+        return remove(self.sentinela.prox)
 
     def insere_fim(self, item: str):
         '''
         Insere *item* no fim da fila.
         '''
-        self.__insere(self.sentinela.ante, No(item))
+        insere(self.sentinela.ante, No(item))
 
     def remove_fim(self) -> str:
         '''
@@ -97,7 +115,7 @@ class FilaDupla:
         if self.vazia():
             raise ValueError('fila vazia')
 
-        return self.__remove(self.sentinela.ante)
+        return remove(self.sentinela.ante)
 
     def vazia(self) -> bool:
         '''
@@ -105,14 +123,3 @@ class FilaDupla:
         '''
         return self.sentinela.prox is self.sentinela
 
-    def __insere(self, p: No, novo: No):
-        novo.prox = p.prox
-        novo.ante = p
-        p.prox.ante = novo
-        p.prox = novo
-
-    def __remove(self, p: No) -> str:
-        item = p.item
-        p.ante.prox = p.prox
-        p.prox.ante = p.ante
-        return p.item
