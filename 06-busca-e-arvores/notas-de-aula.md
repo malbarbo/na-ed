@@ -1,6 +1,6 @@
 ---
 # vim: set spell spelllang=pt_br:
-title: Árvores
+title: Busca e árvores
 linkcolor: Black
 urlcolor: Blue
 ---
@@ -185,7 +185,9 @@ Se as cartas estiverem em ordem alfabética, pode usar o seguinte método:
 Este algoritmo é chamado de **busca binária**.
 
 
-## Exemplo - pesquisa pelo 20
+## Exemplo
+
+Busca pelo 20. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
 
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -198,6 +200,8 @@ Este algoritmo é chamado de **busca binária**.
 
 
 ## Exemplo - pesquisa pelo 20
+
+Busca pelo 20. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
 
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -211,17 +215,21 @@ Este algoritmo é chamado de **busca binária**.
 
 ## Exemplo - pesquisa pelo 20
 
+Busca pelo 20. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
+
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
-|    |    |    | 14 | 20 | 21 | 22 |    |    |    |    |    |    |    |
+|    |    |    | 14 | 20 | 21 |    |    |    |    |    |    |    |    |
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
    0    1    2    3    4    5    6    7    8    9   10   11   12   13
-                 ^^   ^^        ^^
-                ini    m       fim
+                 ^^   ^^   ^^
+                ini    m  fim
 ```
 
 
 ## Exemplo - pesquisa pelo 42
+
+Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
 
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -235,6 +243,8 @@ Este algoritmo é chamado de **busca binária**.
 
 ## Exemplo - pesquisa pelo 42
 
+Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
+
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
 |    |    |    |    |    |    |    | 30 | 40 | 41 | 43 | 47 | 50 | 70 |
@@ -246,6 +256,8 @@ Este algoritmo é chamado de **busca binária**.
 
 
 ## Exemplo - pesquisa pelo 42
+
+Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
 
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -259,6 +271,8 @@ Este algoritmo é chamado de **busca binária**.
 
 ## Exemplo - pesquisa pelo 42
 
+Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
+
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
 |    |    |    |    |    |    |    |    |    | 41 |    |    |    |    |
@@ -270,6 +284,8 @@ Este algoritmo é chamado de **busca binária**.
 
 
 ## Exemplo - pesquisa pelo 42
+
+Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
 
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -308,3 +324,57 @@ Como as complexidades de tempo da busca linear e binária se comparam? \pause
 | $2^{20}$ | $\approx 10^6$ |      20        |
 | $2^{30}$ | $\approx 10^9$ |      30        |
 | $2^{40}$ | $\approx 10^{12}$|    40        |
+
+
+## Implementação da busca binária
+
+Existem várias formas de implementar a busca binária (veja a lista de exercícios).
+
+A seguir mostramos um implementação iterativa que devolve um índice onde a chave está na lista ou onde ela deveria estar. Isto é útil pois podemos usar esse índice para inserir a chave se ela não está presente.
+
+
+## Implementação da busca binária
+
+<div class="columns">
+<div class="column" width="55%">
+\scriptsize
+
+```python
+def busca_binaria(valores: list[int], chave: int) -> int:
+    '''
+    Se *chave* está presente em *valores*, devolve o
+    índice i tal que *valores[i] == chave*. Senão devolve
+    o índice i tal que a inserção de *chave* na posição
+    *i* de *valores* mantém *valores* em ordem não
+    decrescente.
+
+    Requer que *valores* esteja em ordem não decrescente.
+
+    Exemplos
+    >>> busca_binaria([6, 8, 10, 12, 20], 7)
+    1
+    >>> busca_binaria([6, 8, 10, 12, 20], 20)
+    4
+    '''
+```
+
+</div>
+<div class="column" width="41%">
+
+\scriptsize
+
+```python
+    ini = 0
+    fim = len(valores) - 1
+    while ini <= fim:
+        m = (ini + fim) // 2
+        if chave == valores[m]:
+            return m
+        elif chave < valores[m]:
+            fim = m - 1
+        else: # chave > valores[m]
+            ini = m + 1
+    return ini
+```
+</div>
+</div>
