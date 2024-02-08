@@ -1386,3 +1386,5 @@ Arranjo Dinâmico       |  $O(1)$ | $O(n)$ / $O(n)$ | $O(1)$[^2] / $O(1)$ | $O(n
 Capítulo 7, 8, 9 - Pilhas, filas e listas - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na Minha Biblioteca na UEM).
 
 Seção 10.2 - Listas ligadas - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
+
+Capítulo 3 - Linked Lists - [Open Data Structures](https://opendatastructures.org/ods-python.pdf).
