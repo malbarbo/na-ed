@@ -1,15 +1,18 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Item:
     chave: str
     valor: int
 
+
 class Dicionario:
     '''
-    Uma coleção de chaves únicas associadas com valores.
+    Uma coleção de associações chave-valor, onde cada chave é única.
 
     Exemplos
+
     >>> d = Dicionario()
     >>> d.num_itens()
     0
@@ -32,6 +35,36 @@ class Dicionario:
     >>> d.remove('Ana')
     >>> d.num_itens()
     1
+
+    Testes
+
+    O teste a seguir cria uma lista com uma permutação dos números de 0 a 99 e
+    cria um dicionário adicionando cada número (string) como chave associada
+    com o próprio número.
+
+    Em seguida, para cada número da lista o get é executado para verificar se a
+    associação está correta. Depois a associação é removida e todas as outras
+    associações são verificadas.
+
+    >>> import random
+    >>> lst = list(range(100))
+    >>> random.shuffle(lst)
+    >>> d = Dicionario()
+    >>> # Faz associação
+    >>> for valor in lst:
+    ...     d.associa(str(valor), valor)
+    >>> for i in range(len(lst)):
+    ...     # Associação original
+    ...     assert d.get(str(i)) == i
+    ...     # Modifica a associação e verifica
+    ...     d.associa(str(i), 2 * i)
+    ...     assert d.get(str(i)) == 2 * i
+    ...     # Remove a associação e verifica
+    ...     d.remove(str(i))
+    ...     assert d.get(str(i)) is None
+    ...     # As associações que não foram removidas permanecem as mesmas?
+    ...     for j in range(i + 1, len(lst)):
+    ...         assert d.get(str(j)) == j
     '''
 
     itens: list[Item]

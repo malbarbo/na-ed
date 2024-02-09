@@ -11,9 +11,10 @@ class No:
 
 class Dicionario:
     '''
-    Uma coleção de chaves únicas associadas com valores.
+    Uma coleção de associações chave-valor, onde cada chave é única.
 
     Exemplos
+
     >>> d = Dicionario()
     >>> d.num_itens()
     0
@@ -36,6 +37,36 @@ class Dicionario:
     >>> d.remove('Ana')
     >>> d.num_itens()
     1
+
+    Testes
+
+    O teste a seguir cria uma lista com uma permutação dos números de 0 a 99 e
+    cria um dicionário adicionando cada número (string) como chave associada
+    com o próprio número.
+
+    Em seguida, para cada número da lista o get é executado para verificar se a
+    associação está correta. Depois a associação é removida e todas as outras
+    associações são verificadas.
+
+    >>> import random
+    >>> lst = list(range(100))
+    >>> random.shuffle(lst)
+    >>> d = Dicionario()
+    >>> # Faz associação
+    >>> for valor in lst:
+    ...     d.associa(str(valor), valor)
+    >>> for i in range(len(lst)):
+    ...     # Associação original
+    ...     assert d.get(str(i)) == i
+    ...     # Modifica a associação e verifica
+    ...     d.associa(str(i), 2 * i)
+    ...     assert d.get(str(i)) == 2 * i
+    ...     # Remove a associação e verifica
+    ...     d.remove(str(i))
+    ...     assert d.get(str(i)) is None
+    ...     # As associações que não foram removidas permanecem as mesmas?
+    ...     for j in range(i + 1, len(lst)):
+    ...         assert d.get(str(j)) == j
     '''
 
     sentinela: No
@@ -62,7 +93,7 @@ class Dicionario:
         Associa a *chave* com o *valor* no dicionário. Se *chave* já está
         associada com um valor, ele é sustituído por *valor*.
         '''
-        p = self.__get_no(chave)
+        p = self.__busca(chave)
         if p is not None:
             p.valor = valor
         else:
@@ -73,7 +104,7 @@ class Dicionario:
         Devolve o valor associado com *chave* no dicionário ou None se a chave
         não está no dicionário.
         '''
-        p = self.__get_no(chave)
+        p = self.__busca(chave)
         if p is not None:
             return p.valor
         else:
@@ -84,13 +115,19 @@ class Dicionario:
         Remove a *chave* e o valor associado com ela do dicionário. Não faz
         nada se a *chave* não está no dicionário.
         '''
+        # Procura o nó anterior ao nó que contém a chave
         p = self.sentinela
         while p.prox is not None and p.prox.chave != chave:
             p = p.prox
+        # Se encontrou, remove o próximo
         if p.prox is not None:
             p.prox = p.prox.prox
 
-    def __get_no(self, chave: str) -> No | None:
+    def __busca(self, chave: str) -> No | None:
+        '''
+        Se *chave* está no dicionário devolve o nó p tal que p.chave == chave,
+        senão devolve None.
+        '''
         p = self.sentinela.prox
         while p is not None and p.chave != chave:
             p = p.prox

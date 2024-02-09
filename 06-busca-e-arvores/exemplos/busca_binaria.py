@@ -8,6 +8,7 @@ def busca_binaria(valores: list[int], chave: int) -> int:
     Requer que *valores* esteja em ordem não decrescente.
 
     Exemplos
+
     >>> busca_binaria([], 10)
     0
     >>> busca_binaria([7], 4)
@@ -30,10 +31,17 @@ def busca_binaria(valores: list[int], chave: int) -> int:
     4
     >>> busca_binaria([6, 8, 10, 12, 20], 21)
     5
+
+    Testes
+
+    O teste a seguir cria uma lista 0, 2, ..., 98 e realiza uma busca binária
+    para 0, 1, 2, ..., 99.
+
     >>> lst = list(range(0, 100, 2))
     >>> for i in range(100):
     ...     assert busca_binaria(lst, i) == (i + 1) // 2
     '''
+
     ini = 0
     fim = len(valores) - 1
     while ini <= fim:
