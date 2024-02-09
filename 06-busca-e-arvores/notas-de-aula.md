@@ -318,17 +318,18 @@ Portanto, a complexidade de tempo da busca binária é $O(\lg n)$. \pause
 
 Como as complexidades de tempo da busca linear e binária se comparam? \pause
 
-| $n$      | Busca Linear   | Busca binária  |
-|----------|:--------------:|:--------------:|
-| $2^{10}$ | $\approx 10^3$ |      10        |
-| $2^{20}$ | $\approx 10^6$ |      20        |
-| $2^{30}$ | $\approx 10^9$ |      30        |
-| $2^{40}$ | $\approx 10^{12}$|    40        |
+| $n$      | Busca Linear     | Busca binária     |
+|----------|-----------------:|:-----------------:|
+| $10^{1}$ |            $10$  | \pause $\approx 4$|
+| $10^{2}$ |           $100$  | \pause $\approx 7$|
+| $10^{3}$ |         $1.000$  | \pause$\approx 10$|
+| $10^{6}$ |     $1.000.000$  | \pause$\approx 20$|
+| $10^{9}$ | $1.000.000.000$  | \pause$\approx 30$|
 
 
 ## Implementação da busca binária
 
-Existem várias formas de implementar a busca binária (veja a lista de exercícios).
+Existem várias formas de implementar a busca binária (veja a lista de exercícios!).
 
 A seguir mostramos um implementação iterativa que devolve um índice onde a chave está na lista ou onde ela deveria estar. Isto é útil pois podemos usar esse índice para inserir a chave se ela não está presente.
 
@@ -378,3 +379,23 @@ def busca_binaria(valores: list[int], chave: int) -> int:
 ```
 </div>
 </div>
+
+
+## Dicionário - Implementação com arranjo ordenado
+
+O que é preciso para usar a busca binária na implementação do dicionário? \pause
+
+Manter as associações chave-valor ordenadas pela chave (a implementação fica como exercício). \pause
+
+Como isso afeta a complexidade de tempo de `associa` e `remove`? \pause Não afeta! A complexidade continua sendo $O(n)$. \pause
+
+E a complexidade da busca? \pause Passa a ser $O(\lg n)$.
+
+
+## Dicionário - Avaliação
+
+De forma geral, a implementação usando arranjo ordenado e busca binária de dicionário é adequada? \pause Se a quantidade de consultas for muito maior que a quantidade de alterações, então pode ser uma boa. \pause
+
+E a implementação usando arranjo com busca linear? \pause Pode ser adequada se a quantidade de elementos for pequena. \pause
+
+Podemos melhor o tempo das operações de alteração? \pause Sim! \pause Mas antes de vermos como, precisamos fazer uma revisão de recursividade.
