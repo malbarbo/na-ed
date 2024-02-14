@@ -398,4 +398,1235 @@ De forma geral, a implementação usando arranjo ordenado e busca binária de di
 
 E a implementação usando arranjo com busca linear? \pause Pode ser adequada se a quantidade de elementos for pequena. \pause
 
-Podemos melhor o tempo das operações de alteração? \pause Sim! \pause Mas antes de vermos como, precisamos fazer uma revisão de recursividade.
+Podemos melhor o tempo das operações de alteração? \pause Sim! \pause Mas antes precisamos revisar recursividade.
+
+
+## Recursividade
+
+Uma função é **recursiva** quando ela chama a si mesmo de forma direta ou indireta. \pause
+
+A recursividade é uma técnica muito poderosa e bastante utilizada na Computação e Matemática. \pause
+
+De certa a forma a recursividade é um caso especial da decomposição de problemas. \pause
+
+De forma geral podemos resolver um problema decompondo-o em subproblemas mais simples, resolvendo os subproblemas e combinado as soluções para obter a solução do problema inicial. \pause
+
+A recursividade surge quando decompomos um problema em subproblemas do _mesmo tipo_, pois nesses casos podemos utilizar _o mesmo processo_ para resolver o problema inicial e os subproblemas. \pause Note que para que o processo funciona, devemos definir situações limites em que o problema seja resolvido diretamente, sem precisar ser decomposto, que são os casos bases.
+
+
+## Recursividade
+
+Então, para que possamos aplicar a recursividade é necessário decompor um problema em subproblemas do mesmo tipo. \pause Mas como fazer a decomposição? \pause
+
+- Para algumas problemas pode ser necessário um momento "eureka" e inventar uma forma de fazer a decomposição, o que requer experiência. \pause
+
+- Mas para a maioria dos problemas podemos fazer uma decomposição "direta", baseada na definição com autorreferência do dado (estrutura) que representa o problema. \pause
+
+A primeira forma gera **funções recursivas generativas**, já a segunda forma gerar **funções recursivas estruturais**. Vamos explorar agora essa segunda forma.
+
+
+## Restrições
+
+Para escrever os próximos exemplos não vamos usar
+
+- Arranjos; e
+
+- Laços de repetição
+
+\pause
+
+Como representar uma quantidade arbitrária de dados sem arranjos? \pause
+
+- Usando encadeamento
+
+
+## Definição de lista
+
+<div class="columns">
+<div class="column" width="48%">
+
+A definição para nó que utilizamos foi:
+
+\scriptsize
+
+```python
+@dataclass
+class No:
+    item: int
+    prox: No | None
+```
+
+\pause
+
+\normalsize
+
+Para facilitar o projeto e entendimento das próximas funções vamos utilizar a seguinte definição:
+
+\scriptsize
+
+```python
+@dataclass
+class No:
+    primeiro: int
+    resto: Lista
+
+Lista = No | None
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+De maneira formal, uma **Lista** é:
+
+- Vazia (`None`{.python}); ou
+- Um nó (`No`) com um elemento e o resto, que é uma **Lista**.
+
+\pause
+
+Para implementar funções que processam uma Lista, vamos explorar a relação entre autorreferência (na definição) e recursividade (na função):
+
+\scriptsize
+
+```python
+def fn_para_lista(lst: Lista) -> ...:
+    if lst is None:
+        return ...
+    else:
+        return lst.primeiro ... \
+               fn_para_lista(lst.resto)
+```
+
+</div>
+</div>
+
+
+## Soma
+
+Projete uma função que some os elementos de uma lista.
+
+
+## Soma
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def soma(lst: Lista) -> int:
+    '''Soma os elementos de *lst*.
+
+                    lst
+         /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+    soma(No(10, No(4, No(3, None)))) -> 17
+             |  \_________________/
+      primeiro      soma(resto)
+            10          7
+
+    Como computar soma(lst) a partir de
+    lst.primeiro e soma(lst.resto)?
+    '''
+```
+
+\pause
+
+```python
+    if lst is None:
+        return ...
+    else:
+        return lst.primeiro ... soma(lst.resto)
+```
+
+</div>
+<div class="column" width="48%">
+</div>
+</div>
+
+
+## Soma
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def soma(lst: Lista) -> int:
+    '''Soma os elementos de *lst*.
+
+                    lst
+         /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+    soma(No(10, No(4, No(3, None)))) -> 17
+             |  \_________________/
+      primeiro      soma(resto)
+            10          7
+
+    Como computar soma(lst) a partir de
+    lst.primeiro e soma(lst.resto)?
+    '''
+```
+
+```python
+    if lst is None:
+        return 0
+    else:
+        return lst.primeiro + soma(lst.resto)
+```
+
+</div>
+<div class="column" width="48%">
+\pause
+
+\scriptsize
+
+```python
+def soma(lst: Lista) -> int:
+    '''Soma os elementos de *lst*.
+
+                    lst
+         /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+    soma(No(10, No(4, No(3, None)))) -> 17
+            \_______/    |     |
+                s    p.primeiro |
+               14             p.resto
+
+    Como inicializar s e p?
+    Como atualizar s e p?
+    '''
+```
+
+\pause
+
+```python
+    s = 0
+    p = lst
+    while p is not None:
+        s += p.primeiro
+        p = p.resto
+    return s
+```
+</div>
+</div>
+
+
+## Número de itens
+
+Projete uma função que determine a quantidade de itens em uma lista.
+
+
+## Número de itens
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def num_itens(lst: Lista) -> int:
+    '''Devolve a quantidade de itens em *lst*.
+
+                        lst
+             /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+   num_itens(No(10, No(4, No(3, None)))) -> 3
+                |   \_________________/
+         primeiro     num_itens(resto)
+               10        2
+
+    Como computar num_itens(lst) a partir de
+    lst.primeiro e num_itens(lst.resto)?
+    '''
+```
+
+\pause
+
+```python
+    if lst is None:
+        return ...
+    else:
+        return lst.primeiro ... num_itens(lst.resto)
+```
+
+</div>
+<div class="column" width="48%">
+</div>
+</div>
+
+
+## Número de itens
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def num_itens(lst: Lista) -> int:
+    '''Devolve a quantidade de itens em *lst*.
+
+                        lst
+             /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+   num_itens(No(10, No(4, No(3, None)))) -> 3
+                |   \_________________/
+         primeiro     num_itens(resto)
+               10        2
+
+    Como computar num_itens(lst) a partir de
+    lst.primeiro e num_itens(lst.resto)?
+    '''
+```
+
+```python
+    if lst is None:
+        return 0
+    else:
+        return 1 + num_itens(lst.resto)
+```
+
+</div>
+<div class="column" width="48%">
+
+\pause
+
+\scriptsize
+
+```python
+def num_itens(lst: Lista) -> int:
+    '''Devolve a quantidade de itens em *lst*.
+
+                        lst
+             /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+   num_itens(No(10, No(4, No(3, None)))) -> 3
+                \______/    |     |
+                  num   p.primeiro |
+                   2              p.resto
+
+    Como inicializar num e p?
+    Como atualizar num e p?
+    '''
+```
+
+\pause
+
+```python
+    num = 0
+    p = lst
+    while p is not None:
+        num += 1
+        p = p.resto
+    return num
+```
+
+</div>
+</div>
+
+
+## Todos pares
+
+Projete uma função que verifique se todos os elementos de uma lista são pares.
+
+
+## Todos pares
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def todos_pares(lst: Lista) -> bool:
+    '''Devolve True se todos os elementos
+    de *lst* são pares, False caso contrário.
+
+                        lst
+             /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+ todos_pares(No(10, No(4, No(6, None)))) -> True
+                |   \_________________/
+         primeiro    todos_pares(resto)
+               10        True
+
+    Como computar todos_pares(lst) a partir de
+    lst.primeiro e todos_pares(lst.resto)?
+    '''
+```
+
+```python
+
+
+
+
+
+```
+
+</div>
+<div class="column" width="48%">
+</div>
+</div>
+
+
+## Todos pares
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def todos_pares(lst: Lista) -> bool:
+    '''Devolve True se todos os elementos
+    de *lst* são pares, False caso contrário.
+
+                        lst
+             /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+ todos_pares(No(11, No(4, No(6, None)))) -> False
+                |   \_________________/
+         primeiro    todos_pares(resto)
+               11        True
+
+    Como computar todos_pares(lst) a partir de
+    lst.primeiro e todos_pares(lst.resto)?
+    '''
+```
+
+```python
+
+
+
+
+
+```
+
+</div>
+<div class="column" width="48%">
+</div>
+</div>
+
+
+## Todos pares
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def todos_pares(lst: Lista) -> bool:
+    '''Devolve True se todos os elementos
+    de *lst* são pares, False caso contrário.
+
+                        lst
+             /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+ todos_pares(No(10, No(4, No(3, None)))) -> False
+                |   \_________________/
+         primeiro    todos_pares(resto)
+               10        False
+
+    Como computar todos_pares(lst) a partir de
+    lst.primeiro e todos_pares(lst.resto)?
+    '''
+```
+
+\pause
+
+```python
+    if lst is None:
+        return ...
+    else:
+        return lst.primeiro ... \
+                   todos_pares(lst.resto)
+```
+
+</div>
+<div class="column" width="48%">
+</div>
+</div>
+
+
+## Todos pares
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def todos_pares(lst: Lista) -> bool:
+    '''Devolve True se todos os elementos
+    de *lst* são pares, False caso contrário.
+
+                        lst
+             /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+ todos_pares(No(10, No(4, No(3, None)))) -> False
+                |   \_________________/
+         primeiro    todos_pares(resto)
+               10        False
+
+    Como computar todos_pares(lst) a partir de
+    lst.primeiro e todos_pares(lst.resto)?
+    '''
+```
+
+```python
+    if lst is None:
+        return True
+    else:
+        return lst.primeiro % 2 == 0 and \
+                   todos_pares(lst.resto)
+```
+
+</div>
+<div class="column" width="48%">
+</div>
+</div>
+
+
+## Todos pares
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def todos_pares(lst: Lista) -> bool:
+    '''Devolve True se todos os elementos
+    de *lst* são pares, False caso contrário.
+
+                        lst
+             /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+ todos_pares(No(10, No(4, No(3, None)))) -> False
+                |   \_________________/
+         primeiro    todos_pares(resto)
+               10        False
+
+    Como computar todos_pares(lst) a partir de
+    lst.primeiro e todos_pares(lst.resto)?
+    '''
+```
+
+```python
+    return lst is None or \
+               lst.primeiro % 2 == 0 and \
+                   todos_pares(lst.resto)
+
+
+```
+
+</div>
+<div class="column" width="48%">
+\pause
+
+\scriptsize
+
+```python
+def todos_pares(lst: Lista) -> bool:
+    '''Devolve True se todos os elementos
+    de *lst* são pares, False caso contrário.
+
+                        lst
+             /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+ todos_pares(No(10, No(4, No(3, None)))) -> False
+                \_______/    |     |
+                  pares  p.primeiro |
+                  True             p.resto
+    Como inicializar pares e p?
+    Como atualizar pares e p?
+    '''
+```
+
+\pause
+
+```python
+    pares = True
+    p = lst
+    while pares and p is not None:
+        pares = p.primeiro % 2 == 0
+        p = p.resto
+    return pares
+```
+</div>
+</div>
+
+
+## Todos pares
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def todos_pares(lst: Lista) -> bool:
+    '''Devolve True se todos os elementos
+    de *lst* são pares, False caso contrário.
+
+                        lst
+             /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+ todos_pares(No(10, No(4, No(3, None)))) -> False
+                |   \_________________/
+         primeiro    todos_pares(resto)
+               10        False
+
+    Como computar todos_pares(lst) a partir de
+    lst.primeiro e todos_pares(lst.resto)?
+    '''
+```
+
+```python
+    return lst is None or \
+               lst.primeiro % 2 == 0 and \
+                   todos_pares(lst.resto)
+
+
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def todos_pares(lst: Lista) -> bool:
+    '''Devolve True se todos os elementos
+    de *lst* são pares, False caso contrário.
+
+                        lst
+             /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+ todos_pares(No(10, No(4, No(3, None)))) -> False
+                \_______/    |     |
+                  pares  p.primeiro |
+                  True             p.resto
+    Como inicializar pares e p?
+    Como atualizar pares e p?
+    '''
+```
+
+
+```python
+    p = lst
+    while p is not None:
+        if p.primeiro % 2 != 0:
+             return False
+        p = p.resto
+    return True
+```
+</div>
+</div>
+
+
+## Todos pares
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def todos_pares(lst: Lista) -> bool:
+    '''Devolve True se todos os elementos
+    de *lst* são pares, False caso contrário.
+
+                        lst
+             /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+ todos_pares(No(10, No(4, No(3, None)))) -> False
+                |   \_________________/
+         primeiro    todos_pares(resto)
+               10        False
+
+    Como computar todos_pares(lst) a partir de
+    lst.primeiro e todos_pares(lst.resto)?
+    '''
+```
+
+```python
+    return lst is None or \
+               lst.primeiro % 2 == 0 and \
+                   todos_pares(lst.resto)
+
+
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def todos_pares(lst: Lista) -> bool:
+    '''Devolve True se todos os elementos
+    de *lst* são pares, False caso contrário.
+
+                        lst
+             /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+ todos_pares(No(10, No(4, No(3, None)))) -> False
+                \_______/    |     |
+                  pares  p.primeiro |
+                  True             p.resto
+    Como inicializar pares e p?
+    Como atualizar pares e p?
+    '''
+```
+
+
+```python
+    while lst is not None and lst.primeiro % 2 == 0:
+        lst = lst.resto
+    return lst is None
+
+
+
+
+```
+</div>
+</div>
+
+
+## Contém
+
+Projete uma função que verifique se um item está em uma lista.
+
+
+## Contém
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def contem(lst: Lista, v: int) -> bool:
+    '''Devolve True se *v* está em *lst*,
+    False caso contrário.
+
+                      lst              v
+           /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
+    contem(No(10, No(4, No(3, None))), 4) -> True
+                |   \_________________/
+         primeiro    contem(resto, v)
+               10         True
+
+    Como computar contem(lst, v) a partir de
+    lst.primeiro e contem(lst.resto, v)?
+    '''
+```
+
+\pause
+
+```python
+    if lst is None:
+        return ... v
+    else:
+        return v ... lst.primeiro ... \
+                   contem(lst.resto, v)
+```
+
+</div>
+<div class="column" width="48%">
+</div>
+</div>
+
+
+## Contém
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def contem(lst: Lista, v: int) -> bool:
+    '''Devolve True se *v* está em *lst*,
+    False caso contrário.
+
+                      lst              v
+           /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
+    contem(No(10, No(4, No(3, None))), 4) -> True
+                |   \_________________/
+         primeiro    contem(resto, v)
+               10         True
+
+    Como computar contem(lst, v) a partir de
+    lst.primeiro e contem(lst.resto, v)?
+    '''
+```
+
+```python
+    if lst is None:
+        return False
+    else:
+        return v == lst.primeiro or \
+                   contem(lst.resto, v)
+```
+
+</div>
+<div class="column" width="48%">
+</div>
+</div>
+
+
+## Contém
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def contem(lst: Lista, v: int) -> bool:
+    '''Devolve True se *v* está em *lst*,
+    False caso contrário.
+
+                      lst              v
+           /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
+    contem(No(10, No(4, No(3, None))), 4) -> True
+                |   \_________________/
+         primeiro    contem(resto, v)
+               10         True
+
+    Como computar contem(lst, v) a partir de
+    lst.primeiro e contem(lst.resto, v)?
+    '''
+```
+
+```python
+    return lst is not None and \
+               (v == lst.primeiro or
+                    contem(lst.resto, v))
+
+
+```
+
+</div>
+<div class="column" width="48%">
+\pause
+
+\scriptsize
+
+```python
+def contem(lst: Lista, v: int) -> bool:
+    '''Devolve True se *v* está em *lst*,
+    False caso contrário.
+
+                      lst              v
+           /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
+    contem(No(10, No(4, No(3, None))), 4) -> True
+              \_______/    |     |
+                achou  p.primeiro |
+                False            p.resto
+    Como inicializar achou e p?
+    Como atualizar achou e p?
+    '''
+```
+
+\pause
+
+```python
+    achou = False
+    p = lst
+    while not achou and p is not None:
+        achou = v == p.primeiro
+        p = p.resto
+    return False
+```
+</div>
+</div>
+
+
+## Contém
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def contem(lst: Lista, v: int) -> bool:
+    '''Devolve True se *v* está em *lst*,
+    False caso contrário.
+
+                      lst              v
+           /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
+    contem(No(10, No(4, No(3, None))), 4) -> True
+                |   \_________________/
+         primeiro    contem(resto, v)
+               10         True
+
+    Como computar contem(lst, v) a partir de
+    lst.primeiro e contem(lst.resto, v)?
+    '''
+```
+
+```python
+    return lst is not None and \
+               (v == lst.primeiro or
+                    contem(lst.resto, v))
+
+
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def contem(lst: Lista, v: int) -> bool:
+    '''Devolve True se *v* está em *lst*,
+    False caso contrário.
+
+                      lst              v
+           /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
+    contem(No(10, No(4, No(3, None))), 4) -> True
+              \_______/    |     |
+                achou  p.primeiro |
+                False            p.resto
+    Como inicializar achou e p?
+    Como atualizar achou e p?
+    '''
+```
+
+```python
+    while lst is not None and v != lst.primeiro:
+        lst = lst.resto
+    return lst is not None
+
+
+
+
+```
+</div>
+</div>
+
+
+## Soma 1
+
+Projete uma função que modifique uma lista somando 1 em cada elemento da lista.
+
+
+## Soma 1
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def soma1(lst: Lista):
+    '''Modifica *lst* somando 1 a cada elemento
+    de *lst*.
+
+                     lst
+          /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+    soma1(No(10, No(4, No(3, None))))
+             |   \_________________/
+      primeiro       soma1(resto)
+            10   No(5, No(4, None))
+
+    Como implementar soma1(lst) usando
+    lst.primeiro e soma1(lst.resto)?
+    '''
+```
+
+\pause
+
+```python
+    if lst is None:
+        ...
+    else:
+        lst.primeiro ... \
+            soma1(lst.resto)
+```
+
+</div>
+<div class="column" width="48%">
+</div>
+</div>
+
+
+## Soma 1
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def soma1(lst: Lista):
+    '''Modifica *lst* somando 1 a cada elemento
+    de *lst*.
+
+                     lst
+          /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+    soma1(No(10, No(4, No(3, None))))
+             |   \_________________/
+      primeiro       soma1(resto)
+            10   No(5, No(4, None))
+
+    Como implementar soma1(lst) usando
+    lst.primeiro e soma1(lst.resto)?
+    '''
+```
+
+```python
+    if lst is None:
+        return
+    else:
+        lst.primeiro += 1
+        soma1(lst.resto)
+```
+
+</div>
+<div class="column" width="48%">
+</div>
+</div>
+
+
+## Soma 1
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def soma1(lst: Lista):
+    '''Modifica *lst* somando 1 a cada elemento
+    de *lst*.
+
+                     lst
+          /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+    soma1(No(10, No(4, No(3, None))))
+             |   \_________________/
+      primeiro       soma1(resto)
+            10   No(5, No(4, None))
+
+    Como implementar soma1(lst) usando
+    lst.primeiro e soma1(lst.resto)?
+    '''
+```
+
+```python
+    if lst is not None:
+        lst.primeiro += 1
+        soma1(lst.resto)
+
+
+```
+
+</div>
+<div class="column" width="48%">
+\pause
+\scriptsize
+
+```python
+def soma1(lst: Lista):
+    '''Modifica *lst* somando 1 a cada elemento
+    de *lst*.
+
+                     lst
+          /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+    soma1(No(10, No(4, No(3, None))))
+             \_______/    |     |
+             11     5 p.primeiro |
+                                p.resto
+
+    Como modificar p.primeiro e atualizar p?
+    '''
+```
+
+\pause
+
+```python
+    p = lst
+    while p is not None:
+        p.primeiro += 1
+        p = p.resto
+```
+</div>
+</div>
+
+
+## Soma 1
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def soma1(lst: Lista):
+    '''Modifica *lst* somando 1 a cada elemento
+    de *lst*.
+
+                     lst
+          /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+    soma1(No(10, No(4, No(3, None))))
+             |   \_________________/
+      primeiro       soma1(resto)
+            10   No(5, No(4, None))
+
+    Como implementar soma1(lst) usando
+    lst.primeiro e soma1(lst.resto)?
+    '''
+```
+
+```python
+    if lst is not None:
+        lst.primeiro += 1
+        soma1(lst.resto)
+
+
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def soma1(lst: Lista):
+    '''Modifica *lst* somando 1 a cada elemento
+    de *lst*.
+
+                     lst
+          /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
+    soma1(No(10, No(4, No(3, None))))
+             \_______/    |     |
+             11     5 p.primeiro |
+                                p.resto
+
+    Como modificar p.primeiro e atualizar p?
+    '''
+```
+
+```python
+    while lst is not None:
+        lst.primeiro += 1
+        lst = lst.resto
+
+```
+</div>
+</div>
+
+
+## Duplica
+
+Projete uma função que modifique uma lista criando uma cópia de cada item da lista (que deve ficar após o item que foi copiado).
+
+
+## Duplica
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def duplica(lst: Lista):
+    '''
+    Modifica *lst* criando uma cópia de cada nó
+    que é colocado após o nó copiado.
+
+    Como implementar duplica(lst) usando
+    lst.primeiro e duplica(lst.resto)?
+    '''
+```
+
+\pause
+
+```python
+    if lst is None:
+        return ...
+    else:
+        lst.primeiro
+        duplica(lst.resto)
+```
+
+</div>
+<div class="column" width="48%">
+</div>
+</div>
+
+
+## Duplica
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def duplica(lst: Lista):
+    '''
+    Modifica *lst* criando uma cópia de cada nó
+    que é colocado após o nó copiado.
+
+    Como implementar duplica(lst) usando
+    lst.primeiro e duplica(lst.resto)?
+    '''
+```
+
+```python
+    if lst is None:
+        return
+    else:
+        duplica(lst.resto)
+        lst.resto = No(lst.primeiro, lst.resto)
+
+```
+
+</div>
+<div class="column" width="48%">
+</div>
+</div>
+
+
+## Duplica
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def duplica(lst: Lista):
+    '''
+    Modifica *lst* criando uma cópia de cada nó
+    que é colocado após o nó copiado.
+
+    Como implementar duplica(lst) usando
+    lst.primeiro e duplica(lst.resto)?
+    '''
+```
+
+```python
+    if lst is not None:
+        duplica(lst.resto)
+        lst.resto = No(lst.primeiro, lst.resto)
+
+
+
+```
+
+</div>
+<div class="column" width="48%">
+\pause
+\scriptsize
+
+```python
+def duplica(lst: Lista):
+    '''
+    Modifica *lst* criando uma cópia de cada nó
+    que é colocado após o nó copiado.
+
+    Como duplicar um nó p e atualizar p?
+    '''
+```
+
+\pause
+
+```python
+    p = lst
+    while p is not None:
+        p.resto = No(p.primeiro, p.resto)
+        p = p.resto.resto
+```
+</div>
+</div>
