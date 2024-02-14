@@ -16,7 +16,7 @@ urlcolor: Blue
     ```python
     def num_itens(p: No | None) -> int:
         '''
-        Determina quanto itens existem no encadeamento
+        Determina quantos itens existem no encadeamento
         que começa com *p*.
 
         Exemplos
@@ -63,7 +63,7 @@ urlcolor: Blue
         Exemplos
         >>> p = No(10, No(20, No(30, None)))
         >>> q = copia(p)
-        >>> # quanto mudamos p,
+        >>> # quando mudamos p,
         >>> # q não é alterado pois é uma cópia
         >>> p.item = 1
         >>> p.prox.item = 2
