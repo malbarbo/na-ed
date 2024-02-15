@@ -1100,9 +1100,9 @@ def contem(lst: Lista, v: int) -> bool:
                       lst              v
            /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
     contem(No(10, No(4, No(3, None))), 4) -> True
-                |   \_________________/
-         primeiro    contem(resto, v)
-               10         True
+                | \_________________/
+         primeiro   contem(resto, v)
+               10        True
 
     Como computar contem(lst, v) a partir de
     lst.primeiro e contem(lst.resto, v)?
@@ -1140,9 +1140,9 @@ def contem(lst: Lista, v: int) -> bool:
                       lst              v
            /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
     contem(No(10, No(4, No(3, None))), 4) -> True
-                |   \_________________/
-         primeiro    contem(resto, v)
-               10         True
+                | \_________________/
+         primeiro   contem(resto, v)
+               10        True
 
     Como computar contem(lst, v) a partir de
     lst.primeiro e contem(lst.resto, v)?
@@ -1178,9 +1178,9 @@ def contem(lst: Lista, v: int) -> bool:
                       lst              v
            /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
     contem(No(10, No(4, No(3, None))), 4) -> True
-                |   \_________________/
-         primeiro    contem(resto, v)
-               10         True
+                | \_________________/
+         primeiro   contem(resto, v)
+               10        True
 
     Como computar contem(lst, v) a partir de
     lst.primeiro e contem(lst.resto, v)?
@@ -1246,9 +1246,9 @@ def contem(lst: Lista, v: int) -> bool:
                       lst              v
            /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
     contem(No(10, No(4, No(3, None))), 4) -> True
-                |   \_________________/
-         primeiro    contem(resto, v)
-               10         True
+                | \_________________/
+         primeiro   contem(resto, v)
+               10        True
 
     Como computar contem(lst, v) a partir de
     lst.primeiro e contem(lst.resto, v)?
@@ -1636,7 +1636,7 @@ def duplica(lst: Lista):
 
 Projetar uma função recursiva pode ser um desafio se for preciso "inventar" uma forma de decompor o problema. \pause
 
-No entanto, se fizermos a decomposição estrutural, isto é, decompor o problema conforme o dado que descrevo o problema é composto, então o projeto de funções recursivas se torna um processo mais sistemático. \pause
+No entanto, se fizermos a decomposição estrutural, isto é, decompor o problema conforme o dado que descreve o problema, então o projeto de funções recursivas se torna um processo mais sistemático. \pause
 
 Podemos aplicar a o processo de projeto de funções recursivas baseada na decomposição estrutural em dados que não sejam listas? \pause Sim, podemos aplicar em qualquer dado que tenha autorreferência!
 
@@ -1683,6 +1683,7 @@ def soma(n: int) -> int:
     >>> soma(0)
     0
     >>> soma(4)
+    10
     '''
 ```
 
@@ -1724,12 +1725,12 @@ def fn_para_n(n: int) -> ...:
 </div>
 <div class="column" width="48%">
 
-Projete uma função que crie um arranjo $[1, 2, ..., n]$. \pause
+Projete uma função que receba como parâmetro um número natural $n$ e crie um arranjo $[1, 2, \dots, n]$. \pause
 
 \scriptsize
 
 ```python
-def lista_n(n: int) -> int:
+def lista_n(n: int) -> list[int]:
     '''
     Devolve a lista [1, 2, ..., *n*].
     Requer que n >= 0.
@@ -1779,12 +1780,12 @@ def fn_para_n(n: int) -> ...:
 </div>
 <div class="column" width="48%">
 
-Projete uma função que crie um arranjo $[1, 2, ..., n]$.
+Projete uma função que receba como parâmetro um número natural $n$ e crie um arranjo $[1, 2, \dots, n]$.
 
 \scriptsize
 
 ```python
-def lista_n(n: int) -> int:
+def lista_n(n: int) -> list[int]:
     '''
     Devolve a lista [1, 2, ..., *n*].
     Requer que n >= 0.
@@ -1814,7 +1815,7 @@ def lista_n(n: int) -> int:
 
 Podemos usar recursão estrutural com arranjos? \pause Sim e não! \pause
 
-Tentar definir um arranjo com autorreferência pode ser um pouco confuso... \pause Mas podemos pensar que um arranjo é vazio, ou tem um primeiro elemento e o restante dos elementos. \pause
+Tentar definir um arranjo usando autorreferência pode ser um pouco confuso... \pause Mas podemos pensar que um arranjo é vazio, ou tem um primeiro elemento e o restante dos elementos. \pause
 
 Dessa forma, podemos definir o seguinte modelo:
 
@@ -1859,7 +1860,10 @@ def soma(lst: list[int]) -> int:
 
 \normalsize
 
-Qual o problema com essa estratégia? \pause O _slice_ cria uma cópia do arranjo, o que é custoso. \pause
+Qual o problema com essa estratégia? \pause
+
+O _slice_ cria um novo arranjo a cada chamada com o restante dos, o que é custoso. \pause
+
 Podemos fazer melhor? \pause Sim!
 </div>
 </div>
@@ -1870,9 +1874,11 @@ Podemos fazer melhor? \pause Sim!
 <div class="columns">
 <div class="column" width="48%">
 
+\small
+
 Ao invés de "diminuir" o arranjo do início, vamos diminuir do fim usando um "tamanho virtual". \pause
 
-Junto com o arranjo passamos também um valor $n$, que representa quantos elementos a partir do início do arranjo devem ser considerados. \pause Na chamada recursiva, passamos o arranjo inalterado e o valor $n - 1$, que representa a diminuição do arranjo. \pause O modelo ficaria:
+Junto com o arranjo passamos também um valor $n$, que representa quantos elementos a partir do início do arranjo devem ser considerados. \pause Na chamada recursiva, passamos o arranjo inalterado e o valor $n - 1$, que representa a diminuição do arranjo. \pause O modelo fica assim:
 
 \scriptsize
 
@@ -1881,14 +1887,16 @@ def fn_para_array(lst: list[int], n: int) -> ...:
     if n == 0:
         return ...
     else:
-        return lst[n - 1] ... fn_para_array(lst, n - 1)
-
+        return lst[n - 1] ... \
+                   fn_para_array(lst, n - 1)
 ```
 
 </div>
 <div class="column" width="48%">
 
 \pause
+
+\small
 
 Projete uma função que some todos os elementos de um arranjo.
 
@@ -1901,7 +1909,6 @@ def soma(lst: list[int], n: int) -> int:
     '''
     Soma os primeiros *n* elementos de *lst*.
     Requer que 0 <= n <= len(lst)
-    Exemplo
     >>> soma([5, 1, 4, 2, 3], 3)
     10
     '''
@@ -1915,9 +1922,142 @@ def soma(lst: list[int], n: int) -> int:
     else:
         return lst[n - 1] + soma(lst, n - 1)
 ```
+
+\pause
+\small
+
+Não parece melhor que um laço de repetição... \pause Além disso, a função precisa de um argumento extra!
+
 </div>
 </div>
 
+
+## Recursão com arranjos
+
+Esse exemplo de função recursiva com arranjo é ilustrativa e de fato não é muito útil. \pause
+
+Na prática, recursividade em arranjo é feita em subarranjos quaisquer, e não em um subarranjo sem o último elemento. \pause
+
+Nesse caso, a função receba como parâmetro além do arranjo um índice de início e outro de fim, que define o subarranjo que vai ser processado. \pause
+
+Note que dessa forma não temos mais recursão estrutural e sim recursão generativa. \pause É preciso determinar uma forma específica para o subarranjo.
+
+
+## Palíndromo
+
+Projete uma função recursiva que determine se um arranjo de números é palíndromo, isto é, tem os mesmos elementos quando lido da direita para e esquerda e da esquerda para a direita. \pause
+
+Para esse problema o principal desafio é definir como decompor o problema em subproblema(s) da mesma natureza. \pause
+
+Por exemplo, para o arranjo `[4, 1, 3, 3, 1, 4]`{.python}, que subproblema (subarranjo) podemos resolver de forma recursiva que nos ajude a resolver o problema para o arranjo todo? \pause
+
+Se determinamos se `[1, 3, 3, 1]`{.python} (arranjo original sem o primeiro e último) é palíndromo, então podemos utilizar esse fato para determinar se o arranjo original é palíndromo verificando se o primeiro e último elementos são iguais. \pause
+
+Em que situação não precisamos decompor o problema original? \pause Se o subarranjo é vazio ou tem apenas um elemento.
+
+
+## Palíndromo
+
+<div class="columns">
+<div class="column" width="65%">
+\scriptsize
+
+```python
+def palindromo(lst: list[int], ini: int, fim: int) -> bool:
+    '''
+    Devolve True se o subarranjo *lst[ini:fim+1]* é palíndromo,
+    isto é, o subarranjo tem os mesmos elementos quando visto
+    da direita para esquerda e da esquerda para a direita.
+    Requer que 0 <= ini < len(lst) e 0 <= fim < len(lst)
+    Exemplos
+    >>> palindromo([1, 1, 3, 4, 3, 1], 1, 5)
+    True
+    >>> palindromo([1, 1, 3, 4, 3, 1], 0, 5)
+    False
+    '''
+    assert 0 <= ini < len(lst)
+    assert 0 <= fim < len(lst)
+    if fim <= ini:
+        return True
+    else:
+        return lst[ini] == lst[fim] and palindromo(lst, ini + 1, fim - 1)
+```
+</div>
+<div class="column" width="33%">
+</div>
+</div>
+
+
+## Palíndromo
+
+<div class="columns">
+<div class="column" width="65%">
+\scriptsize
+
+```python
+def palindromo(lst: list[int], ini: int, fim: int) -> bool:
+    '''
+    Devolve True se o subarranjo *lst[ini:fim+1]* é palíndromo,
+    isto é, o subarranjo tem os mesmos elementos quando visto
+    da direita para esquerda e da esquerda para a direita.
+    Requer que 0 <= ini < len(lst) e 0 <= fim < len(lst)
+    Exemplos
+    >>> palindromo([1, 1, 3, 4, 3, 1], 1, 5)
+    True
+    >>> palindromo([1, 1, 3, 4, 3, 1], 0, 5)
+    False
+    '''
+    assert 0 <= ini < len(lst)
+    assert 0 <= fim < len(lst)
+    return fim <= ini or \
+               lst[ini] == lst[fim] and \
+                   palindromo(lst, ini + 1, fim - 1)
+```
+</div>
+<div class="column" width="33%">
+\pause
+Quais os problemas dessa implementação? \pause
+
+- Requer argumentos extras; \pause
+- Verifica a validade dos parâmetros em todas as chamadas. \pause
+
+Como podemos melhorar? \pause Vamos criar um função auxiliar interna que recebe o inicio e o fim e deixar a função principal recebendo apenas um argumento.
+</div>
+</div>
+
+
+## Palíndromo
+
+<div class="columns">
+<div class="column" width="65%">
+\scriptsize
+
+```python
+def palindromo(lst: list[int]) -> bool:
+    '''
+    Devolve True se o lst é palíndromo, isto é, tem os mesmos elementos quando
+    visto da direita para esquerda e da esquerda para a direita.
+    Exemplos
+    >>> palindromo([1, 1])
+    True
+    >>> palindromo([2, 1, 0, 1, 2])
+    True
+    >>> palindromo([2, 1, 0, 1, 1])
+    False
+    '''
+    def _palindromo(lst: list[int], ini: int, fim: int) -> bool:
+        return fim <= ini or \
+                   lst[ini] == lst[fim] and \
+                       _palindromo(lst, ini + 1, fim - 1)
+
+    return _palindromo(lst, 0, len(lst) - 1)
+```
+</div>
+<div class="column" width="33%">
+</div>
+</div>
+
+<!--
 
 ## Criando uma árvore de busca {.b}
 
@@ -2017,3 +2157,45 @@ def soma(lst: list[int], n: int) -> int:
 ```
 </div>
 </div>
+
+
+## Definição de árvore
+
+Uma **árvore binária** é:
+
+- Vazia (`None`{.python}); ou
+- Um nó (`No`{.python}) com um valor e uma **árvore binária** a esquerda e uma **árvore binária** a direita.
+
+\scriptsize
+
+```python
+@dataclass
+class No:
+    esq: Arvore
+    val: int
+    dir: Arvore
+
+Arvore = No | None
+```
+
+Modelo
+
+```python
+def fn_para_ab(t: Arvore) -> ...:
+    if t is None:
+        return
+    else:
+        return t.val ... \
+               fn_para_ab(t.esq) ... \
+               fn_para_ab(t.dir)
+```
+
+
+## Referências
+
+Capítulo 10 - Árvores - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na Minha Biblioteca na UEM).
+
+Capítulo 12 - Árvores Binárias de Busca - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
+
+Capítulo 6 - Binary Trees - [Open Data Structures](https://opendatastructures.org/ods-python.pdf).
+-->
