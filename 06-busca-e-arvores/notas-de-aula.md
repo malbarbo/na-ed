@@ -1632,6 +1632,293 @@ def duplica(lst: Lista):
 </div>
 
 
+## Considerações sobre recursividade com lista
+
+Projetar uma função recursiva pode ser um desafio se for preciso "inventar" uma forma de decompor o problema. \pause
+
+No entanto, se fizermos a decomposição estrutural, isto é, decompor o problema conforme o dado que descrevo o problema é composto, então o projeto de funções recursivas se torna um processo mais sistemático. \pause
+
+Podemos aplicar a o processo de projeto de funções recursivas baseada na decomposição estrutural em dados que não sejam listas? \pause Sim, podemos aplicar em qualquer dado que tenha autorreferência!
+
+
+## Recursão com número natural
+
+<div class="columns">
+<div class="column" width="48%">
+Como definir um número natural? \pause Usando autorreferência. \pause
+
+Um **número natural** é:
+
+- 0; ou
+- $n + 1$, onde $n$ é um **número natural**.
+
+\pause
+
+A partir dessa definição podemos criar um modelo de função para processar número naturais (que precisam ser decompostos):
+
+\scriptsize
+
+```python
+def fn_para_n(n: int) -> ...:
+    if n == 0:
+        return ...
+    else:
+        return n ... fn_para_n(n - 1)
+```
+
+</div>
+<div class="column" width="48%">
+\pause
+
+Projete uma função que some todos os número naturais até um dado $n$.
+
+\scriptsize
+
+```python
+def soma(n: int) -> int:
+    '''
+    Devolve a soma de todos os números
+    naturais até *n*. Requer que n >=0.
+    Exemplos
+    >>> soma(0)
+    0
+    >>> soma(4)
+    '''
+```
+
+\pause
+
+```python
+    if n == 0:
+        return 0
+    else:
+        return n + soma(n - 1)
+```
+</div>
+</div>
+
+
+## Recursão com número natural
+
+<div class="columns">
+<div class="column" width="48%">
+Como definir um número natural? Usando autorreferência.
+
+Um **número natural** é:
+
+- 0; ou
+- $n + 1$, onde $n$ é um **número natural**.
+
+A partir dessa definição podemos criar um modelo de função para processar número naturais (que precisam ser decompostos):
+
+\scriptsize
+
+```python
+def fn_para_n(n: int) -> ...:
+    if n == 0:
+        return ...
+    else:
+        return n ... fn_para_n(n - 1)
+```
+
+</div>
+<div class="column" width="48%">
+
+Projete uma função que crie um arranjo $[1, 2, ..., n]$. \pause
+
+\scriptsize
+
+```python
+def lista_n(n: int) -> int:
+    '''
+    Devolve a lista [1, 2, ..., *n*].
+    Requer que n >= 0.
+
+    >>> lista_n(0)
+    []
+    >>> lista_n(3)
+    [1, 2, 3]
+    '''
+```
+
+\pause
+
+```python
+    if n == 0:
+        return []
+    else:
+        return lista_n(n - 1) + [n]
+```
+</div>
+</div>
+
+
+## Recursão com número natural
+
+<div class="columns">
+<div class="column" width="48%">
+Como definir um número natural? Usando autorreferência.
+
+Um **número natural** é:
+
+- 0; ou
+- $n + 1$, onde $n$ é um **número natural**.
+
+A partir dessa definição podemos criar um modelo de função para processar número naturais (que precisam ser decompostos):
+
+\scriptsize
+
+```python
+def fn_para_n(n: int) -> ...:
+    if n == 0:
+        return ...
+    else:
+        return n ... fn_para_n(n - 1)
+```
+
+</div>
+<div class="column" width="48%">
+
+Projete uma função que crie um arranjo $[1, 2, ..., n]$.
+
+\scriptsize
+
+```python
+def lista_n(n: int) -> int:
+    '''
+    Devolve a lista [1, 2, ..., *n*].
+    Requer que n >= 0.
+    >>> lista_n(0)
+    []
+    >>> lista_n(3)
+    [1, 2, 3]
+    '''
+```
+
+```python
+    if n == 0:
+        return []
+    else:
+        lst = lista_n(n - 1)
+        lst.append(n)
+        return lst
+```
+</div>
+</div>
+
+
+## Recursão com arranjos
+
+<div class="columns">
+<div class="column" width="48%">
+
+Podemos usar recursão estrutural com arranjos? \pause Sim e não! \pause
+
+Tentar definir um arranjo com autorreferência pode ser um pouco confuso... \pause Mas podemos pensar que um arranjo é vazio, ou tem um primeiro elemento e o restante dos elementos. \pause
+
+Dessa forma, podemos definir o seguinte modelo:
+
+\scriptsize
+
+```python
+def fn_para_array(lst: list[int]) -> ...:
+    if lst == []:
+        return ...
+    else:
+        return lst[0] ... fn_para_array(lst[1:])
+```
+
+</div>
+<div class="column" width="48%">
+
+\pause
+
+Projete uma função que some todos os elementos de um arranjo.
+
+\pause
+
+\scriptsize
+
+```python
+def soma(lst: list[int]) -> int:
+    '''
+    Soma todos os elementos de *lst*.
+    '''
+```
+
+\pause
+
+```python
+    if lst == []:
+        return 0
+    else:
+        return lst[0] + soma(lst[1:])
+```
+
+\pause
+
+\normalsize
+
+Qual o problema com essa estratégia? \pause O _slice_ cria uma cópia do arranjo, o que é custoso. \pause
+Podemos fazer melhor? \pause Sim!
+</div>
+</div>
+
+
+## Recursão com arranjos
+
+<div class="columns">
+<div class="column" width="48%">
+
+Ao invés de "diminuir" o arranjo do início, vamos diminuir do fim usando um "tamanho virtual". \pause
+
+Junto com o arranjo passamos também um valor $n$, que representa quantos elementos a partir do início do arranjo devem ser considerados. \pause Na chamada recursiva, passamos o arranjo inalterado e o valor $n - 1$, que representa a diminuição do arranjo. \pause O modelo ficaria:
+
+\scriptsize
+
+```python
+def fn_para_array(lst: list[int], n: int) -> ...:
+    if n == 0:
+        return ...
+    else:
+        return lst[n - 1] ... fn_para_array(lst, n - 1)
+
+```
+
+</div>
+<div class="column" width="48%">
+
+\pause
+
+Projete uma função que some todos os elementos de um arranjo.
+
+\pause
+
+\scriptsize
+
+```python
+def soma(lst: list[int], n: int) -> int:
+    '''
+    Soma os primeiros *n* elementos de *lst*.
+    Requer que 0 <= n <= len(lst)
+    Exemplo
+    >>> soma([5, 1, 4, 2, 3], 3)
+    10
+    '''
+```
+
+\pause
+
+```python
+    if n == 0:
+        return 0
+    else:
+        return lst[n - 1] + soma(lst, n - 1)
+```
+</div>
+</div>
+
+
 ## Criando uma árvore de busca {.b}
 
 <div class="columns">
