@@ -2057,6 +2057,19 @@ def palindromo(lst: list[int]) -> bool:
 </div>
 </div>
 
+
+## Exemplos de execução passo a passo
+
+Exemplos de execução passo a passo no [PythonTutor](https://pythontutor.com):
+
+- [Soma](https://pythontutor.com/render.html#code=def%20soma%28n%3A%20int%29%20-%3E%20int%3A%0A%20%20%20%20if%20n%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20return%200%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20n%20%2B%20soma%28n%20-%201%29%0A%0Aprint%28soma%284%29%29&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false) dos números naturais menores que um $n$.
+
+- [Soma](https://pythontutor.com/render.html#code=class%20No%3A%0A%20%20%20%20primeiro%3A%20int%0A%20%20%20%20resto%3A%20'Lista'%0A%20%20%20%20%0A%20%20%20%20def%20__init__%28self,%20primeiro%3A%20int,%20resto%3A%20'Lista'%29%3A%0A%20%20%20%20%20%20%20%20self.primeiro%20%3D%20primeiro%0A%20%20%20%20%20%20%20%20self.resto%20%3D%20resto%0A%0A%0ALista%20%3D%20No%20%7C%20None%0A%0A%0Adef%20soma%28lst%3A%20Lista%29%20-%3E%20int%3A%0A%20%20%20%20if%20lst%20is%20None%3A%0A%20%20%20%20%20%20%20%20return%200%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20lst.primeiro%20%2B%20soma%28lst.resto%29%0A%0Alst%20%3D%20No%2810,%20No%282,%20No%283,%20No%285,%20None%29%29%29%29%0A%0Aprint%28soma%28lst%29%29&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false) dos elementos de uma lista.
+
+- [Soma](https://pythontutor.com/render.html#code=def%20soma_slice%28lst%3A%20list%5Bint%5D%29%20-%3E%20int%3A%0A%20%20%20%20if%20lst%20%3D%3D%20%5B%5D%3A%0A%20%20%20%20%20%20%20%20return%200%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20lst%5B0%5D%20%2B%20soma_slice%28lst%5B1%3A%5D%29%0A%0Adef%20soma%28lst%3A%20list%5Bint%5D,%20n%3A%20int%29%20-%3E%20int%3A%0A%20%20%20%20if%20n%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20return%200%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20lst%5Bn%20-%201%5D%20%2B%20soma%28lst,%20n%20-%201%29%0A%20%20%20%20%20%20%20%20%0A%0Aprint%28soma_slice%28%5B4,%201,%205,%202%5D%29%29%0A%0Aprint%28soma%28%5B4,%201,%205,%202%5D,%204%29%29&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false) dos número em um arranjo.
+
+- [Palíndromo](https://pythontutor.com/render.html#code=def%20palindromo%28lst%3A%20list%5Bint%5D%29%20-%3E%20bool%3A%0A%20%20%20%20def%20_palindromo%28lst%3A%20list%5Bint%5D,%20ini%3A%20int,%20fim%3A%20int%29%20-%3E%20bool%3A%0A%20%20%20%20%20%20%20%20return%20fim%20%3C%3D%20ini%20or%20lst%5Bini%5D%20%3D%3D%20lst%5Bfim%5D%20and%20_palindromo%28lst,%20ini%20%2B%201,%20fim%20-%201%29%0A%20%20%20%20return%20_palindromo%28lst,%200,%20len%28lst%29%20-%201%29%0A%0Aprint%28palindromo%28%5B4,%201,%203,%200,%203,%201,%204%5D%29%29&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false) de arranjo.
+
 <!--
 
 ## Criando uma árvore de busca {.b}
