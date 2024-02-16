@@ -1862,7 +1862,7 @@ def soma(lst: list[int]) -> int:
 
 Qual o problema com essa estratégia? \pause
 
-O _slice_ cria um novo arranjo a cada chamada com o restante dos, o que é custoso. \pause
+O _slice_ cria um novo arranjo a cada chamada com o restante dos elementos, o que é custoso. \pause
 
 Podemos fazer melhor? \pause Sim!
 </div>
