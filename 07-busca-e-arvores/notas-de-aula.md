@@ -401,9 +401,20 @@ E a implementação usando arranjo com busca linear? \pause Pode ser adequada se
 Podemos melhor o tempo das operações de alteração? \pause Sim! \pause Mas antes precisamos revisar recursividade.
 
 
-<!--
+## Encadeamento e busca binária?
 
-## Criando uma árvore de busca {.b}
+Podemos fazer uma busca binária em um encadeamento linear de forma eficiente? \pause Não, pois não temos acesso em tempo constante ao elemento "do meio". \pause
+
+Podemos fazer uma busca binária em _algum tipo de encadeamento_ de forma eficiente? \pause
+
+Porque iríamos querer fazer isso? \pause Em um arranjo é possível fazer busca binária eficiente, mas a inserção e remoção tem complexidade de tempo $O(n)$. \pause
+
+Se conseguirmos fazer uma busca binária eficiente em um encadeamento, _talvez_ possamos fazer inserção e remoção de forma eficiente também! \pause
+
+Vamos analisar uma sequência ordenada de elementos e tentar criar um encadeamento que permita a realização de uma busca binária.
+
+
+## Encadeamento e busca binária? {.b}
 
 <div class="columns">
 <div class="column" width="15%">
@@ -420,7 +431,7 @@ Podemos melhor o tempo das operações de alteração? \pause Sim! \pause Mas an
 </div>
 
 
-## Criando uma árvore de busca {.b}
+## Encadeamento e busca binária? {.b}
 
 <div class="columns">
 <div class="column" width="15%">
@@ -443,7 +454,7 @@ Podemos melhor o tempo das operações de alteração? \pause Sim! \pause Mas an
 </div>
 
 
-## Criando uma árvore de busca {.b}
+## Encadeamento e busca binária? {.b}
 
 <div class="columns">
 <div class="column" width="15%">
@@ -471,7 +482,7 @@ Podemos melhor o tempo das operações de alteração? \pause Sim! \pause Mas an
 </div>
 
 
-## Criando uma árvore de busca {.b}
+## Encadeamento e busca binária? {.b}
 
 <div class="columns">
 <div class="column" width="15%">
@@ -503,12 +514,35 @@ Podemos melhor o tempo das operações de alteração? \pause Sim! \pause Mas an
 </div>
 
 
+## Árvore
+
+Essa forma de representar uma coleção de valores é chamada de árvore, especificamente, uma árvore binária. \pause
+
+Vire de ponta cabeça para ver a árvore!!! \pause As árvores em computação crescem para baixo! \pause
+
+Como podemos definir uma árvore binária?
+
+
 ## Definição de árvore
 
 Uma **árvore binária** é:
 
 - Vazia (`None`{.python}); ou
 - Um nó (`No`{.python}) com um valor e uma **árvore binária** a esquerda e uma **árvore binária** a direita.
+
+\pause
+
+Um nó é a **raiz** da árvore composta por ele e por suas subárvores. \pause
+
+Se $A$ é o nó raiz de uma árvore e $B$ é o nó raiz de uma de suas subárvores, então, dizemos que $B$ é **filho** de $A$ e $A$ é **pai** de $B$. \pause
+
+Um nó $A$ é **ancestral** de um nó $B$ se $A$ é pai de $B$ ou pai de algum ancestral de $B$. Se $A$ é ancestral de $B$, então $B$ é **descendente** de $A$.
+
+## Definição de árvore
+
+<div class="columns">
+<div class="column" width="48%">
+Como representar uma árvore binária em Python? \pause
 
 \scriptsize
 
@@ -522,7 +556,15 @@ class No:
 Arvore = No | None
 ```
 
-Modelo
+\pause
+</div>
+<div class="column" width="48%">
+
+Como `Arvore` é um tipo com autorreferência, podemos derivar um modelo de função recursiva para processar uma árvore binária:
+
+\pause
+
+\scriptsize
 
 ```python
 def fn_para_ab(t: Arvore) -> ...:
@@ -533,6 +575,170 @@ def fn_para_ab(t: Arvore) -> ...:
                fn_para_ab(t.esq) ... \
                fn_para_ab(t.dir)
 ```
+</div>
+</div>
+
+
+## Busca em árvore
+
+Note que da mesma forma que não podemos fazer uma busca binária em um arranjo qualquer, também não podemos fazer uma busca binária em uma árvore binária qualquer! É necessário adicionar restrições a árvore que veremos daqui a pouco. \pause
+
+Antes vamos ver alguns exemplos e definições.
+
+
+## Exemplo de criação de árvore
+
+<div class="columns">
+<div class="column" width="43%">
+\scriptsize
+
+```python
+@dataclass
+class No:
+    esq: Arvore
+    val: int
+    dir: Arvore
+
+Arvore = No | None
+```
+
+\normalsize
+
+Escreva o código Python para criar as seguintes árvores:
+
+\scriptsize
+
+```
+      t4  4
+        /   \
+     /         \
+t2  8           6  t3
+  /   \       /
+ 4  t1 7     5
+        \
+         1
+```
+
+\pause
+
+</div>
+<div class="column" width="55%">
+\scriptsize
+
+```python
+>>> t1 = No(None, 7, No(None, 1, None))
+>>> t1
+No(esq=None, val=7, dir=No(esq=None, val=1, dir=None))
+```
+
+\pause
+
+```python
+>>> t2 = No(No(None, 4, None), 8, t1)
+>>> t3 = No(No(None, 5, None), 6, None)
+>>> t4 = No(t2, 4, t3)
+```
+
+\pause
+
+\normalsize
+
+Como acessar o valor 1 a partir de `t4`?
+
+\pause
+
+\scriptsize
+
+```python
+>>> t4.esq.dir.dir.val
+```
+
+\pause
+
+\normalsize
+
+Como adicionar uma nova subárvore (valor da raiz 4) a esquerda de `t3` a partir de `t4`? \pause
+
+\scriptsize
+
+```python
+>>> t4.dir.dir = No(None, 4, None)
+```
+
+\pause
+
+\normalsize
+
+Como remove a subárvore a direita de `t2` a partir de `t4`? \pause
+
+\scriptsize
+
+```python
+>>> t4.esq.dir = None
+```
+</div>
+</div>
+
+
+## Número de folhas
+
+<div class="columns">
+<div class="column" width="48%">
+O **grau** de um nó é a quantidade de subárvores do nó. \pause
+
+Um nó com grau zero é chamado de **nó folha**. Um nó que não é uma folha é chamado de **nó interno**. \pause
+
+Projete uma função que determine a quantidade de nós folhas de uma árvore.
+
+\pause
+
+\scriptsize
+
+```
+      t4  4
+        /   \
+     /         \
+t2  8           6  t3
+  /   \       /
+ 4  t1 7     5
+        \
+         1
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def num_folhas(t: Arvore) -> int:
+    '''
+    Determina a quantidade de folhas em *t*.
+    Uma folha é um nó sem nehum filho.
+    >>> # Criação das árvores e alguns exemplos omitidos...
+    >>> num_folhas(t2)
+    2
+    >>> num_folhas(t3)
+    1
+    >>> num_folhas(t4)
+    3
+    '''
+```
+
+\pause
+
+```python
+    if t is None:
+        return 0
+    elif t.esq is None and t.dir is None:
+        return 1
+    else:
+        return num_folhas(t.esq) + num_folhas(t.dir)
+```
+
+</div>
+</div>
 
 
 ## Referências
@@ -542,4 +748,3 @@ Capítulo 10 - Árvores - Fundamentos de Python: Estruturas de dados. Kenneth A.
 Capítulo 12 - Árvores Binárias de Busca - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
 
 Capítulo 6 - Binary Trees - [Open Data Structures](https://opendatastructures.org/ods-python.pdf).
--->
