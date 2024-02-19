@@ -1,12 +1,13 @@
 # Notas de aula de estruturas de dados
 
-Para gerar os pdfs execute o comando `make pdf`. Os arquivos pdfs serão gerados no diretório `target/pdfs`.
+Para gerar os pdfs execute o comando `make pdf`. Os arquivos pdfs serão gerados no diretório `target/`.
 
-Este comando irá baixar e executar os programas [pandoc](https://pandoc.org/)
-e [tectonic](http://tectonic-typesetting.github.io/).
+Este comando irá baixar e executar os programas [pandoc](https://pandoc.org/) e [tectonic](http://tectonic-typesetting.github.io/).
+
+Se preferir, veja os pdfs [aqui](https://malbarbo.pro.br/ensino/2023/6884/).
 
 
-## Estruturas lineares
+## Tipos abstratos de dados
 
 - [Pilha](04-estruturas-lineares-contiguas/exemplos/pilha_tad.py)
   - Arranjo estático e topo ([`pilha_arranjo.py`](/04-estruturas-lineares-contiguas/exemplos/pilha_arranjo.py))
@@ -24,6 +25,20 @@ e [tectonic](http://tectonic-typesetting.github.io/).
 - [Lista](04-estruturas-lineares-contiguas/exemplos/lista_tad.py)
   - Arranjo estático com redimensionamento ([`lista_arranjo.py`](04-estruturas-lineares-contiguas/exemplos/lista_arranjo.py))
   - Encadeamento simples ([`lista_encadeamento_simples.py`](05-estruturas-lineares-encadeadas/pratica-solucoes/lista_encadeamento_simples.py))
+- [Dicionário](07-busca-e-arvores/exemplos/dicionario_tad.py)
+  - Encadeamento simples ([`dicionario_encadeamento.py`](07-busca-e-arvores/exemplos/dicionario_encadeamento.py))
+  - Arranjo ([`dicionario_arranjo.py`](07-busca-e-arvores/exemplos/dicionario_arranjo.py))
+  - Arranjo ordenado e busca binária ([`dicionario_arranjo_ordenado.py`](07-busca-e-arvores/pratica-solucoes/dicionario_arranjo_ordenado.py))
+  - Árvore AVL (em breve)
+  - Tabela de dispersão (em breve)
+
+
+## Busca e ordenação
+
+- Busca binária
+  - Iterativa ([`busca_binaria.py`](07-busca-e-arvores/exemplos/busca_binaria.py))
+  - Recursiva ([`busca_binaria.py`](06-recursividade/pratica-solucoes/busca_binaria.py))
+
 
 # Licença
 
