@@ -534,7 +534,7 @@ Uma **árvore binária** é:
 
 Um nó é a **raiz** da árvore composta por ele e por suas subárvores. \pause
 
-Se $A$ é o nó raiz de uma árvore e $B$ é o nó raiz de uma de suas subárvores, então, dizemos que $B$ é **filho** de $A$ e $A$ é **pai** de $B$. \pause
+Se $A$ é o nó raiz de uma árvore e $B$ é o nó raiz de uma das subárvores de $A$, então, $B$ é **filho** de $A$ e $A$ é **pai** de $B$. \pause
 
 Um nó $A$ é **ancestral** de um nó $B$ se $A$ é pai de $B$ ou pai de algum ancestral de $B$. Se $A$ é ancestral de $B$, então $B$ é **descendente** de $A$.
 
@@ -805,8 +805,8 @@ def num_folhas(t: Arvore) -> int:
 
 O **nível** de um nó em uma árvore é:
 
-- 0 se o nó é a raiz da árvore; ou
-- O nível do pai mais 1 caso contário
+- `0`{.python} se o nó é a raiz da árvore; ou
+- O **nível** do pai mais 1 caso contrário
 
 \pause
 
@@ -966,20 +966,32 @@ def valores_nivel(t: Arvore, n: int) -> list[int]:
 
 ## Árvore binária de busca
 
-O que é preciso para podemos fazer uma busca binária em um árvore binária? \pause
+O que é preciso para podemos fazer uma busca binária em um árvore binária? \pause Que ela seja de busca! \pause
 
-Uma **árvore binária de busca** é uma árvore binária com raiz $t$, onde: \pause
+Uma **árvore binária de busca** é uma árvore binária, que quando não é vazia, tem uma raiz $t$ e: \pause
 
-- Todos os elementos da subárvore esquerda de $t$ são menores que o valor armazenado em $t$; \pause
+- Todos os elementos da subárvore a esquerda de $t$ são menores que o valor armazenado em $t$; \pause
 
-- Todos os elementos da subárvore direita de $t$ são maiores que o valor armazenado em $t$; \pause
+- Todos os elementos da subárvore a direita de $t$ são maiores que o valor armazenado em $t$; \pause
 
 - As subárvores a esquerda e a direta de $t$ são árvores binárias de busca.
+
+\pause
+
+Dessa forma, quando estamos procurando um valor $v$ e $v$ é menor que o valor na raiz, continuamos a busca na subárvore a esquerda, se $v$ é maior que o valor da raiz, continuamos a busca na subárvore a direita.
 
 
 ## Árvore binária de busca
 
+<div class="columns">
+<div class="column" width="48%">
+
 Projete uma função que determine se uma árvore binária é uma árvore binária de busca.
+
+</div>
+<div class="column" width="48%">
+</div>
+</div>
 
 
 ## Busca em árvore binária de busca
