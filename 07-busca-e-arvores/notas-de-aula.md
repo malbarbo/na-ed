@@ -409,7 +409,7 @@ Podemos fazer uma busca binária em _algum tipo de encadeamento_ de forma eficie
 
 Porque iríamos querer fazer isso? \pause Em um arranjo é possível fazer busca binária eficiente, mas a inserção e remoção tem complexidade de tempo $O(n)$. \pause
 
-Se conseguirmos fazer uma busca binária eficiente em um encadeamento, _talvez_ possamos fazer inserção e remoção de forma eficiente também! \pause
+Se _conseguirmos_ fazer uma busca binária eficiente em um encadeamento, _talvez_ possamos fazer inserção e remoção de forma eficiente também! \pause
 
 Vamos analisar uma sequência ordenada de elementos e tentar criar um encadeamento que permita a realização de uma busca binária.
 
@@ -669,7 +669,7 @@ Como adicionar uma nova subárvore (valor da raiz 4) a esquerda de `t3` a partir
 
 \normalsize
 
-Como remove a subárvore a direita de `t2` a partir de `t4`? \pause
+Como remover a subárvore a direita de `t2` a partir de `t4`? \pause
 
 \scriptsize
 
@@ -683,7 +683,7 @@ Como remove a subárvore a direita de `t2` a partir de `t4`? \pause
 ## Número de folhas
 
 <div class="columns">
-<div class="column" width="48%">
+<div class="column" width="45%">
 O **grau** de um nó é a quantidade de subárvores do nó. \pause
 
 Um nó com grau zero é chamado de **nó folha**. Um nó que não é uma folha é chamado de **nó interno**. \pause
@@ -708,14 +708,14 @@ t2  8           6  t3
 \pause
 
 </div>
-<div class="column" width="48%">
+<div class="column" width="50%">
 \scriptsize
 
 ```python
 def num_folhas(t: Arvore) -> int:
     '''
     Determina a quantidade de folhas em *t*.
-    Uma folha é um nó sem nehum filho.
+    Uma folha é um nó sem nenhum filho.
     >>> # Criação das árvores e alguns exemplos omitidos...
     >>> num_folhas(t2)
     2
@@ -730,15 +730,271 @@ def num_folhas(t: Arvore) -> int:
 
 ```python
     if t is None:
-        return 0
-    elif t.esq is None and t.dir is None:
-        return 1
+        return ...
     else:
-        return num_folhas(t.esq) + num_folhas(t.dir)
+        return self.val ... \
+                num_folhas(t.esq) ... \
+                num_folhas(t.dir)
 ```
 
 </div>
 </div>
+
+
+## Número de folhas
+
+<div class="columns">
+<div class="column" width="45%">
+O **grau** de um nó é a quantidade de subárvores do nó.
+
+Um nó com grau zero é chamado de **nó folha**. Um nó que não é uma folha é chamado de **nó interno**.
+
+Projete uma função que determine a quantidade de nós folhas de uma árvore.
+
+\scriptsize
+
+```
+      t4  4
+        /   \
+     /         \
+t2  8           6  t3
+  /   \       /
+ 4  t1 7     5
+        \
+         1
+```
+
+
+</div>
+<div class="column" width="50%">
+\scriptsize
+
+```python
+def num_folhas(t: Arvore) -> int:
+    '''
+    Determina a quantidade de folhas em *t*.
+    Uma folha é um nó sem nenhum filho.
+    >>> # Criação das árvores e alguns exemplos omitidos...
+    >>> num_folhas(t2)
+    2
+    >>> num_folhas(t3)
+    1
+    >>> num_folhas(t4)
+    3
+    '''
+```
+
+```python
+    if t is None:
+        return 0
+    else:
+        if t.esq is None and t.dir is None:
+            return 1
+        else:
+            return num_folhas(t.esq) + num_folhas(t.dir)
+```
+
+</div>
+</div>
+
+
+## Nível e altura
+
+<div class="columns">
+<div class="column" width="45%">
+
+O **nível** de um nó em uma árvore é:
+
+- 0 se o nó é a raiz da árvore; ou
+- O nível do pai mais 1 caso contário
+
+\pause
+
+A **altura** (ou profundidade) de um nó é o máximo entre os níveis de todas as folhas da árvore com raiz nesse nó. \pause
+
+De de outra forma, é o comprimento do caminho mais longo deste o nó até uma folha. \pause
+
+</div>
+<div class="column" width="50%">
+
+\scriptsize
+
+```
+      t4  4
+        /   \
+     /         \
+t2  8           6  t3
+  /   \       /
+ 4  t1 7     5
+        \
+      t0 1
+```
+
+\normalsize
+
+Em relação a árvore com raiz `t4`, qual é o nível de: \pause
+
+`t4`? \pause 0. \pause
+`t2`? \pause 1. \pause
+`t3`? \pause 1. \pause
+`t1`? \pause 2. \pause
+`t0`? \pause 3. \pause
+
+Qual é a altura da árvore: \pause
+
+`t0`? \pause 0. \pause
+`t1`? \pause 1. \pause
+`t2`? \pause 2. \pause
+`t3`? \pause 1. \pause
+`t4`? \pause 3.
+
+</div>
+</div>
+
+
+## Nível
+
+<div class="columns">
+<div class="column" width="45%">
+
+Projete uma função que encontre todos os valores em um determinado nível de uma árvore.
+
+\scriptsize
+
+```
+      t4  4
+        /   \
+     /         \
+t2  8           6  t3
+  /   \       /
+ 4  t1 7     5
+        \
+      t0 1
+```
+
+\pause
+
+</div>
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+def valores_nivel(t: Arvore, n: int) -> list[int]:
+    '''
+    Devolve os nós que estão no nível *n* de *t*.
+    >>> valores_nivel(None, 0)
+    []
+    >>> valores_nivel(t4, 0)
+    [4]
+    >>> valores_nivel(t4, 2)
+    [4, 7, 5]
+    >>> valores_nivel(t4, 3)
+    [1]
+    '''
+```
+
+\pause
+
+```python
+    if t is None:
+        return ... n
+    else:
+        n ... \
+            t.val ... \
+                valores_nivel(t.esq, ...) ... \
+                    valores_nivel(t.dir, ...) ...
+```
+
+</div>
+</div>
+
+
+## Nível
+
+<div class="columns">
+<div class="column" width="45%">
+
+Projete uma função que encontre todos os valores em um determinado nível de uma árvore.
+
+\scriptsize
+
+```
+      t4  4
+        /   \
+     /         \
+t2  8           6  t3
+  /   \       /
+ 4  t1 7     5
+        \
+      t0 1
+```
+
+</div>
+<div class="column" width="50%">
+
+\scriptsize
+
+\vspace{0.1cm}
+
+```python
+def valores_nivel(t: Arvore, n: int) -> list[int]:
+    '''
+    Devolve os nós que estão no nível *n* de *t*.
+    >>> valores_nivel(None, 0)
+    []
+    >>> valores_nivel(t4, 0)
+    [4]
+    >>> valores_nivel(t4, 2)
+    [4, 7, 5]
+    >>> valores_nivel(t4, 3)
+    [1]
+    '''
+    if t is None:
+        return []
+    else:
+        if n == 0:
+            return [t.val]
+        else:
+            return valores_nivel(t.esq, n - 1) + \
+                    valores_nivel(t.dir, n - 1)
+```
+
+</div>
+</div>
+
+
+## Árvore binária de busca
+
+O que é preciso para podemos fazer uma busca binária em um árvore binária? \pause
+
+Uma **árvore binária de busca** é uma árvore binária com raiz $t$, onde: \pause
+
+- Todos os elementos da subárvore esquerda de $t$ são menores que o valor armazenado em $t$; \pause
+
+- Todos os elementos da subárvore direita de $t$ são maiores que o valor armazenado em $t$; \pause
+
+- As subárvores a esquerda e a direta de $t$ são árvores binárias de busca.
+
+
+## Árvore binária de busca
+
+Projete uma função que determine se uma árvore binária é uma árvore binária de busca.
+
+
+## Busca em árvore binária de busca
+
+Projete uma função que determine se um valor está em uma árvore binária de busca.
+
+
+## Inserção em árvore binária de busca
+
+Projete uma função que insira um novo valor, se ainda não estiver presente, em uma árvore binária de busca.
+
+
+## Remoção em árvore binária de busca
+
+Projete uma função que remova um valor, se estiver presente, de uma árvore binária de busca.
 
 
 ## Referências

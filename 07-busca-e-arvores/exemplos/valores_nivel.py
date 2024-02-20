@@ -12,10 +12,9 @@ class No:
 Arvore = No | None
 
 
-def num_folhas(t: Arvore) -> int:
+def valores_nivel(t: Arvore, n: int) -> list[int]:
     '''
-    Determina a quantidade de folhas em *t*.
-    Uma folha é um nó sem nenhum filho.
+    Devolve os nós que estão no nível *n* de *t*.
 
     Exemplos
           t4  4
@@ -31,20 +30,20 @@ def num_folhas(t: Arvore) -> int:
     >>> t2 = No(No(None, 4, None), 8, t1)
     >>> t3 = No(No(None, 5, None), 6, None)
     >>> t4 = No(t2, 4, t3)
-    >>> num_folhas(t1)
-    1
-    >>> num_folhas(t2)
-    2
-    >>> num_folhas(t3)
-    1
-    >>> num_folhas(t4)
-    3
-    >>> num_folhas(None)
-    0
+    >>> valores_nivel(None, 0)
+    []
+    >>> valores_nivel(t4, 0)
+    [4]
+    >>> valores_nivel(t4, 1)
+    [8, 6]
+    >>> valores_nivel(t4, 2)
+    [4, 7, 5]
+    >>> valores_nivel(t4, 3)
+    [1]
     '''
     if t is None:
-        return 0
-    elif t.esq is None and t.dir is None:
-        return 1
+        return []
+    elif n == 0:
+        return [t.val]
     else:
-        return num_folhas(t.esq) + num_folhas(t.dir)
+        return valores_nivel(t.esq, n - 1) + valores_nivel(t.dir, n - 1)
