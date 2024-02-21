@@ -3,6 +3,12 @@ author:
     - \href{http://malbarbo.pro.br}{malbarbo.pro.br}
 header-includes: |
     \usepackage[super]{nth}
+    \usepackage{fontspec}
+    \setmonofont[
+      Extension   = .otf,
+      UprightFont = *-Regular,
+      BoldFont    = *-Medium
+    ]{FiraMono}
 # Substitui a licença do arquivo metadata-ex.yml
 license:
 numbersections: true
