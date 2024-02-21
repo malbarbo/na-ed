@@ -13,7 +13,7 @@ Arvore = No | None
 
 
 def num_folhas(t: Arvore) -> int:
-    '''
+    r'''
     Determina a quantidade de folhas em *t*.
     Uma folha é um nó sem nenhum filho.
 
