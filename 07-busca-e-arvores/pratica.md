@@ -44,3 +44,8 @@ urlcolor: Blue
             ├── 4
             └──
     ```
+
+<!-- Árvores binárias de busca -->
+
+@) Projete uma função que determine se uma árvore binária é uma árvore binária de busca.
+
