@@ -733,8 +733,8 @@ def num_folhas(t: Arvore) -> int:
         return ...
     else:
         return self.val ... \
-                num_folhas(t.esq) ... \
-                num_folhas(t.dir)
+               num_folhas(t.esq) ... \
+               num_folhas(t.dir)
 ```
 
 </div>
@@ -900,10 +900,10 @@ def valores_nivel(t: Arvore, n: int) -> list[int]:
     if t is None:
         return ... n
     else:
-        n ... \
-            t.val ... \
-                valores_nivel(t.esq, ...) ... \
-                    valores_nivel(t.dir, ...) ...
+        return n ... \
+               t.val ... \
+               valores_nivel(t.esq, ...) ... \
+               valores_nivel(t.dir, ...) ...
 ```
 
 </div>
@@ -957,7 +957,7 @@ def valores_nivel(t: Arvore, n: int) -> list[int]:
             return [t.val]
         else:
             return valores_nivel(t.esq, n - 1) + \
-                    valores_nivel(t.dir, n - 1)
+                   valores_nivel(t.dir, n - 1)
 ```
 
 </div>
@@ -968,7 +968,7 @@ def valores_nivel(t: Arvore, n: int) -> list[int]:
 
 O que é preciso para podemos fazer uma busca binária em um árvore binária? \pause Que ela seja de busca! \pause
 
-Uma **árvore binária de busca** é uma árvore binária, que quando não é vazia, tem uma raiz $t$ e: \pause
+Uma **árvore binária de busca** (ABB) é uma árvore binária, que quando não é vazia, tem uma raiz $t$ e: \pause
 
 - Todos os elementos da subárvore a esquerda de $t$ são menores que o valor armazenado em $t$; \pause
 
@@ -976,32 +976,277 @@ Uma **árvore binária de busca** é uma árvore binária, que quando não é va
 
 - As subárvores a esquerda e a direta de $t$ são árvores binárias de busca.
 
-\pause
 
-Dessa forma, quando estamos procurando um valor $v$ e $v$ é menor que o valor na raiz, continuamos a busca na subárvore a esquerda, se $v$ é maior que o valor da raiz, continuamos a busca na subárvore a direita.
-
-
-## Árvore binária de busca
+## Busca em árvore binária de busca
 
 <div class="columns">
 <div class="column" width="48%">
 
-Projete uma função que determine se uma árvore binária é uma árvore binária de busca.
+Dessa forma, quando estamos procurando um valor $v$ e $v$ é menor que o valor na raiz, continuamos a busca na subárvore a esquerda, se $v$ é maior que o valor da raiz, continuamos a busca na subárvore a direita. \pause
+
+Implemente o algoritmo de busca para uma árvore binária de busca. \pause
+
+\scriptsize
+
+```
+          4
+        /   \
+     /         \
+    1           7
+  /   \       /
+-3     2     5
+        \
+         3
+```
+
+\pause
 
 </div>
 <div class="column" width="48%">
+\scriptsize
+
+```python
+def busca(t: Arvore, val: int) -> bool:
+    r'''
+    Devolve True se *val* está em *t*,
+    False caso contrário.
+    >>> busca(None, 10)
+    False
+    >>> busca(t, 2)
+    True
+    >>> busca(t, 6)
+    False
+    '''
+    if t is None:
+        return ... val
+    else:
+        return val ... \
+               t.val ... \
+               busca(t.esq, val) ... \
+               busca(t.dir, val) ...
+```
+
 </div>
 </div>
 
 
 ## Busca em árvore binária de busca
 
-Projete uma função que determine se um valor está em uma árvore binária de busca.
+<div class="columns">
+<div class="column" width="48%">
+
+Dessa forma, quando estamos procurando um valor $v$ e $v$ é menor que o valor na raiz, continuamos a busca na subárvore a esquerda, se $v$ é maior que o valor da raiz, continuamos a busca na subárvore a direita.
+
+Implemente o algoritmo de busca para uma árvore binária de busca.
+
+\scriptsize
+
+```
+          4
+        /   \
+     /         \
+    1           7
+  /   \       /
+-3     2     5
+        \
+         3
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def busca(t: Arvore, val: int) -> bool:
+    r'''
+    Devolve True se *val* está em *t*,
+    False caso contrário.
+    >>> busca(None, 10)
+    False
+    >>> busca(t, 2)
+    True
+    >>> busca(t, 6)
+    False
+    '''
+    if t is None:
+        return False
+    elif val == t.val:
+        return True
+    elif val < t.val:
+        return busca(t.esq, val)
+    else:  # val > t.val
+        return busca(t.dir, val)
+```
+
+</div>
+</div>
+
+
+## Busca em árvore binária de busca
+
+<div class="columns">
+<div class="column" width="48%">
+
+Dessa forma, quando estamos procurando um valor $v$ e $v$ é menor que o valor na raiz, continuamos a busca na subárvore a esquerda, se $v$ é maior que o valor da raiz, continuamos a busca na subárvore a direita.
+
+Implemente o algoritmo de busca para uma árvore binária de busca.
+
+\scriptsize
+
+```
+          4
+        /   \
+     /         \
+    1           7
+  /   \       /
+-3     2     5
+        \
+         3
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def busca(t: Arvore, val: int) -> bool:
+    r'''
+    Devolve True se *val* está em *t*,
+    False caso contrário.
+    >>> busca(None, 10)
+    False
+    >>> busca(t, 2)
+    True
+    >>> busca(t, 6)
+    False
+    '''
+    r = t
+    while r is not None:
+        if val == r.val:
+            return True
+        elif val < r.val:
+            r = r.esq
+        else:  # val > r.val
+            r = r.dir
+    return False
+```
+
+</div>
+</div>
+
+
+## Complexidade de tempo da busca em ABB
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def busca(t: Arvore, val: int) -> bool:
+    if t is None:
+        return False
+    elif val == t.val:
+        return True
+    elif val < t.val:
+        return busca(t.esq, val)
+    else:  # val > t.val
+        return busca(t.dir, val)
+
+def busca(t: Arvore, val: int) -> bool:
+    r = t
+    while r is not None:
+        if val == r.val:
+            return True
+        elif val < r.val:
+            r = r.esq
+        else:  # val > r.val
+            r = r.dir
+    return False
+```
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```
+          4
+        /   \
+     /         \
+    1           7
+  /   \       /
+-3     2     5
+        \
+         3
+```
+
+\pause
+
+\normalsize
+
+Qual é a complexidade de tempo do algoritmo de busca em árvore binária de busca? \pause $O(h)$, onde $h$ é a altura da árvore. \pause
+
+Qual é a relação entre a quantidade $n$ de elementos da árvore e $h$? \pause Qual é o limite inferior de $h$? \pause $\lg(n)$. \pause Qual é o limite superior de $h$? \pause $n - 1$.
+
+</div>
+</div>
+
+
+## Complexidade de tempo da busca em ABB
+
+O que podemos concluir sobre isso? \pause Para que a busca em uma ABB seja eficiente, precisamos manter a altura da árvore perto do valor mínimo. \pause
+
+Fato: uma ABB criada com $n$ valores aleatórios tem altura média de $1.39 \lg N$. \pause
+
+Então, se as chaves usadas nas inserções e remoções tem uma distribuição aleatória, a ABB resultante tem uma altura pequena. \pause
+
+Como manter a altura pequena em uma árvore para qualquer distribuição de chaves? \pause Veremos daqui a pouco. \pause
+
+Agora vamos ver como inserir e remover valores de uma ABB sem se preocupar com a altura.
 
 
 ## Inserção em árvore binária de busca
 
-Projete uma função que insira um novo valor, se ainda não estiver presente, em uma árvore binária de busca.
+Projete uma função que insira um novo valor, se ainda não estiver presente, em uma árvore binária de busca. \pause
+
+Quais são os tipos dos parâmetros da função? \pause `Arvore`{.python} e `int`{.python}. \pause
+
+Quais deve ser o tipo de saída da função? \pause `None`{.python}? \pause
+
+\scriptsize
+
+```python
+def insere(t: Arvore, val: int) -> None:
+    '''
+    >>> r = None
+    >>> insere(r, 10)
+    >>> r
+    No(esq=None, val=10, dir=None)
+    '''
+```
+
+\pause
+
+\normalsize
+
+É possível implementar a função para que o exemplo funcione? \pause Não! \pause Dentro da função é preciso fazer `t` referenciar um novo nó, mas quando fazemos isso, `r` permanece inalterado...
+
+## Inserção em árvore binária de busca
+
+Como resolver essa questão? \pause Alterando o tipo de retorno para `No`{.pause}.
+
+\pause
+
+\scriptsize
+
+```python
+def insere(t: Arvore, val: int) -> None:
+    '''
+    >>> insere(None, 10)
+    No(esq=None, val=10, dir=None)
+    '''
+```
 
 
 ## Remoção em árvore binária de busca
