@@ -1601,7 +1601,7 @@ Mas temos lembrar que quando chamamos `remove` é preciso armazenar o resultado 
 
 \small
 
-Remoção de folha: \pause retorna `None`{.python}.
+Remoção de folha: \pause retorna `None`{.python}. \pause
 
 \small
 
@@ -1657,8 +1657,8 @@ def remove(t: Arvore, val: int) -> Arvore:
     else:
         val ...
         t.val ...
-        remove(t.esq, ...) ...
-        remove(t.dir, ...) ...
+        remove(t.esq, val) ...
+        remove(t.dir, val) ...
         return ...
 ```
 </div>
@@ -1723,9 +1723,220 @@ def remove(t: Arvore, val: int) -> Arvore:
     else:
         val ...
         t.val ...
-        t.esq = remove(t.esq, ...) ...
-        t.dir = remove(t.dir, ...) ...
+        t.esq = remove(t.esq, val) ...
+        t.dir = remove(t.dir, val) ...
         return ...
+```
+</div>
+</div>
+
+
+## Remoção em árvore binária de busca
+
+<div class="columns">
+<div class="column" width="48%">
+
+\small
+
+Remoção de folha: retorna `None`{.python}.
+
+\small
+
+Remoção de nó sem subárvore a esq ou dir
+
+\scriptsize
+
+```
+     7       rem        7      rem      7
+  /     \    --->     /   \    --->    / \
+2        10   2     4      10   2     4   8
+ \      /          / \    /          / \   \
+  4    8          3   6  8          3   6   9
+ / \    \                 \
+3   6    9                 9
+```
+
+\small
+
+Remoção de nó com subárvore a esq e a dir
+
+\scriptsize
+
+```
+    7     rem      6           6
+   / \    --->    / \         / \
+  4   8    7     4   8       4   8
+ / \   \        / \   \     /     \
+3   6   9      3   6   9   3       9
+               copia max    remove
+               esquerda     max esq
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def remove(t: Arvore, val: int) -> Arvore:
+    '''
+    Devolve a raiz da ABB que é o resultado
+    da remoção de *val* de *t*.
+    Se *val* não está em *t*, devolve *t*.
+    Requer que *t* seja uma ABB.
+    '''
+    if t is None:
+        return None
+    elif val < t.val:
+        t.esq = remove(t.esq, val)
+        return t
+    elif val > t.val:
+        t.dir = remove(t.dir, val)
+        return t
+    else: # val == t.val
+        val, t.val, t.esq, t.dir
+        ... = remove(t.esq, ...) ...
+        ... = remove(t.dir, ...) ...
+        return ...
+```
+</div>
+</div>
+
+
+## Remoção em árvore binária de busca
+
+<div class="columns">
+<div class="column" width="48%">
+
+\small
+
+Remoção de folha: retorna `None`{.python}.
+
+\small
+
+Remoção de nó sem subárvore a esq ou dir
+
+\scriptsize
+
+```
+     7       rem        7      rem      7
+  /     \    --->     /   \    --->    / \
+2        10   2     4      10   2     4   8
+ \      /          / \    /          / \   \
+  4    8          3   6  8          3   6   9
+ / \    \                 \
+3   6    9                 9
+```
+
+\small
+
+Remoção de nó com subárvore a esq e a dir
+
+\scriptsize
+
+```
+    7     rem      6           6
+   / \    --->    / \         / \
+  4   8    7     4   8       4   8
+ / \   \        / \   \     /     \
+3   6   9      3   6   9   3       9
+               copia max    remove
+               esquerda     max esq
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def remove(t: Arvore, val: int) -> Arvore:
+    if t is None:
+        return None
+    elif val < t.val:
+        t.esq = remove(t.esq, val)
+        return t
+    elif val > t.val:
+        t.dir = remove(t.dir, val)
+        return t
+    else: # val == t.val
+        if t.esq is None:
+            return t.dir
+        elif t.dir is None:
+            return t.esq
+        else:
+            val, t.val, t.esq, t.dir ...
+            ... = remove(t.esq, ...) ...
+            ... = remove(t.dir, ...) ...
+            return ...
+```
+</div>
+</div>
+
+
+## Remoção em árvore binária de busca
+
+<div class="columns">
+<div class="column" width="48%">
+
+\small
+
+Remoção de folha: retorna `None`{.python}.
+
+\small
+
+Remoção de nó sem subárvore a esq ou dir
+
+\scriptsize
+
+```
+     7       rem        7      rem      7
+  /     \    --->     /   \    --->    / \
+2        10   2     4      10   2     4   8
+ \      /          / \    /          / \   \
+  4    8          3   6  8          3   6   9
+ / \    \                 \
+3   6    9                 9
+```
+
+\small
+
+Remoção de nó com subárvore a esq e a dir
+
+\scriptsize
+
+```
+    7     rem      6           6
+   / \    --->    / \         / \
+  4   8    7     4   8       4   8
+ / \   \        / \   \     /     \
+3   6   9      3   6   9   3       9
+               copia max    remove
+               esquerda     max esq
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def remove(t: Arvore, val: int) -> Arvore:
+    if t is None:
+        return None
+    elif val < t.val:
+        t.esq = remove(t.esq, val)
+        return t
+    elif val > t.val:
+        t.dir = remove(t.dir, val)
+        return t
+    else: # val == t.val
+        if t.esq is None:
+            return t.dir
+        elif t.dir is None:
+            return t.esq
+        else:
+            m = maximo(t.esq)
+            t.val = m
+            t.esq = remove(t.esq, m)
+            return t
 ```
 </div>
 </div>
