@@ -975,7 +975,7 @@ Uma **árvore binária de busca** (ABB) é uma árvore binária, que quando não
 
 - Todos os elementos da subárvore a direita de $t$ são maiores que o valor armazenado em $t$; \pause
 
-- As subárvores a esquerda e a direta de $t$ são árvores binárias de busca.
+- As subárvores a esquerda e a direta de $t$ são **árvores binárias de busca**.
 
 
 ## Busca em árvore binária de busca
@@ -1612,7 +1612,7 @@ Remoção de nó sem subárvore a esq ou dir
 ```
      7       rem        7      rem      7
   /     \    --->     /   \    --->    / \
-2        10   2     4      10   2     4   8
+2        10   2     4      10   10    4   8
  \      /          / \    /          / \   \
   4    8          3   6  8          3   6   9
  / \    \                 \
@@ -1683,7 +1683,7 @@ Remoção de nó sem subárvore a esq ou dir
 ```
      7       rem        7      rem      7
   /     \    --->     /   \    --->    / \
-2        10   2     4      10   2     4   8
+2        10   2     4      10   10    4   8
  \      /          / \    /          / \   \
   4    8          3   6  8          3   6   9
  / \    \                 \
@@ -1749,7 +1749,7 @@ Remoção de nó sem subárvore a esq ou dir
 ```
      7       rem        7      rem      7
   /     \    --->     /   \    --->    / \
-2        10   2     4      10   2     4   8
+2        10   2     4      10   10    4   8
  \      /          / \    /          / \   \
   4    8          3   6  8          3   6   9
  / \    \                 \
@@ -1820,7 +1820,7 @@ Remoção de nó sem subárvore a esq ou dir
 ```
      7       rem        7      rem      7
   /     \    --->     /   \    --->    / \
-2        10   2     4      10   2     4   8
+2        10   2     4      10   10    4   8
  \      /          / \    /          / \   \
   4    8          3   6  8          3   6   9
  / \    \                 \
@@ -1890,7 +1890,7 @@ Remoção de nó sem subárvore a esq ou dir
 ```
      7       rem        7      rem      7
   /     \    --->     /   \    --->    / \
-2        10   2     4      10   2     4   8
+2        10   2     4      10   10    4   8
  \      /          / \    /          / \   \
   4    8          3   6  8          3   6   9
  / \    \                 \
