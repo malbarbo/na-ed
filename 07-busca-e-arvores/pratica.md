@@ -47,5 +47,20 @@ urlcolor: Blue
 
 <!-- Árvores binárias de busca -->
 
-@) Projete uma função que determine se uma árvore binária é uma árvore binária de busca.
+@) Projete uma função que determine se uma árvore binária é uma árvore binária de busca (ABB).
 
+@) Projete uma função que encontre a amplitude dos valores de uma ABB não vazia. A amplitude de valores é a diferença entre o valor máximo e mínimo. A sua função deve ter tempo de execução $O(h)$, onde $h$ é a altura da árvore. Dica: faça duas funções auxiliares, uma para encontrar o mínimo e outra para encontrar o máximo.
+
+@) Projete uma função que receba como parâmetro uma ABB e um valor $n$, contido na ABB, e determine o sucessor de $n$ na ABB, isto é, o menor valor maior que $n$. A função deve devolver `None`{.python} se não existe sucessor de $n$.
+
+@) Projete uma função que crie uma ABB balanceada a partir de um arranjo de valores distintos em ordem crescente. Dica: use o processo do material que "transformou" um arranjo em uma ABB.
+
+@) Projete uma função que crie um arranjo ordenado em ordem crescente a partir dos valores de uma ABB.
+
+@) Projete uma função que crie um arranjo ordenado em ordem decrescente a partir dos valores de uma ABB.
+
+@) (Desafio) Projete uma função que crie um arranjo com os valores de uma ABB em ordem de nível da direita para esquerda.
+
+@) Projete uma versão iterativa da operação de inserção em ABB.
+
+@) Projete uma versão iterativa da operação de remoção em ABB.
