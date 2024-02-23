@@ -3,6 +3,7 @@
 title: Busca e árvores
 linkcolor: Black
 urlcolor: Blue
+# TODO: mudar val para chave?
 ---
 
 ## Introdução
@@ -569,7 +570,7 @@ Como `Arvore` é um tipo com autorreferência, podemos derivar um modelo de fun�
 ```python
 def fn_para_ab(t: Arvore) -> ...:
     if t is None:
-        return
+        return ...
     else:
         return t.val ... \
                fn_para_ab(t.esq) ... \
@@ -1197,7 +1198,7 @@ Qual é a relação entre a quantidade $n$ de elementos da árvore e $h$? \pause
 
 O que podemos concluir sobre isso? \pause Para que a busca em uma ABB seja eficiente, precisamos manter a altura da árvore perto do valor mínimo. \pause
 
-Fato: uma ABB criada com $n$ valores aleatórios tem altura média de $1.39 \lg N$. \pause
+Fato: uma ABB criada com $n$ valores aleatórios tem altura média de $1.39 \lg n$. \pause
 
 Então, se as chaves usadas nas inserções e remoções tem uma distribuição aleatória, a ABB resultante tem uma altura pequena. \pause
 
@@ -1214,11 +1215,16 @@ Quais são os tipos dos parâmetros da função? \pause `Arvore`{.python} e `int
 
 Quais deve ser o tipo de saída da função? \pause `None`{.python}? \pause
 
+<div class="columns">
+<div class="column" width="48%">
 \scriptsize
 
 ```python
 def insere(t: Arvore, val: int) -> None:
     '''
+    Insere *val* em *t* mantendo as
+    propriedades de ABB.
+    Requer que *t* seja uma ABB.
     >>> r = None
     >>> insere(r, 10)
     >>> r
@@ -1228,30 +1234,501 @@ def insere(t: Arvore, val: int) -> None:
 
 \pause
 
-\normalsize
+</div>
+<div class="column" width="48%">
+É possível implementar a função para que o exemplo funcione? \pause Não! \pause
 
-É possível implementar a função para que o exemplo funcione? \pause Não! \pause Dentro da função é preciso fazer `t` referenciar um novo nó, mas quando fazemos isso, `r` permanece inalterado...
+Dentro da função é preciso fazer `t` referenciar um novo nó, mas quando fazemos isso, `r` permanece inalterado...
+</div>
+</div>
+
 
 ## Inserção em árvore binária de busca
 
-Como resolver essa questão? \pause Alterando o tipo de retorno para `No`{.pause}.
+Como resolver essa questão? \pause Alterando o tipo de retorno para `No`{.pause} e atribuindo o retorno para `r`.
 
 \pause
 
+<div class="columns">
+<div class="column" width="48%">
 \scriptsize
 
 ```python
-def insere(t: Arvore, val: int) -> None:
+def insere(t: Arvore, val: int) -> No:
     '''
-    >>> insere(None, 10)
+    Devolve a raiz da ABB que é o resultado
+    da inserção de *val* em *t*.
+    Se *val* já está em *t*, devolve *t*.
+    Requer que *t* seja uma ABB.
+
+    Exemplo
+    >>> r = None
+    >>> r = insere(None, 10)
+    >>> r
     No(esq=None, val=10, dir=None)
     '''
 ```
+
+\pause
+</div>
+<div class="column" width="48%">
+
+\normalsize
+
+Como proceder com a implementação? \pause
+
+Partindo do modelo! \pause
+
+Mas temos que lembrar que quando chamamos `insere` é preciso armazenar o resultado no lugar da raiz que foi chamada como parâmetro.
+
+</div>
+</div>
+
+
+## Inserção em árvore binária de busca
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```
+       ins
+None   --->   7
+        7
+```
+
+\pause
+
+```
+7  ins       7   ins       7
+   --->    /     --->    /
+    4    4        6    4
+                        \
+                         6
+```
+
+\pause
+
+```
+    7  ins       7      ins       7
+  /    --->    /   \    --->    /   \
+4      10    4      10   9    4      10
+ \            \                \     /
+  6            6                6   9
+```
+
+\pause
+
+```
+    7      ins       7
+  /   \    --->    /   \
+4      10  12    4      10
+ \     /          \    /  \
+  6   9            6  9   12
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def insere(t: Arvore, val: int) -> No:
+    '''
+    Devolve a raiz da ABB que é o resultado
+    da inserção de *val* em *t*.
+    Se *val* já está em *t*, devolve *t*.
+    Requer que *t* seja uma ABB.
+    '''
+    if t is None:
+        return ... val
+    else:
+        val ...
+        t.val ...
+        insere(t.esq, val) ...
+        insere(t.dir, val) ...
+        return ...
+```
+</div>
+</div>
+
+
+## Inserção em árvore binária de busca
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```
+       ins
+None   --->   7
+        7
+```
+
+
+```
+7  ins       7   ins       7
+   --->    /     --->    /
+    4    4        6    4
+                        \
+                         6
+```
+
+
+```
+    7  ins       7      ins       7
+  /    --->    /   \    --->    /   \
+4      10    4      10   9    4      10
+ \            \                \     /
+  6            6                6   9
+```
+
+
+```
+    7      ins       7
+  /   \    --->    /   \
+4      10  12    4      10
+ \     /          \    /  \
+  6   9            6  9   12
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def insere(t: Arvore, val: int) -> No:
+    '''
+    Devolve a raiz da ABB que é o resultado
+    da inserção de *val* em *t*.
+    Se *val* já está em *t*, devolve *t*.
+    Requer que *t* seja uma ABB.
+    '''
+    if t is None:
+        return ... val
+    else:
+        val ...
+        t.val ...
+        t.esq = insere(t.esq, val) ...
+        t.dir = insere(t.dir, val) ...
+        return ...
+```
+</div>
+</div>
+
+
+## Inserção em árvore binária de busca
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```
+       ins
+None   --->   7
+        7
+```
+
+
+```
+7  ins       7   ins       7
+   --->    /     --->    /
+    4    4        6    4
+                        \
+                         6
+```
+
+
+```
+    7  ins       7      ins       7
+  /    --->    /   \    --->    /   \
+4      10    4      10   9    4      10
+ \            \                \     /
+  6            6                6   9
+```
+
+
+```
+    7      ins       7
+  /   \    --->    /   \
+4      10  12    4      10
+ \     /          \    /  \
+  6   9            6  9   12
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def insere(t: Arvore, val: int) -> No:
+    '''
+    Devolve a raiz da ABB que é o resultado
+    da inserção de *val* em *t*.
+    Se *val* já está em *t*, devolve *t*.
+    Requer que *t* seja uma ABB.
+    '''
+    if t is None:
+        return No(None, val, None)
+    else:
+        val ...
+        t.val ...
+        t.esq = insere(t.esq, val) ...
+        t.dir = insere(t.dir, val) ...
+        return ...
+```
+</div>
+</div>
+
+
+## Inserção em árvore binária de busca
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```
+       ins
+None   --->   7
+        7
+```
+
+
+```
+7  ins       7   ins       7
+   --->    /     --->    /
+    4    4        6    4
+                        \
+                         6
+```
+
+
+```
+    7  ins       7      ins       7
+  /    --->    /   \    --->    /   \
+4      10    4      10   9    4      10
+ \            \                \     /
+  6            6                6   9
+```
+
+
+```
+    7      ins       7
+  /   \    --->    /   \
+4      10  12    4      10
+ \     /          \    /  \
+  6   9            6  9   12
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def insere(t: Arvore, val: int) -> No:
+    '''
+    Devolve a raiz da ABB que é o resultado
+    da inserção de *val* em *t*.
+    Se *val* já está em *t*, devolve *t*.
+    Requer que *t* seja uma ABB.
+    '''
+    if t is None:
+        return No(None, val, None)
+    else:
+        if val < t.val:
+            t.esq = insere(t.esq, val)
+        elif val > t.val:
+            t.dir = insere(t.dir, val)
+        else: # val == t.val
+            pass
+        return t
+```
+</div>
+</div>
 
 
 ## Remoção em árvore binária de busca
 
 Projete uma função que remova um valor, se estiver presente, de uma árvore binária de busca.
+
+\pause
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def remove(t: Arvore, val: int) -> Arvore:
+    '''
+    Devolve a raiz da ABB que é o resultado
+    da remoção de *val* de *t*.
+    Se *val* não está em *t*, devolve *t*.
+    Requer que *t* seja uma ABB.
+
+    Exemplo
+    >>> r = No(None, 10, None)
+    >>> r = remove(r, 10)
+    >>> r is None
+    True
+    '''
+```
+
+\pause
+</div>
+<div class="column" width="48%">
+
+\normalsize
+
+Como proceder com a implementação? \pause
+
+Partindo do modelo! \pause
+
+Mas temos lembrar que quando chamamos `remove` é preciso armazenar o resultado no lugar da raiz que foi chamada como parâmetro.
+
+</div>
+</div>
+
+
+## Remoção em árvore binária de busca
+
+<div class="columns">
+<div class="column" width="48%">
+
+\small
+
+Remoção de folha: \pause retorna `None`{.python}.
+
+\small
+
+Remoção de nó sem subárvore a esq ou dir
+
+\scriptsize
+
+```
+     7       rem        7      rem      7
+  /     \    --->     /   \    --->    / \
+2        10   2     4      10   2     4   8
+ \      /          / \    /          / \   \
+  4    8          3   6  8          3   6   9
+ / \    \                 \
+3   6    9                 9
+```
+
+
+\pause
+
+\small
+
+Remoção de nó com subárvore a esq e a dir
+
+\scriptsize
+
+```
+    7     rem      6           6
+   / \    --->    / \         / \
+  4   8    7     4   8       4   8
+ / \   \        / \   \     /     \
+3   6   9      3   6   9   3       9
+               copia max    remove
+               esquerda     max esq
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def remove(t: Arvore, val: int) -> Arvore:
+    '''
+    Devolve a raiz da ABB que é o resultado
+    da remoção de *val* de *t*.
+    Se *val* não está em *t*, devolve *t*.
+    Requer que *t* seja uma ABB.
+    '''
+    if t is None:
+        return ... val
+    else:
+        val ...
+        t.val ...
+        remove(t.esq, ...) ...
+        remove(t.dir, ...) ...
+        return ...
+```
+</div>
+</div>
+
+
+## Remoção em árvore binária de busca
+
+<div class="columns">
+<div class="column" width="48%">
+
+\small
+
+Remoção de folha: retorna `None`{.python}.
+
+\small
+
+Remoção de nó sem subárvore a esq ou dir
+
+\scriptsize
+
+```
+     7       rem        7      rem      7
+  /     \    --->     /   \    --->    / \
+2        10   2     4      10   2     4   8
+ \      /          / \    /          / \   \
+  4    8          3   6  8          3   6   9
+ / \    \                 \
+3   6    9                 9
+```
+
+\small
+
+Remoção de nó com subárvore a esq e a dir
+
+\scriptsize
+
+```
+    7     rem      6           6
+   / \    --->    / \         / \
+  4   8    7     4   8       4   8
+ / \   \        / \   \     /     \
+3   6   9      3   6   9   3       9
+               copia max    remove
+               esquerda     max esq
+```
+
+</div>
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def remove(t: Arvore, val: int) -> Arvore:
+    '''
+    Devolve a raiz da ABB que é o resultado
+    da remoção de *val* de *t*.
+    Se *val* não está em *t*, devolve *t*.
+    Requer que *t* seja uma ABB.
+    '''
+    if t is None:
+        return None
+    else:
+        val ...
+        t.val ...
+        t.esq = remove(t.esq, ...) ...
+        t.dir = remove(t.dir, ...) ...
+        return ...
+```
+</div>
+</div>
 
 
 ## Referências
