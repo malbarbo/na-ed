@@ -183,14 +183,14 @@ def remove(t: Arvore, val: int) -> Arvore:
 
     Exemplos
 
-                5
-              /   \
-            /       \
-           1         10
-            \       /
-             3     6
-            / \     \
-           2   4     8
+         5
+       /   \
+     /       \
+    1         10
+     \       /
+      3     6
+     / \     \
+    2   4     8
 
     >>> r = None
     >>> for val in [5, 1, 3, 10, 6, 4, 8, 2]:
@@ -224,14 +224,13 @@ def remove(t: Arvore, val: int) -> Arvore:
         if t.esq is None:
             # Se t.dir é None
             #     t     ->  None
-
+            #
             # Se t.dir não é None
             #     t          D
             #    / \    ->  / \
             #   E   D      DE DD
             #      / \
             #     DE DD
-
             return t.dir
         elif t.dir is None:
             #     t          E
