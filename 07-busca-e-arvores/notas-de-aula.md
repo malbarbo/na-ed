@@ -1552,6 +1552,45 @@ def insere(t: Arvore, val: int) -> No:
 </div>
 
 
+## Inserção em árvore binária de busca
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def insere(t: Arvore, val: int) -> No:
+    '''
+    Devolve a raiz da ABB que é o resultado
+    da inserção de *val* em *t*.
+    Se *val* já está em *t*, devolve *t*.
+    Requer que *t* seja uma ABB.
+    '''
+    if t is None:
+        return No(None, val, None)
+    else:
+        if val < t.val:
+            t.esq = insere(t.esq, val)
+        elif val > t.val:
+            t.dir = insere(t.dir, val)
+        else: # val == t.val
+            pass
+        return t
+```
+
+</div>
+<div class="column" width="48%">
+
+Qual é a complexidade de tempo da inserção? \pause
+
+$O(h)$. \pause
+
+$O(1)$ operações para cada nó analisado. No pior caso todos os nós de um caminho de tamanho máximo são analisados.
+</div>
+</div>
+
+
 ## Remoção em árvore binária de busca
 
 Projete uma função que remova um valor, se estiver presente, de uma árvore binária de busca.
@@ -1940,6 +1979,115 @@ def remove(t: Arvore, val: int) -> Arvore:
 ```
 </div>
 </div>
+
+
+## Remoção em árvore binária de busca
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def remove(t: Arvore, val: int) -> Arvore:
+    if t is None:
+        return None
+    elif val < t.val:
+        t.esq = remove(t.esq, val)
+        return t
+    elif val > t.val:
+        t.dir = remove(t.dir, val)
+        return t
+    else: # val == t.val
+        if t.esq is None:
+            return t.dir
+        elif t.dir is None:
+            return t.esq
+        else:
+            m = maximo(t.esq)
+            t.val = m
+            t.esq = remove(t.esq, m)
+            return t
+```
+
+</div>
+<div class="column" width="48%">
+Qual é a complexidade de tempo da remoção? \pause
+
+$O(h)$. \pause
+
+$O(1)$ operações para cada nó analisado. No pior caso, todos os nós de um caminho de tamanho máximo são analisados.
+</div>
+</div>
+
+
+## Complexidade de tempo das operações em uma ABB
+
+A complexidade de tempo das operações de busca, inserção e remoção em uma ABB tem tempo de execução $O(h)$. \pause
+
+Como vimos anteriormente, se as chaves usadas nas inserções e remoções têm distribuição aleatória, então a altura média da ABB é $O(\lg n)$. \pause
+
+Como garantir que a altura seja $O(\lg n)$ para uma distribuição qualquer de chaves? \pause
+
+Mantendo a árvore balanceada.
+
+
+## Árvores binárias balanceadas
+
+Informalmente, uma árvore é balanceada (na altura), quando a diferença das alturas das suas subárvores é "pequena" e as subárvores são balanceadas. \pause Ou ainda, uma árvore que tem altura $O(\lg n)$. \pause
+
+Uma **árvore binária de busca auto balanceada** é aquela que se mantém balanceada após cada modificação. \pause
+
+Existem diversos tipos de ABB auto balanceadas, entre elas: AVL, rubro-negra e treap.
+
+
+## Árvore AVL
+
+A árvore AVL (nomeada a partir do nome dos criadores - **A**delson-**V**elsky and **L**andis) foi a primeira árvore auto balanceada a ser criada (1962). \pause
+
+Uma **árvore AVL**, é uma ABB de busca, que quando não é vazia, tem uma raiz $t$ e: \pause
+
+- A diferença absoluta da altura das subárvores a direita e a esquerda de $t$ é no máximo 1; \pause
+- As subárvores a esquerda e direita de $t$ são AVL. \pause
+
+Para representar uma AVL, é preciso adicionar um atributo `altura` na classe `No`.
+
+
+## Rebalanceamento e rotação
+
+Quando um nó é inserido ou removido e a regra de balanceamento é violada, é preciso ajustar a árvore para restabelecer o balanceamento (**rebalancear**), o que é feito através de operações de rotações. \pause
+
+Uma **rotação** é uma operação que muda localmente a estrutura de uma ABB, mas mantém a propriedade de busca. \pause No contexto de árvore AVL, a operação de rotação também deve ajustar o atributo altura dos nós envolvidos na rotação.
+
+
+## Rebalanceamento e rotação
+
+Na figura abaixo, $x$ e $y$ representam valores armazenados nos nós e $A$, $B$ e $C$ representam subárvores.
+
+\pause
+
+\small
+
+```
+    y      rotação a direita       x
+   / \     ----------------->     / \
+  x   C                          A   y
+ / \       rotação a esquerda       / \
+A   B      <-----------------      B   C
+```
+
+\normalsize
+
+\pause
+
+Note que $A < x < B < y < C$ nas duas figuras. Ou seja, essas rotações não alteram a propriedade de ABB. \pause
+
+Veja uma [animação](https://en.wikipedia.org/wiki/Tree_rotation#/media/File:Tree_rotation_animation_250x250.gif) da rotação e outras informações na página [Tree rotation](https://en.wikipedia.org/wiki/Tree_rotation).
+
+
+## Exemplo de inserção em árvore AVL
+
+Exemplo feito em sala.
 
 
 ## Referências
