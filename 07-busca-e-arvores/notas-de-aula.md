@@ -2034,7 +2034,8 @@ Mantendo a árvore balanceada.
 
 ## Árvores binárias balanceadas
 
-Informalmente, uma árvore é balanceada (na altura), quando a diferença das alturas das suas subárvores é "pequena" e as subárvores são balanceadas. \pause Ou ainda, uma árvore que tem altura $O(\lg n)$. \pause
+Informalmente, uma árvore é **balanceada** (na altura), quando a diferença das alturas das suas subárvores é "pequena" e as subárvores são **balanceadas**. \pause Ou ainda, uma árvore que tem altura $O(\lg n)$. \pause
+
 
 Uma **árvore binária de busca auto balanceada** é aquela que se mantém balanceada após cada modificação. \pause
 
@@ -2048,7 +2049,7 @@ A árvore AVL (nomeada a partir do nome dos criadores - **A**delson-**V**elsky a
 Uma **árvore AVL**, é uma ABB de busca, que quando não é vazia, tem uma raiz $t$ e: \pause
 
 - A diferença absoluta da altura das subárvores a direita e a esquerda de $t$ é no máximo 1; \pause
-- As subárvores a esquerda e direita de $t$ são AVL. \pause
+- As subárvores a esquerda e direita de $t$ são **AVL**. \pause
 
 Para representar uma AVL, é preciso adicionar um atributo `altura` na classe `No`.
 
@@ -2066,7 +2067,11 @@ Na figura abaixo, $x$ e $y$ representam valores armazenados nos nós e $A$, $B$ 
 
 \pause
 
-\small
+<div class="columns">
+<div class="column" width="25%">
+</div>
+<div class="column" width="75%">
+\scriptsize
 
 ```
     y      rotação a direita       x
@@ -2074,7 +2079,12 @@ Na figura abaixo, $x$ e $y$ representam valores armazenados nos nós e $A$, $B$ 
   x   C                          A   y
  / \       rotação a esquerda       / \
 A   B      <-----------------      B   C
+
+
 ```
+
+</div>
+</div>
 
 \normalsize
 
@@ -2085,15 +2095,71 @@ Note que $A < x < B < y < C$ nas duas figuras. Ou seja, essas rotações não al
 Veja uma [animação](https://en.wikipedia.org/wiki/Tree_rotation#/media/File:Tree_rotation_animation_250x250.gif) da rotação e outras informações na página [Tree rotation](https://en.wikipedia.org/wiki/Tree_rotation).
 
 
+## Rotação a esquerda
+
+Projete uma função para fazer a rotação a esquerda de uma árvore não vazia com raiz `r`.
+
+\pause
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+def rotaciona_esq(r: No) -> No:
+    r'''
+    Rotaciona a árvore com raiz *r*
+    conforme o seguinte esquema:
+
+         r              x
+        / \            / \
+       A   x    ->    r   C
+          / \        / \
+         B   C      A   B
+
+    E devolve como nova raiz o nó que estava
+    em *r.dir* quando a função foi chamada.
+
+    Requer que *r.dir* não seja None.
+    '''
+```
+</div>
+<div class="column" width="48%">
+\pause
+
+\scriptsize
+
+```python
+def rotaciona_esq(r: No) -> No:
+    assert r.dir is not None
+    x = r.dir
+    r.dir = x.esq
+    x.esq = r
+    atualiza_altura(r)
+    atualiza_altura(x)
+    return x
+```
+
+\pause
+
+\normalsize
+
+Exercício: projete a função para fazer a rotação a direita.
+</div>
+</div>
+
+
 ## Exemplo de inserção em árvore AVL
 
 Crie uma árvore AVL inserindo os seguintes itens na ordem que eles aparecem: 20, 10, 5, 30, 40, 25, 8, 2, 6, 9, 12, 14.
 
 \pause
 
-Feito em sala.
+Feito e discutido em sala.
 
-Você pode conferir o resultado usando [este](https://www.cs.usfca.edu/~galles/visualization/AVLtree.html) simulador.
+Você pode conferir o resultado usando [este](https://www.cs.usfca.edu/~galles/visualization/AVLtree.html) simulador. \pause
+
+Após essa experiência prática, vamos sistematizar a forma que o rebalanceamento é feito!
 
 
 ## Rebalanceamento
@@ -2152,7 +2218,7 @@ A forma que o rebalanceamento a esquerda de uma árvore AVL com raiz `r` é feit
 
 ## Rebalanceamento a esquerda-esquerda
 
-Esquerda-Esquerda \scriptsize `altura(r.esq.esq) > altura(r.esq.dir)`{.python}
+Esquerda-Esquerda  -- \small `altura(r.esq.esq) > altura(r.esq.dir)`{.python}
 
 \normalsize
 
@@ -2214,7 +2280,7 @@ Note que árvore tem uma nova raiz e que a altura da subárvore a esquerda dimin
 
 ## Rebalanceamento a esquerda-direita
 
-Esquerda-Direita \scriptsize `altura(r.esq.esq) < altura(r.esq.dir)`{.python}
+Esquerda-Direita -- \small `altura(r.esq.esq) < altura(r.esq.dir)`{.python}
 
 \normalsize
 
@@ -2277,10 +2343,15 @@ A   B
 
 \normalsize
 
-Note que árvore tem uma nova raiz e que a altura da subárvore a esquerda diminui e a altura da subárvore a direita aumentou.
+Note que a árvore fica com uma nova raiz e que a altura da subárvore a esquerda diminui e a altura da subárvore a direita aumenta.
 
 </div>
 </div>
+
+
+## Rebalanceamento a esquerda - código
+
+Projete uma função que implemente o esquema de rebalanceamento a esquerda (e a correção da altura da árvore).
 
 
 ## Rebalanceamento a esquerda - código
@@ -2289,11 +2360,23 @@ Note que árvore tem uma nova raiz e que a altura da subárvore a esquerda dimin
 
 ```python
 def rebalanceia_esq(r: No) -> No:
+    '''
+    Verifica o balanceamento de *r*, considerando o caso da subárvore a esquerda com maior altura,
+    e faz o rebalanceamento e atualização das alturas se necessário. Devolve a raiz da árvore balanceada.
+    '''
+```
+
+\pause
+
+```python
     assert r.esq is not None
     if altura(r.esq) - altura(r.dir) == 2:
+        # r está desbalaceada
         if altura(r.esq.esq) > altura(r.esq.dir):
+            # Caso Esquerda-Esquerda
             return rotaciona_dir(r)
         else:
+            # Caso Esquerda-Direita
             assert altura(r.esq.dir) > altura(r.esq.esq)
             r.esq = rotaciona_esq(r.esq)
             return rotaciona_dir(r)
@@ -2306,10 +2389,14 @@ def rebalanceia_esq(r: No) -> No:
 
 ## Rebalanceamento a direita
 
+Projete uma função que implemente o esquema de rebalanceamento a direita (e a correção da altura da árvore). \pause
+
 Fica como exercício.
 
 
 ## Atualização da função de inserção
+
+Atualize a função de inserção em ABB para árvores AVL. \pause
 
 <div class="columns">
 <div class="column" width="48%">
@@ -2358,7 +2445,14 @@ def insere(t: Arvore, val: int) -> No:
 
 ## Atualização da função de remoção
 
+Atualize a função de remoção em ABB para árvores AVL. \pause
+
 Fica como exercício.
+
+
+## Testes
+
+Como testar se as funções estão funcionando corretamente?
 
 
 ## Referências
