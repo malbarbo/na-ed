@@ -2087,7 +2087,275 @@ Veja uma [animação](https://en.wikipedia.org/wiki/Tree_rotation#/media/File:Tr
 
 ## Exemplo de inserção em árvore AVL
 
-Exemplo feito em sala.
+Crie uma árvore AVL inserindo os seguintes itens na ordem que eles aparecem: 20, 10, 5, 30, 40, 25, 8, 2, 6, 9, 12, 14.
+
+\pause
+
+Feito em sala.
+
+Você pode conferir o resultado usando [este](https://www.cs.usfca.edu/~galles/visualization/AVLtree.html) simulador.
+
+
+## Rebalanceamento
+
+Quando uma árvore AVL com raiz $r$ tem a subárvore a esquerda ou a direita alterada, é necessário verificar se a propriedade de balanceamento foi violada. \pause Como fazer essa verificação? \pause
+
+\scriptsize
+
+```python
+abs(altura(r.esq) - altura(r.dir)) == 2
+```
+
+\pause
+
+```python
+# Desbalanceamento a esquerda
+altura(r.esq) > altura(r.dir)) + 1
+
+# Desbalanceamento a direita
+altura(r.dir) > altura(r.esq)) + 1
+```
+
+
+\normalsize
+
+\pause
+
+Se existe violação, é necessário rebalancear a árvore usando rotações. \pause
+
+**Note que o rebalanceamento não é feito em uma árvore qualquer, mas sim em uma árvore AVL que acabou de ficar desbalanceada devido a inserção ou remoção de um elemento.**
+
+
+## Rebalanceamento
+
+Se a subárvore a esquerda tem altura maior que a subárvore a direita, então fazemos o rebalanceamento a esquerda, senão fazemos o rebalanceamento a direita. \pause
+
+Como o rebalanceamento a esquerda afeta as alturas das subárvores? \pause
+
+- Aumenta a altura da árvore a direita \pause
+
+- Diminui a altura da árvore a esquerda \pause
+
+
+Como o rebalanceamento a direita afeta as alturas das subárvores? \pause
+
+- Aumenta a altura da árvore a esquerda \pause
+
+- Diminui a altura da árvore a direita
+
+
+
+## Rebalanceamento a esquerda
+
+A forma que o rebalanceamento a esquerda de uma árvore AVL com raiz `r` é feito depende de qual das subárvores de `r.esq` tem maior altura.
+
+
+## Rebalanceamento a esquerda-esquerda
+
+Esquerda-Esquerda \scriptsize `altura(r.esq.esq) > altura(r.esq.dir)`{.python}
+
+\normalsize
+
+\pause
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```
+      r
+    // \
+    y   D
+  // \
+  x   C
+ / \
+A   B
+
+h(r) > h(y) > h(x) > h(C) == h(D)
+```
+
+\normalsize
+
+\pause
+
+O que é preciso para rebalancear a árvore? \pause
+
+\scriptsize
+
+```python
+return rotaciona_dir(r)
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```
+     y
+   /   \
+  x     z
+ / \   / \
+A   B C   D
+```
+
+\pause
+
+\normalsize
+
+Note que árvore tem uma nova raiz e que a altura da subárvore a esquerda diminui e a altura da subárvore a direita aumentou.
+
+</div>
+</div>
+
+
+## Rebalanceamento a esquerda-direita
+
+Esquerda-Direita \scriptsize `altura(r.esq.esq) < altura(r.esq.dir)`{.python}
+
+\normalsize
+
+\pause
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```
+      r
+    // \
+    y   D
+   / \\
+  A   x
+     / \
+    B   C
+
+h(r) > h(y) > h(x) > h(A) == h(D)
+```
+
+\normalsize
+
+\pause
+
+O que é preciso para rebalancear a árvore? \pause
+
+\scriptsize
+
+```python
+# Transforma no caso esquerda-esquerda
+r.dir = rotaciona_esq(r.dir)
+```
+
+\pause
+
+```python
+return rotaciona_dir(r)
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```
+      r              x
+     / \           /   \
+    x   D         y     z
+   / \           / \   / \
+  y   C         A   B C   D
+ / \
+A   B
+```
+
+\pause
+
+\normalsize
+
+Note que árvore tem uma nova raiz e que a altura da subárvore a esquerda diminui e a altura da subárvore a direita aumentou.
+
+</div>
+</div>
+
+
+## Rebalanceamento a esquerda - código
+
+\scriptsize
+
+```python
+def rebalanceia_esq(r: No) -> No:
+    assert r.esq is not None
+    if altura(r.esq) - altura(r.dir) == 2:
+        if altura(r.esq.esq) > altura(r.esq.dir):
+            return rotaciona_dir(r)
+        else:
+            assert altura(r.esq.dir) > altura(r.esq.esq)
+            r.esq = rotaciona_esq(r.esq)
+            return rotaciona_dir(r)
+    else:
+        # r está balaceada
+        atualiza_altura(r)
+        return r
+```
+
+
+## Rebalanceamento a direita
+
+Fica como exercício
+
+
+## Atualização da função de inserção
+
+<div class="columns">
+<div class="column" width="48%">
+
+```python
+def insere(t: Arvore, val: int) -> No:
+    if t is None:
+        return No(None, val, None)
+    else:
+        if val < t.val:
+            t.esq = insere(t.esq, val)
+        elif val > t.val:
+            t.dir = insere(t.dir, val)
+        else: # val == t.val
+            pass
+        return t
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+```python
+def insere(t: Arvore, val: int) -> No:
+    if t is None:
+        return No(None, val, None)
+    else:
+        if val < t.val:
+            t.esq = insere(t.esq, val)
+            t = rebalanceia_esq(t)
+        elif val > t.val:
+            t.dir = insere(t.dir, val)
+            t = rebalanceia_dir(t)
+        else: # val == t.val
+            pass
+        return t
+```
+</div>
+</div>
+
+
+## Atualização da função de remoção
+
+Fica como exercício.
+
 
 
 ## Referências
