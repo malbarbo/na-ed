@@ -2197,7 +2197,7 @@ return rotaciona_dir(r)
 ```
      y
    /   \
-  x     z
+  x     r
  / \   / \
 A   B C   D
 ```
@@ -2247,7 +2247,7 @@ O que é preciso para rebalancear a árvore? \pause
 
 ```python
 # Transforma no caso esquerda-esquerda
-r.dir = rotaciona_esq(r.dir)
+r.esq = rotaciona_esq(r.esq)
 ```
 
 \pause
@@ -2266,7 +2266,7 @@ return rotaciona_dir(r)
 ```
       r              x
      / \           /   \
-    x   D         y     z
+    x   D         y     r
    / \           / \   / \
   y   C         A   B C   D
  / \
@@ -2306,13 +2306,15 @@ def rebalanceia_esq(r: No) -> No:
 
 ## Rebalanceamento a direita
 
-Fica como exercício
+Fica como exercício.
 
 
 ## Atualização da função de inserção
 
 <div class="columns">
 <div class="column" width="48%">
+
+\scriptsize
 
 ```python
 def insere(t: Arvore, val: int) -> No:
@@ -2332,6 +2334,8 @@ def insere(t: Arvore, val: int) -> No:
 
 </div>
 <div class="column" width="48%">
+
+\scriptsize
 
 ```python
 def insere(t: Arvore, val: int) -> No:
@@ -2355,7 +2359,6 @@ def insere(t: Arvore, val: int) -> No:
 ## Atualização da função de remoção
 
 Fica como exercício.
-
 
 
 ## Referências
