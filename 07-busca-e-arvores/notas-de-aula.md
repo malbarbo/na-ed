@@ -2472,22 +2472,33 @@ No caso de árvores AVL, podemos verificar se após cada inserção e remoção,
 Veja o código no arquivo `avl.py`.
 
 
-## Percurso em árvore com funções iterativas
+## Percursos em árvores com funções recursivas e iterativas
 
 Discutido em sala.
+
+Veja o arquivo `percursos.py`.
 
 
 ## Revisão
 
 Implementação do TAD dicionário: \pause
 
-- Com arranjos e lista encadeada com busca linear, as operações de busca inserção e remoção tem tempo $O(n)$ \pause
+- Com arranjos e lista encadeada com busca linear, as operações de busca inserção e remoção tem tempo $O(n)$; \pause
 
-- Com arranjos ordenados e busca binária, a busca tem tempo $O(\lg n)$ e a inserção e remoção $O(n)$ \pause
+- Com arranjos ordenados e busca binária, a busca tem tempo $O(\lg n)$ e a inserção e remoção $O(n)$; \pause
 
-- Com ABB o tempo de busca, inserção e remoção é $O(h)$, onde $h$ é a altura da árvore. O caso médio o tempo é de $O(\lg n)$ e no pior caso $O(\lg n)$ \pause
+- Com ABB o tempo de busca, inserção e remoção é $O(h)$, onde $h$ é a altura da árvore. No caso médio o tempo é de $O(\lg n)$ e no pior caso $O(\lg n)$; \pause
 
-- Com árvore AVL o tempo de busca, inserção e remoção é $O(\lg n)$
+- Com árvore AVL o tempo de busca, inserção e remoção é $O(\lg n)$.
+
+
+## Revisão
+
+Podemos fazer melhor? \pause Sim! \pause
+
+Quando usamos uma ABB ou AVL, precisamos manter os elementos "ordenados", para podermos fazer uma busca binária. \pause
+
+A seguir vamos ver como fazer uma busca eficiente sem precisar manter os elementos ordenados.
 
 
 ## Referências
