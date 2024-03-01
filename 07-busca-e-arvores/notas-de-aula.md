@@ -4,6 +4,8 @@ title: Busca e árvores
 linkcolor: Black
 urlcolor: Blue
 # TODO: mudar val para chave?
+# TODO: adicionar testes de invariante
+# TODO: completar funções iterativas de percurso
 ---
 
 ## Introdução
@@ -2452,7 +2454,40 @@ Fica como exercício.
 
 ## Testes
 
-Como testar se as funções estão funcionando corretamente?
+As funções `busca`, `insere` e `remove` definem a interface de uso da ABB e AVL. \pause
+
+Os exemplos servem tanto para mostrar para o usuário o uso da função e o seu comportamento. Os exemplos são bons testes iniciais para essas funções. \pause
+
+Já as funções de rotação e balanceamento são funções auxiliares, não fazem parte da interface para o usuário. \pause Além disso, as funções são mais complicadas e interagem com outras funções. \pause Os exemplos podem não ser suficientes para um bom teste. \pause
+
+Como proceder? \pause Fazendo testes de propriedade. \pause
+
+
+## Testes de propriedade
+
+Em um teste de propriedade executamos uma função e verificamos se a saída mantém alguma propriedade específica. \pause
+
+No caso de árvores AVL, podemos verificar se após cada inserção e remoção, a árvore continua sendo AVL. \pause
+
+Veja o código no arquivo `avl.py`.
+
+
+## Percurso em árvore com funções iterativas
+
+Discutido em sala.
+
+
+## Revisão
+
+Implementação do TAD dicionário: \pause
+
+- Com arranjos e lista encadeada com busca linear, as operações de busca inserção e remoção tem tempo $O(n)$ \pause
+
+- Com arranjos ordenados e busca binária, a busca tem tempo $O(\lg n)$ e a inserção e remoção $O(n)$ \pause
+
+- Com ABB o tempo de busca, inserção e remoção é $O(h)$, onde $h$ é a altura da árvore. O caso médio o tempo é de $O(\lg n)$ e no pior caso $O(\lg n)$ \pause
+
+- Com árvore AVL o tempo de busca, inserção e remoção é $O(\lg n)$
 
 
 ## Referências

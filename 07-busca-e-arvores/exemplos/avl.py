@@ -60,11 +60,10 @@ def insere(r: Arvore, chave: str) -> No:
     >>> busca(r, 'b')
     False
 
-    Testes
+    Testes de propriedade
 
-    Nós testes a seguir, várias árvores são criadas pela inserção
-    de elementos e após cada inserção é verificada se a árvore
-    mantém a propriedade da AVL.
+    Nós testes a seguir, várias árvores são criadas pela inserção de elementos
+    e após cada inserção é verificada se a árvore mantém a propriedade da AVL.
 
     >>> # Inserção em ordem
     >>> r = None
@@ -110,7 +109,8 @@ def remove(r: Arvore, chave: str) -> Arvore:
     >>> busca(r, 'b')
     False
 
-    Testes
+
+    Testes de propriedade
 
     Nos testes a seguir várias árvores são criadas, em seguida algumas chaves
     são removidas e a proprieade de AVL e o resultado de busca são verificados.
@@ -205,7 +205,8 @@ def rotaciona_esq(r: No) -> No:
 
     Requer que *r.dir* não seja None.
 
-    Teste
+    Testes
+
     >>> # Cria a árvore
     >>> #1 2  3  4  5
     >>> A, r, B, x, C = _cria_nos('12345')
@@ -256,7 +257,8 @@ def balanceia_esq(r: No) -> No:
       / \
      A   B
 
-    Teste
+    Testes
+
     >>> # Cria a árvore
     >>> #1 2  3  4  5  6  7
     >>> A, y, B, x, C, r, D = _cria_nos('1234567')
@@ -294,7 +296,10 @@ def balanceia_esq(r: No) -> No:
                     A   y        x   C                A   B C   D
                        / \      / \
                       B   C    A   B
+
+
     Testes
+
     >>> # Cria a árvore
     >>> #1 2  3  4  5  6  7
     >>> A, x, B, y, C, r, D = _cria_nos('1234567')
@@ -343,6 +348,7 @@ def maximo(r: No) -> str:
     Encontra o valor máximo em *r*.
 
     Exemplos
+
     >>> r = None
     >>> for val in [5, 1, 2, 7, 6, 3, 8, 4]:
     ...     r = insere(r, val)

@@ -223,19 +223,19 @@ def remove(t: Arvore, val: int) -> Arvore:
     else:  # val == t.val
         if t.esq is None:
             # Se t.dir é None
-            #     t     ->  None
+            #  t    ->  None
             #
             # Se t.dir não é None
-            #     t          D
-            #    / \    ->  / \
-            #   E   D      DE DD
-            #      / \
-            #     DE DD
+            # t           D
+            #  \     ->  / \
+            #   D       DE DD
+            #  / \
+            # DE DD
             return t.dir
         elif t.dir is None:
-            #     t          E
-            #    /      ->  / \
-            #   E          EE ED
+            #     t       E
+            #    /   ->  / \
+            #   E       EE ED
             #  / \
             # EE ED
             return t.esq

@@ -17,6 +17,7 @@ def valores_nivel(t: Arvore, n: int) -> list[int]:
     Devolve os nós que estão no nível *n* de *t*.
 
     Exemplos
+
           t4  4
             /   \
          /         \

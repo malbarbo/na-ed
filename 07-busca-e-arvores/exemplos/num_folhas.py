@@ -18,6 +18,7 @@ def num_folhas(t: Arvore) -> int:
     Uma folha é um nó sem nenhum filho.
 
     Exemplos
+
           t4  4
             /   \
          /         \

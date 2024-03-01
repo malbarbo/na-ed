@@ -32,7 +32,8 @@ def busca_binaria(valores: list[int], chave: int) -> int:
     >>> busca_binaria([6, 8, 10, 12, 20], 21)
     5
 
-    Testes
+
+    Testes de propriedade
 
     O teste a seguir cria uma lista 0, 2, ..., 98 e realiza uma busca binária
     para 0, 1, 2, ..., 99.
