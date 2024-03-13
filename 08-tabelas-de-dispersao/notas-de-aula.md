@@ -38,7 +38,9 @@ Como tirar proveito desse conhecimento sobre as chaves para fazer uma implementa
 
 Podemos criar um arranjo com uma posição para cada possível chave da entrada, armazenamos na posição o valor associada com a chave, se houver um, ou `None`{.python} caso contrário. \pause
 
-Essa estratégia é chamada de **endereçamento direto**. \pause De forma geral, para chaves no intervalo de $0$ a $M - 1$, alocamos um arranjo com $M$ posições.
+Essa estratégia é chamada de **endereçamento direto**. \pause
+
+De forma geral, para chaves no intervalo de $0$ a $M - 1$, alocamos um arranjo com $M$ posições.
 
 
 ## Endereçamento direto
@@ -100,7 +102,7 @@ Vamos isolar e tentar lidar com cada uma dessas questões.
 <div class="columns">
 <div class="column" width="48%">
 
-O que podemos fazer se as chaves puderem ser menores que 0, isto é, puderem estar em um intervalo de $[A, B)$ qualquer? \pause
+O que podemos fazer se as chaves puderem estar em um intervalo de $[A, B)$ qualquer? \pause
 
 Podemos _mapear_ cada chave para um valor distinto no intervalo  $[0, B - A)$:
 
@@ -150,20 +152,20 @@ def mapeia(chave: int, A: int, B: int) -> int:
 
 ## Quantidade de chaves menor que o tamanho do intervalo
 
-O que fazer quando a quantidade de chaves armazenadas $n$ é muito menor que a quantidade de chaves possíveis $M$? \pause
+O que fazer quando a quantidade de chaves armazenadas $n$ é muito menor que a quantidade de chaves possíveis $U$? \pause
 
-Usar um arranjo de tamanho $m = O(n)$ e _mapear_ as chaves para índices no intervalo de $[0, m - 1)$ (índice válido para o arranjo). \pause
-
-Como mapear 10 valores no intervalo de $[0, 1000]$ para valores no intervalo $[0, 20]$? ($n = 10$, $m  = 20$, $M = 1000$).
+Usar um arranjo de tamanho $m = O(n)$ e _mapear_ as chaves para índices no intervalo de $[0, m)$ (índice válido para o arranjo).
 
 
 ## Quantidade de chaves menor que o tamanho do intervalo
 
-Algumas opções (sendo `k` uma chave e $m$ o tamanho do arranjo): \pause
+Como mapear uma chave no intervalo de $[0, U)$ para posições no intervalo $[0, m)$? \pause
 
-- Por divisão: `k % m`{.python} \pause
+Algumas opções (sendo $k$ uma chave): \pause
 
-- Por multiplicação: `floor(m * (k * A % 1))`{.python}, onde $A > 1$ é um valor real -- note que `k * A % 1`{.python} é um valor menor que `1`{.python}.
+- Por divisão (resto): $k \mod m$ \pause
+
+- Por multiplicação: $\left \lfloor m \times (k \times A \mod 1) \right \rfloor$, onde $A > 1$ é um valor real -- note que $k \times A \mod 1 < 1$.
 
 
 ## Quantidade de chaves menor que o tamanho do intervalo
@@ -172,7 +174,7 @@ Mapeie as chaves 734, 141, 8, 230, 554, 650 usando o esquema de divisão com $m 
 
 $734 \rightarrow 14$, \pause $141 \rightarrow 1$ \pause, $8 \rightarrow 8$, \pause $230 \rightarrow 10$, \pause $554 \rightarrow 14$, \pause $650 \rightarrow 10$. \pause
 
-Considerando que queremos usar o resultado do mapeamento de uma chave como índice em um arranjo (onde o valor associado com a chave será armazenado), qual o problema que temos? \pause Colisões! \pause
+Considerando que o resultado do mapeamento de uma chave é uma posição em um arranjo (onde o valor associado com a chave será armazenado), qual o problema que temos? \pause Colisões! \pause
 
 Uma **colisão** ocorre quando duas chaves são mapeadas para a mesma posição do arranjo.
 
@@ -185,9 +187,7 @@ Podemos lidar com as colisões? \pause Sim, de algumas maneiras que vamos ver de
 
 Considerando o mapeamento por divisão, qual a característica das chaves para que as colisões sejam mais raras? \pause Elas devem estar uniformemente distribuídas. \pause
 
-E para que as colisões sejam frequentes? \pause Que tenham o mesmo resto quando divididas por `m`. \pause
-
-É possível projetar funções de mapeamento que tornem as colisões raras, independente da distribuição da entrada? \pause Sim! Mas é um assunto avançado, que não vamos discutir nessa disciplina.
+E para que as colisões sejam frequentes? \pause Que tenham o mesmo resto quando divididas por $m$.
 
 
 ## Chaves que não são inteiros
@@ -200,26 +200,94 @@ _Mapear_ as chaves para valores inteiros: \pause
 
 - Para um inteiro que depois é mapeado para uma posição. \pause
 
-Como mapear uma string para um inteiro? \pause Cada caractere da string é internamente representado por um número (_code point_), esse número pode ser obtido com a função `ord`{.python}. \pause
-
-Então, podemos, por exemplo, mapear uma string para o _code point_ do seu primeiro caractere, ou para zero se a string é vazia. \pause
-
-Qual o problema dessa forma de mapeamento? \pause Gera muitas colisões!
+Como mapear uma string para um inteiro?
 
 
-## Funções de dispersão
+## Chaves que não são inteiros
 
-Vimos diferentes situações e diferentes formas de lidar com elas, mas elas tinha algo em comum, o que? \pause
+Cada elemento em uma posição de uma string é internamente representado por um número (_code point_), esse número pode ser obtido com a função `ord`{.python}. \pause
 
-- O mapeamento da chave para inteiro.
+Então, podemos, por exemplo, mapear uma string para o _code point_ do seu primeiro caractere, ou zero se a string for vazia. \pause Ou ainda, somar todos os _code point_ de todos os caracteres. \pause
+
+Qual o problema dessas formas de mapeamento? \pause Geram muitas colisões! \pause
+
+Mas não vamos nos preocupar com isso, porque enquanto, basta sabermos que é possível mapear _qualquer_ tipo de valor para um número inteiro.
+
+
+## Revisão
+
+Vimos que, se as chaves são inteiros em um intervalo de 0 a $M - 1$, então podemos implementar um dicionário usando endereçamento direto, onde as operações de busca, inserção e remoção tem complexidade de tempo de $O(1)$. \pause
+
+Vimos as limitações do endereçamento direto e discutimos estratégias de como superá-las. \pause O quê essas estratégias tinham em comum? \pause
+
+- O mapeamento da chave para uma posição de um arranjo com tamanho conhecido
 
 \pause
 
-Vamos combinar duas funções de mapeamento: \pause
+Em outras palavras, a estratégia é a mesma!
 
-- A primeira mapeará uma chave qualquer para um número inteiro, garantindo uma distribuição uniforme do resultado. \pause Chamaremos essa função de **função de dispersão**, ou em inglês, função _hash_. \pause
 
-- A segunda mapeará o resultado da primeira para uma posição do arranjo.
+## Tabelas de dispersão
+
+Chamamos a função que mapeia a chaves para posições de um arranjo de **função de dispersão** ou **função _hash_**. \pause
+
+Uma **tabela de dispersão** ou **tabela _hash_** é uma estrutura de dados que usa uma função de dispersão para calcular índices em um arranjo que fornece uma forma de armazenar pares de chave-valor.
+
+\pause
+
+Existem dois desafios no projeto e implementação de uma tabela de dispersão: \pause
+
+- A função de dispersão \pause
+
+- O tratamento de colisões
+
+
+## Função de dispersão
+
+Criar uma boa função de dispersão, isto é, uma função que gere poucas colisões, requer conhecimentos de avançados de probabilidade e estatística, por isso não vamos tratar desse assunto. \pause
+
+Como função de dispersão, vamos combinar a função `hash`{.python}, pré-defina em Python, com o resto da divisão. \pause
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+>>> hash('casa')
+-3155579165809741514
+>>> hash('arroz')
+-5974344979373615551
+>>> hash(7)
+7
+>>> hash(-17)
+-17
+>>> hash(2 ** 100)
+549755813888
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+>>> hash('casa') % 20
+6
+>>> hash('arroz') % 20
+9
+>>> hash(7) % 20
+7
+>>> hash(-17) % 20
+3
+>>> hash(2 ** 100) % 20
+8
+```
+</div>
+</div>
+
 
 
 ## Referências
@@ -229,3 +297,5 @@ Capítulo 11 - Seção Estratégias de hashing - Fundamentos de Python: Estrutur
 Capítulo 11 - Tabelas de Dispersão - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
 
 Capítulo 5 - Hash Tables - [Open Data Structures](https://opendatastructures.org/ods-python.pdf).
+
+Funções [`hash`](https://docs.python.org/3/library/functions.html#hash) e [`object.__hash__`](https://docs.python.org/3/reference/datamodel.html#object.__hash__) do Python.
