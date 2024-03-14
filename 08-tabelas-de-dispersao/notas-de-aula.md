@@ -45,6 +45,11 @@ De forma geral, para chaves no intervalo de $0$ a $M - 1$, alocamos um arranjo c
 
 ## Endereçamento direto
 
+![](imagens/Fig-11-1.pdf){width=9cm}
+
+
+## Endereçamento direto
+
 <div class="columns">
 <div class="column" width="48%">
 \small
@@ -194,11 +199,7 @@ E para que as colisões sejam frequentes? \pause Que tenham o mesmo resto quando
 
 O que fazer quando as chaves não são inteiros? \pause
 
-_Mapear_ as chaves para valores inteiros: \pause
-
-- Diretamente para uma posição; ou \pause
-
-- Para um inteiro que depois é mapeado para uma posição. \pause
+_Mapear_ as chaves para valores inteiros e depois para posições. (Ou diretamente para posições) \pause
 
 Como mapear uma string para um inteiro?
 
@@ -288,6 +289,16 @@ Como função de dispersão, vamos combinar a função `hash`{.python}, pré-def
 </div>
 </div>
 
+
+## Colisão
+
+Considere os pares de chave-valor: \footnotesize `(734, 'maça')`{.python}, `(141, 'mamão')`{.python}, `(84, 'banana')`{.python}, `(230, 'goiaba')`{.python}, `(554, 'ameixa')`{.python}, `(1, 'laranja')`{.python}. \pause
+
+\normalsize
+
+Calcule a posição para cada chave em um tabela (arranjo) com 10 posições. \pause
+
+Proponha uma forma de lidar com as colisões, isto é, uma maneira de armazenar, busca, inserir e remover os pares chave-valor na tabela.
 
 
 ## Referências
