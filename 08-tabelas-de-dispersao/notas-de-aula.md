@@ -245,9 +245,9 @@ Existem dois desafios no projeto e implementação de uma tabela de dispersão: 
 
 ## Função de dispersão
 
-Criar uma boa função de dispersão, isto é, uma função que gere poucas colisões, requer conhecimentos de avançados de probabilidade e estatística, por isso não vamos tratar desse assunto. \pause
+Criar uma boa função de dispersão, isto é, uma função que gere poucas colisões, requer conhecimentos avançados de probabilidade e estatística, por isso não vamos tratar desse assunto. \pause
 
-Como função de dispersão, vamos combinar a função `hash`{.python}, pré-defina em Python, com o resto da divisão. \pause
+Como função de dispersão, vamos combinar a função `hash`{.python}, pré-defina em Python, com o resto da divisão. \pause Para uma chave $k$, vamos representar o resultado da função de dispersão por $h(k)$. \pause
 
 <div class="columns">
 <div class="column" width="48%">
@@ -292,13 +292,170 @@ Como função de dispersão, vamos combinar a função `hash`{.python}, pré-def
 
 ## Colisão
 
-Considere os pares de chave-valor: \footnotesize `(734, 'maça')`{.python}, `(141, 'mamão')`{.python}, `(84, 'banana')`{.python}, `(230, 'goiaba')`{.python}, `(554, 'ameixa')`{.python}, `(1, 'laranja')`{.python}. \pause
+Considere os pares de chave-valor: \footnotesize `(734, 'maça')`{.python}, `(141, 'mamão')`{.python}, `(84, 'banana')`{.python}, `(236, 'goiaba')`{.python}, `(554, 'ameixa')`{.python}, `(1, 'laranja')`{.python}. \pause
 
 \normalsize
 
-Calcule a posição para cada chave em um tabela (arranjo) com 10 posições. \pause
+Considerando um tabela (arranjo) de 10 posições, calcule $h(k)$ para cada chave $k$ listada anteriormente. \pause
 
 Proponha uma forma de lidar com as colisões, isto é, uma maneira de armazenar, busca, inserir e remover os pares chave-valor na tabela.
+
+
+## Encadeamento
+
+Podemos armazenar todas os pares chave-valor cuja a chave gerou o mesmo índice em um coleção: \pause
+
+- Arranjo dinâmico \pause
+- Lista encadeada \pause
+- Árvore AVL \pause
+- Outra tabela de dispersão!
+
+\pause
+
+Quanto usamos listas encadeadas, chamamos a estratégia **encadeamento**.
+
+
+## Encadeamento
+
+<div class="columns">
+<div class="column" width="40%">
+\scriptsize
+
+```
+(734, 'maça') -> 4
+
+(141, 'mamão') -> 1
+
+(84, 'banana') -> 4
+
+(236, 'goiaba') -> 6
+
+(554, 'ameixa') -> 4
+
+(1, 'laranja') -> 1
+```
+
+\pause
+
+</div>
+<div class="column" width="60%">
+
+\scriptsize
+
+\vspace{-0.1cm}
+
+```
+  +---+
+0 |   |
+  +---+   +-----------+   +-----------+
+1 |   |-->| 141 mamão |-->| 1 laranja |
+  +---+   +-----------+   +-----------+
+2 |   |
+  +---+
+3 |   |
+  +---+   +-----------+   +-----------+   +-----------+
+4 |   |-->| 734  maça |-->| 84 banana |-->| 554 ameixa|
+  +---+   +-----------+   +-----------+   +-----------+
+5 |   |
+  +---+   +-----------+
+6 |   |-->| 236 goiaba|
+  +---+   +-----------+
+7 |   |
+  +---+
+8 |   |
+  +---+
+9 |   |
+  +---+
+```
+
+</div>
+</div>
+
+
+## Encadeamento
+
+<div class="columns">
+<div class="column" width="48%">
+
+Como definir os tipos para implementar um dicionario usando uma tabela de dispersão com encadeamento? \pause
+
+\scriptsize
+
+```python
+@dataclass
+class No:
+    chave: str
+    valor: int
+    prox: No | None
+```
+
+\pause
+
+```python
+class Dicionario:
+    tabela: list[No | None]
+    num_itens: int
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+Como implementar `get`?
+
+\pause
+
+\scriptsize
+
+```python
+def get(self, chave: str) -> int | None:
+    # procurar por chave em self.tabela[h(chave)]
+```
+
+\pause
+
+\normalsize
+
+Como implementar `assoc`?
+
+\pause
+
+\scriptsize
+
+```python
+def assoc(self, chave: str, valor: int):
+    # inserir (chave, valor) em self.tabela[h(chave)]
+    # ou atualizar o valor associado com a chave
+```
+
+\pause
+
+\normalsize
+
+Como implementar `remove`?
+
+\pause
+
+\scriptsize
+
+```python
+def remove(self, chave: str):
+    # remover (chave, valor) de self.tabela[h(chave)]
+```
+
+</div>
+</div>
+
+\pause
+
+Qual é a complexidade de tempo de `get`, `assoc` e `remove`? \pause Depende da quantidade de itens no encadeamento...
+
+
+## Fator de carga
+
+Para discutirmos a complexidade de tempo, precisamos de uma definição. \pause
+
+Chamado de **fator de carga** $\alpha$ de uma tabela de dispersão $T$ o $n / m$, onde $n$ é a quantidade de posições na tabela e $m$ é a quantidade de elementos armazenados.
 
 
 ## Referências
