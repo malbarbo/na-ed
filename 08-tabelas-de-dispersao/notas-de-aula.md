@@ -301,7 +301,7 @@ Considerando um tabela (arranjo) de 10 posições, calcule $h(k)$ para cada chav
 Proponha uma forma de lidar com as colisões, isto é, uma maneira de armazenar, busca, inserir e remover os pares chave-valor na tabela.
 
 
-## Encadeamento
+## Encadeamento separado
 
 Podemos armazenar todas os pares chave-valor cuja a chave gerou o mesmo índice em um coleção: \pause
 
@@ -312,10 +312,10 @@ Podemos armazenar todas os pares chave-valor cuja a chave gerou o mesmo índice 
 
 \pause
 
-Quanto usamos listas encadeadas, chamamos a estratégia **encadeamento**.
+Quanto usamos uma lista encadeada em cada posição, chamamos a estratégia **encadeamento separado**.
 
 
-## Encadeamento
+## Encadeamento separado
 
 <div class="columns">
 <div class="column" width="40%">
@@ -372,12 +372,12 @@ Quanto usamos listas encadeadas, chamamos a estratégia **encadeamento**.
 </div>
 
 
-## Encadeamento
+## Encadeamento separado
 
 <div class="columns">
 <div class="column" width="48%">
 
-Como definir os tipos para implementar um dicionario usando uma tabela de dispersão com encadeamento? \pause
+Como definir os tipos para implementar um dicionário usando uma tabela de dispersão com encadeamento? \pause
 
 \scriptsize
 
@@ -451,11 +451,33 @@ def remove(self, chave: str):
 Qual é a complexidade de tempo de `get`, `assoc` e `remove`? \pause Depende da quantidade de itens no encadeamento...
 
 
-## Fator de carga
+## Fator de carga e complexidade de tempo
 
 Para discutirmos a complexidade de tempo, precisamos de uma definição. \pause
 
-Chamado de **fator de carga** $\alpha$ de uma tabela de dispersão $T$ o $n / m$, onde $n$ é a quantidade de posições na tabela e $m$ é a quantidade de elementos armazenados.
+Chamamos de **fator de carga** $\alpha$ de uma tabela de dispersão $T$ o valor $n / m$, onde $n$ é a quantidade de posições na tabela e $m$ é a quantidade de elementos em $T$. \pause
+
+Qual é o pior caso para as operações? \pause Todos os $n$ elementos estão na mesma posição da tabela. \pause Nesse caso, o tempo das operações é $O(n)$. \pause
+
+E o caso médio? \pause Qual o tamanho médio de cada lista encadeada? \pause $n / m = \alpha$ \pause, ou seja, no caso médio, o tempo das operações é $O(1 + \alpha)$. \pause
+
+Se mantermos $n = O(m)$, então $\alpha = n / m = O(m) / m = O(1)$, e o tempo das operações fica $O(1)$.
+
+
+## Redispersão
+
+Para manter o tempo médio em $O(1)$, temos que manter um fator de carga pequeno. \pause Mas não muito pequeno para não desperdiçar memória. \pause
+
+Sedgewick recomenda um valor entre 5 e 10. \pause
+
+Então quanto $\alpha$ ficar maior que 10, temos que alocar uma tabela _maior_ e fazer a redispersão das chaves. \pause
+
+Quanto $\alpha$ fica menor que 5, temos que alocar uma tabela _menor_ e fazer a redispersão das chaves.
+
+
+## Sondagem
+
+Outra forma de lidar com as colisões é a sondagem.
 
 
 ## Referências
