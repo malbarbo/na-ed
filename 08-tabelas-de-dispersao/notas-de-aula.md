@@ -296,7 +296,7 @@ Considere os pares de chave-valor: \footnotesize `(734, 'maça')`{.python}, `(14
 
 \normalsize
 
-Considerando um tabela (arranjo) de 10 posições, calcule $h(k)$ para cada chave $k$ listada anteriormente. \pause
+Considerando um tabela (arranjo) de $m = 10$ posições, calcule $h(k) = k \mod m$ para cada chave $k$ listada anteriormente. \pause
 
 Proponha uma forma de lidar com as colisões, isto é, uma maneira de armazenar, busca, inserir e remover os pares chave-valor na tabela.
 
@@ -416,14 +416,14 @@ def get(self, chave: str) -> int | None:
 
 \normalsize
 
-Como implementar `assoc`?
+Como implementar `associa`?
 
 \pause
 
 \scriptsize
 
 ```python
-def assoc(self, chave: str, valor: int):
+def associa(self, chave: str, valor: int):
     # inserir (chave, valor) em self.tabela[h(chave)]
     # ou atualizar o valor associado com a chave
 ```
@@ -448,20 +448,20 @@ def remove(self, chave: str):
 
 \pause
 
-Qual é a complexidade de tempo de `get`, `assoc` e `remove`? \pause Depende da quantidade de itens no encadeamento...
+Qual é a complexidade de tempo de `get`, `associa` e `remove`? \pause Depende da quantidade de itens no encadeamento...
 
 
 ## Fator de carga e complexidade de tempo
 
 Para discutirmos a complexidade de tempo, precisamos de uma definição. \pause
 
-Chamamos de **fator de carga** $\alpha$ de uma tabela de dispersão $T$ o valor $n / m$, onde $n$ é a quantidade de posições na tabela e $m$ é a quantidade de elementos em $T$. \pause
+Chamamos de **fator de carga** $\alpha$ de uma tabela de dispersão $T$ o valor $n / m$, onde $m$ é a quantidade de posições na tabela e $n$ é a quantidade de elementos em $T$. \pause
 
 Qual é o pior caso para as operações? \pause Todos os $n$ elementos estão na mesma posição da tabela. \pause Nesse caso, o tempo das operações é $O(n)$. \pause
 
 E o caso médio? \pause Qual o tamanho médio de cada lista encadeada? \pause $n / m = \alpha$ \pause, ou seja, no caso médio, o tempo das operações é $O(1 + \alpha)$. \pause
 
-Se mantermos $n = O(m)$, então $\alpha = n / m = O(m) / m = O(1)$, e o tempo das operações fica $O(1)$.
+Se mantermos $n = O(m)$, então $\alpha = n / m = O(m) / m = O(1)$, e o tempo médio das operações fica $O(1)$.
 
 
 ## Redispersão
@@ -470,7 +470,7 @@ Para manter o tempo médio em $O(1)$, temos que manter um fator de carga pequeno
 
 Sedgewick recomenda um valor entre 5 e 10. \pause
 
-Então quanto $\alpha$ ficar maior que 10, temos que alocar uma tabela _maior_ e fazer a redispersão das chaves. \pause
+Então quanto $\alpha$ fica maior que 10, temos que alocar uma tabela _maior_ e fazer a redispersão das chaves. \pause
 
 Quanto $\alpha$ fica menor que 5, temos que alocar uma tabela _menor_ e fazer a redispersão das chaves.
 
