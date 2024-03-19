@@ -14,7 +14,7 @@ O problema de ordenação consiste em, dado uma sequência de $n$ números $\lan
 
 ## Introdução
 
-Para avaliarmos os algoritmos de ordenação usamos normalmente, além da complexidade de tempo, o uso extra de memória e se a ordenação é estável. \pause
+Para avaliarmos os algoritmos de ordenação, além da complexidade de tempo, consideramos o uso extra de memória e se a ordenação é estável. \pause
 
 Um algoritmo é **in-loco** se a quantidade de memória que ele precisa para executar é $O(1)$, ou seja, não depende do tamanho da entrada. \pause
 
@@ -23,9 +23,7 @@ Um algoritmo de ordenação é **estável** se a ordem relativamente dos element
 
 ## Introdução
 
-Veremos agora o projeto de diversos algoritmos de ordenação e também vamos discutir suas características. \pause
-
-Os algoritmos que veremos são baseados nas seguintes técnicas de projeto: \pause
+Veremos agora o projeto de diversos algoritmos de ordenação. \pause Eles são baseados nas seguintes técnicas de projeto: \pause
 
 - Incremental \pause
 
@@ -71,13 +69,17 @@ Temos que tomar duas decisões para tornar o processo concreto: \pause
 
 ![](imagens/ordenado-resto.pdf){width=6cm}
 
-Como selecionar o próximo elemento? \pause Pegamos o primeiro elemento do restante. \pause
+Como selecionar o próximo elemento? \pause
 
-Como estender o subarranjo ordenado? \pause Inserindo o elemento selecionado na parte ordenada. \pause
+- Pegamos o primeiro elemento do restante. \pause
+- Qual é o custo? \pause $O(1)$ \pause
 
-Este algoritmo é conhecido como **ordenação por inserção**. \pause
+Como estender o subarranjo ordenado? \pause
 
-Considerado que o tamanho da parte ordenada é $j$ e o tamanho do restante é $n - j$, qual é o tempo para selecionar um elemento? \pause $O(1)$. \pause E para inserir o elemento selecionado na parte ordenada? \pause $O(j)$.
+- Inserindo o elemento selecionado na parte ordenada. \pause
+- Qual é o custo? \pause $O(j)$ \pause
+
+Este algoritmo é conhecido como **ordenação por inserção** (_selection sort_).
 
 
 ## Ordenação por inserção
@@ -126,6 +128,11 @@ def ordena_insercao(lst: list[int]):
     >>> lst
     [1, 2, 3, 4, 5, 6]
     '''
+```
+
+\pause
+
+```python
     for i in range(1, len(lst)):
         j = i
         while j > 0 and lst[j - 1] > lst[j]:
@@ -148,3 +155,304 @@ A ordenação é estável? \pause Sim.
 
 </div>
 </div>
+
+
+## Melhoria
+
+Podemos melhor o tempo? \pause
+
+Temos dois custos, o de seleção, que é $O(1)$, e o de inserção, que é $O(j)$. \pause Podemos melhor o tempo da inserção? \pause
+
+Considerando que o subarranjo `lst[:j]` está ordenado, poderíamos usar uma busca binária para encontrar a posição de inserção em $O(\lg j)$. \pause No entanto, a inserção continuaria sendo $O(j)$, pois os elementos precisar ser deslocados. \pause
+
+Podemos fazer uma "inserção" sem fazer o deslocamento dos elementos? \pause Sim!
+
+
+## Ordenação por seleção
+
+![](imagens/ordenado-resto.pdf){width=6cm}
+
+Como selecionar o próximo elemento? \pause
+
+- Pegamos o menor elemento do restante. \pause
+- Qual é o custo? \pause $O(n - j)$ \pause
+
+Como estender o subarranjo ordenado? \pause
+
+- Trocando de posição o menor elemento com o primeiro do restante. \pause
+- Qual é o custo? \pause $O(1)$ \pause
+
+Este algoritmo é conhecido como **ordenação por seleção** (_selection sort_).
+
+
+## Ordenação por seleção
+
+<div class="columns">
+<div class="column" width="53%">
+Projete uma função que implemente o algoritmo de ordenação por seleção. \pause
+
+\scriptsize
+
+```python
+def ordena_selecao(lst: list[int]):
+    '''
+    Ordena *lst* em ordem não decrescente usando
+    o algoritmo de ordenação por inserção.
+    Exemplos
+    >>> lst = [5, 2, 4, 6, 1, 3]
+    >>> ordena_insercao(lst)
+    >>> lst
+    [1, 2, 3, 4, 5, 6]
+    '''
+```
+
+\pause
+
+```python
+    for i in range(len(lst)):
+        m = i # índice do menor em lst[i:]
+        for j in range(i + 1, len(lst)):
+            if lst[j] < lst[m]:
+                m = j
+        lst[i], lst[m] = lst[m], lst[i]
+```
+
+</div>
+<div class="column" width="43%">
+\pause
+Qual a complexidade de tempo da ordenação por seleção? \pause
+
+Cada iteração `i` o corpo do segundo `for`{.python} é executado `n - i - 1` vezes. \pause A complexidade de tempo é $\displaystyle \sum_{i=0}^{n - 1} n - i - 1 = O(n^2)$. \pause
+
+A implementação é in-loco? \pause Sim. \pause
+
+A ordenação é estável? \pause Sim. \pause
+
+A ordenação por seleção é mais eficiente do que a ordenação por inserção? \pause Não...
+
+</div>
+</div>
+
+
+## Melhoria
+
+Quando projetamos o algoritmo de ordenação por seleção nós movemos o custo de inserção para a seleção e
+vice e versa… \pause Parece que não ganhamos nada! \pause
+
+Mas isso não é verdade, agora podemos abordar o problema por outro ângulo! \pause
+
+### Antes
+
+Tentamos diminuir o tempo para inserir em um arranjo ordenado (parece muito rígido). \pause
+
+### Agora
+
+Vamos tentar diminuir o tempo para selecionar o valor mínimo de um arranjo (parece mais flexível).
+
+
+## Heap
+
+Um **heap** (binário) é um arranjo que pode ser visto como uma árvore binária quase completa:
+
+![](imagens/Fig-6-1.pdf){width=10cm}
+
+Cada nó da árvore corresponde ao elemento do arranjo que armazena o valor do nó.
+
+A árvore está preenchida em todos os níveis, exceto talvez no nível mais baixo, que é preenchido a partir da esquerda.
+
+Note que nesse exemplo o arranjo é indexado a partir de 1!
+
+
+## Heap
+
+Como o heap pode ser visto como árvore, ele também tem uma altura, que é $O(\lg n)$. \pause
+
+É essa característica que permite que as operações em um heap sejam eficientes.
+
+
+## Heap
+
+Para arranjos indexados a partir de 0, a raiz do heap está na posição 0. \pause Além disso, para cada nó no índice $i$, os índices do pai e dos filhos a direita e a esquerda podem ser caculado da seguinte forma: \pause
+
+$\proc{pai}(i) = \lfloor (i - 1) / 2 \rfloor$ \pause
+
+$\proc{esq}(i) = 2 i + 1$ \pause
+
+$\proc{dir}(i) = 2 i + 2$
+
+<!--
+\pause
+
+Um arranjo $A$ que representa um heap tem dois atributos
+
+- $\attrib{A}{length}$, que é o tamanho do arranjo; e
+- $\attrib{A}{heap-size}$, que é o número de elementos do heap ($0 \le \attrib{A}{heap-size} \le \attrib{A}{length}$)
+
+-->
+
+## Propriedade do heap
+
+Em um **heap máximo** armazenado em um arranjo $A$, para cada nó $i$ diferente da raiz
+$$A[\proc{pai}(i)] \ge A[i]$$
+
+\pause
+
+Em um **heap mínimo** armazenado em um arranjo $A$, para cada nó $i$ diferente da raiz
+$$A[\proc{pai}(i)] \le A[i]$$
+
+\pause
+
+Em um heap máximo, onde está o maior elemento? \pause Na raiz. \pause
+
+Em um heap mínimo, onde está o menor elemento? \pause Na raiz.
+
+
+## Heap e ordenação
+
+Como utilizar um heap máximo em um processo de ordenação incremental? \pause
+
+- Mantemos a porção ordenada no final do arranjo; \pause
+- E o heap na porção inicial (não ordenada). \pause
+
+Como selecionar o próximo elemento? \pause
+
+- Pegamos o maior elemento do heap. \pause
+- Qual é o custo? \pause $O(\log(n - j))$ \pause
+
+Como estender o subarranjo ordenado? \pause
+
+- Trocando de posição o maior elemento com o último do restante. \pause
+- Qual é o custo? \pause $O(1)$ \pause
+
+Este algoritmo é conhecido como **ordenação por heap** (_heap sort_).
+
+
+## Operações com heap
+
+Para implementar a ordenação por heap precisamos de duas operações: a inicialização de um heap e a remoção do elemento máximo. \pause
+
+Para implementar essas funções, vamos precisar de uma operação auxiliar, que "concerta" um heap.
+
+
+## Concertando um heap
+
+<div class="columns">
+<div class="column" width="48%">
+\includegraphics[trim=0cm 42.2cm 55.55cm 0cm, clip]{imagens/Fig-6-2.pdf}
+</div>
+<div class="column" width="48%">
+Seja $A$ um arranjo que armazena um heap máximo.
+
+Considerando que o elemento da posição $i$ foi alterado, como podemos verificar se a propriedade do heap se mantém, e caso contrário, como podemos "concertar" o heap? \pause
+
+Verificamos se $A[i]$ é menor que algum dos dois filhos, \pause se sim, trocamos $A[i]$ de lugar com o maior filho,
+</div>
+</div>
+
+
+## Concertando um heap
+
+<div class="columns">
+<div class="column" width="48%">
+\includegraphics[trim=55.55cm 42.2cm 0cm 0cm, clip]{imagens/Fig-6-2.pdf}
+</div>
+<div class="column" width="48%">
+
+Seja $A$ um arranjo que armazena um heap máximo.
+
+Considerando que o elemento da posição $i$ foi alterado, como podemos verificar se a propriedade do heap se mantém, e caso contrário, como podemos "concertar" o heap?
+
+Verificamos se $A[i]$ é menor que algum dos dois filhos, se sim, trocamos $A[i]$ de lugar com o maior filho, \pause depois executamos o processo recursivamente para o filho que foi trocado.
+</div>
+</div>
+
+
+## Concertando um heap
+
+<div class="columns">
+<div class="column" width="48%">
+\includegraphics[trim=0cm 2.5cm 55.55cm 39.7cm, clip]{imagens/Fig-6-2.pdf}
+</div>
+<div class="column" width="48%">
+Seja $A$ um arranjo que armazena um heap máximo.
+
+Considerando que o elemento da posição $i$ foi alterado, como podemos verificar se a propriedade do heap se mantém, e caso contrário, como podemos "concertar" o heap?
+
+Verificamos se $A[i]$ é menor que algum dos dois filhos, se sim, trocamos $A[i]$ de lugar com o maior filho, depois executamos o processo recursivamente para o filho que foi trocado.
+</div>
+</div>
+
+
+## Concertando um heap
+
+<div class="columns">
+<div class="column" width="48%">
+Projete uma função que receba com parâmetro um arranjo $A$, a quantidade de elementos $n$ de $A$ que estão sendo usados e um índice $i$, onde os elementos `esq(i)` e `dir(i)` são raízes de heap máximo, e "concerte" o arranjo para que a árvore com raiz $i$ seja um heap máximo. \pause
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def concerta_heap(A: list[int], n: int, i: int):
+    assert i < n <= len(A)
+    # Encontra o índice do maior entre
+    # A[i], A[esq(i)] e A[dir(i)]
+    fesq = esq(i)
+    fdir = dir(i)
+    imax = i
+    if fesq < n and A[fesq] > A[imax]:
+        imax = fesq
+    if fdir < n and A[fdir] > A[imax]:
+        imax = fdir
+    # Se o maior não é A[i], ajusta e repete
+    # o processo.
+    if imax != i:
+        A[i], A[imax] = A[imax], A[i]
+        concerta_heap(A, n, imax)
+```
+
+</div>
+</div>
+
+
+## Construindo um heap
+
+Como construir um heap? \pause Vamos começar com o que está certo e ir "consertando" até que todo o heap fique certo. \pause
+
+\includegraphics[trim=0cm 81.7cm 55.55cm 7cm, clip, width=6cm]{imagens/Fig-6-3.pdf}
+
+Dado um arranjo qualquer, que vamos transformar em um heap, quais elementos sabemos que são raízes de heap válidos? \pause
+
+As folhas.
+
+
+## \proc{Build-Max-Heap}
+
+\includegraphics[trim=0cm 81.7cm 55.55cm 7cm, clip, width=8cm]{imagens/Fig-6-3.pdf}
+
+
+## \proc{Build-Max-Heap}
+
+\includegraphics[trim=55.55cm 81.7cm 0cm 7cm, clip, width=8cm]{imagens/Fig-6-3.pdf}
+
+
+## \proc{Build-Max-Heap}
+
+\includegraphics[trim=0cm 42cm 55.55cm 46.7cm, clip, width=8cm]{imagens/Fig-6-3.pdf}
+
+
+## \proc{Build-Max-Heap}
+
+\includegraphics[trim=55.55cm 42cm 0cm 46.7cm, clip, width=8cm]{imagens/Fig-6-3.pdf}
+
+
+## \proc{Build-Max-Heap}
+
+\includegraphics[trim=0cm 2.3cm 55.55cm 86.4cm, clip, width=8cm]{imagens/Fig-6-3.pdf}
+
+
+## \proc{Build-Max-Heap}
+
+\includegraphics[trim=55.55cm 2.3cm 0cm 86.4cm, clip, width=8cm]{imagens/Fig-6-3.pdf}
