@@ -79,7 +79,7 @@ Como estender o subarranjo ordenado? \pause
 - Inserindo o elemento selecionado na parte ordenada. \pause
 - Qual é o custo? \pause $O(j)$ \pause
 
-Este algoritmo é conhecido como **ordenação por inserção** (_selection sort_).
+Este algoritmo é conhecido como **ordenação por inserção** (_insertion sort_).
 
 
 ## Ordenação por inserção
@@ -143,7 +143,7 @@ def ordena_insercao(lst: list[int]):
 </div>
 <div class="column" width="43%">
 \pause
-Qual a complexidade de tempo da ordenação por inserção? \pause
+Qual é a complexidade de tempo da ordenação por inserção? \pause
 
 Qual é o melhor caso? \pause `lst` está em ordem não decrescente, o corpo do `while`{.python} não é executado nenhuma vez. \pause A complexidade de tempo é $O(n)$. \pause
 
@@ -311,25 +311,154 @@ Em um heap mínimo, onde está o menor elemento? \pause Na raiz.
 
 Como utilizar um heap máximo em um processo de ordenação incremental? \pause
 
-- Mantemos a porção ordenada no final do arranjo; \pause
-- E o heap na porção inicial (não ordenada). \pause
+![](imagens/heap-ordenado.pdf){width=6cm}
+
+- Mantemos a porção ordenada no final do arranjo;
+- E o heap na porção inicial.
+
+
+## Heap e ordenação
+
+![](imagens/heap-ordenado.pdf){width=6cm}
 
 Como selecionar o próximo elemento? \pause
 
 - Pegamos o maior elemento do heap. \pause
-- Qual é o custo? \pause $O(\log(n - j))$ \pause
+- Qual é o custo? \pause $O(\log(heap-size))$ -- veremos isso a seguir. \pause
 
 Como estender o subarranjo ordenado? \pause
 
 - Trocando de posição o maior elemento com o último do restante. \pause
-- Qual é o custo? \pause $O(1)$ \pause
+- Qual é o custo? \pause $O(1)$. \pause
 
 Este algoritmo é conhecido como **ordenação por heap** (_heap sort_).
 
 
+## Exemplo da ordenação por heap
+
+\includegraphics[trim=0cm 90cm 84.65cm 0cm, clip, width=8cm]{imagens/Fig-6-4.pdf}
+
+\large
+
+```
+       | 16 | 14 | 10 |  8 |  7 |  9 |  3 |  2 |  4 |  1 |
+       \_____________________ heap ______________________/
+```
+
+
+## Exemplo da ordenação por heap
+
+\includegraphics[trim=42.34cm 90cm 42.31cm 0cm, clip, width=8cm]{imagens/Fig-6-4.pdf}
+
+\large
+
+```
+       | 14 |  8 | 10 |  4 |  7 |  9 |  3 |  2 |  1 | 16 |
+       \__________________ heap ____________________/
+```
+
+
+## Exemplo da ordenação por heap
+
+\includegraphics[trim=84.68cm 90cm 0cm 0cm, clip, width=8cm]{imagens/Fig-6-4.pdf}
+
+\large
+
+```
+       | 10 |  8 |  9 |  4 |  7 |  1 |  3 |  2 | 14 | 16 |
+       \________________ heap _________________/
+```
+
+
+## Exemplo da ordenação por heap
+
+\includegraphics[trim=0cm 60.9cm 84.65cm 29.1cm, clip, width=8cm]{imagens/Fig-6-4.pdf}
+
+\large
+
+```
+       |  9 |  8 |  3 |  4 |  7 |  1 |  2 | 10 | 14 | 16 |
+       \______________ heap ______________/
+```
+
+
+## Exemplo da ordenação por heap
+
+\includegraphics[trim=42.34cm 60.9cm 42.31cm 29.1cm, clip, width=8cm]{imagens/Fig-6-4.pdf}
+
+\large
+
+```
+       |  8 |  7 |  3 |  4 |  2 |  1 |  9 | 10 | 14 | 16 |
+       \___________ heap ____________/
+```
+
+
+## Exemplo da ordenação por heap
+
+\includegraphics[trim=84.68cm 60.9cm 0cm 29.1cm, clip, width=8cm]{imagens/Fig-6-4.pdf}
+
+\large
+
+```
+       |  7 |  4 |  3 |  1 |  2 |  8 |  9 | 10 | 14 | 16 |
+       \_________ heap _________/
+```
+
+
+## Exemplo da ordenação por heap
+
+\includegraphics[trim=0cm 31.8cm 84.65cm 58.2cm, clip, width=8cm]{imagens/Fig-6-4.pdf}
+
+\large
+
+```
+       |  4 |  2 |  3 |  1 |  7 |  8 |  9 | 10 | 14 | 16 |
+       \______ heap _______/
+```
+
+
+## Exemplo da ordenação por heap
+
+\includegraphics[trim=42.34cm 31.8cm 42.31cm 58.2cm, clip, width=8cm]{imagens/Fig-6-4.pdf}
+
+\large
+
+```
+       |  3 |  2 |  1 |  4 |  7 |  8 |  9 | 10 | 14 | 16 |
+       \____ heap ____/
+```
+
+
+## Exemplo da ordenação por heap
+
+\includegraphics[trim=84.68cm 31.8cm 0cm 58.2cm, clip, width=8cm]{imagens/Fig-6-4.pdf}
+
+\large
+
+```
+       |  2 |  1 |  3 |  4 |  7 |  8 |  9 | 10 | 14 | 16 |
+       \_ heap __/
+```
+
+
+## Exemplo da ordenação por heap
+
+\includegraphics[trim=0cm 2.7cm 84.65cm 87.3cm, clip, width=8cm]{imagens/Fig-6-4.pdf}
+\large
+
+```
+       |  1 |  2 |  3 |  4 |  7 |  8 |  9 | 10 | 14 | 16 |
+       \heap/
+```
+
+
 ## Operações com heap
 
-Para implementar a ordenação por heap precisamos de duas operações: a inicialização de um heap e a remoção do elemento máximo. \pause
+Que operações precisamos para implementar a ordenação por heap? \pause
+
+- Inicialização do heap \pause
+- Remoção do máximo \pause
 
 Para implementar essas funções, vamos precisar de uma operação auxiliar, que "concerta" um heap.
 
@@ -387,7 +516,7 @@ Verificamos se $A[i]$ é menor que algum dos dois filhos, se sim, trocamos $A[i]
 
 <div class="columns">
 <div class="column" width="48%">
-Projete uma função que receba com parâmetro um arranjo $A$, a quantidade de elementos $n$ de $A$ que estão sendo usados e um índice $i$, onde os elementos `esq(i)` e `dir(i)` são raízes de heap máximo, e "concerte" o arranjo para que a árvore com raiz $i$ seja um heap máximo. \pause
+Projete uma função que receba com parâmetro um arranjo $A$, a quantidade de elementos $n$ de $A$ que estão sendo usados e um índice $i$, onde os elementos `esq(i)` e `dir(i)` são raízes de heap máximo, e "concerte" o arranjo, se necessário, para que a árvore com raiz $i$ seja um heap máximo. \pause
 
 </div>
 <div class="column" width="48%">
@@ -413,6 +542,12 @@ def concerta_heap(A: list[int], n: int, i: int):
         concerta_heap(A, n, imax)
 ```
 
+\pause
+
+\normalsize
+
+Qual é a complexidade de tempo? \pause $O(\lg n)$.
+
 </div>
 </div>
 
@@ -423,36 +558,205 @@ Como construir um heap? \pause Vamos começar com o que está certo e ir "conser
 
 \includegraphics[trim=0cm 81.7cm 55.55cm 7cm, clip, width=6cm]{imagens/Fig-6-3.pdf}
 
-Dado um arranjo qualquer, que vamos transformar em um heap, quais elementos sabemos que são raízes de heap válidos? \pause
-
-As folhas.
+Dado um arranjo qualquer, que vamos transformar em um heap, quais elementos sabemos que são raízes de heap válidos? \pause As folhas.
 
 
-## \proc{Build-Max-Heap}
+## Construindo um heap
 
-\includegraphics[trim=0cm 81.7cm 55.55cm 7cm, clip, width=8cm]{imagens/Fig-6-3.pdf}
-
-
-## \proc{Build-Max-Heap}
-
-\includegraphics[trim=55.55cm 81.7cm 0cm 7cm, clip, width=8cm]{imagens/Fig-6-3.pdf}
+\includegraphics[trim=0cm 81.7cm 55.55cm 7cm, clip, width=6cm]{imagens/Fig-6-3.pdf}
 
 
-## \proc{Build-Max-Heap}
+## Construindo um heap
 
-\includegraphics[trim=0cm 42cm 55.55cm 46.7cm, clip, width=8cm]{imagens/Fig-6-3.pdf}
-
-
-## \proc{Build-Max-Heap}
-
-\includegraphics[trim=55.55cm 42cm 0cm 46.7cm, clip, width=8cm]{imagens/Fig-6-3.pdf}
+\includegraphics[trim=55.55cm 81.7cm 0cm 7cm, clip, width=6cm]{imagens/Fig-6-3.pdf}
 
 
-## \proc{Build-Max-Heap}
+## Construindo um heap
 
-\includegraphics[trim=0cm 2.3cm 55.55cm 86.4cm, clip, width=8cm]{imagens/Fig-6-3.pdf}
+\includegraphics[trim=0cm 42cm 55.55cm 46.7cm, clip, width=6cm]{imagens/Fig-6-3.pdf}
 
 
-## \proc{Build-Max-Heap}
+## Construindo um heap
 
-\includegraphics[trim=55.55cm 2.3cm 0cm 86.4cm, clip, width=8cm]{imagens/Fig-6-3.pdf}
+\includegraphics[trim=55.55cm 42cm 0cm 46.7cm, clip, width=6cm]{imagens/Fig-6-3.pdf}
+
+
+## Construindo um heap
+
+\includegraphics[trim=0cm 2.3cm 55.55cm 86.4cm, clip, width=6cm]{imagens/Fig-6-3.pdf}
+
+
+## Construindo um heap
+
+\includegraphics[trim=55.55cm 2.3cm 0cm 86.4cm, clip, width=6cm]{imagens/Fig-6-3.pdf}
+
+
+## Construindo um heap
+
+<div class="columns">
+<div class="column" width="48%">
+Projete uma função que receba com parâmetro um arranjo $A$, e rearranje os elementos de $A$ para formar um heap máximo.
+
+\pause
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def inicializa_heap(A: list[int]):
+    for i in range(len(A) // 2 - 1, -1, -1):
+        concerta_heap(A, len(A), i)
+```
+
+</div>
+</div>
+
+\vspace{0.5cm}
+
+\pause
+
+Qual a complexidade de tempo? \pause
+
+- Limite simples: a função é `concerta_heap` tem tempo $O(\lg n)$ e é chamada $n / 2$, portanto, $O(n \lg n)$ \pause
+
+- Limite estrito: $O(n)$
+
+
+## Implementação ordenação por heap
+
+<div class="columns">
+<div class="column" width="48%">
+Projete uma função que implemente a ordenação por heap.
+
+\pause
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def ordena_heap(lst: list[int]):
+    inicializa_heap(lst)
+    for n in range(len(lst) - 1, 0, -1):
+        # Troca o maior do heap com
+        # o elemento da última posição do heap
+        lst[0], lst[n] = lst[n], lst[0]
+        # Concerta a raiz do heap
+        concerta_heap(lst, n, 0)
+```
+
+</div>
+</div>
+
+\vspace{0.5cm}
+
+\pause
+
+Qual a complexidade de tempo? \pause $O(n \lg n)$ \pause
+
+A implementação é in-loco? \pause Sim. \pause
+
+A implementação é estável? Não.
+
+
+## Projeto de algoritmos de divisão e conquista
+
+A ideia de um algoritmo divisão e conquista é: \pause
+
+- Resolver o problema diretamente se ele for trivial, senão **dividir** o problema em dois ou mais subproblemas do mesmo tipo; \pause
+
+- **Conquistar** os subproblemas resolvendo-os recursivamente; \pause
+
+- **Combinar** as soluções dos subproblemas para obter a solução do problema original \pause
+
+
+Como projetar um algoritmo de divisão e conquista para somar os elementos de um arranjo? \pause
+
+- Se o arranjo for vazio, a soma é 0. Senão dividir o arranjo na metade e calcular a soma de cada metade recursivamente; \pause
+
+- Obter a soma do arranjo somando o resultado de cada metade;
+
+
+## Ordenação incremental
+
+Como projetar um algoritmo de divisão e conquista para ordenar os elementos de um arranjo? \pause
+
+- Se o arranjo tiver mais que um elemento, separamos os elementos em dois subarranjos; \pause
+
+- Ordenamos cada subarranjo recursivamente; \pause
+
+- Combinamos os dois subarranjos para obter a ordenação do arranjo inicial. \pause
+
+
+Temos que tomar duas decisões para tornar o processo concreto: \pause
+
+- Como separar os elementos em dois subarranjos? \pause
+
+- Como combinar os dois subarranjos ordenados?
+
+
+## Ordenação por intercalação
+
+Como separar os elementos em dois subarranjos? \pause
+
+- Dividindo o arranjo arranjo ao meio; \pause
+
+- Qual é o custo? \pause $O(1)$ \pause
+
+Como combinar os dois subarranjos ordenados? \pause
+
+- Fazendo a intercalação em ordem dos elementos dos subarranjos; \pause
+
+- Qual é o custo? \pause $O(n)$ \pause
+
+Este algoritmo é conhecido como ordenação por intercalação (_merge sort_).
+
+
+## Ordenação por intercalação
+
+![](imagens/mergesort.pdf){width=7cm}
+
+
+## Ordenação por intercalação
+
+<div class="columns">
+<div class="column" width="48%">
+Projete uma função que implemente o algoritmo de ordenação por intercalação.
+\pause
+</div>
+<div class="column" width="48%">
+A implementação é in-loco? \pause Não. \pause
+
+A implementação é estável? Sim. \pause
+
+Qual é a complexidade de tempo? \pause
+
+$$T(n) =
+    \begin{cases}
+      c               & \text{se $n \le 1$} \\
+      2T(n/2) + cn    & \text{caso contrário}
+    \end{cases}$$
+
+\pause
+
+$T(n) = O(n \lg n)$
+
+\pause
+
+Podemos fazer melhor?
+
+</div>
+</div>
+
+
+## Divisão e conquista
+
+A etapa de divisão é constante, então temos que pensar na combinação. \pause
+
+Como combinar dois arranjos ordenados sem precisar passar por todos os elementos? Parece
+que não tem com... \pause
+
+É possível "eliminar" a etapa de combinação? \pause Supondo que o arranjo de entrada $A[0:n]$ é dividido em $A[0:q]$ e $A[q:n]$, o que é necessário para que após a ordenação de $A[0:q]$ e $A[q:n]$ o arranjo $A[0:n]$ fique ordenado sem precisarmos fazer mais nada? \pause
+
+Os elementos de $A[0:q]$ devem ser menores ou iguais aos elementos de $A[q:n]$.
