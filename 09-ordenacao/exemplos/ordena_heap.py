@@ -1,3 +1,35 @@
+def ordena_heap(lst: list[int]):
+    '''
+    Ordena os elementos de *lst* em ordem não decrescente.
+
+    Exemplo
+
+    >>> lst = [5, 2, 4, 6, 1, 3]
+    >>> ordena_heap(lst)
+    >>> lst
+    [1, 2, 3, 4, 5, 6]
+
+    Testes de propriedade
+    A seguir, listas com tamanhos n = 0, 1, ..., 10,
+    são geradas com os elementos 0, 1, ..., n. Para
+    cada lista todas as suas permutações são usadas
+    para testar o algoritmo de ordenação.
+    >>> from itertools import permutations
+    >>> for n in range(0, 11):
+    ...     for p in permutations(range(n)):
+    ...         lst = list(p)
+    ...         ordena_heap(lst)
+    ...         assert lst == list(range(n))
+    '''
+    inicializa_heap(lst)
+    for n in range(len(lst) - 1, 0, -1):
+        # Troca o maior do heap com
+        # o elemento da última posição do heap
+        lst[0], lst[n] = lst[n], lst[0]
+        # Concerta a raiz do heap
+        concerta_heap(lst, n, 0)
+
+
 def inicializa_heap(A: list[int]):
     r'''
     Organiza os elementos de *A* para formarem um heap máximo.
@@ -16,9 +48,12 @@ def inicializa_heap(A: list[int]):
     >>> inicializa_heap(A)
     >>> A
     [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
-    >>>
+    >>> A = []
+    >>> inicializa_heap(A)
+    >>> A
+    []
     '''
-    for i in range(len(A) // 2, -1, -1):
+    for i in range(len(A) // 2 - 1, -1, -1):
         concerta_heap(A, len(A), i)
 
 
