@@ -700,7 +700,7 @@ Temos que tomar duas decisões para tornar o processo concreto: \pause
 
 Como separar os elementos em dois subarranjos? \pause
 
-- Dividindo o arranjo arranjo ao meio; \pause
+- Dividindo o arranjo ao meio; \pause
 
 - Qual é o custo? \pause $O(1)$ \pause
 
@@ -923,6 +923,10 @@ Mas antes, vamos ver a forma mais comum de implementar a ordenação por interca
 
 \pause
 
+Note que nessa versão a cópia dos subarranjos geralmente é feita na função `intercala`.
+
+\pause
+
 </div>
 <div class="column" width="55%">
 \scriptsize
@@ -932,7 +936,6 @@ def ordena_intercalacao(lst: list[int], ini: int, fim: int):
     '''
     Ordena o subarranjo lst[ini:fim] em ordem não
     decrescente.
-
     Requer que 0 <= i <= fim <= len(lst).
     '''
 ```
@@ -965,8 +968,13 @@ def ordena_intercalacao(lst: list[int], ini: int, fim: int):
         # Combina as soluções
         intercala(lst, ini, meio, fim)
 ```
+
+\pause
+
 </div>
 </div>
+
+Projete essa versão de `intercala`.
 
 
 ## Divisão e conquista
@@ -982,39 +990,148 @@ Na ordenação por intercalação, a etapa de divisão é constante e a de combi
 
 ## Divisão e conquista
 
-Como combinar dois arranjos ordenados sem precisar passar por todos os elementos? Parece
-que não tem com... \pause
+Como combinar dois arranjos ordenados sem precisar passar por todos os elementos? \pause Parece que não tem com... \pause
 
 Se não podemos melhorar, será que podemos eliminar a etapa de combinação? \pause
 
-Supondo que o arranjo de entrada `lst[0:n]`{.python} seja dividido em `lst[0:q]`{.python} e `lst[q:n]`{.python}, o que é necessário para que após a ordenação de `lst[0:q]`{.python} e `lst[q:n]`{.python} o arranjo `lst[0:n]`{.python} fique ordenado sem precisarmos fazer mais nada? \pause
+Supondo que o arranjo de entrada `lst[0:n]`{.python} seja dividido em `lst[0:p]`{.python} e `lst[p:n]`{.python}, o que é necessário para que após a ordenação de `lst[0:p]`{.python} e `lst[p:n]`{.python} o arranjo `lst[0:n]`{.python} fique ordenado sem precisarmos fazer mais nada? \pause
 
-Os elementos de `lst[0:q]`{.python} devem ser menores ou iguais aos elementos de `lst[q:n]`{.python}!
+Os elementos de `lst[0:p]`{.python} devem ser menores ou iguais aos elementos de `lst[p:n]`{.python}!
 
 
 ## Particionamento
 
 <div class="columns">
-<div class="column" width="48%">
+<div class="column" width="40%">
 
 Então, o que precisamos fazer? \pause
 
-Projetar uma função que particione um arranjo em duas partes, um com os "menores" e outra com os "maiores". \pause Para isso vamos precisar de uma referência para determinar quem é maior e quem é menor. \pause
-
-\vspace{1cm}
+Projetar uma função que particione um arranjo em duas partes, um com os "menores" e outra com os "maiores". \pause Para isso vamos precisar de um "pivô" para determinar em que parte cada elemento deve ficar. \pause
 
 \includegraphics[trim=8cm 79cm 0cm 3cm, clip, width=4cm]{imagens/Fig-7-1.pdf}
+
+\vspace{-0.5cm}
 
 \pause \center $\downarrow$
 
 \includegraphics[trim=8cm 0cm 0cm 82cm, clip, width=4cm]{imagens/Fig-7-1.pdf}
 
 </div>
-<div class="column" width="48%">
-Projete uma função que particione os elementos de um subarranjo em menores e maiores e devolva o índice do particionamento. \pause
+<div class="column" width="55%">
+Especifique a função para fazer o particionamento de um subarranjo. A função deve devolver o índice que separa as duas partes.
+
+\scriptsize
 
 ```python
+def particiona(lst: list[int], ini: int, fim: int) -> int:
+    '''
+    Reorganiza os elementos de lst[ini:fim] e devolve um
+    índice p de maneira que os elementos de lst[ini:p]
+    são menores que lst[p:fim].
+
+    Exemplos
+    >>> lst = [2, 8, 7, 1, 3, 5, 6, 4]
+    >>> particiona(lst, 0, len(lst))
+    3
+    >>> lst
+    [2, 1, 3, 4, 8, 7, 5, 6]
+    '''
+```
+</div>
+</div>
+
+
+## Ordenação por partição
+
+O algoritmo de ordenação de divisão e conquista baseado na função de particionamento é chamado de **ordenação por particionamento** ou **quick sort**.
+
+\pause
+
+Implemente a ordenação por particionamento.
+
+
+## Ordenação por partição
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def ordena_particionamento(lst: list[int], ini: int, fim: int):
+    '''
+    Ordena o subarranjo lst[ini:fim] em ordem não
+    decrescente.
+
+    Requer que 0 <= i <= fim <= len(lst).
+    '''
 ```
 
+\pause
+
+```python
+    # Se o problema não é trivial
+    if ini < fim - 1:
+```
+
+\pause
+
+```python
+        # Divide em dois subproblemas
+        p = particiona(lst, ini, fim)
+```
+
+\pause
+
+```python
+        # Conquista recursivamente
+        ordena_particionamento(lst, ini, p)
+        ordena_particionamento(lst, p, fim)
+```
+
+\pause
+
+```python
+        # As soluções já estão combinadas!
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+
+
+
+
+
+
+
+def ordena_intercalacao(lst: list[int], ini: int, fim: int):
+```
+
+```python
+    # Se o problema não é trivial
+    if ini < fim - 1:
+```
+
+```python
+        # Divide em dois subproblemas
+        meio = (ini + fim) // 2
+```
+
+```python
+        # Conquista recursivamente
+        ordena_intercalacao(lst, ini, meio)
+        ordena_intercalacao(lst, meio, fim)
+```
+
+```python
+        # Combina as soluções
+        intercala(lst, ini, meio, fim)
+```
 </div>
 </div>
