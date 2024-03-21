@@ -6,7 +6,8 @@ def particiona(lst: list[int], ini: int, fim: int) -> int:
     >>> lst
     [2, 1, 3, 4, 8, 7, 5, 6]
     '''
-    assert ini < fim
+    assert 0 <= ini <= fim <= len(lst)
+    # Particiona lst
     pivo = lst[fim - 1]
     menores = []
     maiores_iguais = []
