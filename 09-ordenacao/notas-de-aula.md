@@ -220,7 +220,7 @@ def ordena_selecao(lst: list[int]):
 </div>
 <div class="column" width="43%">
 \pause
-Qual a complexidade de tempo da ordenação por seleção? \pause
+Qual é a complexidade de tempo da ordenação por seleção? \pause
 
 Cada iteração `i` o corpo do segundo `for`{.python} é executado `n - i - 1` vezes. \pause A complexidade de tempo é $\displaystyle \sum_{i=0}^{n - 1} n - i - 1 = O(n^2)$. \pause
 
@@ -616,7 +616,7 @@ def inicializa_heap(A: list[int]):
 
 \pause
 
-Qual a complexidade de tempo? \pause
+Qual é a complexidade de tempo? \pause
 
 - Limite simples: a função é `concerta_heap` tem tempo $O(\lg n)$ e é chamada $n / 2$, portanto, $O(n \lg n)$ \pause
 
@@ -653,11 +653,11 @@ def ordena_heap(lst: list[int]):
 
 \pause
 
-Qual a complexidade de tempo? \pause $O(n \lg n)$ \pause
+Qual é a complexidade de tempo? \pause $O(n \lg n)$. \pause
 
 A implementação é in-loco? \pause Sim. \pause
 
-A implementação é estável? Não.
+A implementação é estável? \pause Não.
 
 
 ## Projeto de algoritmos de divisão e conquista
@@ -710,7 +710,7 @@ Como combinar os dois subarranjos ordenados? \pause
 
 - Qual é o custo? \pause $O(n)$ \pause
 
-Este algoritmo é conhecido como ordenação por intercalação (_merge sort_).
+Este algoritmo é conhecido como **ordenação por intercalação** (_merge sort_).
 
 
 ## Ordenação por intercalação
@@ -721,16 +721,183 @@ Este algoritmo é conhecido como ordenação por intercalação (_merge sort_).
 ## Ordenação por intercalação
 
 <div class="columns">
-<div class="column" width="48%">
+<div class="column" width="43%">
 Projete uma função que implemente o algoritmo de ordenação por intercalação.
+
 \pause
+
+\scriptsize
+
+```python
+def ordena_intercalacao(lst: list[int]):
+    # Se o problema não é trivial
+    if len(lst) > 1:
+```
+
+\pause
+
+```python
+        # Divide em dois subproblemas
+        m = len(lst) // 2
+        a = lst[:m]
+        b = lst[m:]
+```
+
+\pause
+
+```python
+        # Conquista recursivamente
+        ordena_intercalacao(a)
+        ordena_intercalacao(b)
+```
+
+\pause
+
+```python
+        # Combina as soluções
+        intercala(lst, a, b)
+```
+
+\pause
+
 </div>
-<div class="column" width="48%">
-A implementação é in-loco? \pause Não. \pause
+<div class="column" width="52%">
 
-A implementação é estável? Sim. \pause
+Projete uma função que implemente a intercalação.
 
-Qual é a complexidade de tempo? \pause
+\pause
+
+\scriptsize
+
+```python
+def intercala(lst: list[int], a: list[int], b: list[int]):
+    '''
+    Faz a intercalação em ordem não decrescente dos
+    elementos de *a* e *b* em *lst*.
+
+    Requer que len(lst) = len(a) + len(b).
+    Requer que a e b estekam em ordem não decrescente.
+
+    Exemplos
+    >>> lst = [0, 0, 0, 0, 0, 0, 0]
+    >>> intercala(lst, [1, 6], [3, 5, 6, 8, 10])
+    >>> lst
+    [1, 3, 5, 6, 6, 8, 10]
+    >>> intercala(lst, [3, 5, 6, 8, 10], [1, 6])
+    >>> lst
+    [1, 3, 5, 6, 6, 8, 10]
+    '''
+```
+
+</div>
+</div>
+
+
+## Ordenação por intercalação
+
+<div class="columns">
+<div class="column" width="43%">
+Projete uma função que implemente o algoritmo de ordenação por intercalação.
+
+\scriptsize
+
+```python
+def ordena_intercalacao(lst: list[int]):
+    # Se o problema não é trivial
+    if len(lst) > 1:
+```
+
+```python
+        # Divide em dois subproblemas
+        m = len(lst) // 2
+        a = lst[:m]
+        b = lst[m:]
+```
+
+```python
+        # Conquista recursivamente
+        ordena_intercalacao(a)
+        ordena_intercalacao(b)
+```
+
+```python
+        # Combina as soluções
+        intercala(lst, a, b)
+```
+
+</div>
+<div class="column" width="52%">
+
+\scriptsize
+
+```python
+def intercala(lst: list[int], a: list[int], b: list[int]):
+    assert len(lst) == len(a) + len(b)
+    i, j, k = 0, 0, 0
+    while i < len(a) and j < len(b):
+        if a[i] <= b[j]:
+            lst[k] = a[i]
+            i += 1
+        else:
+            lst[k] = b[j]
+            j += 1
+        k += 1
+    while i < len(a): # Copia o restante de a
+        lst[k] = a[i]
+        i += 1
+        k += 1
+    while j < len(b): # Copia o restante de b
+        lst[k] = b[j]
+        j += 1
+        k += 1
+```
+
+</div>
+</div>
+
+
+## Ordenação por intercalação
+
+<div class="columns">
+<div class="column" width="43%">
+Projete uma função que implemente o algoritmo de ordenação por intercalação.
+
+\scriptsize
+
+```python
+def ordena_intercalacao(lst: list[int]):
+    # Se o problema não é trivial
+    if len(lst) > 1:
+```
+
+```python
+        # Divide em dois subproblemas
+        m = len(lst) // 2
+        a = lst[:m]
+        b = lst[m:]
+```
+
+```python
+        # Conquista recursivamente
+        ordena_intercalacao(a)
+        ordena_intercalacao(b)
+```
+
+```python
+        # Combina as soluções
+        intercala(lst, a, b)
+```
+
+</div>
+<div class="column" width="52%">
+
+Qual é a complexidade de tempo de `intercala`? \pause $O(n)$. \pause
+
+A implementação da ordenação por intercalação é in-loco? \pause Não. \pause
+
+É estável? Sim. \pause
+
+Qual é a complexidade de tempo de `ordena_intercalacao`? \pause
 
 $$T(n) =
     \begin{cases}
@@ -742,21 +909,112 @@ $$T(n) =
 
 $T(n) = O(n \lg n)$
 
+</div>
+</div>
+
+
+## Ordenação por intercalação
+
+<div class="columns">
+<div class="column" width="40%">
+Podemos fazer melhor? \pause Vamos tentar! \pause
+
+Mas antes, vamos ver a forma mais comum de implementar a ordenação por intercalação, que é utilizando índices para informar o intervalo de ordenação / intercalação.
+
 \pause
 
-Podemos fazer melhor?
+</div>
+<div class="column" width="55%">
+\scriptsize
 
+```python
+def ordena_intercalacao(lst: list[int], ini: int, fim: int):
+    '''
+    Ordena o subarranjo lst[ini:fim] em ordem não
+    decrescente.
+
+    Requer que 0 <= i <= fim <= len(lst).
+    '''
+```
+
+\pause
+
+```python
+    # Se o problema não é trivial
+    if ini < fim - 1:
+```
+
+\pause
+
+```python
+        # Divide em dois subproblemas
+        meio = (ini + fim) // 2
+```
+
+\pause
+
+```python
+        # Conquista recursivamente
+        ordena_intercalacao(lst, ini, meio)
+        ordena_intercalacao(lst, meio, fim)
+```
+
+\pause
+
+```python
+        # Combina as soluções
+        intercala(lst, ini, meio, fim)
+```
 </div>
 </div>
 
 
 ## Divisão e conquista
 
-A etapa de divisão é constante, então temos que pensar na combinação. \pause
+No projeto de um algoritmo de divisão e conquista temos que tomar duas decisõe: \pause
+
+- Como separar os elementos em dois subarranjos? \pause
+
+- Como combinar os dois subarranjos ordenados? \pause
+
+Na ordenação por intercalação, a etapa de divisão é constante e a de combinação linear. Então, se queremos mudar o tempo de execução, precisamos pensar em como melhorar a combinação.
+
+
+## Divisão e conquista
 
 Como combinar dois arranjos ordenados sem precisar passar por todos os elementos? Parece
 que não tem com... \pause
 
-É possível "eliminar" a etapa de combinação? \pause Supondo que o arranjo de entrada $A[0:n]$ é dividido em $A[0:q]$ e $A[q:n]$, o que é necessário para que após a ordenação de $A[0:q]$ e $A[q:n]$ o arranjo $A[0:n]$ fique ordenado sem precisarmos fazer mais nada? \pause
+Se não podemos melhorar, será que podemos eliminar a etapa de combinação? \pause
 
-Os elementos de $A[0:q]$ devem ser menores ou iguais aos elementos de $A[q:n]$.
+Supondo que o arranjo de entrada `lst[0:n]`{.python} seja dividido em `lst[0:q]`{.python} e `lst[q:n]`{.python}, o que é necessário para que após a ordenação de `lst[0:q]`{.python} e `lst[q:n]`{.python} o arranjo `lst[0:n]`{.python} fique ordenado sem precisarmos fazer mais nada? \pause
+
+Os elementos de `lst[0:q]`{.python} devem ser menores ou iguais aos elementos de `lst[q:n]`{.python}!
+
+
+## Particionamento
+
+<div class="columns">
+<div class="column" width="48%">
+
+Então, o que precisamos fazer? \pause
+
+Projetar uma função que particione um arranjo em duas partes, um com os "menores" e outra com os "maiores". \pause Para isso vamos precisar de uma referência para determinar quem é maior e quem é menor. \pause
+
+\vspace{1cm}
+
+\includegraphics[trim=8cm 79cm 0cm 3cm, clip, width=4cm]{imagens/Fig-7-1.pdf}
+
+\pause \center $\downarrow$
+
+\includegraphics[trim=8cm 0cm 0cm 82cm, clip, width=4cm]{imagens/Fig-7-1.pdf}
+
+</div>
+<div class="column" width="48%">
+Projete uma função que particione os elementos de um subarranjo em menores e maiores e devolva o índice do particionamento. \pause
+
+```python
+```
+
+</div>
+</div>
