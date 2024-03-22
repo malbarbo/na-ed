@@ -475,9 +475,350 @@ Então quanto $\alpha$ fica maior que 10, temos que alocar uma tabela _maior_ e 
 Quanto $\alpha$ fica menor que 5, temos que alocar uma tabela _menor_ e fazer a redispersão das chaves.
 
 
-## Sondagem
+## Endereçamento aberto
 
-Outra forma de lidar com as colisões é a sondagem.
+**Endereçamento aberto** é uma técnica de resolução de colisão baseado em **sondagem**. \pause
+
+Nessa técnica todos os pares chave-valor são armazenados na própria tabela. \pause
+
+Quando um novo par chave-valor precisa ser inserido na tabela e a posição já está ocupada, outras posições são sondadas até que uma posição livre seja encontra. \pause
+
+A busca e a remoção devem usar o mesmo processo de sondagem.
+
+
+## Sondagem linear
+
+A forma mais simples de sondagem é a linear. Nesse esquema, quando há colisão na posição $i$, as posições são testadas na ordem $(i + j) \mod m$ para $j = 1, 2, \dots, ... m$. \pause
+
+A sondagem para quando uma posição que nunca foi ocupada é encontrada. \pause
+
+Veremos que para esse esquema funcionar, a remoção deve marcar de forma especial a posição.
+
+
+## Sondagem linear - inserção
+
+Mostre passo a passo a inserção das chaves 734, 84, 236, 554, 141 em uma tabela com $m = 8$. \pause
+
+<div class="columns">
+<div class="column" width="22%">
+
+\uncover<2->{$734 \rightarrow 6$}
+
+\uncover<3->{$84 \rightarrow 4$}
+
+\uncover<4->{$236 \rightarrow 4, 5$}
+
+\uncover<5->{$554 \rightarrow 2$}
+
+\uncover<6->{$31 \rightarrow 7$}
+
+\uncover<7->{$141 \rightarrow 5, 6, 7, 0$}
+
+\pause
+
+</div>
+<div class="column" width="13%">
+
+\scriptsize
+
+```
+  +---+
+0 |   |
+  +---+
+1 |   |
+  +---+
+2 |   |
+  +---+
+3 |   |
+  +---+
+4 |   |
+  +---+
+5 |   |
+  +---+
+6 |734|
+  +---+
+7 |   |
+  +---+
+```
+\pause
+</div>
+<div class="column" width="13%">
+
+\scriptsize
+
+```
+  +---+
+0 |   |
+  +---+
+1 |   |
+  +---+
+2 |   |
+  +---+
+3 |   |
+  +---+
+4 |84 |
+  +---+
+5 |   |
+  +---+
+6 |734|
+  +---+
+7 |   |
+  +---+
+```
+
+\pause
+</div>
+<div class="column" width="13%">
+
+\scriptsize
+
+```
+  +---+
+0 |   |
+  +---+
+1 |   |
+  +---+
+2 |   |
+  +---+
+3 |   |
+  +---+
+4 |84 |
+  +---+
+5 |236|
+  +---+
+6 |734|
+  +---+
+7 |   |
+  +---+
+```
+
+\pause
+</div>
+<div class="column" width="13%">
+
+\scriptsize
+
+```
+  +---+
+0 |   |
+  +---+
+1 |   |
+  +---+
+2 |554|
+  +---+
+3 |   |
+  +---+
+4 |84 |
+  +---+
+5 |236|
+  +---+
+6 |734|
+  +---+
+7 |   |
+  +---+
+```
+
+\pause
+</div>
+<div class="column" width="13%">
+
+\scriptsize
+
+```
+  +---+
+0 |   |
+  +---+
+1 |   |
+  +---+
+2 |554|
+  +---+
+3 |   |
+  +---+
+4 |84 |
+  +---+
+5 |236|
+  +---+
+6 |734|
+  +---+
+7 |31 |
+  +---+
+```
+
+\pause
+</div>
+<div class="column" width="13%">
+
+\scriptsize
+
+```
+  +---+
+0 |141|
+  +---+
+1 |   |
+  +---+
+2 |554|
+  +---+
+3 |   |
+  +---+
+4 |84 |
+  +---+
+5 |236|
+  +---+
+6 |734|
+  +---+
+7 |31 |
+  +---+
+```
+
+</div>
+</div>
+
+
+## Sondagem linear - remoção e busca
+
+Mostre passo a passo para a remoção da chave 236, e a busca das chave 742 e 141?.
+
+<div class="columns">
+<div class="column" width="15%">
+\scriptsize
+
+```
+  +---+
+0 |141|
+  +---+
+1 |   |
+  +---+
+2 |554|
+  +---+
+3 |   |
+  +---+
+4 |84 |
+  +---+
+5 |236|
+  +---+
+6 |734|
+  +---+
+7 |31 |
+  +---+
+```
+
+\pause
+</div>
+<div class="column" width="22%">
+Remoção do $236 \rightarrow 4, 5$.
+
+A posição de remoção deve ser marcada forma especial.
+
+\pause
+</div>
+<div class="column" width="3%">
+</div>
+<div class="column" width="15%">
+\scriptsize
+
+```
+  +---+
+0 |141|
+  +---+
+1 |   |
+  +---+
+2 |554|
+  +---+
+3 |   |
+  +---+
+4 |84 |
+  +---+
+5 | \ |
+  +---+
+6 |734|
+  +---+
+7 |31 |
+  +---+
+```
+
+\pause
+</div>
+<div class="column" width="22%">
+
+Busca do $742 \rightarrow 6, 7, 0, 1$. \pause
+
+Não encontrado. \pause
+
+</div>
+<div class="column" width="22%">
+
+Busca do $141 \rightarrow 5, 6, 7, 0$. \pause
+
+Encontrado.
+
+</div>
+</div>
+
+
+## Sondagem linear
+
+<div class="columns">
+<div class="column" width="48%">
+Defina os tipos de dados para um dicionário implementado usando tabelas de dispersão com sondagem.
+
+\pause
+
+\scriptsize
+
+```python
+@dataclass
+class Removido:
+    pass
+
+@dataclass
+class Presente:
+    chave: str
+    valor: int
+
+class Dicionario:
+    tabela: list[None | Removido | Presente]
+    # Qtd de itens Presente na tabela.
+    num_itens: int
+    # Qtd de itens Removido na tabela.
+    num_removidos: int
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+Projete a função `Dicionario.busca`. \pause
+
+\scriptsize
+
+```python
+def busca(self, chave: str) -> None | int:
+    p = hash(chave) % len(self.tabela)
+    while self.tabela[p] is not None:
+        if isinstance(self.tabela[p], Presente):
+            if self.tabela[p].chave == chave:
+                return self.tabela[p].valor
+        p = (p + 1) % len(self.tabela)
+    return None
+```
+
+\pause
+
+\normalsize
+
+Note que para a busca para no caso que a chave não é encontrada é preciso que exista pelo menos uma posição com `None`{.python}, ou seja, a quantidade de itens presentes mais os removidos deve ser menor o tamanho da tabela.
+
+</div>
+</div>
+
+
+## Sondagem linear
+
+Qual o tempo de execução das operações de busca, inserção e remoção? \pause
+
+No pior caso, $O(n)$. \pause
+
+Mas se o fator de carga for mantido menor do que $0.7$, a complexidade de tempo no caso médio é $O(1)$.
 
 
 ## Referências
