@@ -22,7 +22,7 @@ def ordena_heap(lst: list[int]):
     ...         assert lst == list(range(n))
     '''
     inicializa_heap(lst)
-    for n in range(len(lst) - 1, 0, -1):
+    for n in reversed(range(1, len(lst))):
         # Troca o maior do heap com
         # o elemento da última posição do heap
         lst[0], lst[n] = lst[n], lst[0]
@@ -53,7 +53,7 @@ def inicializa_heap(A: list[int]):
     >>> A
     []
     '''
-    for i in range(len(A) // 2 - 1, -1, -1):
+    for i in reversed(range(len(A) // 2)):
         concerta_heap(A, len(A), i)
 
 
