@@ -36,7 +36,7 @@ def intercala(lst: list[int], a: list[int], b: list[int]):
     de *a* e *b* e armazena o resultado em *lst*.
 
     Requer que len(lst) = len(a) + len(b).
-    Requer que a e b estekam em ordem não decrescente.
+    Requer que a e b estejam em ordem não decrescente.
 
     Exemplos
     >>> lst = [0, 0, 0, 0, 0, 0, 0]
