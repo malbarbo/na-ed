@@ -1,5 +1,11 @@
 def particiona(lst: list[int], ini: int, fim: int) -> int:
     '''
+    Reorganiza os elementos de lst[ini:fim] e devolve um índice p de maneira
+    que os elementos de lst[ini:p] são menores ou iguais que lst[p:fim].
+
+    Requer que  0 <= ini <= fim <= len(lst)
+
+    Exemplo
     >>> lst = [2, 8, 7, 1, 3, 5, 6, 4]
     >>> particiona(lst, 0, len(lst))
     3
