@@ -163,7 +163,7 @@ Podemos melhor o tempo? \pause
 
 Temos dois custos, o de seleção, que é $O(1)$, e o de inserção, que é $O(j)$. \pause Podemos melhor o tempo da inserção? \pause
 
-Considerando que o subarranjo `lst[:j]` está ordenado, poderíamos usar uma busca binária para encontrar a posição de inserção em $O(\lg j)$. \pause No entanto, a inserção continuaria sendo $O(j)$, pois os elementos precisar ser deslocados. \pause
+Considerando que o subarranjo `lst[:j]`{.python} está ordenado, poderíamos usar uma busca binária para encontrar a posição de inserção em $O(\lg j)$. \pause No entanto, a inserção continuaria sendo $O(j)$, pois os elementos precisar ser deslocados. \pause
 
 Podemos fazer uma "inserção" sem fazer o deslocamento dos elementos? \pause Sim!
 
@@ -226,7 +226,7 @@ Cada iteração `i` o corpo do segundo `for`{.python} é executado `n - i - 1` v
 
 A implementação é in-loco? \pause Sim. \pause
 
-A ordenação é estável? \pause Sim. \pause
+A ordenação é estável? \pause Não. \pause
 
 A ordenação por seleção é mais eficiente do que a ordenação por inserção? \pause Não...
 
@@ -324,7 +324,7 @@ Como utilizar um heap máximo em um processo de ordenação incremental? \pause
 Como selecionar o próximo elemento? \pause
 
 - Pegamos o maior elemento do heap. \pause
-- Qual é o custo? \pause $O(\log(heap-size))$ -- veremos isso a seguir. \pause
+- Qual é o custo? \pause $O(\lg(heap-size))$ -- veremos isso a seguir. \pause
 
 Como estender o subarranjo ordenado? \pause
 
@@ -544,12 +544,10 @@ def concerta_heap(A: list[int], n: int, i: int):
 
 \pause
 
-\normalsize
-
-Qual é a complexidade de tempo? \pause $O(\lg n)$.
-
 </div>
 </div>
+
+Qual é a complexidade de tempo? \pause $O(h)$, onde $h$ é a altura do heap, ou seja, $O(\lg n)$.
 
 
 ## Construindo um heap
@@ -558,7 +556,7 @@ Como construir um heap? \pause Vamos começar com o que está certo e ir "conser
 
 \includegraphics[trim=0cm 81.7cm 55.55cm 7cm, clip, width=6cm]{imagens/Fig-6-3.pdf}
 
-Dado um arranjo qualquer, que vamos transformar em um heap, quais elementos sabemos que são raízes de heap válidos? \pause As folhas.
+Dado um arranjo qualquer, que vamos transformar em um heap, quais elementos sabemos que são raízes de heap válidos? \pause As folhas. \pause Note que em um heap o número de folhas nunca é menor do que o número de nós internos.
 
 
 ## Construindo um heap
@@ -605,7 +603,7 @@ Projete uma função que receba com parâmetro um arranjo $A$, e rearranje os el
 
 ```python
 def inicializa_heap(A: list[int]):
-    for i in range(len(A) // 2 - 1, -1, -1):
+    for i in reversed(range(len(A) // 2)):
         concerta_heap(A, len(A), i)
 ```
 
@@ -618,9 +616,9 @@ def inicializa_heap(A: list[int]):
 
 Qual é a complexidade de tempo? \pause
 
-- Limite simples: a função é `concerta_heap` tem tempo $O(\lg n)$ e é chamada $n / 2$, portanto, $O(n \lg n)$ \pause
+- Limite simples: a função é `concerta_heap` tem tempo $O(\lg n)$ e é chamada $n / 2$, portanto, $O(n \lg n)$; \pause
 
-- Limite estrito: $O(n)$
+- Limite estrito: $O(n)$ -- discutido em sala.
 
 
 ## Implementação ordenação por heap
@@ -638,7 +636,7 @@ Projete uma função que implemente a ordenação por heap.
 ```python
 def ordena_heap(lst: list[int]):
     inicializa_heap(lst)
-    for n in range(len(lst) - 1, 0, -1):
+    for n in reversed(range(1, len(lst))):
         # Troca o maior do heap com
         # o elemento da última posição do heap
         lst[0], lst[n] = lst[n], lst[0]
@@ -655,7 +653,7 @@ def ordena_heap(lst: list[int]):
 
 Qual é a complexidade de tempo? \pause $O(n \lg n)$. \pause
 
-A implementação é in-loco? \pause Sim. \pause
+A implementação é in-loco? \pause Sim (se `concerta_heap` não for recursiva) \pause
 
 A implementação é estável? \pause Não.
 
@@ -671,7 +669,7 @@ A ideia de um algoritmo divisão e conquista é: \pause
 - **Combinar** as soluções dos subproblemas para obter a solução do problema original \pause
 
 
-Como projetar um algoritmo de divisão e conquista para somar os elementos de um arranjo? \pause
+Como projetar um algoritmo de divisão e conquista para somar os elementos de um arranjo? (Note que esse algoritmo não traz nenhum vantagem, é apenas uma ilustração) \pause
 
 - Se o arranjo for vazio, a soma é 0. Senão dividir o arranjo na metade e calcular a soma de cada metade recursivamente; \pause
 
@@ -708,7 +706,7 @@ Como combinar os dois subarranjos ordenados? \pause
 
 - Fazendo a intercalação em ordem dos elementos dos subarranjos; \pause
 
-- Qual é o custo? \pause $O(n)$ \pause
+- Qual é o custo? \pause $O(n)$ -- discutido a seguir \pause
 
 Este algoritmo é conhecido como **ordenação por intercalação** (_merge sort_).
 
@@ -776,7 +774,7 @@ def intercala(lst: list[int], a: list[int], b: list[int]):
     elementos de *a* e *b* em *lst*.
 
     Requer que len(lst) = len(a) + len(b).
-    Requer que a e b estekam em ordem não decrescente.
+    Requer que a e b estejam em ordem não decrescente.
 
     Exemplos
     >>> lst = [0, 0, 0, 0, 0, 0, 0]
@@ -895,9 +893,9 @@ Qual é a complexidade de tempo de `intercala`? \pause $O(n)$. \pause
 
 A implementação da ordenação por intercalação é in-loco? \pause Não. \pause
 
-É estável? Sim. \pause
+É estável? \pause Sim. \pause
 
-Qual é a complexidade de tempo de `ordena_intercalacao`? \pause
+Qual é a complexidade de tempo? \pause
 
 $$T(n) =
     \begin{cases}
@@ -923,7 +921,7 @@ Mas antes, vamos ver a forma mais comum de implementar a ordenação por interca
 
 \pause
 
-Note que nessa versão a cópia dos subarranjos geralmente é feita na função `intercala`.
+Note que nessa versão a cópia dos subarranjos geralmente é feita na função `intercala` e não em `ordena_intercala` como fizemos anteriormente.
 
 \pause
 
@@ -979,13 +977,13 @@ Projete essa versão de `intercala`.
 
 ## Divisão e conquista
 
-No projeto de um algoritmo de divisão e conquista temos que tomar duas decisõe: \pause
+No projeto de um algoritmo de divisão e conquista temos que tomar duas decisões: \pause
 
 - Como separar os elementos em dois subarranjos? \pause
 
 - Como combinar os dois subarranjos ordenados? \pause
 
-Na ordenação por intercalação, a etapa de divisão é constante e a de combinação linear. Então, se queremos mudar o tempo de execução, precisamos pensar em como melhorar a combinação.
+Na ordenação por intercalação, a etapa de divisão tem tempo constante e a combinação tempo linear. Então, se queremos mudar o tempo de execução, precisamos pensar em como melhorar a combinação.
 
 
 ## Divisão e conquista
@@ -1006,9 +1004,11 @@ Os elementos de `lst[0:p]`{.python} devem ser menores ou iguais aos elementos de
 
 Então, o que precisamos fazer? \pause
 
-Projetar uma função que particione um arranjo em duas partes, um com os "menores" e outra com os "maiores". \pause Para isso vamos precisar de um "pivô" para determinar em que parte cada elemento deve ficar. \pause
+Projetar uma função que **particione** um arranjo em duas partes, uma com os "menores" e outra com os demais elementos ("maiores"). \pause
 
-\includegraphics[trim=8cm 79cm 0cm 3cm, clip, width=4cm]{imagens/Fig-7-1.pdf}
+Para isso precisamos de um "pivô" para determinar em que parte cada elemento deve ficar. \pause
+
+\includegraphics[trim=8cm 79cm 0cm 2.5cm, clip, width=4cm]{imagens/Fig-7-1.pdf}
 
 \vspace{-0.5cm}
 
@@ -1016,9 +1016,13 @@ Projetar uma função que particione um arranjo em duas partes, um com os "menor
 
 \includegraphics[trim=8cm 0cm 0cm 82cm, clip, width=4cm]{imagens/Fig-7-1.pdf}
 
+\pause
+
 </div>
 <div class="column" width="55%">
-Especifique a função para fazer o particionamento de um subarranjo. A função deve devolver o índice que separa as duas partes.
+Faça a especificação da função que faz o particionamento de um arranjo. A função deve devolver o índice que separa as duas partes.
+
+\pause
 
 \scriptsize
 
@@ -1027,7 +1031,7 @@ def particiona(lst: list[int], ini: int, fim: int) -> int:
     '''
     Reorganiza os elementos de lst[ini:fim] e devolve um
     índice p de maneira que os elementos de lst[ini:p]
-    são menores que lst[p:fim].
+    são menores ou iguais que lst[p:fim].
 
     Exemplos
     >>> lst = [2, 8, 7, 1, 3, 5, 6, 4]
@@ -1041,7 +1045,7 @@ def particiona(lst: list[int], ini: int, fim: int) -> int:
 </div>
 
 
-## Ordenação por partição
+## Ordenação por particionamento
 
 O algoritmo de ordenação de divisão e conquista baseado na função de particionamento é chamado de **ordenação por particionamento** ou **quick sort**.
 
@@ -1109,9 +1113,10 @@ def ordena_particionamento(lst: list[int], ini: int, fim: int):
 
 
 
-
 def ordena_intercalacao(lst: list[int], ini: int, fim: int):
 ```
+
+\vspace{0.15cm}
 
 ```python
     # Se o problema não é trivial
@@ -1135,3 +1140,251 @@ def ordena_intercalacao(lst: list[int], ini: int, fim: int):
 ```
 </div>
 </div>
+
+
+## Ordenação por partição
+
+<div class="columns">
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+def ordena_particionamento(lst: list[int],
+                           ini: int,
+                           fim: int):
+```
+
+```python
+    # Se o problema não é trivial
+    if ini < fim - 1:
+```
+
+```python
+        # Divide em dois subproblemas
+        p = particiona(lst, ini, fim)
+```
+
+```python
+        # Conquista recursivamente
+        ordena_particionamento(lst, ini, p)
+        ordena_particionamento(lst, p, fim)
+```
+
+```python
+        # As soluções já estão combinadas!
+```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+\small
+
+Veremos como implementar `particiona` com tempo $O(n)$. \pause
+
+A ordenação por particionamento é in-loco? \pause Se particiona é in-loco, sim. \pause
+
+É estável? \pause Depende de particiona, mas o comum é que não seja. \pause
+
+Qual é a complexidade de tempo? \pause Depende de como o arranjo é particionado. \pause
+
+O pior caso ocorre quando as partições são desbalanceadas (1 e $n - 1$), nesse caso a complexidade de tempo é $O(n^2)$. \pause
+
+Quando as partições são balanceadas a complexidade de tempo é $O(n \lg n)$.
+
+</div>
+</div>
+
+
+## Particionamento
+
+<div class="columns">
+<div class="column" width="40%">
+Como podemos implementar a função `particiona`? \pause
+
+Uma forma simples é usar arranjos auxiliares para armazenar as duas partições enquanto elas são construídas. \pause
+
+</div>
+<div class="column" width="56%">
+\scriptsize
+
+```python
+def particiona(lst: list[int], ini: int, fim: int) -> int:
+    pivo = lst[fim - 1]
+    menores = []
+    maiores_iguais = []
+    for i in range(ini, fim - 1):
+        if lst[i] < pivo:
+            menores.append(lst[i])
+        else:
+            maiores_iguais.append(lst[i])
+    # Copia os menores do que o pivo para lst
+    for i in range(len(menores)):
+        lst[i] = menores[i]
+    # Copia o pivo para lst
+    p = len(menores)
+    lst[p] = pivo
+    # Copias os maiores ou iguais ao pivo para lst
+    for j in range(len(maiores_iguais)):
+        lst[p + j + 1] = maiores_iguais[j]
+    return p # Retorna o índice do pivo
+```
+</div>
+</div>
+
+
+## Particionamento in-loco
+
+As duas formas mais comum de fazer o particionamento in-loco são: \pause
+
+A forma sugerida por Tony Hoare, criador do quick sort, é manter dois índices, um para a partição do início do arranjo com os menores, e outro para a partição no final com os maiores. Os índices movem em direção ao meio e os elementos são trocados de lugar quando necessário. \pause
+
+A outra forma é o particionamento de Lomuto. \pause Nesse esquema tanta a partição dos menores fica no início do arranjo e a dos maior logo em seguida.
+
+
+## Particionamento de Lomuto
+
+<div class="columns">
+<div class="column" width="40%">
+\includegraphics[trim=6cm 79.0cm 0cm  0.0cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
+\includegraphics[trim=6cm 69.0cm 0cm  9.8cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
+\includegraphics[trim=6cm 59.0cm 0cm 19.7cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
+\includegraphics[trim=6cm 49.0cm 0cm 29.5cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
+\includegraphics[trim=6cm 39.1cm 0cm 39.6cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
+\includegraphics[trim=6cm 29.1cm 0cm 49.4cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
+\includegraphics[trim=6cm 19.2cm 0cm 59.3cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
+\includegraphics[trim=6cm  9.3cm 0cm 69.1cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
+\includegraphics[trim=6cm  0.0cm 0cm 79.2cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \pause
+</div>
+<div class="column" width="56%">
+\scriptsize
+
+```python
+def particiona(lst: list[int], ini: int, fim: int) -> int:
+    pivo = lst[fim - 1]
+    i = ini - 1
+    for j in range(ini, fim - 1):
+        if lst[j] <= pivo:
+            i += 1
+            lst[i], lst[j] = lst[j], lst[i]
+    lst[i + 1], lst[fim - 1] = lst[fim - 1], lst[i + 1]
+    return i + 1
+```
+</div>
+</div>
+
+
+## Comparação entre os algoritmo de ordenação
+
+Algoritmo      | Estável? | Local? | Melhor       | Médio        | Pior
+---------------|----------|--------|--------------|--------------|-----------
+Inserção       |  Sim     | Sim    | $O(n)$       | $O(n^2)$     | $O(n^2)$
+Seleção        |  Não     | Sim    | $O(n^2)$     | $O(n^2)$     | $O(n^2)$
+Heap           |  Não     | Sim    | $O(n \lg n)$ | $O(n \lg n)$ | $O(n \lg n)$
+Intercalação   |  Sim     | Não    | $O(n \lg n)$ | $O(n \lg n)$ | $O(n \lg n)$
+Particionamento|  Não     | Sim    | $O(n \lg n)$ | $O(n \lg n)$ | $O(n^2)$
+
+\pause
+
+Parece que mesmo usando diversas técnicas não conseguimos um algoritmo melhor que $O(n \lg n)$...
+
+
+## Ordenação por comparação
+
+Os algoritmos de ordenação que vimos até agora são baseados em comparações, isto é, a ordem dos elementos é determinada usando apenas comparações entre os elementos.
+
+\pause
+
+Um resultado conhecido diz que não existe algoritmo de ordenação baseado em comparação que tenha tempo melhor que $O(n \lg n)$, \pause então, já temos algoritmos ótimos. \pause
+
+Mas ainda podemos melhorar fazendo ordenação sem comparação!
+
+
+## Ordenação por dígitos (radix)
+
+Cada um dos $n$ valores de entrada é uma sequência de tamanho $d$, onde cada valor da sequência pode ser um de $k$ valores distintos. \pause Exemplos: \pause
+
+- Nomes com 50 caracteres, onde cada caractere pode $a, b, \dots, z$ \pause ($d = 50$, $k = 26$) \pause
+
+- Números com 8 dígitos, onde cada dígito pode ser $0, 1, \dots, 9$ ($d = 8$, $k = 10$) \pause
+
+Podemos usar a restrição dos valores de entrada para projetar um algoritmo de ordenação mais eficiente? \pause Sim! \pause
+
+A ideia é ordenar os valores pelos dígitos, começando com o menos significativos.
+
+
+## Ordenação por dígitos (radix)
+
+<div class="columns">
+<div class="column" width="15%"></div>
+
+<div class="column" width="10%">
+\includegraphics[trim=0cm 0cm 41cm 0cm, clip, width=1cm]{imagens/Fig-8-3.pdf} \pause
+</div>
+
+<div class="column" width="10%">
+\includegraphics[trim=5.5cm 0cm 33.5cm 0cm, clip, width=1cm]{imagens/Fig-8-3.pdf}
+</div>
+
+<div class="column" width="10%">
+\includegraphics[trim=14cm 0cm 27cm 0cm, clip, width=1cm]{imagens/Fig-8-3.pdf} \pause
+</div>
+
+<div class="column" width="10%">
+\includegraphics[trim=5.5cm 0cm 33.5cm 0cm, clip, width=1cm]{imagens/Fig-8-3.pdf}
+</div>
+
+<div class="column" width="10%">
+\includegraphics[trim=27.5cm 0cm 13.5cm 0cm, clip, width=1cm]{imagens/Fig-8-3.pdf} \pause
+</div>
+
+<div class="column" width="10%">
+\includegraphics[trim=5.5cm 0cm 33.5cm 0cm, clip, width=1cm]{imagens/Fig-8-3.pdf}
+</div>
+
+<div class="column" width="10%">
+\includegraphics[trim=41cm 0cm 0cm 0cm, clip, width=1cm]{imagens/Fig-8-3.pdf}
+</div>
+
+<div class="column" width="15%"></div>
+</div>
+
+Se $d$ é constante e $k = O(n)$, então é possível implementar a ordenação por dígito com complexidade de tempo de $O(n)$.
+
+
+## Ordenação por balde
+
+Os $n$ valores de entrada estão distribuídos uniformemente no intervalo $[0, 1)$. \pause
+
+Podemos usar a restrição dos valores de entrada para projetar um algoritmo de ordenação mais eficiente? \pause Sim! \pause
+
+A ideia é: \pause
+
+- Dividir o intervalo $[0, 1)$ em $n$ segmentos (baldes) e distribuir cada um dos $n$ elementos em seu respectivo segmento; \pause
+- Ordenar os elementos de cada segmento; \pause
+- Juntos os elementos de cada segmento
+
+
+## Ordenação por balde
+
+<div class="columns">
+<div class="column" width="10%"></div>
+<div class="column" width="30%">
+\includegraphics[trim=0cm 0cm 46cm 0cm, clip, width=1.35cm]{imagens/Fig-8-4.pdf} \pause
+</div>
+<div class="column" width="45%">
+\includegraphics[trim=10cm 0cm 0cm 0cm, clip, width=5.82cm]{imagens/Fig-8-4.pdf}
+</div>
+<div class="column" width="15%"></div>
+</div>
+
+\pause
+
+Uma implementação direta da ordenação por balde tem tempo de execução no pior cado de $O(n^2)$, mas o tempo esperado é de $O(n)$.
+
+
+## Referências
+
+Thomas H. Cormen et al. Introduction to Algorithms. \nth{3} edition. Capítulos 6, 7 e 8.
