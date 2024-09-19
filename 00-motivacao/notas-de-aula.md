@@ -60,7 +60,7 @@ def encontra_mais_frequentes(palavras: list[str], m: int) -> list[PalavraVezes]:
     Encontra as *m* palavras mais frequentes em *palavras*.
     Se a frequência de duas palavras for a mesma, então a
     que vem primeiro em ordem alfabética aparece primeiro.
-    Se *m* for menor que a quantidade de palavras distintas,
+    Se *m* for maior que a quantidade de palavras distintas,
     então devolve a frequência de todas as palavras.
     Requer que m > 0.
 
