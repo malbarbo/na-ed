@@ -4,9 +4,9 @@ from time import time
 import sys
 
 
-def main():
+def main() -> None:
     if len(sys.argv) != 4:
-        print('Modo de usar: {} m n arquivo', sys.argv[0])
+        print(f'Modo de usar: python {sys.argv[0]} m n arquivo')
         print('  m - quantidade de palavras na saída')
         print('  n - quantidade de palavras para serem lidas do arquivo de entrada')
         sys.exit(1)
@@ -90,9 +90,11 @@ def encontra_mais_frequentes(palavras: list[str], m: int) -> list[PalavraVezes]:
     return contagem[:m]
 
 
-def troca(lst: list, i: int, j: int):
+def troca(lst: list, i: int, j: int) -> None:
     '''
     Move o elemento da posição *i* de *lst* para a posição *j* e vice-versa.
+
+    Requer que *i* e *j* sejam posições valídas de *lst*.
 
     Exemplos
     >>> lst = [5, 1, 6, 8, 2]

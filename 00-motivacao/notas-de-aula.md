@@ -12,9 +12,15 @@ subtitle: Motivação
 
 Um sítio de conteúdo pretende fazer uma série de postagens com as palavras/expressões mais comuns em diversos idiomas, incluindo também listas especializadas para determinadas áreas (como engenharia, culinária, etc).
 
+\pause
+
 Para criar as listas foi levantado diversos corpus (coleções de textos) para cada possível postagem. Também foi contratado especialistas em cada idioma / área. Para ajudar os especialistas existe a necessidade de processar os textos e gerar uma lista preliminar das palavras/expressões mais frequentes.
 
+\pause
+
 Uma equipe já pré-processou os corpus e gerou arquivos textos contendo uma palavra/expressão em minúsculo por linha. Cada arquivo tem entre 1.000 e 1.000.000 de palavras. A equipe também já criou uma função para ler o arquivo e devolver uma lista com cada palavra/expressão de um arquivo.
+
+\pause
 
 Agora é preciso um programa que analise uma lista e gere uma tabela com as palavras/expressões mais frequentes. A quantidade de itens na tabela pode variar, dependendo do corpus e da equipe de especialistas que vai usar o programa.
 
@@ -26,7 +32,7 @@ Determinar um número específico de palavras/expressões mais frequentes em uma
 
 # Definição de tipos de dados
 
-Cada palavra/expressão será representada por uma strings.
+Cada palavra/expressão será representada por uma string.
 
 A saída será uma lista de valores `PalavraVezes`.
 
@@ -76,7 +82,15 @@ Forme equipes de até 5 pessoas. \pause
 
 Proponha um algoritmo para resolver o problema. \pause
 
-Apresente o algoritmo usando um exemplo.
+Faça o download do código inicial e escreva a implementação. Depois que os testes estiverem passando, execute o programa com o seguinte comando (que encontra as 10 palavras mais frequentes dentre as primeiras 1000 palavras do arquivo `palavras.txt`):
+
+```
+python mais-frequentes.py 10 1000 palavras.txt
+```
+
+\pause
+
+Apresente o algoritmo para a turma.
 
 
 # Estratégias de implementação
@@ -244,7 +258,7 @@ Demorou muito para executar...
 
 Nenhum das duas abordagens é viável... \pause
 
-Podemos fazer melhor? \pause Sim! \pause Mas precisamos de estruturas de dados e métodos de ordenação eficientes, que é o que vamos estudar nessa disciplina!
+Podemos fazer melhor? \pause Sim! \pause Mas precisamos de estruturas de dados e métodos de ordenação eficientes, que é o que vamos fazer nessa disciplina!
 
 
 # Considerações
@@ -266,7 +280,7 @@ A biblioteca do Python disponibiliza um tipo chamado `dict`{.python} (dicionári
 
 Podemos implementar nosso algoritmo por etapas com `dict` e `sort`. \pause
 
-**Note que** não vamos utilizar as coisas prontas do Python durante a disciplina, a ideia aqui é apenas mostrar qual eficiente pode ser alcançada usando estruturas de dados e algoritmos de ordenação adequados.
+**Note que** não vamos utilizar as coisas prontas do Python durante a disciplina, a ideia aqui é apenas mostrar quão eficiente o programa pode ser usando estruturas de dados e algoritmos de ordenação adequados.
 
 
 # Implementação eficiente

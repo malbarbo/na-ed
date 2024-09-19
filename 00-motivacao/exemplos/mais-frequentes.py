@@ -65,23 +65,22 @@ def encontra_mais_frequentes(palavras: list[str], m: int) -> list[PalavraVezes]:
     >>> encontra_mais_frequentes(['casa', 'de', 'a', 'ti', 'de', 'a', 'casa', 'a', 'de'], 3)
     [PalavraVezes(palavra='a', vezes=3), PalavraVezes(palavra='de', vezes=3), PalavraVezes(palavra='casa', vezes=2)]
     '''
-    # Calcula a frequência de cada palavra
-    contagem: dict[str, int] = {}
-    for p in palavras:
-        if p in contagem:
-            contagem[p] = contagem[p] + 1
-        else:
-            contagem[p] = 1
+    return []
 
-    # Cria uma lista de PalavrasVezes
-    freqs = []
-    for p, vezes in contagem.items():
-        freqs.append(PalavraVezes(p, vezes))
 
-    # Ordena a lista
-    freqs.sort(reverse=True)
+def troca(lst: list, i: int, j: int) -> None:
+    '''
+    Move o elemento da posição *i* de *lst* para a posição *j* e vice-versa.
 
-    return freqs[:m]
+    Requer que *i* e *j* sejam posições valídas de *lst*.
+
+    Exemplos
+    >>> lst = [5, 1, 6, 8, 2]
+    >>> troca(lst, 2, 4)
+    >>> lst
+    [5, 1, 2, 8, 6]
+    '''
+    lst[i], lst[j] = lst[j], lst[i]
 
 
 if __name__ == "__main__":
