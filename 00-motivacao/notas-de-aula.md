@@ -1,7 +1,6 @@
 ---
 # vim: set spell spelllang=pt_br:
-title: Estruturas de Dados
-subtitle: Motivação
+title: Motivação
 # TODO: adiciona tabela/gráfico dos tempos de execução
 ---
 
