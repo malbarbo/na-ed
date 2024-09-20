@@ -125,11 +125,17 @@ Ponto flutuante (`float`{.python}), representação aproximada de números reais
 </div>
 </div>
 
+\pause
 
-## Operações básicas
+Podemos usar as quatro operações aritméticas básicas com esses tipos numéricos e algumas outras operações.
+
+
+## Operadores básicas
 
 <div class="columns">
 <div class="column" width="50%">
+
+\small
 
 ```python
 >>> # Soma e subtração
@@ -160,6 +166,8 @@ Ponto flutuante (`float`{.python}), representação aproximada de números reais
 <div class="column" width="50%">
 \pause
 
+\small
+
 ```python
 >>> # Piso da divisão
 >>> 7 // 2
@@ -171,12 +179,17 @@ Ponto flutuante (`float`{.python}), representação aproximada de números reais
 \pause
 
 ```python
->>> # Resto da divisão
+>>> # Módulo
 >>> 14 % 3
 2
->>> # Esperávamos obter exatamente
->>> # 1.1, mas float é apenas
->>> # uma aproximação dos reais...
+>>> -14 % 3
+1
+```
+
+\pause
+
+```python
+>>> # float é uma aproximação dos reais
 >>> 5 % 1.3
 1.0999999999999999
 ```
@@ -185,7 +198,13 @@ Ponto flutuante (`float`{.python}), representação aproximada de números reais
 </div>
 
 
+## Comentários
+
+O símbolo `#`{.python} (cerquilha), é utilizado para indicar um **comentário**. O comentário inicia na `#`{.python} e vai até o final da linha. Os comentários são ignorados pelo interpretador do Python, mas são utilizados para adicionar informações relevantes para os leitores do código.
+
+
 ## Exponenciação
+\small
 
 ```python
 >>> # Exponenciação e radiciação
@@ -193,7 +212,8 @@ Ponto flutuante (`float`{.python}), representação aproximada de números reais
 81
 >>> 2 ** 80
 1208925819614629174706176
->>> 16 ** 0.5 # raiz quadrada, o mesmo que 16 ** (1 / 2)
+>>> # raiz quadrada, o mesmo que 16 ** (1 / 2)
+>>> 16 ** 0.5
 4.0
 ```
 
@@ -201,7 +221,8 @@ Ponto flutuante (`float`{.python}), representação aproximada de números reais
 
 ```python
 >>> # A exponenciação tem prioridade sobre a divisão
->>> 27 ** 1 / 3 # o mesmo que (27 ** 1) / 3
+>>> # O mesmo que (27 ** 1) / 3
+>>> 27 ** 1 / 3
 9.0
 >>> # Usamos parênteses para mudar a prioridade
 >>> 27 ** (1 / 3) # raiz cúbica
@@ -220,6 +241,8 @@ Ponto flutuante (`float`{.python}), representação aproximada de números reais
 3
 >>> round(3.5)
 4
+>>> round(-1.6)
+-2
 >>> round(3.5134, 2)
 3.51
 ```
@@ -228,6 +251,8 @@ Ponto flutuante (`float`{.python}), representação aproximada de números reais
 
 </div>
 <div class="column" width="50%">
+
+\small
 
 ```python
 >>> # Conversão entre int e float
@@ -245,11 +270,21 @@ Ponto flutuante (`float`{.python}), representação aproximada de números reais
 
 ## Piso e teto
 
+\small
+
+```python
+>>> # Importação do módulo
+>>> import math
+```
+
+\pause
+
 <div class="columns">
 <div class="column" width="50%">
 
+\small
+
 ```python
->>> import math
 >>> # Piso
 >>> # maior inteiro <= ao número
 >>> math.floor(4.2)
@@ -264,6 +299,8 @@ Ponto flutuante (`float`{.python}), representação aproximada de números reais
 
 </div>
 <div class="column" width="50%">
+
+\small
 
 ```python
 >>> # Teto
@@ -284,7 +321,11 @@ Ponto flutuante (`float`{.python}), representação aproximada de números reais
 
 Outro tipo de dado pré-definido em Python é a cadeia de caracteres (`str`{.python}), _string_ em inglês. \pause
 
+Geralmente usamos strings para armazenar informações simbólicas, como por exemplo palavras e textos. \pause
+
 Uma string em Python é escrita entre apóstrofo (`'`{.python}) ou aspas (`"`{.python}) \pause
+
+\small
 
 ```python
 >>> 'casa'
@@ -302,6 +343,8 @@ Assim como existem operações pré-definidas para números, também existem ope
 
 <div class="columns">
 <div class="column" width="50%">
+
+\small
 
 ```python
 >>> # Concatenação
@@ -331,6 +374,8 @@ Assim como existem operações pré-definidas para números, também existem ope
 </div>
 <div class="column" width="50%">
 
+\small
+
 ```python
 >>> # Quantidade de caracteres
 >>> len('ciência da computação')
@@ -343,6 +388,11 @@ Assim como existem operações pré-definidas para números, também existem ope
 >>> # Conversão maiúscula
 >>> 'José'.upper() # ou str.upper('José')
 'JOSÉ'
+```
+
+\pause
+
+```python
 >>> # Conversão minúscula
 >>> 'José'.lower() # ou str.lower('José')
 'josé'
@@ -353,6 +403,8 @@ Assim como existem operações pré-definidas para números, também existem ope
 
 
 ## Substrings
+
+\small
 
 ```python
 >>> # Indexação de caractere
@@ -399,7 +451,7 @@ IndexError: string index out of range
 
 ```python
 >>> # Substring de 2 até 6 - 1
->>> 'veja isso'[2:6] # ou str.__getitem__('veja isso', slice(7, 9))
+>>> 'veja isso'[2:6] # ou str.__getitem__('veja isso', slice(2, 6))
 'ja i'
 ```
 
@@ -408,6 +460,8 @@ IndexError: string index out of range
 
 <div class="columns">
 <div class="column" width="50%">
+
+\small
 
 ```python
 >>> # Conversão de int para str
@@ -430,6 +484,8 @@ IndexError: string index out of range
 
 </div>
 <div class="column" width="50%">
+
+\small
 
 ```python
 >>> # Conversão de str para int
@@ -520,6 +576,8 @@ Além da conveniência de escrita, a forma de chamada métodos e indexação tem
 <div class="columns">
 <div class="column" width="50%">
 
+\small
+
 ```python
 >>> # Maior e maior ou igual
 >>> 4 > 4
@@ -542,6 +600,8 @@ True
 
 </div>
 <div class="column" width="50%">
+
+\small
 
 ```python
 >>> # Igual
@@ -568,31 +628,36 @@ False
 
 \ 
 
-Observe que as operações relacionais tem prioridade menor do que as operações aritméticas.
+Quem tem maior prioridade, os operadores relacionais ou aritméticas? \pause Os aritméticos.
 
 
-## Operações relacionais
+## Operadores relacionais
 
 As operações relacionais podem ser utilizadas com outros tipos, incluindo strings e booleanos. \pause
+
+As strings são comparadas lexicograficamente, o que pode gerar algumas surpresas. \pause
 
 <div class="columns">
 <div class="column" width="50%">
 
+\small
+
 ```python
->>> # As strings são comparadas
->>> # lexicograficamente, o
->>> # que pode gerar algumas
->>> # supressas
 >>> 'a' < 'b'
 True
 >>> 'á' < 'b'
 False
+>>> 'Paulo' < 'andré'
+True
 ```
 
 \pause
 
 </div>
 <div class="column" width="50%">
+
+\small
+
 ```python
 >>> 'Abacaxi' < 'Abacate'
 False
@@ -600,21 +665,27 @@ False
 True
 >>> 'casa' == 'Casa'
 False
->>> 'á' != 'a'
+>>> 'A' != 'a'
 True
 ```
 </div>
 </div>
 
 
-## Operações relacionais
+## Operadores relacionais
+
+O valor `False`{.python} é considerado menor que o valor `True`{.python}, isso porque o `False`{.python} quando convertido para `int`{.python} é `0`{.python} e o `True`{.python} é `1`{.python}. \pause
 
 <div class="columns">
 <div class="column" width="50%">
 
+\small
+
 ```python
->>> # O valor False é considerado
->>> # menor que o valor True
+>>> int(False)
+0
+>>> int(True)
+1
 >>> False < True
 True
 >>> True > False
@@ -625,6 +696,8 @@ True
 
 </div>
 <div class="column" width="50%">
+
+\small
 
 ```Python
 >>> False == False
@@ -641,13 +714,23 @@ True
 </div>
 
 
-## Operadores booleanos
+## Operadores lógicos
+
+Assim como existem operações com números e strings, também existem operações com booleanos, que são chamadas de **operações lógicas**. \pause
+
+As operações mais comuns com booleanos são: `not`{.python} (negação), `or`{.python} (ou) e `and`{.python} (e).
+
+
+## Operadores lógicos
+
+O `not`{.python} é um operador unário, que produz o valor contrário do seu argumento. \pause
 
 <div class="columns">
 <div class="column" width="50%">
 
+\small
+
 ```python
->>> # O not é um operator unário.
 >>> not True
 False
 >>> not False
@@ -661,10 +744,9 @@ True
 </div>
 <div class="column" width="50%">
 
+\small
+
 ```Python
->>> # O not tem menor precedência
->>> # do que os operadores relacionais
->>> # e aritméticos.
 >>> # 4 > 4.0 é False
 >>> not 3 + 1 > 2 + 2.0
 True
@@ -673,19 +755,28 @@ True
 False
 ```
 
+\pause
+
 </div>
 </div>
 
+\ 
 
-## Operadores booleanos
+Qual é precedência do `not`{.python} em relação aos operadores relacionais e aritméticos? \pause É menor.
+
+
+## Operadores lógicos
 
 <div class="columns">
-<div class="column" width="50%">
+<div class="column" width="48%">
+
+O `and`{.python} é um operador binário que só produz `True`{.python} se os dois operandos forem `True`{.python}.
+
+\small
+
+\pause
 
 ```python
->>> # O and é um operador binário
->>> # que só produz True se os
->>> # dois operandos forem True.
 
 >>> # Tabela verdade do and
 >>> False and False
@@ -701,13 +792,14 @@ True
 \pause
 
 </div>
-<div class="column" width="50%">
+<div class="column" width="48%">
+
+Qual é a precedência do `and`{.python} em relação aos operadores relacionais e aritméticos? \pause É menor. \pause
+
+
+\small
 
 ```Python
->>> # O and tem menor precedência
->>> # do que os operadores relacionais
->>> # e aritméticos.
-
 >>> # 15 > 8 é True
 >>> # 4 == 3 é False
 >>> 15 > 2 ** 3 and 4 == 1 + 2
@@ -722,16 +814,16 @@ True
 </div>
 
 
-## Operadores booleanos
+## Operadores lógicos
 
 <div class="columns">
-<div class="column" width="50%">
+<div class="column" width="48%">
+
+O `or`{.python} é um operador binário que produz `True`{.python} se pelo menos um dos operandos for `True`{.python}. \pause
+
+\small
 
 ```python
->>> # O or é um operador binário
->>> # que produz True se pelo menos
->>> # um dos operandos for True.
-
 >>> # Tabela verdade do or
 >>> False or False
 False
@@ -746,12 +838,13 @@ True
 \pause
 
 </div>
-<div class="column" width="50%">
+<div class="column" width="48%">
+
+Qual é a precedência do `or`{.python} em relação aos operadores relacionais e aritméticos? \pause É menor. \pause
+
+\small
 
 ```Python
->>> # O or tem menor precedência
->>> # do que os operadores relacionais
->>> # e aritméticos.
 
 >>> # 15 > 8 é True
 >>> # 4 == 3 é False
@@ -767,9 +860,9 @@ False
 </div>
 
 
-## Operadores relacionais
+## Operadores lógicos
 
-Quem tem maior prioridade, o `and`{.python} ou o `or`{.python}? \pause O `and`{.python}.
+Quem tem maior prioridade, o `and`{.python} ou o `or`{.python}? \pause O `and`{.python}. \pause Vamos criar uma expressão que mostre que isso é verdade. \pause
 
 \small
 
@@ -788,7 +881,6 @@ True
 ```
 
 \pause
-
 
 ```python
 >>> # Se o or tivesse prioridade...
