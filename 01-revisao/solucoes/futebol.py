@@ -22,7 +22,7 @@ class Desempenho:
     pontos: int
     # quantidade de jogos ganhos
     vitorias: int
-    # diferença entre os gols marcados e sofriados
+    # diferença entre os gols marcados e sofridos
     saldo: int
 
 

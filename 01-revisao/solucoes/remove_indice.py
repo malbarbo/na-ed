@@ -8,7 +8,7 @@ def remove_indice(lst: list[int], i: int):
 
     Exemplos
     >>> lst = [7, 1, 8, 9]
-    >>> remove_indice(lst, 2);
+    >>> remove_indice(lst, 2)
     >>> lst
     [7, 1, 9]
     >>> remove_indice(lst, 0)
