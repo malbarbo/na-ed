@@ -1,4 +1,6 @@
 author: |
+    Estrutura de Dados
+    \newline
     Marco A L Barbosa
     \newline
     \href{https://malbarbo.pro.br}{\color{black}{malbarbo.pro.br}}
@@ -36,10 +38,9 @@ header-includes: |
     }
 
     \makeatletter
-
     \def\bbl@cs#1{\csname bbl@#1\endcsname}
-
     \setlength{\metropolis@frametitle@padding}{1.2ex}
+    \makeatother
 
     \setbeamertemplate{footline}{%
       \begin{beamercolorbox}[wd=\textwidth, ht=1mm, sep=0mm]{footline}
@@ -50,7 +51,8 @@ header-includes: |
       \end{beamercolorbox}%
     }
 
-    \newcommand{\@minipagerestore}{\setlength{\parskip}{\metropolis@parskip}}
+    \makeatletter\newcommand{\@minipagerestore}{\setlength{\parskip}{\metropolis@parskip}}
+    \makeatother
 
     \let\oldblock\block
     \let\endoldblock\endblock
@@ -62,8 +64,6 @@ header-includes: |
     \let\endorigcolumns\endcolumns
     \renewenvironment{columns}[1][]{\origcolumns[onlytextwidth,#1]}{\endorigcolumns}
 
-    \makeatother
-
     \usepackage{bm}
     \usepackage{caption}
     \usepackage{clrscode3e}
@@ -73,6 +73,8 @@ header-includes: |
     \usepackage[super]{nth}
     \usepackage{tikz}
     \usetikzlibrary{positioning}
+
+    \makeatletter
     \AtBeginDocument{
       \letcs\oig{@orig\string\includegraphics}
       \renewcommand<>\includegraphics[2][]{
@@ -81,18 +83,20 @@ header-includes: |
         }
       }
     }
+    \makeatother
 license: |
   \vspace{-2cm}
   \begin{tikzpicture}[overlay, remember picture]
     \linespread{0.75}
     \node[above =0cm of current page.south, align=center] {
-        \href{http://creativecommons.org/licenses/by-sa/4.0/}{\ccbysa}\\
+        \href{http://creativecommons.org/licenses/by-sa/4.0/}{\color{black}{\ccbysa}}\\
         \vspace{-1mm}
         \tiny Este trabalho está licenciado com uma Licença Creative Commons - Atribuição-CompartilhaIgual 4.0 Internacional.\\
-        \tiny \url{http://github.com/malbarbo/na-programacao}
+        \tiny \href{http://github.com/malbarbo/na-ed}{\color{black}{http://github.com/malbarbo/na-ed}}
     };
   \end{tikzpicture}
 toc-title: Conteúdo
 theme: metropolis
+urlcolor: Magenta
 themeoptions: numbering=fraction,sectionpage=simple
 aspectratio: 169

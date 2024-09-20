@@ -86,25 +86,25 @@ Este algoritmo é conhecido como **ordenação por inserção** (_insertion sort
 
 <div class="columns">
 <div class="column" width="25%">
-\includegraphics[trim=140pt 380pt 2000pt 50pt,clip]{imagens/Fig-2-2.pdf} \pause
+\includegraphics[trim=140pt 380pt 2000pt 50pt, clip, width=3.5cm]{imagens/Fig-2-2.pdf} \pause
 </div>
 <div class="column" width="25%">
-\includegraphics[trim=1140pt 380pt 1000pt 50pt,clip]{imagens/Fig-2-2.pdf} \pause
+\includegraphics[trim=1140pt 380pt 1000pt 50pt, clip, width=3.5cm]{imagens/Fig-2-2.pdf} \pause
 </div>
 <div class="column" width="25%">
-\includegraphics[trim=2140pt 380pt 0pt 50pt,clip]{imagens/Fig-2-2.pdf} \pause
+\includegraphics[trim=2140pt 380pt 0pt 50pt, clip, width=3.5cm]{imagens/Fig-2-2.pdf} \pause
 </div>
 </div>
 
 <div class="columns">
 <div class="column" width="25%">
-\includegraphics[trim=140pt 0pt 2000pt 450pt,clip]{imagens/Fig-2-2.pdf} \pause
+\includegraphics[trim=140pt 0pt 2000pt 450pt, clip, width=3.5cm]{imagens/Fig-2-2.pdf} \pause
 </div>
 <div class="column" width="25%">
-\includegraphics[trim=1140pt 0pt 1000pt 450pt,clip]{imagens/Fig-2-2.pdf} \pause
+\includegraphics[trim=1140pt 0pt 1000pt 450pt, clip, width=3.5cm]{imagens/Fig-2-2.pdf} \pause
 </div>
 <div class="column" width="25%">
-\includegraphics[trim=2140pt 0pt 0pt 450pt,clip]{imagens/Fig-2-2.pdf}
+\includegraphics[trim=2140pt 0pt 0pt 450pt, clip, width=3.5cm]{imagens/Fig-2-2.pdf}
 </div>
 </div>
 
@@ -467,7 +467,7 @@ Para implementar essas funções, vamos precisar de uma operação auxiliar, que
 
 <div class="columns">
 <div class="column" width="48%">
-\includegraphics[trim=0cm 42.2cm 55.55cm 0cm, clip]{imagens/Fig-6-2.pdf}
+\includegraphics[trim=0cm 42.2cm 55.55cm 0cm, clip, width=6cm]{imagens/Fig-6-2.pdf}
 </div>
 <div class="column" width="48%">
 Seja $A$ um arranjo que armazena um heap máximo.
@@ -483,7 +483,7 @@ Verificamos se $A[i]$ é menor que algum dos dois filhos, \pause se sim, trocamo
 
 <div class="columns">
 <div class="column" width="48%">
-\includegraphics[trim=55.55cm 42.2cm 0cm 0cm, clip]{imagens/Fig-6-2.pdf}
+\includegraphics[trim=55.55cm 42.2cm 0cm 0cm, clip, width=6cm]{imagens/Fig-6-2.pdf}
 </div>
 <div class="column" width="48%">
 
@@ -500,7 +500,7 @@ Verificamos se $A[i]$ é menor que algum dos dois filhos, se sim, trocamos $A[i]
 
 <div class="columns">
 <div class="column" width="48%">
-\includegraphics[trim=0cm 2.5cm 55.55cm 39.7cm, clip]{imagens/Fig-6-2.pdf}
+\includegraphics[trim=0cm 2.5cm 55.55cm 39.7cm, clip, width=6cm]{imagens/Fig-6-2.pdf}
 </div>
 <div class="column" width="48%">
 Seja $A$ um arranjo que armazena um heap máximo.

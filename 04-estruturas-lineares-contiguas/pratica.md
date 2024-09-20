@@ -101,7 +101,7 @@ urlcolor: Blue
 
     Execute o arquivo com o comando `python arquivo.py` e veja na saída os tempos de execução da função `tempo_fila` para $n = 1000, 2000, 4000$.
 
-    Troque a implementação de fila usada no arquivo comentando a linha `from fila_arranjo_inicio_fim import`{.python} `Fila` e descomentando a linha `from fila_arranjo_fim import Fila`{.python}.
+    Troque a implementação de fila usada no arquivo comentando a linha `from fila_arranjo_inicio_fim import` `Fila` e descomentando a linha `from fila_arranjo_fim import Fila`.
 
     Execute novamente o arquivo e observe os tempos de execução.
 

@@ -2,17 +2,13 @@
 # vim: set spell spelllang=pt_br:
 title: Revisão
 linkcolor: Black
-urlcolor: Blue
 # TODO: falar de variáveis e tipos explicitamente
 # TODO: falar de modificação de parâmetros (imagens pythontutor)
-# TODO: exercícios sobre passagem de parêmetros
+# TODO: exercícios sobre passagem de parâmetros
 # TODO: falar que a verificação dinâmica não garante que o programa funciona corretamente
 # TODO: exemplo campo dado composto sendo dado composto a.b.c
 # TODO: exemplo lista de dados compostos lst[i].a
 ---
-
-Introdução
-==========
 
 ## Introdução
 
@@ -33,7 +29,7 @@ Projeto de programas
 
 Quais são as principais atividades no projeto de um programa? \pause
 
-- Análise (identificação o problema) \pause
+- Análise (identificação do problema) \pause
 
 - Especificação (descrição do que o programa deve fazer) \pause
 
@@ -506,16 +502,15 @@ Se o propósito é o mesmo, por que não usar a mesma forma? \pause
 
 Por conveniência! \pause
 
-Por exemplo, se não tivéssemos a forma de operadores e apenas a forma de chamada de funções, então deveríamos escrever
+Por exemplo, se não tivéssemos a forma de operadores e apenas a forma de chamada de funções, então, para escrever a expressão `30 * 2 + 3`{.python} teríamos que escrever \pause
 
 ```python
-from operator import add, mull
-add(mul(30, 2), 3)
+int.__add__(int.__mul__(30, 2), 3)
 ```
 
-ao invés de `30 * 2 + 3`{.python}, o que seria inconveniente. \pause
+\pause
 
-Além da conveniência de escrita, a forma de chamada métodos e indexação tem outras vantagens, vamos discutir isso ao longo da disciplina.
+Além da conveniência de escrita, a forma de chamada métodos e indexação tem outras vantagens, que não vamos discutir nessa disciplina.
 </div>
 </div>
 
@@ -875,9 +870,6 @@ IndexError: list index out of range
 
 
 ## Listas - alteração, acréscimo e concatenação
-
-<div class="columns">
-<div class="column" width="45%">
 
 \footnotesize
 
