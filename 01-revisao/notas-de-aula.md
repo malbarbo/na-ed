@@ -961,7 +961,7 @@ Uso da nova função
 
 ## Memória e passagem de parâmetros
 
-Veja o material de Memória e passagem de parâmetros na página <https://malbarbo.pro.br/ensino/2023/6879/>.
+Veja o material de Memória e passagem de parâmetros na página <https://malbarbo.pro.br/ensino/2024/6879/>.
 
 Veja o arquivo `parametros.py` no arquivo com os exemplos para download na página da disciplina.
 
@@ -1960,7 +1960,7 @@ O que escrever no propósito? \pause
 
 No propósito escrevemos **o que** a função deve fazer / faz. \pause
 
-Devemos usar o nome dos parâmetros na descrição do propósito para que a relação da entrada e da saída fique clara. \pause
+Devemos usar os nomes dos parâmetros na descrição do propósito para que a relação da entrada e da saída fique clara. \pause
 
 Para diferenciar o nome do parâmetro de uma palavra "normal", colocamos um asterisco antes e depois do nome do parâmetro: \pause
 
@@ -2008,7 +2008,7 @@ Escrever **como** a função faz ao invés de escrever **o que** a função faz:
 
 \pause
 
-Isto é como a função faz e pode ser visto na implementação, não é preciso "narrar" o que está na implementação! \pause
+Isto é como a função faz e pode ser visto na implementação, não é preciso "narrar" o que já está na implementação! \pause
 
 Compare com o que a função faz:
 
@@ -2082,7 +2082,7 @@ Depois os exemplos são usados como parte da verificação.
 
 Como escrever os exemplos? \pause
 
-O exemplos são escritos na forma de uma sessão iterativa do Python. Uma linha que inicia com `>>>` indica uma instrução, as seguintes (até uma linha sem nada) indicam a reposta esperada:
+O exemplos são escritos na forma de uma sessão iterativa do Python. Uma linha que inicia com `>>>` indica uma instrução, as seguintes (até uma linha sem nada) indicam a resposta esperada:
 
 \small
 
@@ -2189,7 +2189,7 @@ Found 1 error in 1 file (checked 1 source file)
 
 ## Verificação dinâmica
 
-Existem muitas estratégias de verificação dinâmica, a que vamos utilizar inicialmente é verificar se chamadas de funções com entradas específicas produzem as saídas esperadas (que já são conhecidas). \pause
+Existem muitas estratégias de verificação dinâmica, a que vamos utilizar inicialmente é baseada em exemplos, onde é verificado se as funções para entradas específicas produzem as saídas esperadas (que já são conhecidas). \pause
 
 Como já temos exemplos de entradas e saídas na especificação, podemos usar inicialmente esses exemplos para fazer a verificação dinâmica. \pause
 
@@ -2316,7 +2316,7 @@ Test passed.
 
 A seguir vamos ver um problema e o projeto de uma função para resolver o problema.
 
-Para exemplos mais detalhados, veja [esse](https://malbarbo.pro.br/arquivos/2023/6879/06-projeto-de-programas-notas-de-aula.pdf) documento.
+Para exemplos mais detalhados, veja [esse](https://malbarbo.pro.br/arquivos/2024/6879/03-projeto-de-programas-notas-de-aula.pdf) documento.
 
 
 ## Exemplo
@@ -2495,6 +2495,6 @@ Test passed.
 
 ## Referências
 
-Veja o material da página \url{https://malbarbo.pro.br/ensino/2023/6879/}.
+Veja o material da página \url{https://malbarbo.pro.br/ensino/2024/6879/}.
 
-Faça os exercícios da página \url{https://malbarbo.pro.br/ensino/2023/6879/}.
+Faça os exercícios da página \url{https://malbarbo.pro.br/ensino/2024/6879/}.
