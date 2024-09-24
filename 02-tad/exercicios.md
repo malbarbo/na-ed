@@ -1,9 +1,14 @@
 ---
-title: Tipos abstratos de dados - Prática
+# vim: set spell spelllang=pt_br sw=4:
+title: Exercícios de Revisão
+title: |
+       | Estrutura de dados
+       | Tipos abstratos de dados
+numbersections: false
 urlcolor: Blue
 ---
 
-O código inicial dos exercícios está disponíveis na página <https://malbarbo.pro.br/ensino/2023/6884/>.
+O código inicial dos exercícios está disponíveis na página <https://malbarbo.pro.br/ensino/2024/6884/>.
 
 @) Seu amigo disse que não é possível implementar a classe `Robo` de forma diferente da que vimos em sala. Mostre que ele está errado fazendo uma implementação que usa apenas um campo do tipo string que armazena a info (nome seguido da posição entre parênteses) do robô. Cria uma cópia do arquivo `robo_tad.py` chamada `robo_info.py` e escreva a implementação nesse novo arquivo. Compare as duas implementações (a da sala e essa) e discuta qual é a mais adequada.
 
