@@ -3,9 +3,8 @@
 title: Tipos abstratos de dados
 linkcolor: Black
 urlcolor: Blue
-# TODO: vantagens e desvantagens de tipos abstratos de dados e concretos
-# TODO: falar do dataclass
-# TODO: falar de modulos
+# TODO: adicionar um resumo no final.
+# TODO: falar de modulos?
 ---
 
 ## Introdução
@@ -197,12 +196,11 @@ O que podemos observar de "diferente" na forma de uso da classe `Robo` em relaç
 
 ## Tipos concretos e abstratos de dados
 
-Um tipo de dado (classe) em que a representação interna é conhecida e pode ser manipulada diretamente é chamado de **tipo concreto de dado**. \pause
+Um tipo de dado (classe) em que a representação interna é conhecida e pode ser manipulada diretamente pelo usuário do tipo é chamado de **tipo concreto de dado**. \pause
 
-Um tipo de dado em que a representação interna não é conhecida e que é manipulado apenas através de funções é chamada do **tipo abstrato de dado**. \pause
+Um tipo de dado em que a representação interna não é conhecida e que é manipulado apenas através de funções é chamado de **tipo abstrato de dado**. \pause
 
-A ocultação da representação interna é chamada de encapsulamento.
-
+A ocultação da representação interna é chamada de **encapsulamento**.
 
 ## Tipo abstrator de dados
 
@@ -210,13 +208,58 @@ De maneira mais formal, um **tipo abstrato de de dado** (TAD) é um modelo teór
 
 - Possíveis valores
 
-- Possíveis operações
+- As operações
 
-- Comportamento das operações
+- O comportamento das operações
+
+\pause
+
+Muitos tipos pré-definidos em Python são TAD's, como `list`{.python}, `dict`{.python} e até mesmo `int`{.python}.
 
 \pause
 
 A especificação criada pelo Roberto define um TAD para um Robô!
+
+
+## Especificação, implementação e uso
+
+Existem três papéis no desenvolvimento e uso de TAD's: \pause
+
+- Quem especifica; \pause
+
+- Quem implementa; \pause
+
+- Quem usa. \pause
+
+Qual é a diferença entre quem implementa e quem usa o TAD? \pause
+
+- Quem implementa pode manipular diretamente a representação interna; \pause
+
+- Quem usa o tipo tem que usar a interface (funções de manipulação) do tipo e não pode manipular diretamente a representação interna.
+
+
+## Vantagens e desvantagens
+
+Quais são as vantagens dos TAD's? \pause
+
+- Facilita o reuso criando abstrações; \pause
+
+- Facilita a verificação permitindo que cada TAD seja testado de forma isolada; \pause
+
+- Facilita a manutenção permitindo que o software seja decomposto em partes e que a implementação possa ser alterada sem que o código do usuário do TAD tenha que ser modificado; \pause
+
+- Agiliza o desenvolvimento permitindo que diferentes partes de um software sejam feitas simultaneamente. 
+
+
+## Vantagens e desvantagens
+
+E as desvantagens? \pause
+
+- Investimento inicial maior na especificação; \pause
+
+- Pode aumentar a complexidade adicionando abstrações desnecessárias; \pause
+
+- Pode gerar perda de desempenho devido as construções de abstrações.
 
 
 ## Classes em Python
@@ -225,20 +268,18 @@ A forma de criar novos tipos em Python é usando a construção `class`{.python}
 
 Até agora usamos classes como um forma de definir dados compostos, que usávamos como tipos concretos de dados, isto é, manipulando diretamente os campos (representação interna) da classe. \pause
 
-Na especificação feita pelo Roberto usamos uma classe para implementar um TAD. \pause Observe a diferença entre quem implementa o TAD e quem usa o TAD: \pause
-
-- Quem implementa o tipo tem acesso e manipula diretamente os campos da classe \pause
-
-- Quem usa o tipo não tem acesso direto aos campos e utiliza funções para fazer operações com os dados do tipo
+Por último, usamos uma classe para implementar o TAD especificado pelo Roberto.
 
 
 ## Métodos
 
-Apesar de podemos usar funções "livres" para implementar TADs, o comum em Python é usar métodos. \pause
+Apesar de podermos usar funções "livres" para implementar TADs, o comum em Python é usar métodos. \pause
 
-Um método é uma função que está associada com uma classe particular. \pause
+Um **método** é uma função que está associada com uma classe particular. \pause
 
-Para criar um método em um classe, basta definir uma função "dentro" da classe!
+Para criar um método em um classe, basta definir uma função "dentro" da classe! \pause
+
+Nos slides a seguir, observe com **ATENÇÃO** as mudanças no código a direita.
 
 
 ## Definição de Métodos
@@ -471,9 +512,9 @@ class Robo:
 
 Usamos `@dataclass`{.python} quando queremos um dado composto simples, sem operações operações associadas (ou com operações simples). \pause
 
-Quando usamos `@dataclass`{.python} um construtor que recebe um argumento para cada campo é criado, dessa forma não precisamos criar o método `__init__`. \pause
+Quando usamos `@dataclass`{.python} um construtor que recebe um argumento para cada campo é criado, dessa forma não precisamos criar o método `__init__`{.python}. \pause
 
-Além do construtor as funções `__eq___`, `__repr__`, `__str__`, `__hash__` são criadas automaticamente.
+Além do construtor as funções `__eq__`{.python}, `__repr__`{.python}, `__str__`{.python}, `__hash__`{.python} são criadas automaticamente.
 
 
 ## dataclass
@@ -494,7 +535,7 @@ class Ponto:
 
 Essa construção é mais ou menos equivalente ao código ao lado!
 
-Não se preocupe com essas funções "estranhas", a única que vamos utilizar por enquanto é o `__init__`.
+Não se preocupe com essas funções "estranhas", a única que vamos utilizar por enquanto é a `__init__`{.python}.
 
 </div>
 <div class="column" width="50%">
