@@ -129,11 +129,9 @@ O que a especificação feita pelo Roberto tem de diferente do que estamos acost
 - A especificação feita pelo Roberto envolve um tipo e uma coleção de funções relacionadas com esse tipo.
 
 
-## Atividade
+## Implementação
 
-Forme uma dupla e implemente a definição e operações do tipo `Robo` e confira se a implementação funciona corretamente. \pause
-
-Inicie com o arquivo `robo.py` disponível na página da disciplina.
+Vamos fazer a implementação.
 
 
 ## Implementação
