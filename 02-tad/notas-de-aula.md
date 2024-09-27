@@ -5,15 +5,14 @@ linkcolor: Black
 urlcolor: Blue
 # TODO: adicionar um resumo no final.
 # TODO: falar de modulos?
+# TODO: mostrar a implementação em etapas.
 ---
 
 ## Introdução
 
 Você acaba de chegar em uma empresa e a sua primeira atividade é concluir um código que havia sido iniciado pelo Roberto, que foi transferido para outra equipe. \pause
 
-Roberto é um bom desenvolvedor e costuma fazer a especificação antes de fazer a implementação, então o seu trabalho é escrever a implementação e fazer a verificação. \pause
-
-Note que a empresa usa uma convenção particular para nomear as funções.
+Roberto é um bom desenvolvedor e costuma fazer a especificação antes de fazer a implementação, então o seu trabalho é escrever a implementação e fazer a verificação.
 
 
 ## Especificação Robô
@@ -120,15 +119,6 @@ def robo_move(r: Robo, n: int):
 ```
 
 
-## Especificação Robô
-
-O que a especificação feita pelo Roberto tem de diferente do que estamos acostumados? \pause
-
-- Estamos acostumados a fazer a **especificação de uma função** que resolve um problema específico. \pause
-
-- A especificação feita pelo Roberto envolve um tipo e uma coleção de funções relacionadas com esse tipo.
-
-
 ## Implementação
 
 Vamos fazer a implementação.
@@ -136,6 +126,8 @@ Vamos fazer a implementação.
 
 ## Implementação
 
+<div class="columns">
+<div class="column" width="50%">
 \scriptsize
 
 ```python
@@ -154,42 +146,47 @@ def robo_info(r: Robo) -> str:
     return r.nome + ' (' + str(r.posicao) + ')'
 
 def robo_move(r: Robo, n: int):
-    r.posicao = max(1, min(10, r.posicao + n))
+    r.posicao = r.posicao + n
+    if r.posicao > 10:
+        r.posicao = 10
+    if r.posicao < 1
+        r.posicao = 1
 ```
-
-
-## Uso
-
-<div class="columns">
-<div class="column" width="50%">
-\scriptsize
-
-```python
->>> r = robo_cria('rob')
->>> # Avança
->>> robo_move(r, 5)
->>> robo_posicao(r)
-6
->>> # Recua
->>> robo_move(r, -3)
->>> robo_posicao(r)
-3
->>> # Info
->>> robo_info(r)
-'rob (6)'
-```
-
 </div>
 <div class="column" width="50%">
-\pause
+Essa é a única implementação possível? \pause
 
-O que podemos observar de "diferente" na forma de uso da classe `Robo` em relação ao que estamos acostumados? \pause
+Não! \pause
 
-- Estamos acostumados a criar valores de classes diretamente e também a ler e modificar os valores dos campos diretamente. \pause
+É possível fazer uma implementação com um representação diferente para `Robo`? \pause
 
-- Nesse exemplo criamos valores da classe com a função `cria_robo` e usamos funções para ler e modificar os campos.
+Sim! Veja o exercício na lista. \pause
+
+Vamos deixar a implementação de lado e focar na especificação.
 </div>
 </div>
+
+
+
+
+## Especificação Robô
+
+O que a especificação feita pelo Roberto têm de diferente do que estamos acostumados? \pause
+
+- Estamos acostumados a fazer a especificação de uma função que resolve um problema específico, \pause a especificação feita pelo Roberto envolve **um tipo e uma coleção de funções relacionadas com esse tipo**; \pause
+
+- Nos exemplos, estamos acostumados a criar valores de classes e acessar os campos diretamente, \pause nos exemplos do Roberto **os valores são criados e os campos acessados indiretamente através de funções**.
+
+
+## Especificação Robô
+
+O que os nomes das funções têm em comum? \pause
+
+- O prefixo `robo_`. \pause
+
+Por que? \pause
+
+- Porque estão relacionas com o tipo `Robo`.
 
 
 ## Tipos concretos e abstratos de dados
@@ -199,6 +196,7 @@ Um tipo de dado (classe) em que a representação interna é conhecida e pode se
 Um tipo de dado em que a representação interna não é conhecida e que é manipulado apenas através de funções é chamado de **tipo abstrato de dado**. \pause
 
 A ocultação da representação interna é chamada de **encapsulamento**.
+
 
 ## Tipo abstrator de dados
 
@@ -233,7 +231,7 @@ Qual é a diferença entre quem implementa e quem usa o TAD? \pause
 
 - Quem implementa pode manipular diretamente a representação interna; \pause
 
-- Quem usa o tipo tem que usar a interface (funções de manipulação) do tipo e não pode manipular diretamente a representação interna.
+- Quem usa o tipo tem que usar a interface (funções) do tipo e não pode manipular diretamente a representação interna.
 
 
 ## Vantagens e desvantagens
@@ -244,16 +242,18 @@ Quais são as vantagens dos TAD's? \pause
 
 - Facilita a verificação permitindo que cada TAD seja testado de forma isolada; \pause
 
+- Aumenta a confiabilidade mantendo os valores em estado consistente; \pause
+
 - Facilita a manutenção permitindo que o software seja decomposto em partes e que a implementação possa ser alterada sem que o código do usuário do TAD tenha que ser modificado; \pause
 
-- Agiliza o desenvolvimento permitindo que diferentes partes de um software sejam feitas simultaneamente. 
+- Agiliza o desenvolvimento permitindo que diferentes partes de um software sejam feitas simultaneamente.
 
 
 ## Vantagens e desvantagens
 
 E as desvantagens? \pause
 
-- Investimento inicial maior na especificação; \pause
+- A especificação requer um investimento inicial maior; \pause
 
 - Pode aumentar a complexidade adicionando abstrações desnecessárias; \pause
 
@@ -271,16 +271,16 @@ Por último, usamos uma classe para implementar o TAD especificado pelo Roberto.
 
 ## Métodos
 
-Apesar de podermos usar funções "livres" para implementar TADs, o comum em Python é usar métodos. \pause
+Apesar de podermos usar funções "livres" para implementar TADs, o **comum em Python** é usar métodos. \pause
 
 Um **método** é uma função que está associada com uma classe particular. \pause
 
 Para criar um método em um classe, basta definir uma função "dentro" da classe! \pause
 
-Nos slides a seguir, observe com **ATENÇÃO** as mudanças no código a direita.
+Nos slides a seguir, observe com **ATENÇÃO** as mudanças entre os códigos a esquerda e direita.
 
 
-## Definição de Métodos
+## Definição de métodos
 
 <div class="columns">
 <div class="column" width="50%">
@@ -307,8 +307,6 @@ def robo_move(r: Robo, n: int):
     6
     '''
 ```
-
-\pause
 
 </div>
 <div class="column" width="50%">
@@ -329,8 +327,8 @@ class Robo:
     def robo_move(r: Robo, n: int):
         '''
         >>> r = Robo.robo_cria('rob')
-        >>> r.robo_move(5)
-        >>> r.robo_posicao()
+        >>> Robo.robo_move(r, 5)
+        >>> Robo.robo_posicao(r)
         6
         '''
 ```
@@ -338,7 +336,12 @@ class Robo:
 </div>
 
 
-## Definição de Métodos
+## Definição de métodos
+
+O prefixo `robo_` fui usado inicialmente para indicar que as funções estavam relacionadas com o tipo `Robo`, mas usando métodos essa relação já está clara, então o prefixo não é necessário.
+
+
+## Definição de métodos
 
 <div class="columns">
 <div class="column" width="50%">
@@ -351,19 +354,90 @@ class Robo:
     nome: str
     posicao: int
 
-def robo_cria(nome: str) -> Robo: ...
+    def robo_cria(nome: str) -> Robo: ...
 
-def robo_posicao(r: Robo) -> int: ...
+    def robo_posicao(r: Robo) -> int: ...
 
-def robo_info(r: Robo) -> str: ...
+    def robo_info(r: Robo) -> str: ...
 
-def robo_move(r: Robo, n: int):
-    '''
-    >>> r = robo_cria('rob')
-    >>> robo_move(r, 5)
-    >>> robo_posicao(r)
-    6
-    '''
+    def robo_move(r: Robo, n: int):
+        '''
+        >>> r = Robo.robo_cria('rob')
+        >>> Robo.robo_move(r, 5)
+        >>> Robo.robo_posicao(r)
+        6
+        '''
+```
+
+</div>
+<div class="column" width="50%">
+\scriptsize
+
+```python
+@dataclass
+class Robo:
+    nome: str
+    posicao: int
+
+    def cria(nome: str) -> Robo: ...
+
+    def posicao(r: Robo) -> int: ...
+
+    def info(r: Robo) -> str: ...
+
+    def move(r: Robo, n: int):
+        '''
+        >>> r = Robo.cria('rob')
+        >>> Robo.move(r, 5)
+        >>> Robo.posicao(r)
+        6
+        '''
+```
+</div>
+</div>
+
+
+## Definição de métodos
+
+Apesar de podermos chamar um método usando o nome da classe, como em `list.append(x, 10)`{.python} ou `Robo.move(r, 6)`{.python}, a forma apropriada para a maioria dos casos é chamar o método diretamente com uma variável, sem usar o nome da classe, como em `x.append(10)`{.python} ou `r.move(6)`{.python}. \pause
+
+Observe a diferença na ênfase: \pause
+
+`Robo.move(r, 6)`{.python} -- `Robo.move`{.python} com os argumentos `r`{.python} e `6`{.python} \pause
+
+`r.move(6)`{.python} -- considerando `r`, `move` `6`{.python} (`r` está em evidência). \pause
+
+Note que para chamar uma método de uma classe sem usar o nome da classe precisamos ter um valor da classe. \pause
+
+Note que as duas formas não são exatamente equivalentes em todos os casos (não vamos discutir sobre isso nessa disciplina).
+
+
+## Definição de métodos
+
+<div class="columns">
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+@dataclass
+class Robo:
+    nome: str
+    posicao: int
+
+    def cria(nome: str) -> Robo: ...
+
+    def posicao(r: Robo) -> int: ...
+
+    def info(r: Robo) -> str: ...
+
+    def move(r: Robo, n: int):
+        '''
+        >>> r = Robo.cria('rob')
+        >>> Robo.move(r, 5)
+        >>> Robo.posicao(r)
+        6
+        '''
 ```
 
 </div>
@@ -394,7 +468,20 @@ class Robo:
 </div>
 
 
-## Definição de Métodos
+## Definição de métodos
+
+Ainda precisamos usar o nome da classe na chamada do método `cria` para criar um `Robo`. \pause
+
+De forma geral, sempre será necessário uma função para criar um valor de uma classe, por isso, o Python fornece uma maneira conveniente de fazer isso: o método `__init__`{.python}. \pause
+
+De fato, o método `__init__`{.python} não serve para criar um valor de uma classe, e sim, para inicializar um valor que já foi criado (implicitamente pelo Python). \pause
+
+Para chamar o método `__init__`{.python} usamos o nome do tipo como se fosse uma função: `Robo('r2d2', 1)`{.python}. \pause Note que nós não definimos o método `__init__`{.python} para a classe `Robo`, mas ele foi criado automaticamente porque usamos o `@dataclass`{.python} (mais sobre isso daqui a pouco). \pause
+
+Para definirmos explicitamente o método `__init__`{.python}, vamos remover o `@dataclass`{.python}.
+
+
+## Definição de métodos
 
 <div class="columns">
 <div class="column" width="50%">
@@ -407,19 +494,19 @@ class Robo:
     nome: str
     posicao: int
 
-def robo_cria(nome: str) -> Robo: ...
+    def cria(nome: str) -> Robo: ...
 
-def robo_posicao(r: Robo) -> int: ...
+    def posicao(r: Robo) -> int: ...
 
-def robo_info(r: Robo) -> str: ...
+    def info(r: Robo) -> str: ...
 
-def robo_move(r: Robo, n: int):
-    '''
-    >>> r = robo_cria('rob')
-    >>> robo_move(r, 5)
-    >>> robo_posicao(r)
-    6
-    '''
+    def move(r: Robo, n: int):
+        '''
+        >>> r = Robo.cria('rob')
+        >>> r.move(5)
+        >>> r.posicao()
+        6
+        '''
 ```
 
 </div>
@@ -450,7 +537,18 @@ class Robo:
 </div>
 
 
-## Definição de Métodos
+## Definição de métodos
+
+Vamos fazer uma última mudança. \pause
+
+O primeiro argumento de todos os métodos da classe `Robo` é `r: Robo`. \pause Isso não é por acaso, os métodos estão na classe `Robo` porque eles manipulam valores do tipo `Robo`, então precisamos de uma variável do tipo `Robo`. \pause
+
+Por convenção do Python, podemos usar `self`{.python} (sem especificar o tipo) como nome para a variável do tipo da classe. \pause
+
+Essa mudança não altera a forma de usar o tipo, apenas o nome da variável que será usado na implementação dos métodos.
+
+
+## Definição de métodos
 
 <div class="columns">
 <div class="column" width="50%">
@@ -458,24 +556,23 @@ class Robo:
 \scriptsize
 
 ```python
-@dataclass
 class Robo:
     nome: str
     posicao: int
 
-def robo_cria(nome: str) -> Robo: ...
+    def __init__(r: Robo, nome: str): ...
 
-def robo_posicao(r: Robo) -> int: ...
+    def posicao(r: Robo) -> int: ...
 
-def robo_info(r: Robo) -> str: ...
+    def info(r: Robo) -> str: ...
 
-def robo_move(r: Robo, n: int):
-    '''
-    >>> r = robo_cria('rob')
-    >>> robo_move(r, 5)
-    >>> robo_posicao(r)
-    6
-    '''
+    def move(r: Robo, n: int):
+        '''
+        >>> r = Robo('rob')
+        >>> r.move(5)
+        >>> r.posicao()
+        6
+        '''
 ```
 
 </div>
@@ -483,7 +580,6 @@ def robo_move(r: Robo, n: int):
 \scriptsize
 
 ```python
-
 class Robo:
     nome: str
     posicao: int
@@ -506,7 +602,12 @@ class Robo:
 </div>
 
 
-## dataclass
+## Definição de métodos
+
+Daqui para frente, vamos usar essa última forma para implementar TAD's.
+
+
+## `@dataclass`
 
 Usamos `@dataclass`{.python} quando queremos um dado composto simples, sem operações operações associadas (ou com operações simples). \pause
 
