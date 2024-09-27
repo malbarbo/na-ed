@@ -149,7 +149,7 @@ def robo_move(r: Robo, n: int):
     r.posicao = r.posicao + n
     if r.posicao > 10:
         r.posicao = 10
-    if r.posicao < 1
+    if r.posicao < 1:
         r.posicao = 1
 ```
 </div>
