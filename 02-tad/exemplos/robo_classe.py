@@ -70,4 +70,8 @@ class Robo:
         >>> r.posicao()
         1
         '''
-        self.pos = max(1, min(10, self.pos + n))
+        self.pos = self.pos + n
+        if self.pos > 10:
+            self.pos = 10
+        if self.pos < 1:
+            self.pos = 1

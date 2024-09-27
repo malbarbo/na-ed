@@ -77,4 +77,8 @@ def robo_move(r: Robo, n: int):
     >>> robo_posicao(r)
     1
     '''
-    r.posicao = max(1, min(10, r.posicao + n))
+    r.posicao = r.posicao + n
+    if r.posicao > 10:
+        r.posicao = 10
+    if r.posicao < 1:
+        r.posicao = 1
