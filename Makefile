@@ -60,6 +60,5 @@ clean-all:
 watch:
 	fd --extension md | entr make
 
-
 # FIXME: não é regenerado quando a árvore de diretórios muda
 include $(DEST)/Makefile.inc

@@ -3,10 +3,12 @@
 title: Noções de complexidade de algoritmos
 linkcolor: Black
 urlcolor: Blue
+# TODO: falar sobre análise experimental
 # TODO: falar de análise de um algoritmo particular vs uma classe de algoritmos
 # TODO: destacar o propósito da notação assintótica e suas limitações
+# TODO: adicionar resumo
+# TODO: colocar o limite em casa exemplo?
 ---
-
 
 ## Introdução
 
@@ -14,20 +16,20 @@ Quando fazemos o projeto de uma função ou de um tipo de dado separamos a espec
 
 Isso trás diversos benefícios, entre eles: \pause
 
-- Oculta a complexidade da implementação (abstração) \pause
+- Oculta a complexidade da implementação (abstração); \pause
 
-- Permite o desenvolvimento independente \pause
+- Permite o desenvolvimento independente; \pause
 
-- Permite múltiplas implementações
+- Permite implementações alternativas.
 
 
 ## Complexidade de algoritmos
 
 Se podemos fazer a implementação de diversas maneirais, quais critérios podemos utilizar para escolher uma implementação? \pause
 
-- Simplicidade \pause
+- Simplicidade; \pause
 
-- Consumo de recurso (tempo, memória, energia, etc)
+- Consumo de recurso (tempo, memória, energia, etc).
 
 \pause
 
@@ -36,11 +38,13 @@ Formalmente, o consumo de recurso de um algoritmo é chamada de **complexidade d
 
 ## Análise de algoritmos
 
-Para podermos determinar qual implementação (algoritmo) é mais eficiente (tem menor complexidade), precisamos de: \pause
+Para podermos determinar qual algoritmo é mais eficiente (tem menor complexidade), precisamos de: \pause
 
-- Uma forma de determinar expressar a complexidade (consumo de recurso) \pause
+- Determinar a complexidade; \pause
 
-- Uma forma de comparar a complexidade \pause
+- Expressar a complexidade; \pause
+
+- Comparar a complexidade. \pause
 
 O processo de determinar a complexidade de algoritmos é chamado de **análise de algoritmos**. \pause
 
@@ -51,31 +55,33 @@ Para expressar e comparar complexidades de algoritmos vamos utilizar a **notaç�
 
 A análise de um algoritmo pode ser: \pause
 
-- Experimental \pause
+- Experimental; \pause
 
-- Teórica ou analítica\pause
+- Teórica;\pause
 
 A análise experimental é mais específica pois dependente da linguagem, do compilador / interpretador, do hardware, etc. \pause
 
-A análise teórica é mais geral e provê entendimento das propriedades e limitações inerentes ao algoritmo. \pause
+A análise teórica (ou analítica) é mais geral e provê entendimento das propriedades e limitações inerentes ao algoritmo. \pause
 
-A duas formas de análise são complementares.
+As duas formas de análise são complementares. \pause
+
+Nessa disciplina vamos focar na análise teórica.
 
 
 ## Análise teórica
 
-Na **análise teórica** adotamos uma máquina teórica de computação e expressamos a complexidade de um algoritmo através de uma função que relaciona o tamanho da entrada com o consumo de recurso nessa máquina teórica. \pause
+Na **análise teórica** adotamos uma máquina teórica de computação e expressamos a complexidade de um algoritmo através de uma **função que relaciona o tamanho da entrada com o consumo de recurso** nessa máquina teórica. \pause
 
 A máquina teórica que vamos adotar tem operações lógicas e aritméticas, cópia de dados e controle de fluxo, e tem as seguintes características: \pause
 
-- As instruções são executadas uma por vez e em sequência \pause
+- As instruções são executadas uma por vez e em sequência; \pause
 
-- Cada operação é executa em uma unidade de tempo
+- Cada operação é executa em uma unidade de tempo.
 
 
 ## Análise teórica
 
-Em geral, não estamos procurando a função precisa de complexidade, mas uma que descreve de forma razoável como o consumo do recurso cresce em relação ao crescimento do tamanho da entrada (ordem de crescimento). \pause Além disso, estamos interessados em entradas suficientemente grandes, para que o algoritmo demore algum tempo razoável para executar e não termine rapidamente. \pause
+Em geral, não estamos procurando uma função precisa para a complexidade de um algoritmo, mas uma que descreve de forma razoável como o consumo do recurso cresce em relação ao crescimento do tamanho da entrada, o que chamamos de **ordem de crescimento**. \pause Além disso, estamos interessados em entradas suficientemente grandes, para que o algoritmo demore algum tempo razoável para executar e não termine rapidamente. \pause
 
 Por esse motivo, em alguns casos podemos fazer simplificações na análise, como por exemplo, levar em consideração apenas as **operações que são mais executadas**.
 
@@ -119,7 +125,7 @@ Como a quantidade de elementos de `lst` ($n$ - tamanho da entrada) está relacio
 
 Quantas vezes a operação `<` é executada? \pause $n - 1$. \pause
 
-Dessa forma, podemos dizer que o complexidade de tempo da função `maximo`, $T(n)$ é $n - 1$.
+Dessa forma, podemos dizer que o complexidade de tempo de `maximo` é $T(n) = n - 1$.
 </div>
 </div>
 
@@ -204,6 +210,8 @@ def ordena_selecao(lst: list[int]):
 ```
 </div>
 <div class="column" width="50%">
+\small
+
 Para uma entrada de tamanho $n$, quantas vezes a operação `<` é executada? \pause
 
 - Para $i = 0$, \pause $n - 1$ \pause
@@ -218,7 +226,7 @@ $\displaystyle \sum_{k = 1}^{n} n - k
 \pause = \sum_{k = 1}^{n} n - \sum_{k = 1}^{n} k
 \pause = n^2 - \frac{n(n - 1)}{2} \pause$
 
-Portanto, a complexidade de tempo da função é $\displaystyle \frac{n^2 - n}{2}$
+Portanto, a complexidade de tempo de `ordena_selecao` é $T(n) = \displaystyle \frac{n^2 - n}{2}$
 
 </div>
 </div>
@@ -226,11 +234,16 @@ Portanto, a complexidade de tempo da função é $\displaystyle \frac{n^2 - n}{2
 
 ## Notação assintótica
 
-Determinamos a complexidade de tempo fazendo a análise dos algoritmos. \pause
 
-Agora vamos ver a **notação assintótica**, que permite expressar e comparar mais facilmente complexidades de tempos. \pause
+Para podermos determinar qual algoritmo é mais eficiente (tem menor complexidade), precisamos de: \pause
 
-Vamos ver três notações:
+- Determinar a complexidade; \pause Feito; \pause
+
+- Expressar a complexidade;
+
+- Comparar a complexidade.
+
+Agora vamos ver a **notação assintótica**, que permite expressar e comparar mais facilmente complexidades de tempos. \pause Vamos ver três notações:
 
 - Notação $O$
 - Notação $\Omega$
