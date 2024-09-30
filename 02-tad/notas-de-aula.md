@@ -12,7 +12,7 @@ urlcolor: Blue
 
 Você acaba de chegar em uma empresa e a sua primeira atividade é concluir um código que havia sido iniciado pelo Roberto, que foi transferido para outra equipe. \pause
 
-Roberto é um bom desenvolvedor e costuma fazer a especificação antes de fazer a implementação, então o seu trabalho é escrever a implementação e fazer a verificação.
+Roberto é um bom desenvolvedor e costuma fazer a especificação antes de fazer a implementação, então o seu trabalho é fazer a implementação.
 
 
 ## Especificação Robô
@@ -154,6 +154,8 @@ def robo_move(r: Robo, n: int):
 ```
 </div>
 <div class="column" width="50%">
+\pause
+
 Essa é a única implementação possível? \pause
 
 Não! \pause
@@ -165,8 +167,6 @@ Sim! Veja o exercício na lista. \pause
 Vamos deixar a implementação de lado e focar na especificação.
 </div>
 </div>
-
-
 
 
 ## Especificação Robô
@@ -191,14 +191,16 @@ Por que? \pause
 
 ## Tipos concretos e abstratos de dados
 
-Um tipo de dado (classe) em que a representação interna é conhecida e pode ser manipulada diretamente pelo usuário do tipo é chamado de **tipo concreto de dado**. \pause
+Um tipo de dado em que a representação interna é conhecida e pode ser manipulada diretamente pelo usuário do tipo é chamado de **tipo concreto de dado**. \pause
 
 Um tipo de dado em que a representação interna não é conhecida e que é manipulado apenas através de funções é chamado de **tipo abstrato de dado**. \pause
 
-A ocultação da representação interna é chamada de **encapsulamento**.
+A ocultação da representação interna é chamada de **encapsulamento**. \pause
+
+Os tipos de dados abstratos de forma específica, e a construção de abstrações de forma geral, são formas essências de controlar a complexidade no desenvolvimento de software.
 
 
-## Tipo abstrator de dados
+## Tipo abstratos de dados
 
 De maneira mais formal, um **tipo abstrato de de dado** (TAD) é um modelo teórico de tipo de dado, definido pela comportamento do ponto de vista do usuário do tipo, incluindo:
 
@@ -246,7 +248,7 @@ Quais são as vantagens dos TAD's? \pause
 
 - Facilita a manutenção permitindo que o software seja decomposto em partes e que a implementação possa ser alterada sem que o código do usuário do TAD tenha que ser modificado; \pause
 
-- Agiliza o desenvolvimento permitindo que diferentes partes de um software sejam feitas simultaneamente.
+- Agiliza o desenvolvimento permitindo que diferentes partes de um software sejam desenvolvidas simultaneamente.
 
 
 ## Vantagens e desvantagens
@@ -271,11 +273,13 @@ Por último, usamos uma classe para implementar o TAD especificado pelo Roberto.
 
 ## Métodos
 
-Apesar de podermos usar funções "livres" para implementar TADs, o **comum em Python** é usar métodos. \pause
+Apesar de podermos usar funções "livres" para implementar TAD's, o **comum em Python** é usar métodos. \pause
 
 Um **método** é uma função que está associada com uma classe particular. \pause
 
 Para criar um método em um classe, basta definir uma função "dentro" da classe! \pause
+
+Vamos transformar nossa implementação de TAD em um classe com métodos. \pause
 
 Nos slides a seguir, observe com **ATENÇÃO** as mudanças entre os códigos a esquerda e direita.
 
@@ -403,7 +407,7 @@ Apesar de podermos chamar um método usando o nome da classe, como em `list.appe
 
 Observe a diferença na ênfase: \pause
 
-`Robo.move(r, 6)`{.python} -- `Robo.move`{.python} com os argumentos `r`{.python} e `6`{.python} \pause
+`Robo.move(r, 6)`{.python} -- `Robo.move`{.python} com os argumentos `r`{.python} e `6`{.python}. \pause
 
 `r.move(6)`{.python} -- considerando `r`, `move` `6`{.python} (`r` está em evidência). \pause
 
@@ -472,7 +476,7 @@ class Robo:
 
 Ainda precisamos usar o nome da classe na chamada do método `cria` para criar um `Robo`. \pause
 
-De forma geral, sempre será necessário uma função para criar um valor de uma classe, por isso, o Python fornece uma maneira conveniente de fazer isso: o método `__init__`{.python}. \pause
+De forma geral, sempre será necessário uma função para criar (construtor) um valor de uma classe, por isso, o Python fornece uma maneira conveniente de fazer isso: o método `__init__`{.python}. \pause
 
 De fato, o método `__init__`{.python} não serve para criar um valor de uma classe, e sim, para inicializar um valor que já foi criado (implicitamente pelo Python). \pause
 
@@ -616,7 +620,7 @@ Quando usamos `@dataclass`{.python} um construtor que recebe um argumento para c
 Além do construtor as funções `__eq__`{.python}, `__repr__`{.python}, `__str__`{.python}, `__hash__`{.python} são criadas automaticamente.
 
 
-## dataclass
+## `@dataclass`
 
 <div class="columns">
 <div class="column" width="50%">
@@ -662,7 +666,7 @@ class Ponto:
 </div>
 
 
-## dataclass
+## `@dataclass`
 
 Porque não usar `@dataclass`{.python} na classe `Robo`? \pause
 
@@ -670,7 +674,7 @@ Porque essas coisas geradas automaticamente não são adequadas para a classe `R
 
 Pode parecer confuso quando usar ou não o `@dataclass`{.python}, mas não se preocupe, isso vai ficar mais claro com a prática! \pause
 
-O importante por enquanto é saber como usar classes para especificar e implementar TADs.
+O importante por enquanto é saber como usar classes para especificar e implementar TAD's.
 
 
 ## Referências
