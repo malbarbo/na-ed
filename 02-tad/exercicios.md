@@ -1,6 +1,5 @@
 ---
 # vim: set spell spelllang=pt_br sw=4:
-title: Exercícios de Revisão
 title: |
        | Estrutura de dados
        | Tipos abstratos de dados
@@ -15,6 +14,8 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 @) O que é um tipo concreto de dado?
 
 @) O que é um tipo abstrato de dado?
+
+@) O tipo `int` do Python é um TAD? Explique.
 
 @) Qual é a diferença na forma que TAD é manipulado por que implementa e por quem usa o TAD?
 
