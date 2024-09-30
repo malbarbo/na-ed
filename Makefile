@@ -1,4 +1,4 @@
-.PHONY: default all pdf zip handout tex clean clean-all
+.PHONY: default all pdf zip handout tex clean clean-all watch
 
 DEST=target
 
@@ -56,6 +56,9 @@ clean:
 clean-all:
 	@echo Removendo $(DEST)
 	@rm -rf $(DEST)
+
+watch:
+	fd --extension md | entr make
 
 
 # FIXME: não é regenerado quando a árvore de diretórios muda
