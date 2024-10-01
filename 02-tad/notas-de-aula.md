@@ -613,7 +613,7 @@ Daqui para frente, vamos usar essa última forma para implementar TAD's.
 
 ## `@dataclass`
 
-Usamos `@dataclass`{.python} quando queremos um dado composto simples, sem operações operações associadas (ou com operações simples). \pause
+Em geral, usamos `@dataclass`{.python} quando queremos um tipo concreto de dado. \pause
 
 Quando usamos `@dataclass`{.python} um construtor que recebe um argumento para cada campo é criado, dessa forma não precisamos criar o método `__init__`{.python}. \pause
 
@@ -670,7 +670,7 @@ class Ponto:
 
 Porque não usar `@dataclass`{.python} na classe `Robo`? \pause
 
-Porque essas coisas geradas automaticamente não são adequadas para a classe `Robo`! \pause
+Porque queremos implementar um TAD e nem tudo que é gerado automaticamente pelo `@dataclass`{.python} é necessário para isso. \pause
 
 Pode parecer confuso quando usar ou não o `@dataclass`{.python}, mas não se preocupe, isso vai ficar mais claro com a prática! \pause
 
@@ -679,6 +679,6 @@ O importante por enquanto é saber como usar classes para especificar e implemen
 
 ## Referências
 
-Capítulo 2 - Visão geral das coleções - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na Minha Biblioteca da UEM)
+Capítulo 2 - Visão geral das coleções - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na [Minha Biblioteca da UEM](https://dliportal.zbra.com.br/Login.aspx?key=UEM))
 
 Seção 1.2 - Interfaces - [Open Data Structures (in pseudocode)](https://opendatastructures.org/ods-python.pdf)
