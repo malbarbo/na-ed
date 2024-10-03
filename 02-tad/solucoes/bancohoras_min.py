@@ -1,7 +1,7 @@
 class BancoHoras:
     '''
-    Representa a quantidade de horas extras que um funcionário fez
-    e que ainda não foram "volgadas".
+    Representa a quantidade de horas extras que um funcionário fez e que ainda
+    não foram compensadas.
     '''
 
     # Total de minutos
@@ -64,8 +64,8 @@ class BancoHoras:
 
     def consulta(self) -> str:
         '''
-        Devolve uma string no formato HH:MM representado
-        a quantidade de horas e minutos no banco de horas.
+        Devolve uma string no formato HH:MM representado a quantidade de horas
+        e minutos no banco de horas.
 
         Exemplos
         >>> b = BancoHoras()

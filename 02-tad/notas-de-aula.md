@@ -6,6 +6,7 @@ urlcolor: Blue
 # TODO: adicionar um resumo no final.
 # TODO: falar de modulos?
 # TODO: mostrar a implementação em etapas.
+# TODO: resolver inconsistência dos propósitos, em alguns é usado *self* em outros não
 ---
 
 ## Introdução
@@ -147,10 +148,10 @@ def robo_info(r: Robo) -> str:
 
 def robo_move(r: Robo, n: int):
     r.posicao = r.posicao + n
-    if r.posicao > 10:
-        r.posicao = 10
     if r.posicao < 1:
         r.posicao = 1
+    if r.posicao > 10:
+        r.posicao = 10
 ```
 </div>
 <div class="column" width="50%">

@@ -20,7 +20,7 @@ class Robo:
 
     def posicao(self) -> int:
         '''
-        Devolve a posição atual do robo *r*.
+        Devolve a posição atual do robo *self*
 
         Exemplos
         >>> r = Robo('rob')
@@ -32,8 +32,8 @@ class Robo:
 
     def info(self) -> str:
         '''
-        Devolve um texto com o nome do robo *r*
-        seguido da sua posição entre parêntes.
+        Devolve um texto com o nome do robo *self* seguido da sua posição entre
+        parêntes.
 
         Exemplos
         >>> r = Robo('rob')
@@ -45,9 +45,10 @@ class Robo:
 
     def move(self, n: int):
         '''
-        Altera a posição de *r* avançando *n* posições (até no máximo a posição 10)
-        se *n* for positivo, ou recuando -*n* posições (até no mínimo a posição 1)
-        se *n* for negativo. O robo *r* permanece na mesma posição se *n* for 0.
+        Altera a posição de *self* avançando *n* posições (até no máximo a
+        posição 10) se *n* for positivo, ou recuando -*n* posições (até no
+        mínimo a posição 1) se *n* for negativo. O robo *self* permanece na
+        mesma posição se *n* for 0.
 
         Exemplos
         >>> r = Robo('rob')
@@ -71,7 +72,7 @@ class Robo:
         1
         '''
         self.pos = self.pos + n
-        if self.pos > 10:
-            self.pos = 10
         if self.pos < 1:
             self.pos = 1
+        if self.pos > 10:
+            self.pos = 10

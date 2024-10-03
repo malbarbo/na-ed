@@ -29,7 +29,7 @@ class Selecao:
 
     def inicio(self) -> int:
         '''
-        Devolve o início da seleção *s*.
+        Devolve o início da seleção *self*.
 
         Exemplos
         >>> s = Selecao(4)
@@ -46,7 +46,7 @@ class Selecao:
 
     def fim(self) -> int:
         '''
-        Devolve o fim da seleção *s*.
+        Devolve o fim da seleção *self*.
 
         Exemplos
         >>> s = Selecao(4)
@@ -64,13 +64,14 @@ class Selecao:
 
     def move_direita(self):
         '''
-        Altera a selação *s* movendo o início ou fim da seleção para a direita da
+        Altera a selação *self* movendo o início ou fim da seleção para a direita da
         seguinte forma:
-        - Se o fim de *s* está a direita da célula onde a seleção começou, ou a
-          seleção só tem uma célula, então o fim é movido uma célula para a
-          direita.
-        - Se o início de *s* está a esquerda célula onde a seleção começou, então,
-          o início é movido uma célula para a direta (até o mínimo de 1).
+        - Se o fim de *self* está a direita da célula onde a seleção começou,
+          ou a seleção só tem uma célula, então o fim é movido uma célula para
+          a direita.
+        - Se o início de *self* está a esquerda célula onde a seleção começou,
+          então, o início é movido uma célula para a direta (até o mínimo de
+          1).
 
         Exemplos
         >>> # Mudança do fim
@@ -104,13 +105,13 @@ class Selecao:
 
     def move_esquerda(self):
         '''
-        Altera a selação *s* movendo o início ou fim da seleção para a esquerda da
+        Altera a selação *self* movendo o início ou fim da seleção para a esquerda da
         seguinte forma:
-        - Se o inicio de *s* está a esquerda da célula onde a seleção começou, ou a
-          seleção só tem uma célula, então o início é movido uma célula para a
-          esquerda (até o mínimo de 1).
-        - Se o fim de *s* está a direita célula onde a seleção começou, então, o
-          fim é movido uma célula para a esquerda.
+        - Se o inicio de *self* está a esquerda da célula onde a seleção
+          começou, ou a seleção só tem uma célula, então o início é movido uma
+          célula para a esquerda (até o mínimo de 1).
+        - Se o fim de *self* está a direita célula onde a seleção começou,
+          então, o fim é movido uma célula para a esquerda.
 
         Exemplos
         >>> # Mudança do início
