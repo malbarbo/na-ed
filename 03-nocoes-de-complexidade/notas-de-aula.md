@@ -4,6 +4,7 @@ title: Noções de complexidade de algoritmos
 linkcolor: Black
 urlcolor: Blue
 # TODO: falar sobre análise experimental
+# TODO: exemplo máximo de uma lista em ordem não decrescente
 # TODO: falar de análise de um algoritmo particular vs uma classe de algoritmos
 # TODO: destacar o propósito da notação assintótica e suas limitações
 # TODO: adicionar resumo
@@ -121,11 +122,15 @@ def maximo(lst: list[int]) -> int:
 ```
 </div>
 <div class="column" width="50%">
-Como a quantidade de elementos de `lst` ($n$ - tamanho da entrada) está relacionada com o tempo de execução (complexidade de tempo) da função `maximo`? \pause
+
+Vamos fazer a análise da função máximo para determinar a sua complexidade de tempo, isto é, determinar
+como o tempo de execução ($T(n)$) está relacionado com o tamanho da entrada ($n$ - quantidade de elementos de `lst`). \pause
+
+Quais são as operações mais executadas pela função? \pause O incremente e comparação de `i` (que estão implícitos) e a comparação de `max`. \pause
 
 Quantas vezes a operação `<` é executada? \pause $n - 1$. \pause
 
-Dessa forma, podemos dizer que o complexidade de tempo de `maximo` é $T(n) = n - 1$.
+Dessa forma, podemos dizer que a complexidade de tempo de `maximo` é $T(n) = n - 1$.
 </div>
 </div>
 
@@ -162,6 +167,8 @@ def contem(lst: list[int], x: int) -> bool:
         i = i + 1
     return contem
 ```
+
+\pause
 </div>
 <div class="column" width="50%">
 Para uma entrada de tamanho $n$, quantas vezes a operação `==` é executada? \pause
@@ -174,7 +181,7 @@ Depende dos valores entrada! \pause
 
 - Caso médio: considerando que `x` está em `lst` e tem a mesma probabilidade de estar em qualquer posição, $\frac{n + 1}{2}$ vezes \pause
 
-Portanto, para o caso geral, a complexidade de tempo da função é $n$.
+Portanto, para o caso geral, a complexidade de tempo da função é $T(n) = n$.
 
 </div>
 </div>
@@ -208,6 +215,8 @@ def ordena_selecao(lst: list[int]):
         lst[i] = lst[min]
         lst[min] = t
 ```
+
+\pause
 </div>
 <div class="column" width="50%">
 \small
@@ -222,7 +231,7 @@ Para uma entrada de tamanho $n$, quantas vezes a operação `<` é executada? \p
 
 Portanto, o total de vezes que `<` é executado é
 
-$\displaystyle \sum_{k = 1}^{n} n - k
+$\displaystyle \sum_{k = 1}^{n} (n - k)
 \pause = \sum_{k = 1}^{n} n - \sum_{k = 1}^{n} k
 \pause = n^2 - \frac{n(n - 1)}{2} \pause$
 
@@ -239,9 +248,9 @@ Para podermos determinar qual algoritmo é mais eficiente (tem menor complexidad
 
 - Determinar a complexidade; \pause Feito; \pause
 
-- Expressar a complexidade;
+- Expressar a complexidade; \pause
 
-- Comparar a complexidade.
+- Comparar a complexidade. \pause
 
 Agora vamos ver a **notação assintótica**, que permite expressar e comparar mais facilmente complexidades de tempos. \pause Vamos ver três notações:
 
