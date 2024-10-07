@@ -1,5 +1,10 @@
 ---
-title: Estruturas de dados lineares - Alocação contígua - Prática
+# vim: set spell spelllang=pt_br sw=4:
+title: |
+       | Estrutura de dados
+       | Estruturas de dados lineares
+       | Alocação contígua
+numbersections: false
 urlcolor: Blue
 # TODO: começar com exercícios mais simples
 # TODO: remover alguns exercícios de pilha, eles são muito iguais
