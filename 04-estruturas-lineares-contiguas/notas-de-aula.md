@@ -4,18 +4,21 @@ title: Estruturas de dados lineares
 subtitle: Alocação contígua
 linkcolor: Black
 urlcolor: Blue
+# TODO: adicionar o exemplo passa a passo da pilha
 ---
 
 ## Introdução
 
 Uma **estrutura de dados** é uma forma de organizar e armazenar dados para facilitar a sua manipulação (operações). \pause
 
+Qual é a relação entre TADs e estruturas de dados? \pause
+
 Usamos estruturas de dados para implementar TADs.
 
 
 ## Estrutura de dados lineares
 
-Em uma **estruturas de dados linear**, os elementos são organizados de forma sequencial, um após o outro. \pause Cada elemento possui no máximo um predecessor e um sucessor.\pause
+Em uma **estrutura de dados linear**, os elementos são organizados de forma sequencial, um após o outro. \pause Cada elemento possui no máximo um predecessor e um sucessor.\pause
 
 A estrutura de dados linear mais comum é o **arranjo**.
 
@@ -39,7 +42,7 @@ Os arranjos podem ser: \pause
 
 O tipo `list`{.python} do Python é de fato um arranjo dinâmico. \pause
 
-Diferente de outras linguagens, o Python não oferece um tipo pré-defino para arranjos estáticos. \pause
+Diferente de outras linguagens, o Python não oferece um tipo pré-definido para arranjos estáticos. \pause
 
 Por hora não vamos mais utilizar o tipo `list`{.python}, e sim o tipo `array`{.py}, que "simula" um arranjo de tamanho fixo. \pause
 
@@ -94,6 +97,11 @@ IndexError: list index out of range
 Traceback (most recent call last):
 ...
 AttributeError: 'array' object has no attribute 'append'
+```
+
+\pause
+
+```python
 >>> x.pop()
 Traceback (most recent call last):
 ...
@@ -113,9 +121,9 @@ A seguir veremos três TADs e como eles podem ser implementados usando arranjos.
 
 Projete uma função que verifique se os parênteses em uma expressão aritmética (representada por uma string) estão corretos, isso é: \pause
 
-- Cada `'('`{.python} tem um `')'`{.python} correspondente \pause
+- Cada `'('` tem um `')'` correspondente; \pause
 
-- Um `')'`{.python} não pode aparecer antes do `'('`{.python} correspondente
+- Um `')'` não pode aparecer antes do `'('` correspondente.
 
 
 ## Projeto
@@ -146,7 +154,7 @@ def parenteses_corretos(expr: str) -> bool:
     False
     >>> parenteses_corretos('())')
     False
-    >>> parenteses_corretos('((a)*(b-c)-10)*((4-2)/8)')
+    >>> parenteses_corretos('((a)*(b-c)-10)*(4-2)')
     True
     '''
 ```
@@ -156,11 +164,13 @@ def parenteses_corretos(expr: str) -> bool:
 </div>
 <div class="column" width="50%">
 
-Ideia da implementação:
+Como implementar essa função? \pause
 
-- Analisar a string um caractere por vez.
-- Manter um contador de parênteses que foram abertos mas ainda não foram fechados.
-- Incrementar o contador a cada abre parênteses e decrementar a cada fecha parênteses (o contador não pode ficar negativo).
+Podemos utilizar a seguinte ideia: \pause
+
+- Analisar a string um caractere por vez. \pause
+- Manter um contador de parênteses que foram abertos mas ainda não foram fechados. \pause
+- Incrementar o contador a cada abre parênteses e decrementar a cada fecha parênteses (o contador não pode ficar negativo). \pause
 - No final, se o contador for 0 e não ficou negativo, os parênteses estão corretos.
 
 </div>
@@ -194,7 +204,7 @@ def parenteses_corretos(expr: str) -> bool:
     False
     >>> parenteses_corretos('())')
     False
-    >>> parenteses_corretos('((a)*(b-c)-10)*((4-2)/8)')
+    >>> parenteses_corretos('((a)*(b-c)-10)*(4-2)')
     True
     '''
 ```
@@ -300,10 +310,10 @@ def grupos_corretos(expr: str) -> bool:
 
 Ideia da implementação: \pause
 
-- Analisar a string um caractere por vez.
-- Manter uma coleção com as ocorrências dos grupos que foram abertos mas ainda não foram fechados.
-- Quando um caractere de início de grupo é encontrado ele é _adicionado_ na coleção.
-- Quando um caractere de fim de grupo é encontrado ele precisa fechar (_remover_ da coleção) o grupo _mais recentemente aberto_ que ainda não foi fechado.
+- Analisar a string um caractere por vez. \pause
+- Manter uma coleção com as ocorrências dos grupos que foram abertos mas ainda não foram fechados. \pause
+- Quando um caractere de início de grupo é encontrado ele é _adicionado_ na coleção. \pause
+- Quando um caractere de fim de grupo é encontrado ele precisa fechar (_remover_ da coleção) o grupo _mais recentemente aberto_ que ainda não foi fechado. \pause
 - No final, se todos os grupos foram abertos e fechados corretamente, a expressão está correta.
 
 </div>
@@ -569,12 +579,12 @@ def grupos_corretos(expr: str) -> bool:
 
 Como implementar uma pilha usando um arranjo estático? \pause
 
-Usamos um inteiro para armazenar o `topo` da pilha, isso é, o índice no arranjo do último elemento que foi inserido na pilha: \pause
+Definimos um tamanho máximo para o arranjo e usamos um inteiro para armazenar o `topo` da pilha, isso é, o índice no arranjo do último elemento que foi inserido na pilha: \pause
 
-- Construtor: inicializa o arranjo e o `topo` com `-1`{.python} \pause
-- Vazia: verifica se `topo == -1`{.python} \pause
-- Empilha: incrementa `topo` e armazena o item na posição `topo` \pause
-- Desempilha: devolve o item na posição `topo` e decrementa `topo`
+- Construtor: \pause inicializa o arranjo e o `topo` com `-1`{.python}. \pause
+- Vazia: \pause verifica se `topo == -1`{.python}. \pause
+- Empilha: \pause incrementa `topo` e armazena o item na posição `topo`. \pause
+- Desempilha: \pause devolve o item na posição `topo` e decrementa `topo`.
 
 
 ## Implementação de Pilha usando arranjo estático
@@ -757,7 +767,7 @@ self.topo = self.topo + 1
 
 \normalsize
 
-Essa forma funciona para qualquer operador binário, mas qual é a vantagem?
+Note que essa forma funciona para qualquer operador binário.
 
 </div>
 </div>
@@ -1056,9 +1066,10 @@ Usamos índices `inicio` e `fim` que avançam de forma "circular", isto é, são
 
 Para uma fila com capacidade $C$ alocamos um arranjo de tamanho $C + 1$. Isto permite diferenciar entre fila vazia (`inicio == fim`{.python}) e fila cheia (o próximo valor de `fim` é igual ao `inicio`.
 
+
 ## {.plain}
 
-![](imagens/fila-circular.pdf)
+\centering ![](imagens/fila-circular.pdf)
 
 
 ## Implementação de fila circular
@@ -1158,11 +1169,11 @@ Na pilha e fila a inserção e remoção dos elementos segue uma política espec
 
 Para uma lista que representa a sequência $x_0, x_1, ..., x_{n-1}$: \pause
 
-- O tamanho da lista é $n$ \pause
-- O elemento $x_i$ está na posição (índice) $i$ \pause
-- Para $n > 0$, $x_0$ é o primeiro elemento e $x_{n-1}$ é o último elemento \pause
-- $x_i$ precede (é o predecessor) de $x_{i+1}$ para $i = 0, 1, \dots, n - 2$ \pause
-- $x_i$ sucede (é sucessor) $x_{i - 1}$ para $i = 1, 2, \dots, n - 1$
+- O tamanho da lista é $n$. \pause
+- O elemento $x_i$ está na posição (índice) $i$. \pause
+- Para $n > 0$, $x_0$ é o primeiro elemento e $x_{n-1}$ é o último elemento. \pause
+- $x_i$ precede (é o predecessor) de $x_{i+1}$ para $i = 0, 1, \dots, n - 2$. \pause
+- $x_i$ sucede (é sucessor) $x_{i - 1}$ para $i = 1, 2, \dots, n - 1$.
 
 
 ## Operações com lista
@@ -1401,9 +1412,9 @@ class Lista:
 
 \small
 
-Veja o código completo (e verificação dos erros!) no arquivo `lista.py`. \pause
+Veja o código completo (incluindo a verificação dos erros!) no arquivo `lista.py`. \pause
 
-A complexidade de tempo de `str`, `insere`, `remove`, `remove_item` e `indice` é $O(n)$. No caso especial de inserção e remoção por posição do final a complexidade é $O(1)$. As demais operações são constantes.
+A complexidade de tempo de `str`, `insere`, `remove`, `remove_item` e `indice` é $O(n)$. No caso especial de inserção e remoção por posição do final da lista a complexidade é $O(1)$. As demais operações são constantes.
 </div>
 </div>
 
@@ -1488,12 +1499,14 @@ Algumas perguntas: \pause
 
 Vimos 4 tipos abstratos de dados e como implementá-los usando arranjos: \pause
 
-- Pilha (inserção e remoção do mesmo extremo) \pause
+- Pilha (inserção e remoção no mesmo extremo) \pause
 - Fila (inserção em um extremo e remoção do outro) \pause
-- Fila Dupla (inserção e remoção dos dois extremos) \pause
+- Fila Dupla (inserção e remoção nos dois extremos) \pause
 - Lista (inserção e remoção em qualquer posição) \pause
 
 Se usarmos arranjos estáticos, então é preciso definir uma capacidade máxima, o que pode não ser adequado para algumas aplicações.
+
+\pause
 
 Se usarmos arranjos dinâmicos, então a capacidade não é limitada mas o tempo de execução de algumas operações é alterada.
 
@@ -1513,9 +1526,10 @@ Os tempos $O(1)$ são amortizados para as implementações com arranjos dinâmic
 
 Veremos a seguir como fazer as implementações desses TADs de maneira que o tempo de execução dessas operações sejam $O(1)$ no pior caso.
 
+
 ## Referências
 
-Capítulo 7, 8, 9 - Pilhas, filas e listas - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na Minha Biblioteca na UEM).
+Capítulo 7, 8, 9 - Pilhas, filas e listas - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na [Minha Biblioteca da UEM](https://dliportal.zbra.com.br/Login.aspx?key=UEM))
 
 Seção 10.1 - Pilhas e filas - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
 
