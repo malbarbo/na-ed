@@ -7,8 +7,8 @@ urlcolor: Blue
 # TODO: exemplo máximo de uma lista em ordem não decrescente
 # TODO: falar de análise de um algoritmo particular vs uma classe de algoritmos
 # TODO: destacar o propósito da notação assintótica e suas limitações
-# TODO: adicionar resumo
-# TODO: colocar o limite em casa exemplo?
+# TODO: adicionar resumo no final
+# TODO: colocar o resultado do limite em cada exemplo?
 ---
 
 ## Introdução
@@ -399,3 +399,10 @@ $f(n) = \Theta(g(n))$ semelhante a $a = b$
 ## Tempos de execução comuns
 
 ![Fonte: <https://www.geeksforgeeks.org/what-is-logarithmic-time-complexity/>](imagens/time-complexity.jpg){width=10cm}
+
+
+## Referências
+
+Capítulo 3 - Pesquisa, ordenação e análise de complexidade - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na [Minha Biblioteca da UEM](https://dliportal.zbra.com.br/Login.aspx?key=UEM))
+
+Seção 3.1 - Notação assintótica - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
