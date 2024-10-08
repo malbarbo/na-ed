@@ -1,7 +1,6 @@
 ---
 # vim: set spell spelllang=pt_br sw=4:
 title: |
-       | Estrutura de dados
        | Estruturas de dados lineares
        | Alocação contígua
 numbersections: false

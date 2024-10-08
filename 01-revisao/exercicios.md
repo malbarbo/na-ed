@@ -1,7 +1,7 @@
 ---
 # vim: set spell spelllang=pt_br sw=4:
 title: |
-       | Estrutura de dados
+       | Estruturas de dados
        | Revisão de fundamentos de algoritmos
 numbersections: false
 urlcolor: Blue
