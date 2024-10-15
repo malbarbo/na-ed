@@ -431,7 +431,7 @@ False
 \pause
 
 ```python
->>> f.desempilha()
+>>> p.desempilha()
 ```
 
 \pause
@@ -872,7 +872,7 @@ False
 \pause
 
 ```python
->>> p.desenfileira()
+>>> f.desenfileira()
 ```
 
 \pause
