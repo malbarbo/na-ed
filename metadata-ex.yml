@@ -9,9 +9,13 @@ header-includes: |
       UprightFont = *-Regular,
       BoldFont    = *-Medium
     ]{FiraMono}
+lang: pt-BR
+geometry:
+- margin=1.5cm
+- nofoot
+- nohead
+papersize: a4
+fontsize: 11pt
+toc-title: Conteúdo
 # Substitui a licença do arquivo metadata-ex.yml
 license:
-numbersections: true
-lang: pt-BR
-toc-title: Conteúdo
-fontsize: 11pt
