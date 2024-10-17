@@ -11,29 +11,44 @@ urlcolor: Blue
 # TODO: adicionar exercícios para usar fila
 ---
 
+
+## Começando
+
+@) O que é uma estrutura de dado?
+
+@) Qual é a relação entre TAD e estrutura de dado?
+
+@) O que é uma estrutura de dado linear?
+
+@) Quais são as principais característica dos arranjos?
+
+
 <!-- Pilha -->
 
-@) Modifique a implementação de `Pilha` vista em sala adicionando um método para verificar se a pilha está cheia.
+## Pilha - Começando
 
-@) Modifique a implementação de `Pilha` (do exercício anterior) para que o construtor receba como parâmetro a quantidade máxima de elementos que a pilha pode armazenar. Adicione um método que devolve a capacidade da pilha e ajuste os exemplos para funcionarem com essas modificações.
+@) O que é uma Pilha?
 
-@) Projete uma função que receba como parâmetro uma pilha e modifique a pilha invertendo a ordem dos seus elementos. Faça a implementação usando uma pilha auxiliar. Qual a complexidade de tempo da função?
+@) Considerando o algoritmo visto em sala que verifica se os grupos em uma expressão estão corretos, quantas operações de empilha e quantas de desempilha são realizadas para a entrada `[4 + ((2) + {4} * [3]] + ([1] + {3})`?
 
-    ```python
-    >>> p = Pilha()
-    >>> p.empilha('um')
-    >>> p.empilha('carro')
-    >>> p.empilha('mouse')
-    >>> inverte_pilha(p)
-    >>> p.desempilha()
-    'um'
-    >>> p.desempilha()
-    'carro'
-    >>> p.desempilha()
-    'mouse'
-    ```
+@) Projete uma função que receba como parâmetro uma pilha e modifique a pilha deixando ela vazia.
 
-@) Projete uma função que receba como parâmetro uma pilha e remova todos os elementos da pilha que sejam vazios. Note que ordem relativa dos elementos que permanecem na pilha não de ser altera.
+@) Projete uma função que inverta a ordem dos caracteres de uma string. Use uma pilha para fazer a implementação.
+
+@) Faça as seguintes alterações na implementação de `Pilha` vista em sala:
+
+    a) Modifique o construtor para que ele receba como parâmetro a quantidade máxima de elementos que a pilha pode armazenar.
+
+    a) Adicione um método para verificar se a pilha está cheia.
+
+    a) Adicione um método que devolve a capacidade da pilha e ajuste os exemplos para funcionarem com essas modificações.
+
+    a) Adicione um método com tempo de execução constante para esvaziar a pilha.
+
+
+## Pilha - Praticando
+
+@) Projete uma função que receba como parâmetro uma pilha e remova todos os elementos da pilha que sejam vazios. Faça a implementação usando uma pilha auxiliar. Qual a complexidade de tempo da função?
 
     ```python
     >>> p = Pilha()
@@ -49,31 +64,65 @@ urlcolor: Blue
     'um'
     ```
 
-@) Projete uma função que exiba os elementos de uma pilha na ordem em que eles foram adicionados. Use uma pilha auxiliar para fazer a implementação. Note que a pilha deve permanecer como ela foi passada para a função.
+@) Projete uma função que receba como parâmetro uma pilha e modifique a pilha invertendo a ordem dos seus elementos. Faça a implementação usando pilhas auxiliares. Qual a complexidade de tempo da função?
 
     ```python
     >>> p = Pilha()
-    >>> p.empilha('um')
-    >>> p.empilha('carro')
+    >>> p.empilha('banana')
+    >>> p.empilha('arco')
     >>> p.empilha('mouse')
-    >>> exibe_pilha(p)
-    um
-    carro
-    mouse
+    >>> inverte_pilha(p)
+    >>> p.desempilha()
+    'banana'
+    >>> p.desempilha()
+    'arco'
     >>> p.desempilha()
     'mouse'
-    >>> p.desempilha()
-    'carro'
-    >>> p.desempilha()
-    'um'
     ```
 
-@) Projete uma função que receba como parâmetro duas pilhas e troque os elementos de uma pilha com os elementos da outra pilha.
+@) A notação que estamos acostumados a escrever expressões aritméticas é chamada de notação infixa, isso porque os operadores ficam entre os operandos, como em `3 + 5 * 6`. Também podemos utilizar a notação posfixa, onde os operadores aparecem depois dos operandos. Na notação posfixa a expressão anterior é escrita como `5 6 * 3 +`. Dois aspectos são interessantes nessa notação: os parênteses não são necessários e o algoritmo de avaliação da expressão é mais simples. O seguinte algoritmo pode ser usado para avaliar expressões na notação posfixa: analise a expressão da esquerda para a direita, se o valor analisado for um operando, empilhe em uma pilha, se o valor for um operador, desempilhe dos valores da pilha, aplique o operador, e empilhe o resultado na pilha. Projete uma função que avalie uma expressão na notação posfixa (considere que a entrada é uma lista de strings onde cada string representa um número ou um dos quadro operadores aritméticos básicos, considere também que a entrada é válida, isto é, representa uma expressão válida).
+
+    ```python
+    >>> avalia_posfixa(['102'])
+    102
+    >>> avalia_posfixa(['55', '5', '/'])
+    10
+    >>> avalia_posfixa(['5', '6', '*', '3', '+'])
+    33
+    ```
+
+
+## Pilha - Avançando
+
+@) Os programas em Python precisam estar corretamente indentados, senão, um erro é gerado antes da execução. A indentação de cada linha de código é determinada pela quantidade de espaços em branco no início da linha. Em geral, a quantidade de espaços é múltipla de 4, mas pode ser qualquer quantidade. Um programa em Python está bem indentado se todos os blocos estão bem indentados. Um bloco está bem indentado se todas as instruções do bloco tem a indentação. Um novo bloco inicia após o término de um alinha com `:` e termina implicitamente com o recuo da indentação. Considere o segui trecho de código
+
+    ```{.python .number-lines}
+    def media_positivos(lst: list[int]) -> float:
+        soma = 0
+        num = 0
+        for x in lst:
+            if x > 0:
+                num += 1
+               soma += x
+        if num == 0:
+          media = 0.0
+        else:
+           media = soma / num
+        return soma
+    ```
+
+    As linhas 1, 4, 5, 8 e 10, terminam com dois ponto, o que indica o ínicio de um bloco. As intruções das linhas 2, 3, 4, 8, 10 e 11 fazem parte do bloco da linha 1 pois têm a mesma identação. A instrunção da linha 3 faz parte do bloco da linha 4. A instrução da linha 9, faz parte do bloco da linha 8. A instrução da linha 11 faz parte do bloco da linha 1. Existe um problema de identação no bloco da linha 5. O problema está na identação da linha 7. Se a linha 7 divesse a mesma identação da linha 6 (seja aumentando a indentação da linha 7 ou diminuindo a indentação da linha 6), então ela faria parte do bloco da linha 5. Se a linha 7 tivesse a mesma identação da linha 5, então ela faria parte do bloco da linha 4. Com a identação atual, a linha 7 fica fora desses blocos e por isso o código está mal indentado.
+
+    Projete uma função que verifique se um código Python está bem indentado. Use uma lista de linhas (strings) como entrada. Assuma que o código não tenha comentários.
+
+@) Projete uma função que avalie uma expressão aritmética na notação infixa. Para isso, implemente o algoritmo [Shunting yard](https://en.wikipedia.org/wiki/Shunting_yard_algorithm), que converte uma expressão na notação infixa para a notação posfixa. Depois de converter a expressão, avalie ela usando a função `avalia_posfixa`.
 
 @) (Desafio) Faça uma implementação alternativa do TAD Pilha que use uma única string para armazenar todos os elementos da pilha.
 
+
 <!-- Fila -->
 
+<!--
 @) Modifique a implementação de `Fila` do aquivo `fila_arranjo_fim.py` adicionando um método para verificar se a fila está cheia. Use o novo método para simplificar a implementação de `enfileira`.
 
 @) Modifique a implementação de `Fila` do aquivo `fila_arranjo_inicio_fim.py` adicionando um método para verificar se a fila está cheia. Use o novo método para simplificar a implementação de `enfileira`.
@@ -152,3 +201,5 @@ urlcolor: Blue
             n = n + 1
         return primos
     ```
+
+-->
