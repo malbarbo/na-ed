@@ -1,6 +1,6 @@
 from ed import array
 
-CAPACIDADE = 100
+CAPACIDADE = 5000
 
 
 class Pilha:
