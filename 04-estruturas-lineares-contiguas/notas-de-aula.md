@@ -579,7 +579,7 @@ def grupos_corretos(expr: str) -> bool:
 
 Como implementar uma pilha usando um arranjo estático? \pause
 
-Definimos um tamanho máximo para o arranjo e usamos um inteiro para armazenar o `topo` da pilha, isso é, o índice no arranjo do último elemento que foi inserido na pilha: \pause
+Definimos um tamanho máximo para o arranjo e usamos um inteiro para armazenar o `topo` da pilha, isso é, o índice no arranjo do último elemento que foi inserido na pilha e que ainda não foi removido: \pause
 
 - Construtor: \pause inicializa o arranjo e o `topo` com `-1`{.python}. \pause
 - Vazia: \pause verifica se `topo == -1`{.python}. \pause
