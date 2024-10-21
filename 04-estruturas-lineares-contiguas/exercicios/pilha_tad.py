@@ -1,0 +1,1 @@
+../exemplos/pilha_tad.py
