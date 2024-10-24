@@ -1355,29 +1355,28 @@ class Lista:
 </div>
 
 
-## Lista
+## Lista - Implementação
 
-<div class="columns">
-<div class="column" width="55%">
-\small
 Como implementar o TAD lista usando um arranjo estático? \pause
 
 Além do arranjo armazenamos a quantidade de elementos na lista. \pause
 
-As operações de tamanho, acesso e modificação em um posição, são diretas. \pause
+As operações de tamanho, acesso e modificação em um posição, são diretas.
+
+
+## Lista - Implementação
 
 Para inserção e remoção (em uma posição) é preciso deslocar os elementos de maneira semelhante ao que fizemos para a primeira implementação de fila. \pause
 
-A busca por um elemento e a representação por string é feita com uma repetição pelos elementos da lista. \pause
-
-Por fim, a remoção de um item pode ser feita com uma busca seguido da remoção por posição. \pause
-
-</div>
-<div class="column" width="43%">
 ![](imagens/arranjo.pdf){width=5cm}
 
-</div>
-</div>
+
+## Lista - Implementação
+
+A busca por um elemento e a representação por string é feita com uma repetição pelos elementos da lista. \pause
+
+Por fim, a remoção de um item pode ser feita com uma busca seguido da remoção por posição.
+
 
 
 ## Lista
