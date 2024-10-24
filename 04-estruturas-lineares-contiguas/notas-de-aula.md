@@ -1538,3 +1538,5 @@ Capítulo 7, 8, 9 - Pilhas, filas e listas - Fundamentos de Python: Estruturas d
 Seção 10.1 - Pilhas e filas - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
 
 Capítulo 2 - Array-Based Lists - [Open Data Structures](https://opendatastructures.org/ods-python.pdf).
+
+[Dynamic Arrays](https://en.wikipedia.org/wiki/Dynamic_array) na Wikipédia.
