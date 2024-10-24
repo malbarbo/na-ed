@@ -4,7 +4,10 @@ title: Estruturas de dados lineares
 subtitle: Alocação contígua
 linkcolor: Black
 urlcolor: Blue
-# TODO: adicionar o exemplo passa a passo da pilha
+# TODO: mudar as ilustrações de pilha e fila para seguirem os padrão das outras
+# TODO: adicionar o exemplo passa a passo para parenteses_corretos e grupos_corretos
+# TODO: fazer o topo ser a posição onde o próximo será adicionado?
+# TODO: fazer o fim ser a posição onde o próximo será adicionado? Já é assim na fila circular.
 ---
 
 ## Introdução
@@ -911,10 +914,10 @@ Como implementar uma fila usando um arranjo estático? \pause
 
 Usando um inteiro para indicar o `fim` da fila: \pause
 
-- Construtor: inicializa o arranjo e o `fim` com `-1`{.python}. \pause
-- Vazia: verifica se `fim == -1`{.python} \pause
-- Enfileira: incrementa `fim` e armazena o item na posição `fim`. \pause
-- Desenfileira: devolve o item na posição 0, move os itens (1 $\rightarrow$ 0, 2 $\rightarrow$ 1, etc) e decrementa o `fim`. \pause
+- Construtor: \pause inicializa o arranjo e o `fim` com `-1`{.python}. \pause
+- Vazia: \pause verifica se `fim == -1`{.python} \pause
+- Enfileira: \pause incrementa `fim` e armazena o item na posição `fim`. \pause
+- Desenfileira: \pause devolve o item na posição 0, move os itens (1 $\rightarrow$ 0, 2 $\rightarrow$ 1, etc) e decrementa o `fim`. \pause
 </div>
 <div class="column" width="48%">
 \scriptsize
@@ -987,10 +990,10 @@ Podemos fazer melhor? \pause Sim!
 <div class="column" width="48%">
 Podemos usar inteiros para indicar o `inicio` e o `fim` da fila da seguinte maneira: \pause
 
-- Construtor: inicializa o arranjo, `inicio` com 0 e `fim` com `-1`{.python}. \pause
-- Vazia: verifica se `fim < inicio`{.python} \pause
-- Enfileira: incrementa `fim` e armazena o item na posição `fim`. \pause
-- Desenfileira: devolve o item na posição `inicio` e incrementa `inicio`. \pause
+- Construtor: \pause inicializa o arranjo, `inicio` com 0 e `fim` com `-1`{.python}. \pause
+- Vazia: \pause verifica se `fim < inicio`{.python} \pause
+- Enfileira: \pause incrementa `fim` e armazena o item na posição `fim`. \pause
+- Desenfileira: \pause devolve o item na posição `inicio` e incrementa `inicio`. \pause
 </div>
 <div class="column" width="48%">
 \scriptsize
@@ -1064,7 +1067,9 @@ Podemos fazer melhor? \pause Sim!
 
 Usamos índices `inicio` e `fim` que avançam de forma "circular", isto é, são incrementados até chegarem no final do arranjo e depois voltam para 0. O `fim` representa o índice onde o próximo elemento será inserido.
 
-Para uma fila com capacidade $C$ alocamos um arranjo de tamanho $C + 1$. Isto permite diferenciar entre fila vazia (`inicio == fim`{.python}) e fila cheia (o próximo valor de `fim` é igual ao `inicio`.
+\pause
+
+Para uma fila com capacidade $C$ alocamos um arranjo de tamanho $C + 1$. Isto permite diferenciar entre fila vazia (`inicio == fim`{.python}) e fila cheia (o próximo valor de `fim` é igual ao `inicio`).
 
 
 ## {.plain}
@@ -1078,10 +1083,10 @@ Para uma fila com capacidade $C$ alocamos um arranjo de tamanho $C + 1$. Isto pe
 <div class="column" width="48%">
 Descrição da implementação dos métodos
 
-- Construtor: inicializa o arranjo, `inicio` e `fim` com `0`{.python}. \pause
-- Vazia: verifica se `inicio == fim`{.python} \pause
-- Enfileira: armazena o item na posição `fim` e avança `fim`. \pause
-- Desenfileira: devolve o item na posição `inicio` e avança `inicio`. \pause
+- Construtor: \pause inicializa o arranjo, `inicio` e `fim` com `0`{.python}. \pause
+- Vazia: \pause verifica se `inicio == fim`{.python} \pause
+- Enfileira: \pause armazena o item na posição `fim` e avança `fim`. \pause
+- Desenfileira: \pause devolve o item na posição `inicio` e avança `inicio`. \pause
 </div>
 <div class="column" width="48%">
 \scriptsize
@@ -1156,7 +1161,7 @@ A implementação "circular" de fila não tem as limitações das duas implement
 
 Uma **fila dupla** (_double ended queue_ - _deque_ em inglês) é uma sequência linear onde os itens podem ser inseridos e removidos dos dois extremos, o que de certa forma é uma generalização de pilha e fila. \pause
 
-Muitas linguagens não oferecem na biblioteca padrão uma implementação separada para pilha, fila e fila dupla, mas apenas uma implementação de fila dupla. Este é o caso do Python (`collections.deque`), do Rust (`std::collections::VecDeque`), entre outras. \pause
+Muitas linguagens não oferecem na biblioteca padrão uma implementação separada para pilha, fila e fila dupla, mas apenas uma implementação de fila dupla. Este é o caso do Python ([`collections.deque`](https://docs.python.org/3/library/collections.html#collections.deque)), do Rust ([`std::collections::VecDeque`](https://doc.rust-lang.org/std/collections/struct.VecDeque.html)), entre outras. \pause
 
 Como os termos início e fim podem parecer confusos para uma fila dupla, alguns autores usam os termos esquerda e direita.
 
@@ -1205,7 +1210,7 @@ class Lista:
         Requer que 0 <= i < self.num_itens().'''
 
     def set(self, i: int, item: int):
-        '''Armazena *item* na posição **i** da lista.
+        '''Armazena *item* na posição *i* da lista.
         Requer que 0 <= i < self.num_itens().'''
 
     def insere(self, i: int, item: int):
@@ -1221,13 +1226,13 @@ class Lista:
 
 ```python
 class Lista:
-    def remove(self, i: int) ->:
+    def remove(self, i: int) -> int:
         '''Remove e devolve o item na posição *i* da lista. Os itens que estavam
         inicialmente nas posições i, i+1, ..., passam a ficar nas posições
         i-1, i, ...
         Requer que 0 <= i < self.num_itens().'''
 
-    def remove_item(self, item: int) ->:
+    def remove_item(self, item: int):
         '''Remove a primeira ocorrência de *item* da lista. Se i é a posição do
         *item*, então os itens que estavam inicialmente nas posições i, i+1,
         ..., passam a ficar nas posições i-1, i, ...
@@ -1369,11 +1374,7 @@ Por fim, a remoção de um item pode ser feita com uma busca seguido da remoçã
 
 </div>
 <div class="column" width="43%">
-![](imagens/arranjo.pdf){width=4cm}
-
-\small
-
-Vamos fazer implementação e determinar as complexidades de tempo juntos!
+![](imagens/arranjo.pdf){width=5cm}
 
 </div>
 </div>
@@ -1447,6 +1448,8 @@ Apesar do bloco de memória reservado para o arranjo não poder mudar de tamanho
 >>> len(array)
 3
 ```
+
+\pause
 </div>
 <div class="column" width="48%">
 ![](imagens/referencia-arranjo-1.pdf)
@@ -1464,6 +1467,8 @@ Apesar do bloco de memória reservado para o arranjo não poder mudar de tamanho
 >>> len(arr)
 6
 ```
+
+\pause
 </div>
 <div class="column" width="48%">
 ![](imagens/referencia-arranjo-2.pdf)
