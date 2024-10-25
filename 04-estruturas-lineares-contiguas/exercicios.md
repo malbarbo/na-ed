@@ -13,7 +13,7 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 
 ## Introdução
 
-@) O que é uma estrutura de dado?
+@) O que são estruturas de dados?
 
 @) Qual é a relação entre TADs e estruturas de dados?
 
@@ -45,7 +45,7 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 
     a) Modifique o construtor para que ele receba como parâmetro a quantidade máxima de elementos que a pilha pode armazenar.
 
-    a) Adicione um método para verificar se a pilha está cheia. Use o novo método para simplificar a implementação de `desempilha`.
+    a) Adicione um método para verificar se a pilha está cheia. Use o novo método para simplificar a implementação de `empilha`.
 
     a) Adicione um método que devolve a capacidade da pilha e ajuste os exemplos para funcionarem com essas modificações.
 
@@ -113,7 +113,7 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 
     a) Modifique o construtor para que ele receba como parâmetro a quantidade máxima de elementos que a fila pode armazenar.
 
-    a) Adicione um método para verificar se a fila está cheia. Use o novo método para simplificar a implementação de `desenfileira`.
+    a) Adicione um método que devolve a quantidade de elementos na fila. Altere a implementação do método `cheia` para para usar esse novo método. A implementação ficou mais simples?
 
     a) Adicione um método que devolve a capacidade da fila e ajuste os exemplos para funcionarem com essas modificações.
 
@@ -139,7 +139,62 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 
 @) Defina um TAD para fila dupla com métodos para inserir e remover da esquerda e direita. Implemente o TAD usando a estratégia de arranjo circular.
 
-@) Modifique o programa `tempo_fila.py` para mostar a diferença do tempo de execução do método `popleft` da classe `collections.deque` e do método `pop(0)` da classe `list` (pré-definidos em Python). Execute o programa, analise os tempos de execução obtidos e explique a diferença.
+@) Modifique o programa `tempo_fila.py` para mostrar a diferença do tempo de execução do método `popleft` da classe `collections.deque` e do método `pop(0)` da classe `list` (pré-definidos em Python). Execute o programa, analise os tempos de execução obtidos e explique a diferença.
+
+
+# Listas - Começando
+
+@) O que é uma Lista?
+
+@) Como os arranjos dinâmicos podem ser implementados usando arranjos estáticos?
+
+@) Altere a implementação de `Lista` do arquivo `lista_arranjo.py` e adicione um método `acrescenta` que acrescenta um elemento no final da lista.
+
+@) Altere a implementação de `Lista` do arquivo `lista_arranjo.py` e adicione um método `eq` que verifica se duas listas são iguais.
+
+@) Altere a seguinte função para usar uma `Lista` do arquivo `lista_arranjo.py` ao invés do `list` do Python.
+
+    ```python
+    def primos(lim: int) -> list[int]:
+        '''
+        Encontra todos os números primos menores que *lim*.
+
+        Exemplos:
+        >>> primos(2)
+        []
+        >>> primos(20)
+        [2, 3, 5, 7, 11, 13, 17, 19]
+        '''
+        primos: list[int] = []
+        n = 2
+        while n < lim:
+            eh_primo = True
+            i = 0
+            while eh_primo and i < len(primos):
+                if n % primos[i] == 0:
+                    eh_primo = False
+                i = i + 1
+
+            if eh_primo:
+                primos.append(n)
+
+            n = n + 1
+        return primos
+    ```
+
+
+# Listas - Praticando
+
+@) Projete uma função que receba como parâmetro uma Lista e modifique a lista removendo todos as ocorrências de elementos iguais consecutivos. Por exemplo, após executar a função para a lista `[4, 4, 4, 1, 2, 2]` ele é alterada para `[4, 1, 2]`. Qual é a complexidade de tempo da sua função?
+
+@) Altere a implementação do método `lista.remove` para que `valores` nunca fique com menos que 25% da sua capacidade utilizada (exceto quanto a capacidade for menor ou igual a 10). Como isso afeta a complexidade de tempo? Dica: veja o método `__cresce` e seu uso em `insere`. Escreve um método auxiliar `__diminui`, que reduz a capacidade de `valores` pela metade.
+
+
+# Listas - Avançando
+
+@) Implemente o TAD Lista usando um arranjo circular de tamanho fixo. Nos métodos de inserção e remoção por índice, mova os elementos para o extremos mais próximo. Que vantagens essa implementação tem em relação a implementação de Lista do arquivo `lista_arranjo.py`.
+
+@) Modifique a implementação anterior para usar um arranjo dinâmico.
 
 
 # Desafios
@@ -170,39 +225,3 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
     As linhas 1, 4, 5, 8 e 10, terminam com dois ponto, o que indica o ínicio de um bloco. As intruções das linhas 2, 3, 4, 8, 10 e 11 fazem parte do bloco da linha 1 pois têm a mesma identação. A instrunção da linha 3 faz parte do bloco da linha 4. A instrução da linha 9, faz parte do bloco da linha 8. A instrução da linha 11 faz parte do bloco da linha 1. Existe um problema de identação no bloco da linha 5. O problema está na identação da linha 7. Se a linha 7 divesse a mesma identação da linha 6 (seja aumentando a indentação da linha 7 ou diminuindo a indentação da linha 6), então ela faria parte do bloco da linha 5. Se a linha 7 tivesse a mesma identação da linha 5, então ela faria parte do bloco da linha 4. Com a identação atual, a linha 7 fica fora desses blocos e por isso o código está mal indentado.
 
     Projete uma função que verifique se um código Python está bem indentado. Use uma lista de linhas (strings) como entrada. Assuma que o código não tenha comentários.
-
-<!--
-
-@) Altere a implementação do método `lista.remove` para que `valores` nunca fique com menos que 25% da sua capacidade utilizada (exceto quanto a capacidade for menor ou igual a 10). Como isso afeta a complexidade de tempo? Dica: veja o método `__cresce` e seu uso em `insere`. Escreve um método auxiliar `__diminui`, que reduz a capacidade de `valores` pela metade.
-
-@) Altere a seguinte função para usar uma `lista` (implementada no exercício anterior) ao invés do `list` do Python.
-
-    ```python
-    def primos(lim: int) -> list[int]:
-        '''
-        Encontra todos os números primos menores que *lim*.
-
-        Exemplos:
-        >>> primos(2)
-        []
-        >>> primos(20)
-        [2, 3, 5, 7, 11, 13, 17, 19]
-        '''
-        primos: list[int] = []
-        n = 2
-        while n < lim:
-            eh_primo = True
-            i = 0
-            while eh_primo and i < len(primos):
-                if n % primos[i] == 0:
-                    eh_primo = False
-                i = i + 1
-
-            if eh_primo:
-                primos.append(n)
-
-            n = n + 1
-        return primos
-    ```
-
--->
