@@ -59,7 +59,7 @@ class Pilha:
         >>> p.desempilha() == str(CAPACIDADE - 1)
         True
         '''
-        if self.topo >= CAPACIDADE - 1:
+        if self.topo >= len(self.valores) - 1:
             raise ValueError('pilha cheia')
         self.topo = self.topo + 1
         self.valores[self.topo] = item

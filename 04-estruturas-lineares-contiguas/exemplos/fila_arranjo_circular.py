@@ -76,7 +76,7 @@ class Fila:
         if self.cheia():
             raise ValueError('fila cheia')
         self.valores[self.fim] = item
-        if self.fim == CAPACIDADE:
+        if self.fim == len(self.valores) - 1:
             self.fim = 0
         else:
             self.fim += 1
@@ -102,7 +102,7 @@ class Fila:
         if self.vazia():
             raise ValueError('fila vazia')
         item = self.valores[self.inicio]
-        if self.inicio == CAPACIDADE:
+        if self.inicio == len(self.valores) - 1:
             self.inicio = 0
         else:
             self.inicio += 1
@@ -124,9 +124,9 @@ class Fila:
 
     def cheia(self) -> bool:
         '''
-        Devolve True se a fila está vazia, isto é, a quantidade de elementos na
+        Devolve True se a fila está cheia, isto é, a quantidade de elementos na
         fila é igual a *CAPACIDADE*, False caso contrário.
         '''
         # O próximo índice para o fim é igual ao início?
         return self.fim + 1 == self.inicio or \
-            self.fim == CAPACIDADE and self.inicio == 0
+            self.fim == len(self.valores) - 1 and self.inicio == 0

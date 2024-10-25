@@ -67,7 +67,7 @@ class Fila:
         >>> f.desenfileira()
         '1'
         '''
-        if self.fim >= CAPACIDADE - 1:
+        if self.fim >= len(self.valores) - 1:
             raise ValueError('fila cheia')
         self.fim += 1
         self.valores[self.fim] = item
