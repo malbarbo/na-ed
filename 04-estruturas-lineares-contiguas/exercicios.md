@@ -95,9 +95,11 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
     >>> avalia_posfixa(['102'])
     102
     >>> avalia_posfixa(['55', '5', '/'])
-    10
+    11
     >>> avalia_posfixa(['5', '6', '*', '3', '+'])
     33
+    >>> avalia_posfixa(['5', '-6', '*', '3', '+', '10', '-'])
+    -37
     ```
 
 
@@ -123,7 +125,7 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 
 @) O programa `tempo_fila.py` (que usa alguns construções que ainda não vimos, mas não se preocupe com isso), mede o tempo de execução da função `operacoes` em segundos para $n = 1000, 2000, 4000$, tanto para fila implementada com o marcador de início, quanto para a fila implementa com o marcador de início e fim.
 
-    Modifique o arquivo `tempo_fila.py` e faça a implementação da função `operacoes`. Em seguida, execute o arquivo com o comando `python arquivo.py`.
+    Modifique o arquivo `tempo_fila.py` e faça a implementação da função `operacoes`. Em seguida, execute o arquivo com o comando `python tempo_fila.py`.
 
     Analise os tempos de execução obtidos e explique a diferença.
 
