@@ -3,9 +3,8 @@ from ed import array
 # Modificações
 # - construtor recebe a capacidade
 # - adicionado método capacidade
-# - adicionado método cheia
 # - adicionado método __avanca
-# - ajustado os exemplos ea implementação para funcionar com essas modificações
+# - ajustado os exemplos e a implementação para funcionar com essas modificações
 
 
 class Fila:

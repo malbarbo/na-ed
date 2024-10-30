@@ -8,43 +8,43 @@ class FilaDupla:
     >>> f = FilaDupla()
     >>> f.vazia()
     True
-    >>> f.insere_inicio('casa')
-    >>> f.insere_inicio('minha')
-    >>> f.insere_fim('é')
-    >>> f.insere_fim('verde')
-    >>> f.insere_fim('legal')
-    >>> f.insere_fim('né?')
+    >>> f.insere_esquerda('casa')
+    >>> f.insere_esquerda('minha')
+    >>> f.insere_direita('é')
+    >>> f.insere_direita('verde')
+    >>> f.insere_direita('legal')
+    >>> f.insere_direita('né?')
     >>> f.vazia()
     False
-    >>> f.remove_inicio()
+    >>> f.remove_esquerda()
     'minha'
-    >>> f.remove_inicio()
+    >>> f.remove_esquerda()
     'casa'
-    >>> f.remove_inicio()
+    >>> f.remove_esquerda()
     'é'
-    >>> f.remove_inicio()
+    >>> f.remove_esquerda()
     'verde'
-    >>> f.remove_fim()
+    >>> f.remove_direita()
     'né?'
-    >>> f.remove_fim()
+    >>> f.remove_direita()
     'legal'
-    >>> f.remove_inicio()
+    >>> f.remove_esquerda()
     Traceback (most recent call last):
     ...
     ValueError: fila vazia
-    >>> f.remove_fim()
+    >>> f.remove_direita()
     Traceback (most recent call last):
     ...
     ValueError: fila vazia
     '''
 
-    def insere_inicio(self, item: str):
+    def insere_esquerda(self, item: str):
         '''
         Insere *item* no início da fila.
         '''
         raise NotImplemented
 
-    def remove_inicio(self) -> str:
+    def remove_esquerda(self) -> str:
         '''
         Remove e devolve o item no início da fila.
 
@@ -52,13 +52,13 @@ class FilaDupla:
         '''
         raise NotImplemented
 
-    def insere_fim(self, item: str):
+    def insere_direita(self, item: str):
         '''
         Insere *item* no fim da fila.
         '''
         raise NotImplemented
 
-    def remove_fim(self) -> str:
+    def remove_direita(self) -> str:
         '''
         Remove e devolve o item no fim da fila.
 
