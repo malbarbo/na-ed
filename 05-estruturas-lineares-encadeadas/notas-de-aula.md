@@ -4,7 +4,9 @@ title: Estruturas de dados lineares
 subtitle: Alocação encadeada
 linkcolor: Black
 urlcolor: Blue
-# TODO: trocar os exemplos de lista de pessoas para exemplos de mulher com mãe, ou inscrito com quem indicou
+# TODO: Use None para retorno de desempilha e desenfileira? Ou exercício?
+# TODO: Falar exatamente o que o is e o is not fazem
+# TODO: trocar os exemplos de lista de pessoas para exemplos de mulher com mãe, ou inscrito com quem indicou?
 # TODO: adicionar discussão vantagens e desvantagens do uso de sentinela (ver o cormen)
 ---
 
@@ -71,8 +73,8 @@ Agora temos que projetar a função `faz_aniversario`.
 ```python
 def faz_aniversario(p: Pessoa):
     '''
-    Se a idade está presente, aumenta
-    a idade da pessoa *p* em 1 ano.
+    Aumenta a idade da pessoa *p* em
+    1 ano e a idade está presente.
 
     Exemplos
     >>> p1 = Pessoa('Joao', 21)
@@ -100,18 +102,21 @@ def faz_aniversario(p: Pessoa):
 
 \small
 
-O que aconteceria se esquecêssemos de fazer a verificação se a idade está presente? \pause O teste iria falhar... \pause
+Qual é o problema em usar `NENHUMA` para representar a ausência de idade? \pause
 
-E se não tivéssemos teste? \pause O programa executaria mas produziria resultados incorretos.
+Sempre que precisamos da idade, temos que fazer uma verificação. \pause O que acontece se esquecermos de fazer a verificação? \pause No melhor dos casos, descobrimos o erro na fase de teste, \pause no pior caso, o programa geraria resultados incorretos para o usuário. \pause
+
+Note que se a idade é opcional, sempre precisamos verificar se ele está presente ou não, a questão é como fazemos isso.
+
 </div>
 </div>
 
 
 ## Valores opcionais
 
-Porque esse erro possível? \pause
+O que permite o programar executar sem verificar se a idade está presente? \pause
 
-Esse tipo de erro só é possível porque estamos usando um valor do mesmo tipo para representar a ausência de valor, então, qualquer operação válida para os valores do tipo também é válida para o valor que representa a ausência de valor! \pause
+O ponto é que estamos usando um valor do mesmo tipo para representar a ausência de valor, então, qualquer operação válida para os valores do tipo também é válida para o valor que representa a ausência de valor! \pause
 
 Existe mais algum problema com essa estratégia? \pause
 
@@ -126,11 +131,8 @@ Em Python existe um valor especial chamado `None`{.python} (do tipo `None`{.pyth
 
 Para que uma variável possa referenciar o valor `None`{.python}, é preciso informar isso na declaração do tipo da variável, por exemplo `a: int | None`{.python}. Está declaração está dizendo que variável `a` pode referenciar uma célula com um inteiro ou com `None`{.python}. \pause
 
-Note que é possível declarar uma variável apenas do tipo `None`{.python}, por exemplo `a: None`{.python}, mas isso não faz muito sentido pois o único valor válido para `a` seria `None`{.python}! \pause
-
 <div class="columns">
 <div class="column" width="48%">
-
 \scriptsize
 
 ```python
@@ -138,25 +140,44 @@ Note que é possível declarar uma variável apenas do tipo `None`{.python}, por
 >>> a: int | None = 20
 >>> a
 20
->>> a = None
->>> a
+>>> a is None
+False
+>>> a is not None
+True
 ```
+
+\pause
 
 </div>
 <div class="column" width="48%">
 \scriptsize
 
 ```python
->>> a = 30
+
+>>> a = None
 >>> a
-30
->>> # b só pode referenciar o valor None!
->>> b: None = None
->>> b
+>>> # nada é exibido, None representa nada!
+>>> a is None
+True
+>>> a is not None
+False
 ```
 
 </div>
 </div>
+
+
+## Valores opcionais
+
+Note que é possível declarar uma variável apenas do tipo `None`{.python}, por exemplo `a: None`{.python}, mas isso não faz muito sentido pois o único valor válido para `a` seria `None`{.python}! \pause
+
+\scriptsize
+
+```python
+>>> # a só pode referenciar o valor None!
+>>> a: None = None
+>>> a
+```
 
 
 ## Valores opcionais
@@ -212,6 +233,18 @@ def faz_aniversario(p: Pessoa):
 
 O que aconteceria se esquecêssemos de fazer a verificação se a idade está presente? \pause
 
+O `python` geraria um erro de execução:
+
+\scriptsize
+
+```
+TypeError: unsupported operand type(s) for +=: 'NoneType' and 'int'
+```
+
+\pause
+
+\normalsize
+
 O `mypy` iria gerar um erro:
 
 \scriptsize
@@ -222,32 +255,34 @@ pessoa.py:23: note: Left operand is of type "int | None"
 Found 1 error in 1 file (checked 1 source file)
 ```
 
-\pause
 
-\normalsize
+## Valores opcionais
 
 O que ganhamos com isso? \pause
 
-Antes era possível cometer um erro incrementando a idade quando ela não estivesse presente, agora isso não é mais possível! Além disso, a detecção do erro acontece de forma estática, sem precisar executar o programa (como é feito nos testes).
+Antes era possível que o programa continuasse a execução mesmo se a verificação da idade, agora isso não é mais possível! \pause
 
-</div>
-</div>
+Além disso, com o uso do `mypy`, podemos detectar o erro estaticamente, sem precisar executar o programa.
 
 
 ## Encadeamento
 
+Vamos voltar a uma das questões iniciais. \pause
+
 Como podemos representar uma quantidade arbitrária de dados sem arranjos? \pause
 
-Suponha que queremos representar uma coleção de nomes de pessoas. \pause Podemos fazer isso usando estruturas. \pause A ideia é criar uma estrutura com um nome de uma pessoa e uma referência para outra instância da mesma estrutura, que conterá o nome da próxima pessoa e uma referência para outra instância da mesma estrutura...
+Suponha que queremos representar uma coleção de nomes de pessoas. \pause Podemos fazer isso usando estruturas. \pause A ideia é criar um **encadeamento** de instância de estruturas. \pause
 
-\pause
+A estrutura têm um nome de uma pessoa e uma referência para outra instância da mesma estrutura, que contém o nome da próxima pessoa e uma referência para outra instância da mesma estrutura...
 
-<div class="columns">
-<div class="column" width="48%">
+
+## Encadeamento
+
 \scriptsize
 
 ```python
 from __future__ import annotations
+
 @dataclass
 class Seq:
     nome: str
@@ -256,27 +291,33 @@ class Seq:
 
 \pause
 
-```python
->>> # Queremos representar a coleção
->>> # com os nomes 'Joao', 'Pedro' e 'Ana'.
->>> seq = Seq('Joao', Seq('Pedro', Seq('Ana', ...)))
-```
+\normalsize
 
-</div>
-<div class="column" width="48%">
-![](imagens/seq-sem-fim.pdf)
-</div>
-</div>
+Como representar a coleção com os nomes "Joao", "Pedro" e "Ana"?
 
 \pause
 
-O que está faltando? \pause Uma forma de encerrar a sequência!
+\scriptsize
+
+```python
+seq = Seq('Joao', Seq('Pedro', Seq('Ana', ...)))
+```
+
+\pause
+
+\ \
+
+![](imagens/seq-sem-fim.pdf)
+
+\pause
+
+\normalsize
+
+O que está faltando? \pause Uma forma de encerrar a sequência! \pause Vamos tornar o próximo opcional usando `None`{.python}.
 
 
 ## Encadeamento
 
-<div class="columns">
-<div class="column" width="35%">
 \scriptsize
 
 ```python
@@ -286,41 +327,32 @@ class Seq:
     proximo: Seq | None
 ```
 
-</div>
-<div class="column" width="60%">
-
 \pause
 
 \scriptsize
 
 ```python
->>> # Queremos representar a coleção
->>> # com os nomes 'Joao', 'Pedro' e 'Ana'.
 >>> seq = Seq('Joao', Seq('Pedro', Seq('Ana', None)))
 ```
 
-</div>
-</div>
-
 \pause
 
-\ 
-
-Na representação gráfica podemos utilizar `/` para indicar uma referência para `None`{.python}
-
-\ 
+\ \
 
 ![](imagens/seq-com-fim.pdf)
 
-
 \pause
+
+\normalsize
+
+Note que na representação gráfica podemos utilizar `/` para indicar uma referência para `None`{.python}. \pause
 
 O que têm de diferente na declaração de `Seq` em relação as classes que definimos anteriormente? \pause  Uma **autorreferência**, ou seja, a utilização da classe em sua própria definição.
 
 
 ## Encadeamento
 
-Os tipos com autorreferência (ou recursivos) permitem a representação de quantidade de dados arbitrárias pelo **encadeamento** de instâncias do tipo. \pause Usamos `None`{.python} para representar o fim do encadeamento. \pause
+Os tipos com autorreferência (ou recursivos) permitem a representação de uma quantidade de dados arbitrárias pelo **encadeamento** de instâncias do tipo. \pause Usamos `None`{.python} para representar o fim do encadeamento. \pause
 
 O tipo utilizado no encadeamento é comumente chamado de `No`, dessa forma, usamos um encadeamento de nós para criar uma coleção de valores. \pause
 
@@ -350,6 +382,8 @@ class No:
 \pause
 
 \normalsize
+
+\ \
 
 Antes de prosseguirmos, vamos revisar o uso de múltiplas referências para a mesma célula de memória.
 
@@ -571,7 +605,9 @@ Adicione um `No` com o item 20 no final.
 >>> p.prox.prox.prox.prox = No(20, None)
 ```
 
-\normalsize
+\pause
+
+\small
 
 Usando repetição!
 
@@ -580,9 +616,12 @@ Usando repetição!
 \pause
 
 ```python
+>>> # q começa no início do encademaneto
 >>> q = p
+>>> # avançamos q enquanto podemos
 >>> while q.prox is not None:
 ...     q = q.prox
+>>> # agora q referencia o último nó
 >>> q.prox = No(20, None)
 ```
 
@@ -598,10 +637,10 @@ Como podemos implementar uma pilha usando um encadeamento de nós? \pause
 
 Usamos uma variável `topo` para armazenar o primeiro nó do encadeamento ou `None`{.python} se a pilha estiver vazia: \pause
 
-- Construtor: inicializa `topo` com `None`{.python} \pause
-- Vazia: verifica se `topo` é `None`{.python} \pause
-- Empilha: insere um novo nó com o item no início do encadeamento e muda `topo` para o novo início \pause
-- Desempilha: remove o primeiro nó do encadeamento e muda `topo` para o novo início \pause
+- Construtor: \pause inicializa `topo` com `None`{.python} \pause
+- Vazia: \pause verifica se `topo` é `None`{.python} \pause
+- Empilha: \pause insere um novo nó com o item no início do encadeamento e muda `topo` para o novo início \pause
+- Desempilha: \pause remove o primeiro nó do encadeamento e muda `topo` para o novo início \pause
 
 </div>
 <div class="column" width="48%">
@@ -640,10 +679,10 @@ Como podemos implementar uma fila usando um encadeamento de nós? \pause
 
 Usamos uma variável `inicio` para armazenar o primeiro nó do encadeamento ou `None`{.python} se a fila estiver vazia: \pause
 
-- Construtor: inicializa `inicio` com `None`{.python} \pause
-- Vazia: verifica se `inicio` é `None`{.python} \pause
-- Enfileira: insere um novo nó com o item no final do encadeamento \pause
-- Desenfileira: remove o primeiro nó do encadeamento e muda `inicio` para o novo início \pause
+- Construtor: \pause inicializa `inicio` com `None`{.python} \pause
+- Vazia: \pause verifica se `inicio` é `None`{.python} \pause
+- Enfileira: \pause insere um novo nó com o item no final do encadeamento \pause
+- Desenfileira: \pause remove o primeiro nó do encadeamento e muda `inicio` para o novo início \pause
 
 </div>
 <div class="column" width="48%">
@@ -661,6 +700,7 @@ class Fila:
             p = self.inicio
             while p.prox is not None:
                 p = p.prox
+            # Coloca item após o último nó
             p.prox = No(item, None)
 
     def desenfileira(self) -> str:
@@ -693,6 +733,7 @@ class Fila:
             p = self.inicio
             while p.prox is not None:
                 p = p.prox
+            # Coloca item após o último nó
             p.prox = No(item, None)
 
     def desenfileira(self) -> str:
@@ -728,7 +769,7 @@ Ambos `inicio` e `fim` são considerados em `enfileira` e `desenfileira`.
 
 <div class="columns">
 <div class="column" width="48%">
-![](imagens/fila-simples.pdf){height=7cm}
+![](imagens/fila-simples.pdf){height=7.7cm}
 \pause
 </div>
 <div class="column" width="48%">
@@ -814,7 +855,7 @@ Precisamos implementar inserção e remoção nos dois extremos. \pause
 
 Mantendo `inicio` e `fim`, quais são as complexidades de tempos das operações? \pause
 
-Inserir no início: \pause $O(1)$ \pause (como `Pilha.empiha` -- atualiza `fim` se necessário) \pause
+Inserir no início: \pause $O(1)$ \pause (como `Pilha.empilha` -- atualiza `fim` se necessário) \pause
 
 Remover do início: \pause $O(1)$ \pause (como `Fila.desenfileira`) \pause
 
@@ -1134,6 +1175,8 @@ def remove(p: No):
     p.ante.prox = p.prox
 ```
 
+\ \
+
 \pause
 
 ```python
@@ -1143,6 +1186,8 @@ def insere_depois(p: No, novo: No):
     p.prox.ante = novo
     p.prox = novo
 ```
+
+\ \
 
 \pause
 
@@ -1156,11 +1201,15 @@ def insere_antes(p: No, novo: No):
 
 \pause
 
+\ \
+
 \normalsize
 
 Não precisamos de dois métodos para inserir!
 
 \scriptsize
+
+\ \
 
 ```python
 def insere_antes(p: No, novo: No):
@@ -1177,7 +1226,7 @@ Como podemos fazer para que cada nó tenha um antecessor e um sucessor? \pause
 
 Usamos uma **sentinela**, um nó especial, que é usando onde o valor `None`{.python} seria usado normalmente. Ou seja, a sentinela fica entre o primeiro e o último nó do encadeamento. \pause
 
-O resultado é comumente chamado de **lista circular duplamente encadeada com sentinela**! \pause Na figura abaixo a `L` e o `self` e a sentinela é o `nil`. \pause
+O resultado é comumente chamado de **lista circular duplamente encadeada com sentinela**! \pause Na figura abaixo `L` é o `self` e a sentinela é o `nil`. \pause
 
 ![](imagens/Fig-10-4.pdf){width=11cm}
 
@@ -1191,6 +1240,8 @@ Como implementar o TAD de fila dupla com esse esquema? \pause
 Nesse esquema o `ante` e o `prox` não podem ser `None`{.python}, então precisamos mudar a definição de `No`: \pause
 
 \scriptsize
+
+\ \
 
 ```python
 @dataclass
@@ -1282,8 +1333,6 @@ class FilaDupla:
 
 \pause
 
-\vspace{-0.2cm}
-
 ```python
         insere_depois(self.sentinela, No(item))
 ```
@@ -1296,8 +1345,6 @@ class FilaDupla:
 
 \pause
 
-\vspace{-0.2cm}
-
 ```python
         insere_depois(self.sentinela.ante, No(item))
 ```
@@ -1309,8 +1356,6 @@ class FilaDupla:
 ```
 
 \pause
-
-\vspace{-0.2cm}
 
 ```python
         assert not self.vazia()
@@ -1325,8 +1370,6 @@ class FilaDupla:
 
 \pause
 
-\vspace{-0.2cm}
-
 ```python
         assert not self.vazia()
         return remove(self.sentinela.ante)
@@ -1338,6 +1381,8 @@ class FilaDupla:
 
 
 ## Lista
+
+Como implementar o TAD Lista utilizando encadeamento? \pause
 
 Devemos usar encadeamento simples ou duplo para implementar o TAD Lista? \pause
 
@@ -1383,7 +1428,7 @@ Arranjo Dinâmico       |  $O(1)$ | $O(n)$ / $O(n)$ | $O(1)$[^2] / $O(1)$ | $O(n
 
 ## Referências
 
-Capítulo 7, 8, 9 - Pilhas, filas e listas - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na Minha Biblioteca na UEM).
+Capítulo 7, 8, 9 - Pilhas, filas e listas - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na [Minha Biblioteca da UEM](https://dliportal.zbra.com.br/Login.aspx?key=UEM))
 
 Seção 10.2 - Listas ligadas - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
 
