@@ -1,15 +1,38 @@
 ---
-title: Estruturas de dados lineares - Alocação encadeada - Prática
+# vim: set spell spelllang=pt_br sw=4:
+title: |
+       | Estruturas de dados lineares
+       | Alocação encadeada
+numbersections: false
 urlcolor: Blue
+# TODO: pedir complexidade de tempo
+# TODO: adicionar exercícios de referências múltiplas
+# TODO: adicionar exercícios de pilhas e filas (inverte, junta)
+# TODO: tad de conjunto
+# TODO: tad de dicionário
+# TODO: adicionar exercícios de listas (slice, splice)
+# TODO: adicionar mais desafios
+# TODO: sistema de janelas, recebe um clique e deve trazer a janela pra frente da lista
 ---
 
-<!-- Encadeamento -->
+O código inicial dos exercícios está disponível na página <https://malbarbo.pro.br/ensino/2024/6884/>.
+
+## Introdução
+
+@) Qual é utilidade do `None`{.python}?
+
+@) O que é uma autorreferência na definição de um tipo de dado?
+
+@) Qual é a utilidade de um tipo de dado com autorreferência?
+
+
+## Encadeamento simples
 
 @) Para criar um encadeamento de nós com os itens 7, 1 e 2 podemos escrever `No(7, No(1, No(2, None)))`{.python}. Quando o Python avalia esta expressão, o primeiro nó criado contém o 2, o segundo o 1 e o terceiro o 7. Escreva um trecho de código que crie o mesmo encadeamento mas que os nós sejam criados na ordem: primeiro o nó com o 7, depois o nó com o 1 e depois o nó com o 2.
 
 @) Projete uma função que receba como parâmetro uma lista de números (`list[int]`{.python}) e devolva um encadeamento com os mesmos itens da lista.
 
-@) Projete uma função que receba como parâmetro uma lista de números (`list[int]`{.python}) e devolva um encadeamento com os mesmos itens da lista, mas em ordem contrária.
+@) Projete uma função que receba como parâmetro uma lista de números (`list[int]`{.python}) e devolva um encadeamento com os mesmos itens da lista, mas em ordem contrária. Sua implementação deve analisar os elementos da lista de entrada na ordem que eles aparecem na lista.
 
 @) Projete uma função que receba como parâmetro o início de um encadeamento (nó ou `None`{.python}) e determine quantos elementos existem no encadeamento.
 
@@ -103,14 +126,11 @@ urlcolor: Blue
     ```
 
 
-<!-- Pilha -->
+## Pilhas e filas
 
 @) Modifique a especificação do TAD Pilha e a implementação que usa encadeamento para que a função `desempilha` devolva `None`{.python} caso a pilha esteja vazia.
 
 @) Modifique a função `grupos_corretos` (veja o material de estruturas de dados lineares com alocação contígua) para que ela use a versão do TAD Pilha que devolve `None`{.python} quando a pilha está vazia. Qual das duas versão você prefere? Por que?
-
-
-<!-- Fila -->
 
 @) Modifique a especificação do TAD Fila e a implementação que usa encadeamento com início e fim para que a função `desenfileira` devolva `None`{.python} caso a fila esteja vazia.
 
@@ -147,7 +167,8 @@ urlcolor: Blue
 
     Crie um exemplo de uso de fila que demostre que implementação está incorreta. Explique e corrija a implementação.
 
-<!-- Encadeamento duplo -->
+
+## Encadeamento duplo
 
 @) Projete uma função que receba como parâmetro uma lista de números (`list[int]`{.python}) e devolva um encadeamento duplo com os mesmos itens da lista.
 
@@ -156,10 +177,13 @@ urlcolor: Blue
 @) Projete uma função que receba como parâmetro um nó `p` de um encadeamento duplo, onde `p.ante` não é `None`{.python}, e troque de lugar os nós `p` e `p.ante`.
 
 
-<!-- Lista -->
+## Listas
 
 @) Implemente o TAD Lista usando encadeamento simples. Dica: use um nó sentinela.
 
 @) Implemente o TAD Lista usando encadeamento duplo com sentinela. Mantenha um campo com a quantidade de elementos na lista e use essa informação para implementar as funções de inserção e remoção em posição navegando pela menor quantidade de nós possível.
 
-@) (Desafio) Suponha que o Python não permitisse estruturas com autorreferência e crie um esquema para fazer encadeamento duplo usando arranjos. Implemente uma fila dupla usando esse esquema. Dica: crie um arranjo de nós, onde os campos `ante` e `prox` de cada nó são índices para elementos do arranjo.
+
+## Desafios
+
+@) Suponha que o Python não permitisse estruturas com autorreferência e crie um esquema para fazer encadeamento duplo usando arranjos. Implemente uma fila dupla usando esse esquema. Dica: crie um arranjo de nós, onde os campos `ante` e `prox` de cada nó são índices para elementos do arranjo.
