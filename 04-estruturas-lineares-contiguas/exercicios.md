@@ -5,6 +5,7 @@ title: |
        | Alocação contígua
 numbersections: false
 urlcolor: Blue
+# TODO: adicionar exercícios para praticar o uso de arranjos
 # TODO: adicionar exercícios para usar fila
 ---
 
