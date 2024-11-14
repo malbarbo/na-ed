@@ -1,9 +1,11 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Pessoa:
     nome: str
     idade: int | None
+
 
 def faz_aniversario(p: Pessoa):
     '''

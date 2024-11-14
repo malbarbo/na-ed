@@ -108,7 +108,8 @@ class FilaDupla:
 
         p = self.inicio
         assert p is not None
-        if p.prox is None: # Único elemento?
+        # Único elemento?
+        if p.prox is None:
             self.inicio = None
             self.fim = None
         else:

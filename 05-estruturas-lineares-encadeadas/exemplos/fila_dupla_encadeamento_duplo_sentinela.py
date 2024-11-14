@@ -17,6 +17,7 @@ class No:
         self.item = item
         self.ante = None  # type: ignore
 
+
 def insere(p: No, novo: No):
     '''
     Insere o nó *novo* após o nó *p*.
@@ -25,6 +26,7 @@ def insere(p: No, novo: No):
     novo.ante = p
     p.prox.ante = novo
     p.prox = novo
+
 
 def remove(p: No) -> str:
     '''
@@ -122,4 +124,3 @@ class FilaDupla:
         Devolve True e a fila está vazia, False caso contrário.
         '''
         return self.sentinela.prox is self.sentinela
-

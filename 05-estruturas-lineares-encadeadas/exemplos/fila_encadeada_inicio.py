@@ -1,11 +1,13 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
+
 @dataclass
 class No:
     '''Um nó em um encadeamento'''
     item: str
     prox: No | None
+
 
 class Fila:
     '''

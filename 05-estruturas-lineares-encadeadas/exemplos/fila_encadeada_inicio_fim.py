@@ -1,11 +1,13 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
+
 @dataclass
 class No:
     '''Um nó em um encadeamento'''
     item: str
     prox: No | None
+
 
 class Fila:
     '''
@@ -33,6 +35,10 @@ class Fila:
     'Alberto'
     '''
 
+    # Invariantes:
+    #   - Se inicio é None, então fim é None
+    #   - Se inicio é um No, então fim é o nó no fim do encadeamento que começa
+    #     em inicio
     inicio: No | None
     fim: No | None
 
@@ -46,6 +52,7 @@ class Fila:
         Adiciona *item* no final da fila.
         '''
         if self.fim is None:
+            assert self.inicio is None
             self.inicio = No(item, None)
             self.fim = self.inicio
         else:

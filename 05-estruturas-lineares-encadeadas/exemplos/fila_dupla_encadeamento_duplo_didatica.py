@@ -126,7 +126,6 @@ class FilaDupla:
 
         return item
 
-
     def vazia(self) -> bool:
         '''
         Devolve True e a fila está vazia, False caso contrário.
