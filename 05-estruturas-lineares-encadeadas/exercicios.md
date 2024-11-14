@@ -7,7 +7,6 @@ numbersections: false
 urlcolor: Blue
 # TODO: pedir complexidade de tempo
 # TODO: adicionar exercícios de referências múltiplas
-# TODO: adicionar exercícios de pilhas e filas (inverte, junta)
 # TODO: tad de conjunto
 # TODO: tad de dicionário
 # TODO: adicionar exercícios de listas (slice, splice)
@@ -132,7 +131,7 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 
 @) Modifique a função `grupos_corretos` (veja o material de estruturas de dados lineares com alocação contígua) para que ela use a versão do TAD Pilha que devolve `None`{.python} quando a pilha está vazia. Qual das duas versão você prefere? Por que?
 
-@) Modifique a especificação do TAD Fila e a implementação que usa encadeamento com início e fim para que a função `desenfileira` devolva `None`{.python} caso a fila esteja vazia.
+@) Adicione o método `inverte`, que inverte a ordem dos elementos da pilha, ao TAD Pilha. Implemente o método para pilhas com encadeamento.
 
 @) O professor Confuso da Silva apresentou a seguinte implementação de Fila para os alunos
 
@@ -165,7 +164,13 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
     ```
 
 
-    Crie um exemplo de uso de fila que demostre que implementação está incorreta. Explique e corrija a implementação.
+    Crie um exemplo de uso de fila que demostre que a implementação está incorreta. Explique e corrija a implementação.
+
+@) Modifique a especificação do TAD Fila e a implementação que usa encadeamento com início e fim para que a função `desenfileira` devolva `None`{.python} caso a fila esteja vazia.
+
+@) Adicione o método `junta(a, b)`, que move todos os elementos da fila b para o final da fila a, ao TAD Fila. Implemente o método para filas com encadeamento. A sua implementação deve ter complexidade de tempo de $O(1)$.
+
+@) Diferente de uma fila comum, que obedece a regra "o primeiro a entrar é o primeiro a sair", em uma fila de prioridades, cada item tem um prioridade e o item que deve sair primeiro é o que tem a maior prioridade. Projete um TAD para uma fila de prioridade e implemente usando encadeamento.
 
 
 ## Encadeamento duplo
