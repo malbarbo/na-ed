@@ -33,7 +33,7 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 
 @) Projete uma função que receba como parâmetro uma lista de números (`list[int]`{.python}) e devolva um encadeamento com os mesmos itens da lista. Sua implementação deve analisar os elementos da lista de entrada na ordem que eles aparecem na lista.
 
-@) Projete uma função que receba como parâmetro o início de um encadeamento (nó ou `None`{.python}) e determine quantos elementos existem no encadeamento.
+@) Projete uma função que receba como parâmetro o início de um encadeamento (nó ou `None`{.python}) e determine quantos elementos existem no encadeamento (código inicial em `num_itens.py`).
 
     ```python
     def num_itens(p: No | None) -> int:
@@ -56,7 +56,7 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 
 @) Projete uma função que receba como parâmetro o início de um encadeamento (nó ou `None`{.python}) e determine a soma dos itens no encadeamento.
 
-@) Projete uma função que receba como parâmetro o início de um encadeamento (nó ou `None`{.python}) e modifique cada nó do encadeamento somando 1 ao item do nó.
+@) Projete uma função que receba como parâmetro o início de um encadeamento (nó ou `None`{.python}) e modifique cada nó do encadeamento somando 1 ao item do nó (código inicial em `soma1.py`).
 
     ```python
     def soma1(p: No | None):
@@ -75,7 +75,7 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 
 @) Projete uma função que receba como parâmetro um nó que representa o início de um encadeamento e encontre o valor máximo entre todos os itens do encadeamento.
 
-@) Projete uma função que receba como parâmetro o início de um encadeamento (nó ou `None`{.python}) e devolva o início de um outro encadeamento que é uma cópia do encadeamento de entrada.
+@) Projete uma função que receba como parâmetro o início de um encadeamento (nó ou `None`{.python}) e devolva o início de um outro encadeamento que é uma cópia do encadeamento de entrada (código inicial em `copia.py`).
 
     ```python
     def copia(p: No | None) -> No | None:
@@ -101,7 +101,7 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
         return None
     ```
 
-@) Projete uma função que receba como parâmetro o início de um encadeamento (nó ou `None`{.python}) e modifique o encadeamento duplicando cada nó (a cópia de cada nó deve ficar após o nó original no encadeamento). Seria possível fazer os exemplos a seguir funcionar se as cópias dos nós ficassem antes dos nós originais? Explique.
+@) Projete uma função que receba como parâmetro o início de um encadeamento (nó ou `None`{.python}) e modifique o encadeamento duplicando cada nó (a cópia de cada nó deve ficar após o nó original no encadeamento). Seria possível fazer os exemplos a seguir funcionar se as cópias dos nós ficassem antes dos nós originais? Explique. (código inicial em `duplica_nos.py`)
 
     ```python
     def duplica_nos(p: No | None):
@@ -127,11 +127,11 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 
 ## Pilhas e filas
 
-@) Modifique a especificação do TAD Pilha e a implementação que usa encadeamento para que a função `desempilha` devolva `None`{.python} caso a pilha esteja vazia.
+@) Modifique a especificação do TAD Pilha e a implementação que usa encadeamento para que a função `desempilha` devolva `None`{.python} caso a pilha esteja vazia (modifique o arquivo `pilha_encadeamento.py`).
 
-@) Modifique a função `grupos_corretos` (veja o material de estruturas de dados lineares com alocação contígua) para que ela use a versão do TAD Pilha que devolve `None`{.python} quando a pilha está vazia. Qual das duas versão você prefere? Por que?
+@) Modifique a função `grupos_corretos` (veja o material de estruturas de dados lineares com alocação contígua) para que ela use a versão do TAD Pilha que devolve `None`{.python} quando a pilha está vazia. Qual das duas versão você prefere? Por que? (modifique o arquivo `grupos_corretos.py`)
 
-@) Adicione o método `inverte`, que inverte a ordem dos elementos da pilha, ao TAD Pilha. Implemente o método para pilhas com encadeamento.
+@) Adicione o método `inverte`, que inverte a ordem dos elementos da pilha, ao TAD Pilha. Implemente o método para pilhas com encadeamento (modifique o arquivo `pilha_encadeamento.py`).
 
 @) O professor Confuso da Silva apresentou a seguinte implementação de Fila para os alunos
 
@@ -166,9 +166,9 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 
     Crie um exemplo de uso de fila que demostre que a implementação está incorreta. Explique e corrija a implementação.
 
-@) Modifique a especificação do TAD Fila e a implementação que usa encadeamento com início e fim para que a função `desenfileira` devolva `None`{.python} caso a fila esteja vazia.
+@) Modifique a especificação do TAD Fila e a implementação que usa encadeamento com início e fim para que a função `desenfileira` devolva `None`{.python} caso a fila esteja vazia (modifique o arquivo `fila_encadeada_inicio_fim.py`).
 
-@) Adicione o método `junta(a, b)`, que move todos os elementos da fila b para o final da fila a, ao TAD Fila. Implemente o método para filas com encadeamento. A sua implementação deve ter complexidade de tempo de $O(1)$.
+@) Adicione o método `junta(a, b)`, que move todos os elementos da fila b para o final da fila a, ao TAD Fila. Implemente o método para filas com encadeamento. A sua implementação deve ter complexidade de tempo de $O(1)$ (modifique o arquivo `fila_encadeada_inicio_fim.py`).
 
 @) Diferente de uma fila comum, que obedece a regra "o primeiro a entrar é o primeiro a sair", em uma fila de prioridades, cada item tem um prioridade e o item que deve sair primeiro é o que tem a maior prioridade. Projete um TAD para uma fila de prioridade e implemente usando encadeamento.
 
