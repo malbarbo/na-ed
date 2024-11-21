@@ -78,5 +78,5 @@ class Robo:
             pos = 1
         if pos > 10:
             pos = 10
-        nome = self._info[:self._info.index('(')]
+        nome = self._info[:self._info.index(' (')]
         self._info = f'{nome} ({pos})'

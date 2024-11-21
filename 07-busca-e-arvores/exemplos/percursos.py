@@ -126,7 +126,7 @@ def em_ordem(r: Arvore):
     2
     5
     '''
-    pilha: [Arvore | int] = [r]
+    pilha: list[Arvore | int] = [r]
     while pilha != []:
         tarefa = pilha.pop()
         if isinstance(tarefa, int):
@@ -155,7 +155,7 @@ def pre_ordem(r: Arvore):
     5
     2
     '''
-    pilha: [Arvore | int] = [r]
+    pilha: list[Arvore | int] = [r]
     while pilha != []:
         tarefa = pilha.pop()
         if isinstance(tarefa, int):
@@ -184,7 +184,7 @@ def pos_ordem(r: Arvore):
     4
     7
     '''
-    pilha: [Arvore | int] = [r]
+    pilha: list[Arvore | int] = [r]
     while pilha != []:
         tarefa = pilha.pop()
         if isinstance(tarefa, int):

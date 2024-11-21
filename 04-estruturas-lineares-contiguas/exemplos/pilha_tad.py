@@ -27,7 +27,7 @@ class Pilha:
         '''
         Adiciona o *item* na pilha.
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def desempilha(self) -> str:
         '''
@@ -35,7 +35,7 @@ class Pilha:
 
         Requer que a pilha não esteja vazia.
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def vazia(self) -> bool:
         '''
@@ -49,4 +49,4 @@ class Pilha:
         >>> p.vazia()
         False
         '''
-        raise NotImplemented
+        raise NotImplementedError

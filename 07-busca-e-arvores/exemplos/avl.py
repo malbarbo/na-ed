@@ -178,11 +178,11 @@ def remove(r: Arvore, chave: str) -> Arvore:
 # Funções auxiliares
 
 def rotaciona_dir(r: No) -> No:
-    return NotImplemented
+    raise NotImplementedError
 
 
 def balanceia_dir(r: No) -> No:
-    return NotImplemented
+    raise NotImplementedError
 
 
 def rotaciona_esq(r: No) -> No:

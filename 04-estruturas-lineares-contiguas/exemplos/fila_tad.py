@@ -28,7 +28,7 @@ class Fila:
         '''
         Adiciona *item* no final da fila.
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def desenfileira(self) -> str:
         '''
@@ -36,10 +36,10 @@ class Fila:
 
         Requer que a fila não esteja vazia.
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def vazia(self) -> bool:
         '''
         Devolve True se a fila está vazia, False caso contrário.
         '''
-        raise NotImplemented
+        raise NotImplementedError

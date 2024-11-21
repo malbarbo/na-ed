@@ -40,7 +40,7 @@ class Lista:
         '''
         Devolve a quantidade de itens da lista.
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def get(self, i: int) -> int:
         '''
@@ -48,7 +48,7 @@ class Lista:
 
         Requer que 0 <= i < self.num_itens().
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def set(self, i: int, item: int):
         '''
@@ -56,7 +56,7 @@ class Lista:
 
         Requer que 0 <= i < self.num_itens().
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def insere(self, i: int, item: int):
         '''
@@ -65,7 +65,7 @@ class Lista:
 
         Requer que 0 <= i <= self.num_itens().
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def remove(self, i: int):
         '''
@@ -75,7 +75,7 @@ class Lista:
 
         Requer que 0 <= i < self.num_itens().
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def remove_item(self, item: int):
         '''
@@ -85,7 +85,7 @@ class Lista:
 
         Requer que *item* esteja na lista.
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def indice(self, item: int) -> int:
         '''
@@ -93,10 +93,10 @@ class Lista:
 
         Requer que *item* esteja na lista.
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def str(self) -> str:
         '''
         Gera uma representação em string da lista.
         '''
-        raise NotImplemented
+        raise NotImplementedError

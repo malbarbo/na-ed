@@ -172,6 +172,7 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 
 @) Diferente de uma fila comum, que obedece a regra "o primeiro a entrar é o primeiro a sair", em uma fila de prioridades, cada item tem um prioridade e o item que deve sair primeiro é o que tem a maior prioridade. Projete um TAD para uma fila de prioridade e implemente usando encadeamento.
 
+<!--
 
 ## Encadeamento duplo
 
@@ -192,3 +193,5 @@ O código inicial dos exercícios está disponível na página <https://malbarbo
 ## Desafios
 
 @) Suponha que o Python não permitisse estruturas com autorreferência e crie um esquema para fazer encadeamento duplo usando arranjos. Implemente uma fila dupla usando esse esquema. Dica: crie um arranjo de nós, onde os campos `ante` e `prox` de cada nó são índices para elementos do arranjo.
+
+-->

@@ -86,7 +86,7 @@ class Pilha:
         '''
         self.topo = No(item, self.topo)
 
-    def desempilha(self) -> str:
+    def desempilha(self) -> str | None:
         '''
         Devolve o elemento mais recentemente adicionado da pilha.
         Se a pilha está vazia, devolve None.

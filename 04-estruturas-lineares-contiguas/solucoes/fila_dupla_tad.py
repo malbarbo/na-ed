@@ -42,7 +42,7 @@ class FilaDupla:
         '''
         Insere *item* no início da fila.
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def remove_esquerda(self) -> str:
         '''
@@ -50,13 +50,13 @@ class FilaDupla:
 
         Requer que a fila não esteja vazia.
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def insere_direita(self, item: str):
         '''
         Insere *item* no fim da fila.
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def remove_direita(self) -> str:
         '''
@@ -64,10 +64,10 @@ class FilaDupla:
 
         Requer que a fila não esteja vazia.
         '''
-        raise NotImplemented
+        raise NotImplementedError
 
     def vazia(self) -> bool:
         '''
         Devolve True e a fila está vazia, False caso contrário.
         '''
-        raise NotImplemented
+        raise NotImplementedError
