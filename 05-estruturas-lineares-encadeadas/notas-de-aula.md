@@ -898,7 +898,7 @@ def remove_fim(self) -> str:
 
 Podemos fazer melhor? Ou seja, podemos fazer uma implementação em que a remoção do fim seja constante? \pause Sim! \pause
 
-Precisamos de um encadeamento duplo. Cada nó mantém, além de uma referência opcional para o próximo, também uma referência opcional para o nó anterior no encadeamento. \pause Dessa forma é possível encontrar o antecessor de um nó em tempo constante. \pause
+Precisamos de um encadeamento duplo. Cada nó mantém, além de uma referência opcional para o próximo, uma referência opcional para o nó anterior no encadeamento. \pause Dessa forma é possível encontrar o antecessor de um nó em tempo constante. \pause
 
 
 \scriptsize
@@ -941,7 +941,7 @@ Escreva o código para criar o seguinte encadeamento
 
 </div>
 <div class="column" width="48%">
-Note que como o encadeamento tem ciclos, ele não pode ser criado todo de uma vez. A estratégia que usamos foi criar os nós separados e depois ligá-los.
+Note que, como o encadeamento tem ciclos, ele não pode ser criado todo de uma vez. A estratégia que usamos foi criar os nós separados e depois ligá-los.
 </div>
 </div>
 
@@ -965,7 +965,7 @@ No(ante=No(ante=No(ante=None, item='A', prox=...), item='B', prox=...), item='C'
 
 \normalsize
 
-Agora vamos implementar uma fila dupla usando encadeamento duplo mantendo referências para o início e fim do encadeamento.
+Agora vamos implementar uma fila dupla usando encadeamento duplo e mantendo referências para o início e fim do encadeamento.
 
 
 ## Fila dupla -  Inserção e remoção no início (versão didática)
@@ -1235,6 +1235,8 @@ O resultado é comumente chamado de **lista circular duplamente encadeada com se
 
 <div class="columns">
 <div class="column" width="48%">
+\small
+
 Como implementar o TAD de fila dupla com esse esquema? \pause
 
 Nesse esquema o `ante` e o `prox` não podem ser `None`{.python}, então precisamos mudar a definição de `No`: \pause
@@ -1256,6 +1258,8 @@ class No:
 </div>
 <div class="column" width="48%">
 
+\small
+
 Mas isso cria um problema, que é a impossibilidade de instanciar um `No`! \pause Conforme discutimos em sala, vamos usar uma inicialização em duas etapas, na primeira um `No` é criado com valores temporários `None`{.python} para `ante` e `prox` (usamos `# type: ignore`{.python} para que o `mypy` não indique o erro) e depois mudamos para os valores corretos.
 
 \pause
@@ -1263,28 +1267,43 @@ Mas isso cria um problema, que é a impossibilidade de instanciar um `No`! \paus
 </div>
 </div>
 
+<div class="columns">
+<div class="column" width="48%">
 \scriptsize
 
 ```python
     def __init__(self, item: str) -> None:
-        # Após a criação de um nó temos a responsabilidade
-        # de alterar ante e prox para valores válidos!
+        # Após a criação de um nó temos a
+        # responsabilidade de alterar ante e
+        # prox para valores válidos!
         self.ante = None # type: ignore
         self.item = item
         self.prox = None # type: ignore
 ```
+
+\pause
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+class FilaDupla:
+    sentinela: No
+    def __init__(self) -> None:
+        self.sentinela = No('')
+        self.sentinela.ante = self.sentinela
+        self.sentinela.prox = self.sentinela
+```
+</div>
+</div>
 
 
 ## Fila Dupla com sentinela
 
 <div class="columns">
 <div class="column" width="48%">
-
-\small
-
-Tendo as funções auxiliares de inserção e remoção de um nó, como podemos implementar inserção e remoção do início e fim de uma fila com sentinela?
-
-\pause
 
 \scriptsize
 
@@ -1307,6 +1326,10 @@ def insere_depois(p: No, novo: No):
     p.prox.ante = novo
     p.prox = novo
 ```
+
+\small
+
+Tendo as funções auxiliares de inserção e remoção de um nó, como podemos implementar inserção e remoção do início e fim de uma fila com sentinela?
 
 \pause
 
