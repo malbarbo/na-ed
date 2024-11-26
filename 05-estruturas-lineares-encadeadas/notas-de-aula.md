@@ -1395,10 +1395,9 @@ class FilaDupla:
 def remove(p: No) -> str:
     '''Remove *p* do seu encademaneto
        e devolve o item em *p*.'''
-    item = p.item
     p.prox.ante = p.ante
     p.ante.prox = p.prox
-    return item
+    return p.item
 ```
 
 \ \
