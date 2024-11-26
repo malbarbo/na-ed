@@ -8,6 +8,7 @@ urlcolor: Blue
 # TODO: Falar exatamente o que o is e o is not fazem
 # TODO: trocar os exemplos de lista de pessoas para exemplos de mulher com mãe, ou inscrito com quem indicou?
 # TODO: adicionar discussão vantagens e desvantagens do uso de sentinela (ver o cormen)
+# TODO: destacar operações de inserção e remoção do início/fim?
 ---
 
 
@@ -182,6 +183,8 @@ Note que é possível declarar uma variável apenas do tipo `None`{.python}, por
 
 ## Valores opcionais
 
+<div class="columns">
+<div class="column" width="48%">
 Como o uso do `None`{.python} muda o código? \pause
 
 \scriptsize
@@ -196,6 +199,9 @@ class Pessoa:
 \normalsize
 
 A intenção está clara, `idade` pode ser um inteiro ou `None`{.python}.
+
+</div>
+<div class="column" width="48%">
 
 \pause
 
@@ -216,6 +222,9 @@ Pessoa(nome='Maria', idade=None)
 
 Os exemplos também ficam mais claros.
 
+</div>
+</div>
+
 
 ## Valores opcionais
 
@@ -231,7 +240,7 @@ def faz_aniversario(p: Pessoa):
 
 \normalsize
 
-O que aconteceria se esquecêssemos de fazer a verificação se a idade está presente? \pause
+O que aconteceria se esquecêssemos de fazer a verificação sem a idade está presente? \pause
 
 O `python` geraria um erro de execução:
 
@@ -975,6 +984,10 @@ Agora vamos implementar uma fila dupla usando encadeamento duplo e mantendo refe
 
 ![](imagens/inicio-insercao-remocao.pdf)
 
+\ \
+
+O nó azul está sendo inserido/removido.
+
 \pause
 
 </div>
@@ -990,6 +1003,8 @@ def insere_inicio(self, item: str):
         self.inicio.ante = No(None, item, self.inicio)
         self.inicio = self.inicio.ante
 ```
+
+\ \
 
 \pause
 
@@ -1019,6 +1034,10 @@ def remove_inicio(self) -> str:
 
 ![](imagens/inicio-insercao-remocao.pdf)
 
+\ \
+
+O nó azul está sendo inserido/removido.
+
 </div>
 <div class="column" width="52%">
 \scriptsize
@@ -1031,6 +1050,8 @@ def insere_inicio(self, item: str):
     else:
         self.inicio.prox.ante = self.inicio
 ```
+
+\ \
 
 ```python
 def remove_inicio(self) -> str:
@@ -1059,6 +1080,10 @@ def remove_inicio(self) -> str:
 
 ![](imagens/fim-insercao-remocao.pdf)
 
+\ \
+
+O nó azul está sendo inserido/removido.
+
 \pause
 
 </div>
@@ -1077,6 +1102,8 @@ def insere_fim(self, item: str):
 ```
 
 \pause
+
+\ \
 
 ```python
 def remove_fim(self) -> str:
@@ -1104,6 +1131,10 @@ def remove_fim(self) -> str:
 
 ![](imagens/fim-insercao-remocao.pdf)
 
+\ \
+
+O nó azul está sendo inserido/removido.
+
 </div>
 <div class="column" width="52%">
 
@@ -1117,6 +1148,8 @@ def insere_fim(self, item: str):
     else:
         self.fim.ante.prox = self.fim
 ```
+
+\ \
 
 ```python
 def remove_fim(self) -> str:
@@ -1170,6 +1203,7 @@ Como inserir um nó `novo` antes de um nó `p` sabendo que `p` tem um antecessor
 \scriptsize
 
 ```python
+# p é o nó azul
 def remove(p: No):
     p.prox.ante = p.ante
     p.ante.prox = p.prox
@@ -1180,6 +1214,8 @@ def remove(p: No):
 \pause
 
 ```python
+# p é o nó mais a esquerda
+# novo é o nó azul
 def insere_depois(p: No, novo: No):
     novo.ante = p
     novo.prox = p.prox
@@ -1192,6 +1228,8 @@ def insere_depois(p: No, novo: No):
 \pause
 
 ```python
+# p é o nó mais a direita
+# novo é o no azul
 def insere_antes(p: No, novo: No):
     novo.ante = p.ante
     novo.prox = p
@@ -1199,7 +1237,16 @@ def insere_antes(p: No, novo: No):
     p.ante = novo
 ```
 
-\pause
+</div>
+</div>
+
+
+## Fila dupla
+
+<div class="columns">
+<div class="column" width="48%">
+
+![](imagens/insercao-remocao.pdf)
 
 \ \
 
@@ -1215,6 +1262,43 @@ Não precisamos de dois métodos para inserir!
 def insere_antes(p: No, novo: No):
     insere_depois(p.ante, novo)
 ```
+
+</div>
+<div class="column" width="48%">
+
+\scriptsize
+
+```python
+# p é o nó azul
+def remove(p: No):
+    p.prox.ante = p.ante
+    p.ante.prox = p.prox
+```
+
+\ \
+
+```python
+# p é o nó mais a esquerda
+# novo é o nó azul
+def insere_depois(p: No, novo: No):
+    novo.ante = p
+    novo.prox = p.prox
+    p.prox.ante = novo
+    p.prox = novo
+```
+
+\ \
+
+```python
+# p é o nó mais a direita
+# novo é o no azul
+def insere_antes(p: No, novo: No):
+    novo.ante = p.ante
+    novo.prox = p
+    p.ante.prox = novo
+    p.ante = novo
+```
+
 
 </div>
 </div>
@@ -1317,6 +1401,8 @@ def remove(p: No) -> str:
     return item
 ```
 
+\ \
+
 ```python
 def insere_depois(p: No, novo: No):
     '''Insere *novo* após *p* no
@@ -1326,6 +1412,8 @@ def insere_depois(p: No, novo: No):
     p.prox.ante = novo
     p.prox = novo
 ```
+
+\ \
 
 \small
 
@@ -1363,19 +1451,7 @@ class FilaDupla:
 \pause
 
 ```python
-    def insere_fim(self, item: str):
-```
-
-\pause
-
-```python
-        insere_depois(self.sentinela.ante, No(item))
-```
-
-\pause
-
-```python
-    def remove_inicio(self, item: str) -> str:
+    def remove_inicio(self) -> str:
 ```
 
 \pause
@@ -1388,7 +1464,19 @@ class FilaDupla:
 \pause
 
 ```python
-    def remove_fim(self, item: str) -> str:
+    def insere_fim(self, item: str):
+```
+
+\pause
+
+```python
+        insere_depois(self.sentinela.ante, No(item))
+```
+
+\pause
+
+```python
+    def remove_fim(self) -> str:
 ```
 
 \pause
