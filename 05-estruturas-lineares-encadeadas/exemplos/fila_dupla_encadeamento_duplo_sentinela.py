@@ -1,7 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 
-
+@dataclass
 class No:
     '''
     Um nó no encademaneto.
@@ -32,7 +32,6 @@ def remove(p: No) -> str:
     '''
     Remove o nó *p* do encadeamento e devolve o valor do item armazenado nele.
     '''
-    item = p.item
     p.ante.prox = p.prox
     p.prox.ante = p.ante
     return p.item
