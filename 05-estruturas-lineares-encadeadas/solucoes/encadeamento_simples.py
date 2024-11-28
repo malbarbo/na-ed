@@ -8,19 +8,37 @@ class No:
     prox: No | None
 
 
-def lista_nos(lst: list[int]) -> No | None:
+def lista_nos_reverso(lst: list[int]) -> No | None:
+    '''
+    Devolve um encadeamento com os elementos de *lst* em ordem reversa.
+
+    Exemplos
+    >>> lista_nos_reverso([])
+    >>> lista_nos_reverso([6, 2, 4])
+    No(item=4, prox=No(item=2, prox=No(item=6, prox=None)))
+    '''
+    p = None
+    for n in lst:
+        p = No(n, p)
+    return p
+
+
+def lista_nos_ordem(lst: list[int]) -> No | None:
     '''
     Devolve um encadeamento com os elementos de *lst*.
 
     Exemplos
-    >>> lista_nos([])
-    >>> lista_nos([6, 2, 4])
+    >>> lista_nos_ordem([])
+    >>> lista_nos_ordem([6, 2, 4])
     No(item=6, prox=No(item=2, prox=No(item=4, prox=None)))
     '''
-    p = None
-    for i in range(len(lst) - 1, -1, -1):
-        p = No(lst[i], p)
-    return p
+    # Cria um nó inicial para facilitar
+    p = No(0, None)
+    ultimo = p
+    for n in lst:
+        ultimo.prox = No(n, None)
+        ultimo = ultimo.prox
+    return p.prox
 
 
 def num_itens(p: No | None) -> int:
@@ -109,7 +127,6 @@ def copia(p: No | None) -> No | None:
         p = p.prox
     # Descarta o primeiro nó
     return inicio.prox
-
 
 
 def duplica_nos(p: No | None):
