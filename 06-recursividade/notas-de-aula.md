@@ -3,7 +3,7 @@
 title: Recursividade
 linkcolor: Black
 urlcolor: Blue
-# TODO: adicionar exemplo em que a recursão é opcional
+# TODO: adicionar uma revisão no final
 # TODO: adicionar referências
 ---
 
@@ -13,22 +13,24 @@ Uma função é **recursiva** quando ela chama a si mesmo de forma direta ou ind
 
 A recursividade é uma técnica muito poderosa e bastante utilizada na Computação e Matemática. \pause
 
-De certa a forma a recursividade é um caso especial da decomposição de problemas. \pause
+De certa maneira a recursividade é um caso especial da decomposição de problemas. \pause
 
 De forma geral podemos resolver um problema decompondo-o em subproblemas mais simples, resolvendo os subproblemas e combinado as soluções para obter a solução do problema inicial. \pause
 
-A recursividade surge quando decompomos um problema em subproblemas do _mesmo tipo_, pois nesses casos podemos utilizar _o mesmo processo_ para resolver o problema inicial e os subproblemas. \pause Note que para que o processo funciona, devemos definir situações limites em que o problema seja resolvido diretamente, sem precisar ser decomposto, que são os casos bases.
+A recursividade surge quando decompomos um problema em subproblemas do _mesmo tipo_, nesses casos podemos utilizar _o mesmo processo_ para resolver o problema inicial e os subproblemas. \pause Note que para que o processo funciona, devemos definir situações limites em que o problema seja resolvido diretamente, sem precisar ser decomposto, que são os casos bases.
 
 
 ## Formas de recursividade
 
-Então, para que possamos aplicar a recursividade é necessário decompor um problema em subproblemas do mesmo tipo. \pause Mas como fazer a decomposição? \pause
+Dessa forma, para aplicarmos a recursividade é necessário decompor um problema em subproblemas do mesmo tipo. \pause Mas como fazer esse decomposição? \pause
 
 - Para algumas problemas pode ser necessário um momento "eureka" e inventar uma forma de fazer a decomposição, o que requer experiência. \pause
 
 - Mas para a maioria dos problemas podemos fazer uma decomposição "direta", baseada na definição com autorreferência do dado (estrutura) que representa o problema. \pause
 
-A primeira forma gera **funções recursivas generativas**, já a segunda forma gerar **funções recursivas estruturais**. Vamos explorar agora essa segunda forma.
+A primeira forma gera **funções recursivas generativas**, já a segunda forma gerar **funções recursivas estruturais**. \pause
+
+Vamos explorar agora essa segunda forma.
 
 
 ## Restrições
@@ -37,13 +39,13 @@ Para escrever os próximos exemplos não vamos usar
 
 - Arranjos; e
 
-- Laços de repetição
+- Laços de repetição.
 
 \pause
 
 Como representar uma quantidade arbitrária de dados sem arranjos? \pause
 
-- Usando encadeamento
+- Usando encadeamento.
 
 
 ## Definição de lista
@@ -55,6 +57,8 @@ A definição para nó que utilizamos foi:
 
 \scriptsize
 
+\ \
+
 ```python
 @dataclass
 class No:
@@ -64,11 +68,15 @@ class No:
 
 \pause
 
+\ \
+
 \normalsize
 
 Para facilitar o projeto e entendimento das próximas funções vamos utilizar a seguinte definição:
 
 \scriptsize
+
+\ \
 
 ```python
 @dataclass
@@ -95,6 +103,8 @@ Para implementar funções que processam uma Lista, vamos explorar a relação e
 
 \scriptsize
 
+\ \
+
 ```python
 def fn_para_lista(lst: Lista) -> ...:
     if lst is None:
@@ -113,7 +123,7 @@ def fn_para_lista(lst: Lista) -> ...:
 Projete uma função que some os elementos de uma lista.
 
 
-## Soma
+## Soma {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -151,7 +161,7 @@ def soma(lst: Lista) -> int:
 </div>
 
 
-## Soma
+## Soma {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -222,7 +232,7 @@ def soma(lst: Lista) -> int:
 Projete uma função que determine a quantidade de itens em uma lista.
 
 
-## Número de itens
+## Número de itens {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -260,7 +270,7 @@ def num_itens(lst: Lista) -> int:
 </div>
 
 
-## Número de itens
+## Número de itens {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -333,7 +343,7 @@ def num_itens(lst: Lista) -> int:
 Projete uma função que verifique se todos os elementos de uma lista são pares.
 
 
-## Todos pares
+## Todos pares {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -371,7 +381,7 @@ def todos_pares(lst: Lista) -> bool:
 </div>
 
 
-## Todos pares
+## Todos pares {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -409,7 +419,7 @@ def todos_pares(lst: Lista) -> bool:
 </div>
 
 
-## Todos pares
+## Todos pares {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -449,7 +459,7 @@ def todos_pares(lst: Lista) -> bool:
 </div>
 
 
-## Todos pares
+## Todos pares {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -487,7 +497,7 @@ def todos_pares(lst: Lista) -> bool:
 </div>
 
 
-## Todos pares
+## Todos pares {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -555,7 +565,7 @@ def todos_pares(lst: Lista) -> bool:
 </div>
 
 
-## Todos pares
+## Todos pares {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -620,7 +630,7 @@ def todos_pares(lst: Lista) -> bool:
 </div>
 
 
-## Todos pares
+## Todos pares {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -691,7 +701,7 @@ def todos_pares(lst: Lista) -> bool:
 Projete uma função que verifique se um item está em uma lista.
 
 
-## Contém
+## Contém {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -731,7 +741,7 @@ def contem(lst: Lista, v: int) -> bool:
 </div>
 
 
-## Contém
+## Contém {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -769,7 +779,7 @@ def contem(lst: Lista, v: int) -> bool:
 </div>
 
 
-## Contém
+## Contém {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -837,7 +847,7 @@ def contem(lst: Lista, v: int) -> bool:
 </div>
 
 
-## Contém
+## Contém {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -907,7 +917,7 @@ def contem(lst: Lista, v: int) -> bool:
 Projete uma função que modifique uma lista somando 1 em cada um dos seus elementos.
 
 
-## Soma 1
+## Soma 1 {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -947,7 +957,7 @@ def soma1(lst: Lista):
 </div>
 
 
-## Soma 1
+## Soma 1 {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -985,7 +995,7 @@ def soma1(lst: Lista):
 </div>
 
 
-## Soma 1
+## Soma 1 {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -1050,7 +1060,7 @@ def soma1(lst: Lista):
 </div>
 
 
-## Soma 1
+## Soma 1 {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -1247,7 +1257,7 @@ No entanto, se fizermos a decomposição estrutural, isto é, decompor o problem
 Podemos aplicar a o processo de projeto de funções recursivas baseada na decomposição estrutural em dados que não sejam listas? \pause Sim, podemos aplicar em qualquer dado que tenha autorreferência!
 
 
-## Recursão com número natural
+## Recursão com número natural {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -1264,6 +1274,8 @@ A partir dessa definição podemos criar um modelo de função para processar n�
 
 \scriptsize
 
+\ \
+
 ```python
 def fn_para_n(n: int) -> ...:
     if n == 0:
@@ -1279,6 +1291,8 @@ def fn_para_n(n: int) -> ...:
 Projete uma função que some todos os número naturais até um dado $n$.
 
 \scriptsize
+
+\ \
 
 ```python
 def soma(n: int) -> int:
@@ -1305,7 +1319,7 @@ def soma(n: int) -> int:
 </div>
 
 
-## Recursão com número natural
+## Recursão com número natural {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -1319,6 +1333,8 @@ Um **número natural** é:
 A partir dessa definição podemos criar um modelo de função para processar número naturais (que precisam ser decompostos):
 
 \scriptsize
+
+\ \
 
 ```python
 def fn_para_n(n: int) -> ...:
@@ -1334,6 +1350,8 @@ def fn_para_n(n: int) -> ...:
 Projete uma função que receba como parâmetro um número natural $n$ e crie um arranjo $[1, 2, \dots, n]$. \pause
 
 \scriptsize
+
+\ \
 
 ```python
 def lista_n(n: int) -> list[int]:
@@ -1360,7 +1378,7 @@ def lista_n(n: int) -> list[int]:
 </div>
 
 
-## Recursão com número natural
+## Recursão com número natural {.t}
 
 <div class="columns">
 <div class="column" width="48%">
@@ -1374,6 +1392,8 @@ Um **número natural** é:
 A partir dessa definição podemos criar um modelo de função para processar número naturais (que precisam ser decompostos):
 
 \scriptsize
+
+\ \
 
 ```python
 def fn_para_n(n: int) -> ...:
@@ -1389,6 +1409,8 @@ def fn_para_n(n: int) -> ...:
 Projete uma função que receba como parâmetro um número natural $n$ e crie um arranjo $[1, 2, \dots, n]$.
 
 \scriptsize
+
+\ \
 
 ```python
 def lista_n(n: int) -> list[int]:
@@ -1427,6 +1449,8 @@ Dessa forma, podemos definir o seguinte modelo:
 
 \scriptsize
 
+\ \
+
 ```python
 def fn_para_array(lst: list[int]) -> ...:
     if lst == []:
@@ -1446,6 +1470,8 @@ Projete uma função que some todos os elementos de um arranjo.
 
 \scriptsize
 
+\ \
+
 ```python
 def soma(lst: list[int]) -> int:
     '''
@@ -1464,11 +1490,13 @@ def soma(lst: list[int]) -> int:
 
 \pause
 
+\ \
+
 \normalsize
 
 Qual o problema com essa estratégia? \pause
 
-O _slice_ cria um novo arranjo a cada chamada, o que é custoso. \pause
+A operação de _slice_ cria um novo arranjo a cada chamada, o que é custoso. \pause
 
 Podemos fazer melhor? \pause Sim!
 </div>
@@ -1540,7 +1568,7 @@ Não parece melhor que um laço de repetição... \pause Além disso, a função
 
 ## Recursão com arranjos
 
-Esse exemplo de função recursiva com arranjo é ilustrativa e de fato não é muito útil. \pause
+Esse exemplo de função recursiva com arranjo é ilustrativo e de fato não é muito útil. \pause
 
 Na prática, recursividade em arranjo é feita em subarranjos quaisquer, e não em um subarranjo sem o último elemento. \pause
 
