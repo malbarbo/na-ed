@@ -9,6 +9,7 @@ urlcolor: Blue
 # TODO: trocar os exemplos de lista de pessoas para exemplos de mulher com mãe, ou inscrito com quem indicou?
 # TODO: adicionar discussão vantagens e desvantagens do uso de sentinela (ver o cormen)
 # TODO: destacar operações de inserção e remoção do início/fim?
+# TODO: destacar a necessidade de criar funções para facilitar os testes (str, str_fim_inicio)
 ---
 
 
