@@ -3,6 +3,7 @@
 title: Recursividade
 linkcolor: Black
 urlcolor: Blue
+# TODO: comparar com o conteúdo de recursividade de fundamentos
 # TODO: adicionar uma revisão no final
 # TODO: adicionar referências
 ---
@@ -1252,7 +1253,7 @@ def duplica(lst: Lista):
 
 Projetar uma função recursiva pode ser um desafio se for preciso "inventar" uma forma de decompor o problema. \pause
 
-No entanto, se fizermos a decomposição estrutural, isto é, decompor o problema conforme o dado que descreve o problema, então o projeto de funções recursivas se torna um processo mais sistemático. \pause
+No entanto, se fizermos a decomposição estrutural, isto é, decompor o problema conforme a estrutura do dado que representa o problema, então o projeto de funções recursivas se torna um processo mais sistemático. \pause
 
 Podemos aplicar a o processo de projeto de funções recursivas baseada na decomposição estrutural em dados que não sejam listas? \pause Sim, podemos aplicar em qualquer dado que tenha autorreferência!
 
@@ -1358,7 +1359,6 @@ def lista_n(n: int) -> list[int]:
     '''
     Devolve a lista [1, 2, ..., *n*].
     Requer que n >= 0.
-
     >>> lista_n(0)
     []
     >>> lista_n(3)
@@ -1585,7 +1585,7 @@ Para esse problema o principal desafio é definir como decompor o problema em su
 
 Por exemplo, para o arranjo `[4, 1, 3, 3, 1, 4]`{.python}, que subproblema (subarranjo) podemos resolver de forma recursiva que nos ajude a resolver o problema para o arranjo todo? \pause
 
-Se determinamos se `[1, 3, 3, 1]`{.python} (arranjo original sem o primeiro e último) é palíndromo, então podemos utilizar esse fato para determinar se o arranjo original é palíndromo verificando se o primeiro e último elementos são iguais. \pause
+Se determinamos que `[1, 3, 3, 1]`{.python} (arranjo original sem o primeiro e último) é palíndromo, então podemos utilizar esse fato para determinar se o arranjo original é palíndromo verificando se o primeiro e último elementos são iguais. \pause
 
 Em que situação não precisamos decompor o problema original? \pause Se o subarranjo é vazio ou tem apenas um elemento.
 
