@@ -948,8 +948,9 @@ def soma1(lst: Lista):
     if lst is None:
         ...
     else:
-        lst.primeiro ... \
-            soma1(lst.resto)
+        lst.primeiro
+        ...
+        soma1(lst.resto)
 ```
 
 </div>
@@ -1150,9 +1151,10 @@ def duplica(lst: Lista):
 
 ```python
     if lst is None:
-        return ...
+        ...
     else:
         lst.primeiro
+        ...
         duplica(lst.resto)
 ```
 
