@@ -35,6 +35,7 @@ urlcolor: Blue
 
 ## Praticando
 
+
 <!-- lista - modificação -->
 @) Projete uma função recursiva que receba como entrada uma lista encadeada de strings e um número natural $n$, e modifique as strings da lista para que todas fiquem com tamanho $n$. Se um string tem tamanho maior que $n$, os caracteres do final devem ser descartados. Se uma string tem tamanho menor que $n$, espaços em branco devem ser adicionados ao final da string.
 
@@ -42,12 +43,11 @@ urlcolor: Blue
 @) Projete uma função recursiva que receba como entrada um número $a$ (diferente de 0) e um número natural $n$ e
 calcule o valor $a^n$.
 
-<!-- arranjo -->
-@) SUBSTITUIR Projete uma função recursiva que concatene todos as strings de um arranjo de strings.
+<!-- lista, filter -->
+@) Projete uma função recursiva que receba como entrada uma lista encadeada e crie uma nova lista encadeada com os elementos positivos da lista de entrada.
 
 <!-- arranjo -->
-@) SUBSTITUIR Projete uma função recursiva que encontre o tamanho máximo entre todas as strings de um arranjo de
-strings.
+@) Projete uma função recursiva que encontre o tamanho máximo entre todas as strings de um arranjo de strings.
 
 
 ## Avançando
@@ -58,8 +58,8 @@ strings.
 <!-- arranjo, verificação ordenação -->
 @) Projete uma função recursiva que verifique se um arranjo de números está em ordem não decrescente. Dica: use dois casos base.
 
-<!-- lista, seleciona -->
-@) Projete uma função recursiva que receba como entrada uma lista encadeada e crie uma nova lista encadeada com os elementos positivos da lista de entrada.
+<!-- lista - filter in loco-->
+@) Projete uma função recursiva que receba como entrada uma lista encadeada de números é remova todas as ocorrências no valor 0.
 
 <!-- natural, cria lista -->
 @) Projete uma função recursiva que receba como entrada dois números naturais, $n$ e $x$, onde $x \le n$ e devolva um arranjo com os divisores de $n$ que são menores ou iguais a $x$. Por exemplo, para $n = 16$ e $x = 7$, a função deve produzir `[1, 2, 4]`{.python}.
