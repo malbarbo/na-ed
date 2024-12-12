@@ -25,7 +25,9 @@ def maximo(lst: Lista) -> int | None:
     '''
     if lst is None:
         return None
-    elif (m := maximo(lst.resto)) is None:
-        return lst.primeiro
     else:
-        return max(lst.primeiro, m)
+        m = maximo(lst.resto)
+        if m is None:
+            return lst.primeiro
+        else:
+            return max(lst.primeiro, m)
