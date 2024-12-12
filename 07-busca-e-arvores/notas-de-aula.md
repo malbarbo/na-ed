@@ -65,19 +65,39 @@ class Dicionario:
 >>> d = Dicionario()
 >>> d.num_itens()
 0
+```
+
+\pause
+
+```python
 >>> d.associa('Jorge', 25)
 >>> d.associa('Bia', 40)
 >>> d.num_itens()
 2
+```
+
+\pause
+
+```python
 >>> d.get('Jorge')
 25
 >>> d.get('Bia')
 40
 >>> d.get('Andre') is None
 True
+```
+
+\pause
+
+```python
 >>> d.associa('Bia', 50)
 >>> d.get('Bia')
 50
+```
+
+\pause
+
+```python
 >>> d.remove('Jorge')
 >>> d.get('Jorge') is None
 True
@@ -95,9 +115,9 @@ True
 Como podemos implementar o TAD Dicionário utilizando arranjo? \pause
 
 - Armazenamos um par chave-valor em cada posição do arranjo. \pause
-- Busca:  busca por todos os itens, se a chave está presente, devolve o valor associado, senão devolve `None`{.python}. \pause
-- Associação: _busca_ por todos os itens, se a chave está presente, atualiza o valor, senão adiciona a nova associação chave-valor no final. \pause
-- Remoção: _busca_ por todos os itens, se a chave está presente, troca pelo último item e remove o último. \pause
+- Busca:  \pause busca por todos os itens, se a chave está presente, devolve o valor associado, senão devolve `None`{.python}. \pause
+- Associação: \pause _busca_ por todos os itens, se a chave está presente, atualiza o valor, senão adiciona a nova associação chave-valor no final. \pause
+- Remoção: \pause _busca_ por todos os itens, se a chave está presente, troca pelo último item e remove o último. \pause
 
 </div>
 <div class="column" width="48%">
@@ -110,16 +130,39 @@ Como podemos implementar o TAD Dicionário utilizando arranjo? \pause
 
 class Dicionario:
     itens: list[Item]
+```
 
+\ \
+
+\pause
+
+```python
     def __init__(self) -> None:
         self.itens = []
+```
 
+\ \
+
+\pause
+
+```python
     def num_itens(self) -> int:
         return len(self.itens)
+```
 
+\ \
+
+\pause
+
+```python
     def __busca(self, chave: str) -> int | None:
         '''Devolve a posição da *chave* ou
         None se a *chave* não está presente.'''
+```
+
+\pause
+
+```python
         for i in range(len(self.itens)):
             if self.itens[i].chave == chave:
                 return i
@@ -138,25 +181,51 @@ class Dicionario:
 ```python
 class Dicionario:
     def associa(self, chave: str, valor: int):
+```
+
+\pause
+
+```python
         i = self.__busca(chave)
         if i is not None:
             self.itens[i].valor = valor
         else:
             self.itens.append(Item(chave, valor))
+```
 
+\pause
+
+```python
     def get(self, chave: str) -> int | None:
-        # Operador walrus para simplificar :=
-        if (i := self.__busca(chave)) is not None:
+```
+
+\pause
+
+```python
+        i = self.__busca(chave)
+        if i is not None:
             return self.itens[i].valor
         else:
             return None
+```
 
+\pause
+
+```python
     def remove(self, chave: str):
-        if (i := self.__busca(chave)) is not None:
+```
+
+\pause
+
+```python
+        i = self.__busca(chave)
+        if i is not None:
             self.itens[i], self.itens[-1] = \
                 self.itens[-1], self.itens[i]
             self.itens.pop()
 ```
+
+\pause
 
 </div>
 <div class="column" width="43%">
@@ -177,9 +246,9 @@ Podemos fazer melhor? \pause As operações dependem do conteúdo do item mas n�
 
 ## Busca eficiente
 
-Como organizar uma coleção de cartas Pokémon de maneira que seja possível encontrar uma carta rapidamente, isso é, sem precisar olhar todas elas? \pause
+Como organizar uma coleção de cartas Pokémon em um monte de maneira que seja possível encontrar uma carta rapidamente, isso é, sem precisar olhar todas elas? \pause
 
-Se as cartas estiverem em ordem alfabética, pode usar o seguinte método:
+Se as cartas estiverem em ordem alfabética, podemos usar o seguinte método:
 
 - Dividimos o monte mais ou menos no meio e olhamos para a carta que está na metade, se é a carta que estamos procurando, ótimo, terminamos! Senão repetimos o processo para a primeira metade, se a carta que estamos procurando vem antes em ordem alfabética, ou para a segunda metade -- sem a carta que já vimos -- se a carta que estamos procurando vem depois. Se o monte que estamos procurando está vazio, então a carta não está presente.
 
@@ -188,9 +257,20 @@ Se as cartas estiverem em ordem alfabética, pode usar o seguinte método:
 Este algoritmo é chamado de **busca binária**.
 
 
+## Busca binária em arranjo
+
+Como podemos fazer uma busca binária em um arranjo? \pause
+
+Mantemos duas variáveis, `ini` e `fim`, que indicam respectivamente o início e o fim do intervalo do arranjo onde estamos fazendo a busca. \pause
+
+Se o intervalo é vazio, finalizamos a busca. \pause
+
+Senão, verificamos se o elemento que estamos buscando está no meio (`(ini + fim) // 2`{.python}). \pause Se estiver, encontramos o elemento e finalizamos a busca, senão, atualizamos o intervalo e fazemos a busca novamente.
+
+
 ## Exemplo
 
-Busca pelo 20. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
+Busca pelo 20. `ini` e `fim` indicam o intervalo e `m = (ini + fim) // 2`{.python} é o "meio".
 
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -204,7 +284,7 @@ Busca pelo 20. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2
 
 ## Exemplo - pesquisa pelo 20
 
-Busca pelo 20. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
+Busca pelo 20. `ini` e `fim` indicam o intervalo e `m = (ini + fim) // 2`{.python} é o "meio".
 
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -218,7 +298,7 @@ Busca pelo 20. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2
 
 ## Exemplo - pesquisa pelo 20
 
-Busca pelo 20. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
+Busca pelo 20. `ini` e `fim` indicam o intervalo e `m = (ini + fim) // 2`{.python} é o "meio".
 
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -232,7 +312,7 @@ Busca pelo 20. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2
 
 ## Exemplo - pesquisa pelo 42
 
-Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
+Busca pelo 42. `ini` e `fim` indicam o intervalo e `m = (ini + fim) // 2`{.python} é o "meio".
 
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -246,7 +326,7 @@ Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2
 
 ## Exemplo - pesquisa pelo 42
 
-Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
+Busca pelo 42. `ini` e `fim` indicam o intervalo e `m = (ini + fim) // 2`{.python} é o "meio".
 
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -260,7 +340,7 @@ Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2
 
 ## Exemplo - pesquisa pelo 42
 
-Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
+Busca pelo 42. `ini` e `fim` indicam o intervalo e `m = (ini + fim) // 2`{.python} é o "meio".
 
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -274,7 +354,7 @@ Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2
 
 ## Exemplo - pesquisa pelo 42
 
-Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
+Busca pelo 42. `ini` e `fim` indicam o intervalo e `m = (ini + fim) // 2`{.python} é o "meio".
 
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -288,7 +368,7 @@ Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2
 
 ## Exemplo - pesquisa pelo 42
 
-Busca pelo 42. `ini` e `fim` são o início do intervalo e `m = (ini + fim) // 2` é o "meio".
+Busca pelo 42. `ini` e `fim` indicam o intervalo e `m = (ini + fim) // 2`{.python} é o "meio".
 
 ```
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
@@ -321,7 +401,7 @@ Portanto, a complexidade de tempo da busca binária é $O(\lg n)$. \pause
 
 Como as complexidades de tempo da busca linear e binária se comparam? \pause
 
-| $n$      | Busca Linear     | Busca binária     |
+| $n$      | Busca linear     | Busca binária     |
 |----------|-----------------:|:-----------------:|
 | $10^{1}$ |            $10$  | \pause $\approx 4$|
 | $10^{2}$ |           $100$  | \pause $\approx 7$|
@@ -386,7 +466,7 @@ def busca_binaria(valores: list[int], chave: int) -> int:
 
 ## Dicionário - Implementação com arranjo ordenado
 
-O que é preciso para usar a busca binária na implementação do dicionário? \pause
+O que é preciso para usar a busca binária na implementação de dicionário? \pause
 
 Manter as associações chave-valor ordenadas pela chave (a implementação fica como exercício). \pause
 
@@ -401,7 +481,7 @@ De forma geral, a implementação usando arranjo ordenado e busca binária de di
 
 E a implementação usando arranjo com busca linear? \pause Pode ser adequada se a quantidade de elementos for pequena. \pause
 
-Podemos melhor o tempo das operações de alteração? \pause Sim! \pause Mas antes precisamos revisar recursividade.
+Podemos melhor o tempo das operações de alteração? \pause Sim!
 
 
 ## Encadeamento e busca binária?
@@ -429,6 +509,7 @@ Vamos analisar uma sequência ordenada de elementos e tentar criar um encadeamen
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
 |  6 |  8 | 12 | 14 | 20 | 21 | 22 | 30 | 40 | 41 | 43 | 47 | 50 | 70 |
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+  0    1    2    3    4    6    7    8    9    10   11   12   13   14
 ```
 </div>
 </div>
@@ -452,6 +533,7 @@ Vamos analisar uma sequência ordenada de elementos e tentar criar um encadeamen
 +----+----+----+----+----+----+    +----+----+----+----+----+----+----+
 |  6 |  8 | 12 | 14 | 20 | 21 |    | 30 | 40 | 41 | 43 | 47 | 50 | 70 |
 +----+----+----+----+----+----+    +----+----+----+----+----+----+----+
+  0    1    2    3    4    6    7    8    9    10   11   12   13   14
 ```
 </div>
 </div>
@@ -480,6 +562,7 @@ Vamos analisar uma sequência ordenada de elementos e tentar criar um encadeamen
 +----+----+    +----+----+----+    +----+----+----+    +----+----+----+
 |  6 |  8 |    | 14 | 20 | 21 |    | 30 | 40 | 41 |    | 47 | 50 | 70 |
 +----+----+    +----+----+----+    +----+----+----+    +----+----+----+
+  0    1    2    3    4    6    7    8    9    10   11   12   13   14
 ```
 </div>
 </div>
@@ -512,6 +595,7 @@ Vamos analisar uma sequência ordenada de elementos e tentar criar um encadeamen
      +----+    +----+    +----+    +----+    +----+    +----+    +----+
      |  8 |    | 14 |    | 21 |    | 30 |    | 41 |    | 47 |    | 70 |
      +----+    +----+    +----+    +----+    +----+    +----+    +----+
+  0    1    2    3    4    6    7    8    9    10   11   12   13   14
 ```
 </div>
 </div>
@@ -547,6 +631,8 @@ Um nó $A$ é **ancestral** de um nó $B$ se $A$ é pai de $B$ ou pai de algum a
 <div class="column" width="48%">
 Como representar uma árvore binária em Python? \pause
 
+\ \
+
 \scriptsize
 
 ```python
@@ -566,6 +652,8 @@ Arvore = No | None
 Como `Arvore` é um tipo com autorreferência, podemos derivar um modelo de função recursiva para processar uma árvore binária:
 
 \pause
+
+\ \
 
 \scriptsize
 
@@ -607,7 +695,9 @@ Arvore = No | None
 
 \normalsize
 
-Escreva o código Python para criar as seguintes árvores:
+Escreva o código Python para criar a seguintes árvores:
+
+\ \
 
 \scriptsize
 
@@ -644,6 +734,8 @@ No(esq=None, val=7, dir=No(esq=None, val=1, dir=None))
 
 \pause
 
+\ \
+
 \normalsize
 
 Como acessar o valor 1 a partir de `t4`?
@@ -656,6 +748,8 @@ Como acessar o valor 1 a partir de `t4`?
 >>> t4.esq.dir.dir.val
 ```
 
+\ \
+
 \pause
 
 \normalsize
@@ -667,6 +761,8 @@ Como adicionar uma nova subárvore (valor da raiz 4) a esquerda de `t3` a partir
 ```python
 >>> t4.dir.dir = No(None, 4, None)
 ```
+
+\ \
 
 \pause
 
