@@ -3,6 +3,11 @@
 title: Busca e árvores
 linkcolor: Black
 urlcolor: Blue
+# TODO: mudar get para busca
+# TODO: colocar exemplos de dicionários em Python
+# TODO: separar em Dicionários e àrvores binárias de busca
+# TODO: exemplos e definições em árvores antes de modelo de função
+# TODO: distinguir ab de abb
 # TODO: mudar val para chave?
 # TODO: adicionar testes de invariante
 # TODO: completar funções iterativas de percurso
