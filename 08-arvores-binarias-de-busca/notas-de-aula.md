@@ -565,7 +565,7 @@ t2  8           6  t3
 \scriptsize
 
 ```python
-def altural(t: Arvore) -> int:
+def altura(t: Arvore) -> int:
     '''
     Devolve a altura da árvore *t*, isto é, o
     comprimeiro do caminho mais longo da raíz
@@ -622,7 +622,7 @@ t2  8           6  t3
 \scriptsize
 
 ```python
-def altural(t: Arvore) -> int:
+def altura(t: Arvore) -> int:
     '''
     Devolve a altura da árvore *t*, isto é, o
     comprimeiro do caminho mais longo da raíz
