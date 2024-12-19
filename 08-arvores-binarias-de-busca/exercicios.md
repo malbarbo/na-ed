@@ -1,17 +1,11 @@
 ---
-title: Busca e árvores - Prática
+# vim: set spell spelllang=pt_br sw=4:
+title: |
+       | Estruturas de dados
+       | Árvores binárias de busca
+numbersections: false
 urlcolor: Blue
 ---
-
-<!-- Busca binária -->
-
-@) Considere um arranjo com os valores 3, 6, 8, 9, 20, 21, 22, 23, 30, 40, 45, 46, 50, 60 e diga quais são os índices dos valores que são comparados com a chave em uma busca binária para cada uma das chaves: 6, 30, 41, 50, 70.
-
-@) Implemente a busca binária de forma que a chave seja comparada por igualdade com o elemento "do meio" apenas uma vez. Dica: Faça a repetição até que `inicio == fim` e faça a comparação após a repetição.
-
-@) Crie um experimento para verificar qual das duas implementação de busca binária é mais eficiente: a vista em sala ou a do exercício anterior.
-
-@) Implemente o TAD Dicionario usando arranjo ordenado e busca binária.
 
 <!-- Árvores binária -->
 
@@ -62,15 +56,3 @@ urlcolor: Blue
 @) Projete uma versão iterativa da operação de inserção em ABB.
 
 @) Projete uma versão iterativa da operação de remoção em ABB.
-
-<!-- Árvores AVL -->
-
-@) Desenhe a sequência de árvores AVL geradas pela inserção dos elementos 6, 1, 3, 7, 8, 12, 9, 5, 4, 2, 16.
-
-@) Partindo do resultado do exercício anterior, desenhe a sequência de árvores AVL geras pela remoção dos elementos 12, 1, 3, 6, 7, 8, 5, 9, 4, 2.
-
-@) Baixe o arquivo `avl.py` e faça a implementação das funções `rotaciona_dir` e `balanceia_dir`. Depois modifique a função `remove` adicionando as chamadas para fazer o rebalanceamento.
-
-@) Implemente o TAD Dicionario usando árvores AVL. Note que você terá que alterar o arquivo `avl.py` para armazenar o valor associado com a chave no nó.
-
-@) O Alberto é um estudante de Computação e quando estava estudando árvore AVL teve a ideia de criar um novo tipo de árvore balanceada: limitar a diferença entre a quantidade de nós a esquerda e a direita da raiz em  1 nó. Discuta os méritos da ideia do Aberto e as diferenças na implementação em relação a árvore AVL.
