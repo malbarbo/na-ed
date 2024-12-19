@@ -3,8 +3,7 @@
 title: Árvores binárias de busca
 linkcolor: Black
 urlcolor: Blue
-# TODO: exemplos e definições em árvores antes de modelo de função
-# TODO: distinguir ab de abb
+# TODO: mudar raiz de t para r?
 # TODO: mudar val para chave?
 ---
 
@@ -127,9 +126,11 @@ Vamos analisar uma sequência ordenada de elementos e tentar criar um encadeamen
 
 ## Árvore
 
-Essa forma de representar uma coleção de valores é chamada de árvore, especificamente, uma árvore binária. \pause
+Essa forma de representar uma coleção de valores é chamada de árvore, especificamente, uma árvore binária de busca. \pause
 
 Vire de ponta cabeça para ver a árvore!!! \pause As árvores em computação crescem para baixo! \pause
+
+\includegraphics[width=4.5cm]{imagens/arvore-binaria-real.jpg} \pause
 
 Como podemos definir uma árvore binária?
 
@@ -143,85 +144,87 @@ Uma **árvore binária** é:
 
 \pause
 
+Note que esta definição de árvore não impõe nenhuma restrição sobre os valores da árvores. \pause
+
+Para podemos usar uma árvore binária para fazer uma busca binária, vamos precisar adicionar restrições sobre os valores da árvores. \pause
+
+Mas antes, vamos ver alguns definições e exemplos.
+
+
+## Algumas definições
+
+<div class="columns">
+<div class="column" width="48%">
 Um nó é a **raiz** da árvore composta por ele e por suas subárvores. \pause
+
+\ \
 
 Se $A$ é o nó raiz de uma árvore e $B$ é o nó raiz de uma das subárvores de $A$, então, $B$ é **filho** de $A$ e $A$ é **pai** de $B$. \pause
 
+\ \
+
 Um nó $A$ é **ancestral** de um nó $B$ se $A$ é pai de $B$ ou pai de algum ancestral de $B$. Se $A$ é ancestral de $B$, então $B$ é **descendente** de $A$.
 
-## Definição de árvore
-
-<div class="columns">
-<div class="column" width="48%">
-Como representar uma árvore binária em Python? \pause
-
-\ \
-
-\scriptsize
-
-```python
-@dataclass
-class No:
-    esq: Arvore
-    val: int
-    dir: Arvore
-
-Arvore = No | None
-```
-
 \pause
+
 </div>
 <div class="column" width="48%">
 
-Como `Arvore` é um tipo com autorreferência, podemos derivar um modelo de função recursiva para processar uma árvore binária:
+\scriptsize
+
+```
+          4
+        /   \
+     /         \
+    8           6
+  /   \       /
+ 2     7     5
+        \
+         1
+```
 
 \pause
-
-\ \
-
-\scriptsize
-
-```python
-def fn_para_ab(t: Arvore) -> ...:
-    if t is None:
-        return ...
-    else:
-        return t.val ... \
-               fn_para_ab(t.esq) ... \
-               fn_para_ab(t.dir)
-```
-</div>
-</div>
-
-
-## Busca em árvore
-
-Note que da mesma forma que não podemos fazer uma busca binária em um arranjo qualquer, também não podemos fazer uma busca binária em uma árvore binária qualquer! É necessário adicionar restrições a árvore que veremos daqui a pouco. \pause
-
-Antes vamos ver alguns exemplos e definições.
-
-
-## Exemplo de criação de árvore
-
-<div class="columns">
-<div class="column" width="43%">
-\scriptsize
-
-```python
-@dataclass
-class No:
-    esq: Arvore
-    val: int
-    dir: Arvore
-
-Arvore = No | None
-```
 
 \normalsize
 
-Escreva o código Python para criar a seguintes árvores:
+Quem são os filhos do nó 4? \pause O nó 8 e o nó 6. \pause
+
+Quem é o pai do nó 7? \pause O nó 8. \pause
+
+Quem são os descendentes do nó 8? \pause Os nós 2, 7 e 1. \pause
+
+Quem são os ancestrais do no 5? \pause Os nós 6 e 4.
+
+</div>
+</div>
+
+
+## Árvores binárias em Python
+
+<div class="columns">
+<div class="column" width="43%">
+Como representar uma árvore binária? \pause
+
+\scriptsize
+\ \
+
+```python
+@dataclass
+class No:
+    esq: Arvore
+    val: int
+    dir: Arvore
+
+Arvore = No | None
+```
 
 \ \
+
+\pause
+
+\normalsize
+
+Como criar a seguinte árvore?
 
 \scriptsize
 
@@ -303,19 +306,65 @@ Como remover a subárvore a direita de `t2` a partir de `t4`? \pause
 </div>
 
 
+## Projeto de funções que processam árvores
+
+<div class="columns">
+<div class="column" width="48%">
+
+Como projetar funções que processam árvores? \pause
+
+\ \
+\scriptsize
+
+```python
+@dataclass
+class No:
+    esq: Arvore
+    val: int
+    dir: Arvore
+
+Arvore = No | None
+```
+
+</div>
+<div class="column" width="48%">
+
+`Arvore` é um tipo com autorreferência, então podemos derivar um modelo de função recursiva para processar uma árvore:
+
+\pause
+
+\ \
+
+\scriptsize
+
+```python
+def fn_para_ab(t: Arvore) -> ...:
+    if t is None:
+        return ...
+    else:
+        return t.val ... \
+               fn_para_ab(t.esq) ... \
+               fn_para_ab(t.dir)
+```
+</div>
+</div>
+
+
 ## Número de folhas
 
 <div class="columns">
 <div class="column" width="45%">
-O **grau** de um nó é a quantidade de subárvores do nó. \pause
+O **grau** de um nó é a quantidade de filhos do nó. \pause
 
-Um nó com grau zero é chamado de **nó folha**. Um nó que não é uma folha é chamado de **nó interno**. \pause
+Um **nó folha** é aquele que tem grau 0. \pause
 
-Projete uma função que determine a quantidade de nós folhas de uma árvore.
+Um **nó interno** é aquele que não é folha. \pause
 
-\pause
+Projete uma função que determine a quantidade de nós folhas de uma árvore. \pause
 
 \scriptsize
+
+\ \
 
 ```
       t4  4
@@ -339,7 +388,6 @@ def num_folhas(t: Arvore) -> int:
     '''
     Determina a quantidade de folhas em *t*.
     Uma folha é um nó sem nenhum filho.
-    >>> # Criação das árvores e alguns exemplos omitidos...
     >>> num_folhas(t2)
     2
     >>> num_folhas(t3)
@@ -364,17 +412,21 @@ def num_folhas(t: Arvore) -> int:
 </div>
 
 
-## Número de folhas
+## Número de folhas {.t}
 
 <div class="columns">
 <div class="column" width="45%">
-O **grau** de um nó é a quantidade de subárvores do nó.
+O **grau** de um nó é a quantidade de filhos do nó.
 
-Um nó com grau zero é chamado de **nó folha**. Um nó que não é uma folha é chamado de **nó interno**.
+Um **nó folha** é aquele que tem grau 0.
+
+Um **nó interno** é aquele que não é folha.
 
 Projete uma função que determine a quantidade de nós folhas de uma árvore.
 
 \scriptsize
+
+\ \
 
 ```
       t4  4
@@ -387,7 +439,6 @@ t2  8           6  t3
          1
 ```
 
-
 </div>
 <div class="column" width="50%">
 \scriptsize
@@ -397,7 +448,6 @@ def num_folhas(t: Arvore) -> int:
     '''
     Determina a quantidade de folhas em *t*.
     Uma folha é um nó sem nenhum filho.
-    >>> # Criação das árvores e alguns exemplos omitidos...
     >>> num_folhas(t2)
     2
     >>> num_folhas(t3)
@@ -429,11 +479,13 @@ def num_folhas(t: Arvore) -> int:
 O **nível** de um nó em uma árvore é:
 
 - `0`{.python} se o nó é a raiz da árvore; ou
-- O **nível** do pai mais 1 caso contrário
+- O **nível** do pai mais 1 caso contrário \pause
 
-\pause
+\ \
 
 A **altura** (ou profundidade) de um nó é o máximo entre os níveis de todas as folhas da árvore com raiz nesse nó. \pause
+
+\ \
 
 De de outra forma, é o comprimento do caminho mais longo deste o nó até uma folha. \pause
 
@@ -453,9 +505,11 @@ t2  8           6  t3
       t0 1
 ```
 
+\ \
+
 \normalsize
 
-Em relação a árvore com raiz `t4`, qual é o nível de: \pause
+Em relação a `t4`, qual é o nível de: \pause
 
 `t4`? \pause 0. \pause
 `t2`? \pause 1. \pause
@@ -463,24 +517,145 @@ Em relação a árvore com raiz `t4`, qual é o nível de: \pause
 `t1`? \pause 2. \pause
 `t0`? \pause 3. \pause
 
+\ \
+
 Qual é a altura da árvore: \pause
 
 `t0`? \pause 0. \pause
 `t1`? \pause 1. \pause
 `t2`? \pause 2. \pause
 `t3`? \pause 1. \pause
-`t4`? \pause 3.
+`t4`? \pause 3. \pause
+
+\ \
+
+Qual é a altura da árvore vazia? \pause -1 (convenção).
 
 </div>
 </div>
 
 
-## Nível
+## Altura {.t}
+
+<div class="columns">
+<div class="column" width="45%">
+
+Projete uma função que determine a altura de uma árvore.
+
+\ \
+
+\scriptsize
+
+```
+      t4  4
+        /   \
+     /         \
+t2  8           6  t3
+  /   \       /
+ 4  t1 7     5
+        \
+      t0 1
+```
+
+\pause
+
+</div>
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+def altural(t: Arvore) -> int:
+    '''
+    Devolve a altura da árvore *t*, isto é, o
+    comprimeiro do caminho mais longo da raíz
+    até um no folha. Devolve -1 se *t* é None.
+    >>> altura(None)
+    -1
+    >>> altura(t1)
+    1
+    >>> altura(t4)
+    3
+    '''
+```
+
+\pause
+
+```python
+    if t is None:
+        return ...
+    else:
+        return t.val ... \
+               altura(t.esq)
+               altura(t.dir)
+```
+
+</div>
+</div>
+
+
+## Altura {.t}
+
+<div class="columns">
+<div class="column" width="45%">
+
+Projete uma função que determine a altura de uma árvore.
+
+\ \
+
+\scriptsize
+
+```
+      t4  4
+        /   \
+     /         \
+t2  8           6  t3
+  /   \       /
+ 4  t1 7     5
+        \
+      t0 1
+```
+
+</div>
+<div class="column" width="50%">
+
+\scriptsize
+
+```python
+def altural(t: Arvore) -> int:
+    '''
+    Devolve a altura da árvore *t*, isto é, o
+    comprimeiro do caminho mais longo da raíz
+    até um no folha. Devolve -1 se *t* é None.
+    >>> altura(None)
+    -1
+    >>> altura(t1)
+    1
+    >>> altura(t4)
+    3
+    '''
+```
+
+```python
+    if t is None:
+        return -1
+    else:
+        return 1 + \
+               max(altura(t.esq), altura(t.dir))
+```
+
+</div>
+</div>
+
+
+## Nível {.t}
 
 <div class="columns">
 <div class="column" width="45%">
 
 Projete uma função que encontre todos os valores em um determinado nível de uma árvore.
+
+\ \
 
 \scriptsize
 
@@ -533,12 +708,14 @@ def valores_nivel(t: Arvore, n: int) -> list[int]:
 </div>
 
 
-## Nível
+## Nível {.t}
 
 <div class="columns">
 <div class="column" width="45%">
 
 Projete uma função que encontre todos os valores em um determinado nível de uma árvore.
+
+\ \
 
 \scriptsize
 
@@ -591,21 +768,26 @@ def valores_nivel(t: Arvore, n: int) -> list[int]:
 
 O que é preciso para podemos fazer uma busca binária em um árvore binária? \pause Que ela seja de busca! \pause
 
-Uma **árvore binária de busca** (ABB) é uma árvore binária, que quando não é vazia, tem uma raiz $t$ e: \pause
+Uma **árvore binária de busca** (ABB) é uma árvore binária que, quando não é vazia, tem uma raiz $t$ e: \pause
 
-- Todos os elementos da subárvore a esquerda de $t$ são menores que o valor armazenado em $t$; \pause
-
-- Todos os elementos da subárvore a direita de $t$ são maiores que o valor armazenado em $t$; \pause
-
+- Todos os elementos da subárvore a esquerda de $t$ são menores que $t.val$; \pause
+- Todos os elementos da subárvore a direita de $t$ são maiores que $t.val$; \pause
 - As subárvores a esquerda e a direta de $t$ são **árvores binárias de busca**.
 
 
-## Busca em árvore binária de busca
+## Busca em árvore binária de busca {.t}
 
 <div class="columns">
 <div class="column" width="48%">
 
-Dessa forma, quando estamos procurando um valor $v$ e $v$ é menor que o valor na raiz, continuamos a busca na subárvore a esquerda, se $v$ é maior que o valor da raiz, continuamos a busca na subárvore a direita. \pause
+\small
+
+Busca $v$ em uma ABB $t$:
+
+- Se $t$ é vazia, $v$ não está na árvore;
+- Se $v$ é igual a $t.val$, $v$ está na árvore;
+- Senão, se $v$ é menor que $t.val$, continuamos a busca na subárvore a esquerda;
+- Senão ($v$ é maior que $t.val$), continuamos a busca na subárvore a direita. \pause
 
 Implemente o algoritmo de busca para uma árvore binária de busca. \pause
 
@@ -630,7 +812,7 @@ Implemente o algoritmo de busca para uma árvore binária de busca. \pause
 
 ```python
 def busca(t: Arvore, val: int) -> bool:
-    r'''
+    '''
     Devolve True se *val* está em *t*,
     False caso contrário.
     >>> busca(None, 10)
@@ -653,12 +835,19 @@ def busca(t: Arvore, val: int) -> bool:
 </div>
 
 
-## Busca em árvore binária de busca
+## Busca em árvore binária de busca {.t}
 
 <div class="columns">
 <div class="column" width="48%">
 
-Dessa forma, quando estamos procurando um valor $v$ e $v$ é menor que o valor na raiz, continuamos a busca na subárvore a esquerda, se $v$ é maior que o valor da raiz, continuamos a busca na subárvore a direita.
+\small
+
+Busca $v$ em uma ABB $t$:
+
+- Se $t$ é vazia, $v$ não está na árvore;
+- Se $v$ é igual a $t.val$, $v$ está na árvore;
+- Senão, se $v$ é menor que $t.val$, continuamos a busca na subárvore a esquerda;
+- Senão ($v$ é maior que $t.val$), continuamos a busca na subárvore a direita.
 
 Implemente o algoritmo de busca para uma árvore binária de busca.
 
@@ -705,12 +894,19 @@ def busca(t: Arvore, val: int) -> bool:
 </div>
 
 
-## Busca em árvore binária de busca
+## Busca em árvore binária de busca {.t}
 
 <div class="columns">
 <div class="column" width="48%">
 
-Dessa forma, quando estamos procurando um valor $v$ e $v$ é menor que o valor na raiz, continuamos a busca na subárvore a esquerda, se $v$ é maior que o valor da raiz, continuamos a busca na subárvore a direita.
+\small
+
+Busca $v$ em uma ABB $t$:
+
+- Se $t$ é vazia, $v$ não está na árvore;
+- Se $v$ é igual a $t.val$, $v$ está na árvore;
+- Senão, se $v$ é menor que $t.val$, continuamos a busca na subárvore a esquerda;
+- Senão ($v$ é maior que $t.val$), continuamos a busca na subárvore a direita.
 
 Implemente o algoritmo de busca para uma árvore binária de busca.
 
@@ -761,7 +957,7 @@ def busca(t: Arvore, val: int) -> bool:
 ## Complexidade de tempo da busca em ABB
 
 <div class="columns">
-<div class="column" width="48%">
+<div class="column" width="42%">
 
 \scriptsize
 
@@ -789,36 +985,24 @@ def busca(t: Arvore, val: int) -> bool:
 ```
 
 </div>
-<div class="column" width="48%">
-
-\scriptsize
-
-```
-          4
-        /   \
-     /         \
-    1           7
-  /   \       /
--3     2     5
-        \
-         3
-```
-
-\pause
-
-\normalsize
+<div class="column" width="54%">
 
 Qual é a complexidade de tempo do algoritmo de busca em árvore binária de busca? \pause $O(h)$, onde $h$ é a altura da árvore. \pause
 
-Qual é a relação entre a quantidade $n$ de elementos da árvore e $h$? \pause Qual é o limite inferior de $h$? \pause $\lg(n)$. \pause Qual é o limite superior de $h$? \pause $n - 1$.
+Qual é a relação entre a quantidade $n$ de elementos da árvore e $h$? \pause
+
+Qual é o limite superior de $h$? \pause $n - 1$. \pause Ocorre quando todos os nós da árvore, exceto as folhas, têm apenas um filho. \pause
+
+
+Qual é o limite inferior de $h$? \pause $\lg(n)$. \pause Ocorre quando todos os níveis da árvore estão cheios, exceto talvez, o último nível. \pause
+
+O que podemos concluir sobre isso? \pause Para que a busca em uma ABB seja eficiente, precisamos manter a altura da árvore perto do valor mínimo.
 
 </div>
 </div>
 
 
 ## Complexidade de tempo da busca em ABB
-
-O que podemos concluir sobre isso? \pause Para que a busca em uma ABB seja eficiente, precisamos manter a altura da árvore perto do valor mínimo. \pause
 
 Fato: uma ABB criada com $n$ valores aleatórios tem altura média de $1.39 \lg n$. \pause
 
