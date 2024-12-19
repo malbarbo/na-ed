@@ -3,7 +3,6 @@
 title: Busca
 linkcolor: Black
 urlcolor: Blue
-# TODO: mudar get para busca
 # TODO: colocar exemplos de dicionários em Python
 # TODO: colocar referência de busca binária e dicionário
 ---
@@ -33,8 +32,8 @@ As operações comuns em um dicionário são a associação de uma chave com um 
 
 ```python
 class Dicionario:
-    '''Uma coleção de associações chave-valor, onde
-    cada chave é única'''
+  '''Uma coleção de associações chave-valor, onde
+  cada chave é única'''
 
   def num_itens(self) -> int:
       '''Devolve a quantidade de chaves no dicionário.'''
@@ -44,12 +43,12 @@ class Dicionario:
       Se *chave* já está associada com um valor, ele
       é sustituído por *valor*.'''
 
-  def get(self, chave: str) -> int | None:
-      ''' Devolve o valor associado com *chave* no dicio-
+  def busca(self, chave: str) -> int | None:
+      '''Devolve o valor associado com *chave* no dicio-
       nário ou None se a chave não está no dicionário.'''
 
   def remove(self, chave: str):
-      ''' Remove a *chave* e o valor associado com ela do
+      '''Remove a *chave* e o valor associado com ela do
       dicionário. Não faz nada se a *chave* não está no
       dicionário.'''
 ```
@@ -79,11 +78,11 @@ class Dicionario:
 \pause
 
 ```python
->>> d.get('Jorge')
+>>> d.busca('Jorge')
 25
->>> d.get('Bia')
+>>> d.busca('Bia')
 40
->>> d.get('Andre') is None
+>>> d.busca('Andre') is None
 True
 ```
 
@@ -91,7 +90,7 @@ True
 
 ```python
 >>> d.associa('Bia', 50)
->>> d.get('Bia')
+>>> d.busca('Bia')
 50
 ```
 
@@ -99,7 +98,7 @@ True
 
 ```python
 >>> d.remove('Jorge')
->>> d.get('Jorge') is None
+>>> d.busca('Jorge') is None
 True
 >>> d.remove('Ana')
 ```
@@ -196,7 +195,7 @@ class Dicionario:
 \pause
 
 ```python
-    def get(self, chave: str) -> int | None:
+    def busca(self, chave: str) -> int | None:
 ```
 
 \pause
@@ -362,7 +361,7 @@ Busca pelo 42. `ini` e `fim` indicam o intervalo e `m = (ini + fim) // 2`{.pytho
 +----+----+----+----+----+----+----+----+----+----+----+----+----+----+
    0    1    2    3    4    5    6    7    8    9   10   11   12   13
                                                ^^
-                                            ini,m,fim
+                                            ini m fim
 ```
 
 

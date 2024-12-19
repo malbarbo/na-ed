@@ -11,17 +11,17 @@ class Dicionario:
     >>> d.associa('Bia', 40)
     >>> d.num_itens()
     2
-    >>> d.get('Jorge')
+    >>> d.busca('Jorge')
     25
-    >>> d.get('Bia')
+    >>> d.busca('Bia')
     40
-    >>> d.get('Andre') is None
+    >>> d.busca('Andre') is None
     True
     >>> d.associa('Bia', 50)
-    >>> d.get('Bia')
+    >>> d.busca('Bia')
     50
     >>> d.remove('Jorge')
-    >>> d.get('Jorge') is None
+    >>> d.busca('Jorge') is None
     True
     >>> d.remove('Ana')
     >>> d.num_itens()
@@ -33,9 +33,9 @@ class Dicionario:
     cria um dicionário adicionando cada número (string) como chave associada
     com o próprio número.
 
-    Em seguida, para cada número da lista o get é executado para verificar se a
-    associação está correta. Depois a associação é removida e todas as outras
-    associações são verificadas.
+    Em seguida, para cada número da lista uma busca é realizada para verificar
+    se a associação está correta. Depois a associação é removida e todas as
+    outras associações são verificadas.
 
     >>> import random
     >>> lst = list(range(100))
@@ -46,22 +46,23 @@ class Dicionario:
     ...     d.associa(str(valor), valor)
     >>> for i in range(len(lst)):
     ...     # Associação original
-    ...     assert d.get(str(i)) == i
+    ...     assert d.busca(str(i)) == i
     ...     # Modifica a associação e verifica
     ...     d.associa(str(i), 2 * i)
-    ...     assert d.get(str(i)) == 2 * i
+    ...     assert d.busca(str(i)) == 2 * i
     ...     # Remove a associação e verifica
     ...     d.remove(str(i))
-    ...     assert d.get(str(i)) is None
+    ...     assert d.busca(str(i)) is None
     ...     # As associações que não foram removidas permanecem as mesmas?
     ...     for j in range(i + 1, len(lst)):
-    ...         assert d.get(str(j)) == j
+    ...         assert d.busca(str(j)) == j
     '''
 
     def __init__(self) -> None:
         '''
         Cria um novo dicionário vazio.
         '''
+        raise NotImplementedError
 
     def num_itens(self) -> int:
         '''
@@ -74,15 +75,18 @@ class Dicionario:
         Associa a *chave* com o *valor* no dicionário. Se *chave* já está
         associada com um valor, ele é sustituído por *valor*.
         '''
+        raise NotImplementedError
 
-    def get(self, chave: str) -> int | None:
+    def busca(self, chave: str) -> int | None:
         '''
         Devolve o valor associado com *chave* no dicionário ou None se a chave
         não está no dicionário.
         '''
+        raise NotImplementedError
 
     def remove(self, chave: str):
         '''
         Remove a *chave* e o valor associado com ela do dicionário. Não faz
         nada se a *chave* não está no dicionário.
         '''
+        raise NotImplementedError
