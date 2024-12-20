@@ -6,6 +6,7 @@ urlcolor: Blue
 # TODO: comparar com o conteúdo de recursividade de fundamentos
 # TODO: adicionar uma revisão no final
 # TODO: adicionar referências
+# TODO: adicionar uma descrição de com utilizar os modelos
 ---
 
 ## Introdução
