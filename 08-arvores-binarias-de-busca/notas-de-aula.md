@@ -3,8 +3,11 @@
 title: Árvores binárias de busca
 linkcolor: Black
 urlcolor: Blue
+# TODO: descrever uma forma de testar se a árvore tem a estrutura correta.
+# TODO: adicionar mais exemplos de funções
 # TODO: mudar raiz de t para r?
 # TODO: mudar val para chave?
+# TODO: no ínicio tem a frase "Se conseguirmos, ... talvez", temos que retomar essa frase no final
 ---
 
 ## Encadeamento e busca binária?
@@ -126,7 +129,7 @@ Vamos analisar uma sequência ordenada de elementos e tentar criar um encadeamen
 
 ## Árvore
 
-Essa forma de representar uma coleção de valores é chamada de árvore, especificamente, uma árvore binária de busca. \pause
+Essa tipo de estrutura é chamada de árvore binária, especificamente, uma **árvore binária de busca**. \pause
 
 Vire de ponta cabeça para ver a árvore!!! \pause As árvores em computação crescem para baixo! \pause
 
@@ -139,8 +142,8 @@ Como podemos definir uma árvore binária?
 
 Uma **árvore binária** é:
 
-- Vazia (`None`{.python}); ou
-- Um nó (`No`{.python}) com um valor e uma **árvore binária** a esquerda e uma **árvore binária** a direita.
+- Vazia; ou
+- Um nó com um valor e uma **árvore binária** a esquerda e uma **árvore binária** a direita.
 
 \pause
 
@@ -183,11 +186,13 @@ Um nó $A$ é **ancestral** de um nó $B$ se $A$ é pai de $B$ ou pai de algum a
          1
 ```
 
+\ \
+
 \pause
 
 \normalsize
 
-Quem são os filhos do nó 4? \pause O nó 8 e o nó 6. \pause
+Quem são os filhos do nó 4? \pause O nós 8 e 6. \pause
 
 Quem é o pai do nó 7? \pause O nó 8. \pause
 
@@ -326,6 +331,8 @@ class No:
 Arvore = No | None
 ```
 
+\pause
+
 </div>
 <div class="column" width="48%">
 
@@ -346,15 +353,33 @@ def fn_para_ab(t: Arvore) -> ...:
                fn_para_ab(t.esq) ... \
                fn_para_ab(t.dir)
 ```
+
+\pause
+
 </div>
 </div>
 
 
-## Número de folhas
+## Projeto de funções que processam árvores
+
+Como o modelo guia a implementação da função? \pause
+
+O modelo indica que, para processarmos um árvore, temos que ter pelo menos dois casos, uma para a árvore vazia, e outro para a árvore não vazia. \pause
+
+Além disso, no caso de árvore não vazia, o modelo sugere chamar a função recursivamente para as árvores a esquerda e a direita. (Por que?) \pause
+
+O nosso trabalho é determinar como combinar o valor do nó raiz com as respostas das chamadas recursivas para obter a resposta da função. \pause
+
+Nos exemplos a seguir, partimos do modelo e fazemos a implementação de algumas funções. \pause
+
+DURANTE OS SEUS ESTUDOS, TENTE COMPLETAR A FUNÇÃO ANTES DE VER A RESPOSTA.
+
+
+## Número de folhas {.t}
 
 <div class="columns">
 <div class="column" width="45%">
-O **grau** de um nó é a quantidade de filhos do nó. \pause
+O **grau** de um nó é o número de filhos do nó. \pause
 
 Um **nó folha** é aquele que tem grau 0. \pause
 
@@ -416,7 +441,7 @@ def num_folhas(t: Arvore) -> int:
 
 <div class="columns">
 <div class="column" width="45%">
-O **grau** de um nó é a quantidade de filhos do nó.
+O **grau** de um nó é o número de filhos do nó.
 
 Um **nó folha** é aquele que tem grau 0.
 
@@ -487,7 +512,7 @@ A **altura** (ou profundidade) de um nó é o máximo entre os níveis de todas 
 
 \ \
 
-De de outra forma, é o comprimento do caminho mais longo deste o nó até uma folha. \pause
+De outra forma, é o comprimento do caminho mais longo deste o nó até uma folha. \pause
 
 </div>
 <div class="column" width="50%">
@@ -735,8 +760,6 @@ t2  8           6  t3
 
 \scriptsize
 
-\vspace{0.1cm}
-
 ```python
 def valores_nivel(t: Arvore, n: int) -> list[int]:
     '''
@@ -752,11 +775,10 @@ def valores_nivel(t: Arvore, n: int) -> list[int]:
     '''
     if t is None:
         return []
+    elif n == 0:
+        return [t.val]
     else:
-        if n == 0:
-            return [t.val]
-        else:
-            return valores_nivel(t.esq, n - 1) + \
+        return valores_nivel(t.esq, n - 1) + \
                    valores_nivel(t.dir, n - 1)
 ```
 
