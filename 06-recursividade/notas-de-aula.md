@@ -45,7 +45,7 @@ Para escrever os próximos exemplos não vamos usar
 
 \pause
 
-Como representar uma quantidade arbitrária de dados sem arranjos? \pause
+Como representar uma lista, que tem uma quantidade arbitrária de dados, sem arranjos? \pause
 
 - Usando encadeamento.
 
@@ -55,26 +55,16 @@ Como representar uma quantidade arbitrária de dados sem arranjos? \pause
 <div class="columns">
 <div class="column" width="48%">
 
-A definição para nó que utilizamos foi:
+Conceitualmente, como podemos definir uma lista? \pause
 
-\scriptsize
+Uma **Lista** é:
 
-\ \
-
-```python
-@dataclass
-class No:
-    item: int
-    prox: No | None
-```
+- Vazia (`None`{.python}); ou \pause
+- Um nó (`No`) com um elemento e o resto, que é uma **Lista**.
 
 \pause
 
-\ \
-
-\normalsize
-
-Para facilitar o projeto e entendimento das próximas funções vamos utilizar a seguinte definição:
+Em Python
 
 \scriptsize
 
@@ -94,13 +84,6 @@ Lista = No | None
 </div>
 <div class="column" width="48%">
 
-De maneira formal, uma **Lista** é:
-
-- Vazia (`None`{.python}); ou
-- Um nó (`No`) com um elemento e o resto, que é uma **Lista**.
-
-\pause
-
 Para implementar funções que processam uma Lista, vamos explorar a relação entre autorreferência (na definição) e recursividade (na função):
 
 \scriptsize
@@ -118,6 +101,28 @@ def fn_para_lista(lst: Lista) -> ...:
 
 </div>
 </div>
+
+
+## Projeto de funções que processam listas
+
+Como o modelo guia a implementação da função? \pause
+
+O modelo indica que, para processarmos uma lista, temos que ter pelo menos dois casos, uma para a lista vazia, e outro para a lista não vazia. \pause
+
+Além disso, no caso de lista não vazia, o modelo sugere chamar a função recursivamente para o resto da lista (por que?). \pause
+
+O nosso trabalho é determinar como combinar o valor do primeiro da lista com a resposta da chamada recursiva para obter a resposta da função. \pause
+
+Nos exemplos a seguir, partimos do modelo e fazemos a implementação de algumas funções.
+
+
+## Projeto de funções que processam listas
+
+\Large
+
+\centering
+
+Tente completar as funções antes de ver as repostas.
 
 
 ## Soma
