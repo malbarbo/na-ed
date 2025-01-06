@@ -131,7 +131,7 @@ Feito e discutido em sala.
 
 Você pode conferir o resultado usando [este](https://www.cs.usfca.edu/~galles/visualization/AVLtree.html) simulador. \pause
 
-Após essa experiência prática, vamos sistematizar a forma que o rebalanceamento é feito!
+Agora que vimos o funcionamento das operações de rotação, vamos sistematizar a forma que o rebalanceamento é feito a partir dessas operações.
 
 
 ## Rebalanceamento
@@ -244,7 +244,7 @@ A   B C   D
 
 \normalsize
 
-Note que árvore tem uma nova raiz e que a altura da subárvore a esquerda diminui e a altura da subárvore a direita aumentou.
+Note que a árvore tem uma nova raiz e que a altura da subárvore a esquerda diminui e a altura da subárvore a direita aumentou.
 
 </div>
 </div>
@@ -430,7 +430,7 @@ Os exemplos servem tanto para mostrar para o usuário o uso da função e o seu 
 
 Já as funções de rotação e balanceamento são funções auxiliares, não fazem parte da interface para o usuário. \pause Além disso, as funções são mais complicadas e interagem com outras funções. \pause Os exemplos podem não ser suficientes para um bom teste. \pause
 
-Como proceder? \pause Fazendo testes de propriedade. \pause
+Como proceder? \pause Fazendo testes de propriedade.
 
 
 ## Testes de propriedade
@@ -457,7 +457,7 @@ Implementação do TAD dicionário: \pause
 
 - Com arranjos ordenados e busca binária, a busca tem tempo $O(\lg n)$ e a inserção e remoção $O(n)$; \pause
 
-- Com ABB o tempo de busca, inserção e remoção é $O(h)$, onde $h$ é a altura da árvore. No caso médio o tempo é de $O(\lg n)$ e no pior caso $O(\lg n)$; \pause
+- Com ABB o tempo de busca, inserção e remoção é $O(h)$, onde $h$ é a altura da árvore. No caso médio o tempo é de $O(\lg n)$ e no pior caso $O(n)$; \pause
 
 - Com árvore AVL o tempo de busca, inserção e remoção é $O(\lg n)$.
 
