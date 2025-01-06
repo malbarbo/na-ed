@@ -354,8 +354,6 @@ def fn_para_ab(t: Arvore) -> ...:
                fn_para_ab(t.dir)
 ```
 
-\pause
-
 </div>
 </div>
 
@@ -370,9 +368,16 @@ Além disso, no caso de árvore não vazia, o modelo sugere chamar a função re
 
 O nosso trabalho é determinar como combinar o valor do nó raiz com as respostas das chamadas recursivas para obter a resposta da função. \pause
 
-Nos exemplos a seguir, partimos do modelo e fazemos a implementação de algumas funções. \pause
+Nos exemplos a seguir, partimos do modelo e fazemos a implementação de algumas funções.
 
-DURANTE OS SEUS ESTUDOS, TENTE COMPLETAR A FUNÇÃO ANTES DE VER A RESPOSTA.
+
+## Projeto de funções que processam árvores
+
+\Large
+
+\centering
+
+Tente completar as funções antes de ver as repostas.
 
 
 ## Número de folhas {.t}
@@ -1091,7 +1096,7 @@ def insere(t: Arvore, val: int) -> No:
 
     Exemplo
     >>> r = None
-    >>> r = insere(None, 10)
+    >>> r = insere(r, 10)
     >>> r
     No(esq=None, val=10, dir=None)
     '''
