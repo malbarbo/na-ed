@@ -36,9 +36,9 @@ urlcolor: Blue
 
 @) Projete uma função que devolva o valor máximo em uma árvore binária ou `None`{.python} se a árvore estiver vazia.
 
-@) Desenhe a sequência de ABBs geradas pela inserção dos elementos 6, 1, 3, 7, 8, 12, 9, 5, 4, 2, 16.
+@) Desenhe a sequência de ABBs geradas pela inserção dos elementos 6, 1, 3, 7, 8, 12, 9, 5, 4, 2, 16. Confira a responda usando [este](https://www.cs.usfca.edu/~galles/visualization/BST.html) simulador.
 
-@) Partindo do resultado do exercício anterior, desenhe a sequência de ABBs geradas pela remoção dos elementos 12, 1, 3, 6, 7, 8, 5, 9, 4, 2.
+@) Partindo do resultado do exercício anterior, desenhe a sequência de ABBs geradas pela remoção dos elementos 12, 1, 3, 6, 7, 8, 5, 9, 4, 2. Confira a resposta usando [este](https://www.cs.usfca.edu/~galles/visualization/BST.html) simulador.
 
 
 ## Praticando
