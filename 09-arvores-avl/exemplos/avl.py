@@ -361,6 +361,10 @@ def maximo(r: No) -> str:
 
 
 def altura(r: Arvore) -> int:
+    '''
+    Devolve a altura da árvore *t*.
+    Devolve -1 se *t* é None.
+    '''
     if r is None:
         return -1
     else:
@@ -368,6 +372,10 @@ def altura(r: Arvore) -> int:
 
 
 def atualiza_altura(no: No):
+    '''
+    Atualiza a altura do *no*.
+    Requer que a altura de *no.esq* e *no.dir* esteja corretas.
+    '''
     no.altura = 1 + max(altura(no.esq), altura(no.dir))
 
 

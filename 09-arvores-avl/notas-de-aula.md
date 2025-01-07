@@ -26,11 +26,94 @@ Uma **árvore AVL**, é uma ABB de busca, que quando não é vazia, tem uma raiz
 Para representar uma AVL, é preciso adicionar um atributo `altura` na classe `No`.
 
 
+## Árvore AVL
+
+<div class="columns">
+<div class="column" width="48%">
+\scriptsize
+
+```python
+@dataclass
+class No:
+    esq: Arvore
+    val: int
+    dir: Arvore
+    altura: int
+
+Arvore = No | None
+```
+
+\ \
+
+\pause
+
+```python
+def altura(t: Arvore) -> Int:
+    '''
+    Devolve a altura da árvore *t*.
+    Devolve -1 se *t* é None.
+    '''
+    if t is None:
+        return -1
+    else:
+        return t.altura
+```
+
+\pause
+</div>
+<div class="column" width="48%">
+Considere as seguintes árvore, onde cada nó é representado pelo seu valor e altura:
+
+\scriptsize
+
+```
+                  20:4  t0
+                /      \
+            /             \
+    t1  7:3              27:1  t2
+      /     \           /   \
+t3  4:2    10:1      22:1  30:0
+   /  \       \        \
+ 3:0   6:1    12:0    25:0
+      /
+    5:0
+```
+
+\pause
+
+\normalsize
+
+A árvore t1 é AVL? \pause Sim. \pause
+
+A árvore t2 é AVL? \pause Sim. \pause
+
+A árvore t3 é AVL? \pause Sim. \pause
+
+A árvore t0 é AVL? \pause Não.
+
+
+</div>
+</div>
+
+
 ## Rebalanceamento e rotação
 
 Quando um nó é inserido ou removido e a regra de balanceamento é violada, é preciso ajustar a árvore para restabelecer o balanceamento (**rebalancear**), o que é feito através de operações de rotações. \pause
 
 Uma **rotação** é uma operação que muda localmente a estrutura de uma ABB, mas mantém a propriedade de busca. \pause No contexto de árvore AVL, a operação de rotação também deve ajustar o atributo altura dos nós envolvidos na rotação.
+
+\pause
+
+\scriptsize
+
+```python
+def atualiza_altura(no: No):
+    '''
+    Atualiza a altura do *no*.
+    Requer que a altura de *no.esq* e *no.dir* esteja corretas.
+    '''
+    no.altura = 1 + max(altura(no.esq), altura(no.dir))
+```
 
 
 ## Rebalanceamento e rotação
