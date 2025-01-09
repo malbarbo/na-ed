@@ -72,9 +72,9 @@ Considere as seguintes árvore, onde cada nó é representado pelo seu valor e a
             /             \
     t1  7:3              27:1  t2
       /     \           /   \
-t3  4:2    10:1      22:1  30:0
-   /  \       \        \
- 3:0   6:1    12:0    25:0
+t3  4:2    10:1      22:0  30:0
+   /  \       \
+ 3:0   6:1    12:0
       /
     5:0
 ```
@@ -231,10 +231,10 @@ abs(altura(r.esq) - altura(r.dir)) == 2
 
 ```python
 # Desbalanceamento a esquerda
-altura(r.esq) > altura(r.dir)) + 1
+altura(r.esq) > altura(r.dir) + 1
 
 # Desbalanceamento a direita
-altura(r.dir) > altura(r.esq)) + 1
+altura(r.dir) > altura(r.esq) + 1
 ```
 
 
