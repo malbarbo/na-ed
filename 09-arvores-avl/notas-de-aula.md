@@ -3,6 +3,7 @@
 title: Árvores AVL
 linkcolor: Black
 urlcolor: Blue
+# TODO: criar mais um coleção de slides sobre percursos em árvores (https://en.wikipedia.org/wiki/Tree_traversal)
 ---
 
 ## Árvores binárias balanceadas
@@ -526,8 +527,6 @@ Veja o código no arquivo `avl.py`.
 
 
 ## Percursos em árvores com funções recursivas e iterativas
-
-Discutido em sala.
 
 Veja o arquivo `percursos.py`.
 
