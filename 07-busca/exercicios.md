@@ -5,6 +5,7 @@ title: |
        | Busca
 numbersections: false
 urlcolor: Blue
+# TODO: adicionar soluções para exercícios de busca binária
 ---
 
 

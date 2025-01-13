@@ -5,6 +5,7 @@ linkcolor: Black
 urlcolor: Blue
 # TODO: mudar o tipo de saída de remove para int | None
 # TODO: colocar exemplos de dicionários em Python
+# TODO: adicionar um método para obter as chaves?
 # TODO: a avaliação no final já é uma revisão?
 ---
 
