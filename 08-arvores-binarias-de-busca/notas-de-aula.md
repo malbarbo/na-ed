@@ -3,10 +3,10 @@
 title: Árvores binárias de busca
 linkcolor: Black
 urlcolor: Blue
-# TODO: descrever uma forma de testar se a árvore tem a estrutura correta.
+# TODO: falar sobre testes, especificamente, de uma forma de testar se a árvore tem a estrutura correta.
+# TODO: falar de percursos?
 # TODO: adicionar mais exemplos de funções
 # TODO: mudar raiz de t para r?
-# TODO: mudar val para chave?
 # TODO: no ínicio tem a frase "Se conseguirmos, ... talvez", temos que retomar essa frase no final
 ---
 
@@ -143,13 +143,13 @@ Como podemos definir uma árvore binária?
 Uma **árvore binária** é:
 
 - Vazia; ou
-- Um nó com um valor e uma **árvore binária** a esquerda e uma **árvore binária** a direita.
+- Um nó com uma chave e uma **árvore binária** a esquerda e uma **árvore binária** a direita.
 
 \pause
 
-Note que esta definição de árvore não impõe nenhuma restrição sobre os valores da árvores. \pause
+Note que esta definição de árvore não impõe nenhuma restrição sobre as chaves. \pause
 
-Para podemos usar uma árvore binária para fazer uma busca binária, vamos precisar adicionar restrições sobre os valores da árvores. \pause
+Para podemos usar uma árvore binária para fazer uma busca binária, vamos precisar adicionar restrições sobre as chaves. \pause
 
 Mas antes, vamos ver alguns definições e exemplos.
 
@@ -207,7 +207,7 @@ Quem são os ancestrais do no 5? \pause Os nós 6 e 4.
 ## Árvores binárias em Python
 
 <div class="columns">
-<div class="column" width="43%">
+<div class="column" width="40%">
 Como representar uma árvore binária? \pause
 
 \scriptsize
@@ -217,7 +217,7 @@ Como representar uma árvore binária? \pause
 @dataclass
 class No:
     esq: Arvore
-    val: int
+    chave: int
     dir: Arvore
 
 Arvore = No | None
@@ -247,13 +247,13 @@ t2  8           6  t3
 \pause
 
 </div>
-<div class="column" width="55%">
+<div class="column" width="58%">
 \scriptsize
 
 ```python
 >>> t1 = No(None, 7, No(None, 1, None))
 >>> t1
-No(esq=None, val=7, dir=No(esq=None, val=1, dir=None))
+No(esq=None, chave=7, dir=No(esq=None, chave=1, dir=None))
 ```
 
 \pause
@@ -270,14 +270,14 @@ No(esq=None, val=7, dir=No(esq=None, val=1, dir=None))
 
 \normalsize
 
-Como acessar o valor 1 a partir de `t4`?
+Como acessar a chave 1 a partir de `t4`?
 
 \pause
 
 \scriptsize
 
 ```python
->>> t4.esq.dir.dir.val
+>>> t4.esq.dir.dir.chave
 ```
 
 \ \
@@ -286,7 +286,7 @@ Como acessar o valor 1 a partir de `t4`?
 
 \normalsize
 
-Como adicionar uma nova subárvore (valor da raiz 4) a esquerda de `t3` a partir de `t4`? \pause
+Como adicionar uma nova subárvore (chave 4) a esquerda de `t3` a partir de `t4`? \pause
 
 \scriptsize
 
@@ -325,7 +325,7 @@ Como projetar funções que processam árvores? \pause
 @dataclass
 class No:
     esq: Arvore
-    val: int
+    chave: int
     dir: Arvore
 
 Arvore = No | None
@@ -349,7 +349,7 @@ def fn_para_ab(t: Arvore) -> ...:
     if t is None:
         return ...
     else:
-        return t.val ... \
+        return t.chave ... \
                fn_para_ab(t.esq) ... \
                fn_para_ab(t.dir)
 ```
@@ -366,7 +366,7 @@ O modelo indica que, para processarmos um árvore, temos que ter pelo menos dois
 
 Além disso, no caso de árvore não vazia, o modelo sugere chamar a função recursivamente para as árvores a esquerda e a direita. (Por que?) \pause
 
-O nosso trabalho é determinar como combinar o valor do nó raiz com as respostas das chamadas recursivas para obter a resposta da função. \pause
+O nosso trabalho é determinar como combinar a chave do nó raiz com as respostas das chamadas recursivas para obter a resposta da função. \pause
 
 Nos exemplos a seguir, partimos do modelo e fazemos a implementação de algumas funções.
 
@@ -433,7 +433,7 @@ def num_folhas(t: Arvore) -> int:
     if t is None:
         return ...
     else:
-        return self.val ... \
+        return self.chave ... \
                num_folhas(t.esq) ... \
                num_folhas(t.dir)
 ```
@@ -615,7 +615,7 @@ def altura(t: Arvore) -> int:
     if t is None:
         return ...
     else:
-        return t.val ... \
+        return t.chave ... \
                altura(t.esq)
                altura(t.dir)
 ```
@@ -683,7 +683,7 @@ def altura(t: Arvore) -> int:
 <div class="columns">
 <div class="column" width="45%">
 
-Projete uma função que encontre todos os valores em um determinado nível de uma árvore.
+Projete uma função que encontre todos as chaves em um determinado nível de uma árvore.
 
 \ \
 
@@ -708,16 +708,16 @@ t2  8           6  t3
 \scriptsize
 
 ```python
-def valores_nivel(t: Arvore, n: int) -> list[int]:
+def chaves_nivel(t: Arvore, n: int) -> list[int]:
     '''
     Devolve os nós que estão no nível *n* de *t*.
-    >>> valores_nivel(None, 0)
+    >>> chaves_nivel(None, 0)
     []
-    >>> valores_nivel(t4, 0)
+    >>> chaves_nivel(t4, 0)
     [4]
-    >>> valores_nivel(t4, 2)
+    >>> chaves_nivel(t4, 2)
     [4, 7, 5]
-    >>> valores_nivel(t4, 3)
+    >>> chaves_nivel(t4, 3)
     [1]
     '''
 ```
@@ -729,9 +729,9 @@ def valores_nivel(t: Arvore, n: int) -> list[int]:
         return ... n
     else:
         return n ... \
-               t.val ... \
-               valores_nivel(t.esq, ...) ... \
-               valores_nivel(t.dir, ...) ...
+               t.chave ... \
+               chaves_nivel(t.esq, ...) ... \
+               chaves_nivel(t.dir, ...) ...
 ```
 
 </div>
@@ -743,7 +743,7 @@ def valores_nivel(t: Arvore, n: int) -> list[int]:
 <div class="columns">
 <div class="column" width="45%">
 
-Projete uma função que encontre todos os valores em um determinado nível de uma árvore.
+Projete uma função que encontre todos as chaves em um determinado nível de uma árvore.
 
 \ \
 
@@ -766,25 +766,25 @@ t2  8           6  t3
 \scriptsize
 
 ```python
-def valores_nivel(t: Arvore, n: int) -> list[int]:
+def chaves_nivel(t: Arvore, n: int) -> list[int]:
     '''
     Devolve os nós que estão no nível *n* de *t*.
-    >>> valores_nivel(None, 0)
+    >>> chaves_nivel(None, 0)
     []
-    >>> valores_nivel(t4, 0)
+    >>> chaves_nivel(t4, 0)
     [4]
-    >>> valores_nivel(t4, 2)
+    >>> chaves_nivel(t4, 2)
     [4, 7, 5]
-    >>> valores_nivel(t4, 3)
+    >>> chaves_nivel(t4, 3)
     [1]
     '''
     if t is None:
         return []
     elif n == 0:
-        return [t.val]
+        return [t.chave]
     else:
-        return valores_nivel(t.esq, n - 1) + \
-                   valores_nivel(t.dir, n - 1)
+        return chaves_nivel(t.esq, n - 1) + \
+                   chaves_nivel(t.dir, n - 1)
 ```
 
 </div>
@@ -797,24 +797,24 @@ O que é preciso para podemos fazer uma busca binária em um árvore binária? \
 
 Uma **árvore binária de busca** (ABB) é uma árvore binária que, quando não é vazia, tem uma raiz $t$ e: \pause
 
-- Todos os elementos da subárvore a esquerda de $t$ são menores que $t.val$; \pause
-- Todos os elementos da subárvore a direita de $t$ são maiores que $t.val$; \pause
+- Todos os elementos da subárvore a esquerda de $t$ são menores que $t.chave$; \pause
+- Todos os elementos da subárvore a direita de $t$ são maiores que $t.chave$; \pause
 - As subárvores a esquerda e a direta de $t$ são **árvores binárias de busca**.
 
 
 ## Busca em árvore binária de busca {.t}
 
 <div class="columns">
-<div class="column" width="48%">
+<div class="column" width="50%">
 
 \small
 
 Busca $v$ em uma ABB $t$:
 
 - Se $t$ é vazia, $v$ não está na árvore;
-- Se $v$ é igual a $t.val$, $v$ está na árvore;
-- Senão, se $v$ é menor que $t.val$, continuamos a busca na subárvore a esquerda;
-- Senão ($v$ é maior que $t.val$), continuamos a busca na subárvore a direita. \pause
+- Se $v$ é igual a $t.chave$, $v$ está na árvore;
+- Senão, se $v$ é menor que $t.chave$, continuamos a busca na subárvore a esquerda;
+- Senão ($v$ é maior que $t.chave$), continuamos a busca na subárvore a direita. \pause
 
 Implemente o algoritmo de busca para uma árvore binária de busca. \pause
 
@@ -834,13 +834,13 @@ Implemente o algoritmo de busca para uma árvore binária de busca. \pause
 \pause
 
 </div>
-<div class="column" width="48%">
+<div class="column" width="46%">
 \scriptsize
 
 ```python
-def busca(t: Arvore, val: int) -> bool:
+def busca(t: Arvore, chave: int) -> bool:
     '''
-    Devolve True se *val* está em *t*,
+    Devolve True se *chave* está em *t*,
     False caso contrário.
     >>> busca(None, 10)
     False
@@ -850,12 +850,12 @@ def busca(t: Arvore, val: int) -> bool:
     False
     '''
     if t is None:
-        return ... val
+        return ... chave
     else:
-        return val ... \
-               t.val ... \
-               busca(t.esq, val) ... \
-               busca(t.dir, val) ...
+        return chave ... \
+               t.chave ... \
+               busca(t.esq, chave) ... \
+               busca(t.dir, chave) ...
 ```
 
 </div>
@@ -865,16 +865,16 @@ def busca(t: Arvore, val: int) -> bool:
 ## Busca em árvore binária de busca {.t}
 
 <div class="columns">
-<div class="column" width="48%">
+<div class="column" width="50%">
 
 \small
 
 Busca $v$ em uma ABB $t$:
 
 - Se $t$ é vazia, $v$ não está na árvore;
-- Se $v$ é igual a $t.val$, $v$ está na árvore;
-- Senão, se $v$ é menor que $t.val$, continuamos a busca na subárvore a esquerda;
-- Senão ($v$ é maior que $t.val$), continuamos a busca na subárvore a direita.
+- Se $v$ é igual a $t.chave$, $v$ está na árvore;
+- Senão, se $v$ é menor que $t.chave$, continuamos a busca na subárvore a esquerda;
+- Senão ($v$ é maior que $t.chave$), continuamos a busca na subárvore a direita.
 
 Implemente o algoritmo de busca para uma árvore binária de busca.
 
@@ -892,13 +892,13 @@ Implemente o algoritmo de busca para uma árvore binária de busca.
 ```
 
 </div>
-<div class="column" width="48%">
+<div class="column" width="46%">
 \scriptsize
 
 ```python
-def busca(t: Arvore, val: int) -> bool:
+def busca(t: Arvore, chave: int) -> bool:
     r'''
-    Devolve True se *val* está em *t*,
+    Devolve True se *chave* está em *t*,
     False caso contrário.
     >>> busca(None, 10)
     False
@@ -909,12 +909,12 @@ def busca(t: Arvore, val: int) -> bool:
     '''
     if t is None:
         return False
-    elif val == t.val:
+    elif chave == t.chave:
         return True
-    elif val < t.val:
-        return busca(t.esq, val)
-    else:  # val > t.val
-        return busca(t.dir, val)
+    elif chave < t.chave:
+        return busca(t.esq, chave)
+    else:  # chave > t.chave
+        return busca(t.dir, chave)
 ```
 
 </div>
@@ -924,16 +924,16 @@ def busca(t: Arvore, val: int) -> bool:
 ## Busca em árvore binária de busca {.t}
 
 <div class="columns">
-<div class="column" width="48%">
+<div class="column" width="50%">
 
 \small
 
 Busca $v$ em uma ABB $t$:
 
 - Se $t$ é vazia, $v$ não está na árvore;
-- Se $v$ é igual a $t.val$, $v$ está na árvore;
-- Senão, se $v$ é menor que $t.val$, continuamos a busca na subárvore a esquerda;
-- Senão ($v$ é maior que $t.val$), continuamos a busca na subárvore a direita.
+- Se $v$ é igual a $t.chave$, $v$ está na árvore;
+- Senão, se $v$ é menor que $t.chave$, continuamos a busca na subárvore a esquerda;
+- Senão ($v$ é maior que $t.chave$), continuamos a busca na subárvore a direita.
 
 Implemente o algoritmo de busca para uma árvore binária de busca.
 
@@ -951,13 +951,13 @@ Implemente o algoritmo de busca para uma árvore binária de busca.
 ```
 
 </div>
-<div class="column" width="48%">
+<div class="column" width="46%">
 \scriptsize
 
 ```python
-def busca(t: Arvore, val: int) -> bool:
+def busca(t: Arvore, chave: int) -> bool:
     r'''
-    Devolve True se *val* está em *t*,
+    Devolve True se *chave* está em *t*,
     False caso contrário.
     >>> busca(None, 10)
     False
@@ -968,11 +968,11 @@ def busca(t: Arvore, val: int) -> bool:
     '''
     r = t
     while r is not None:
-        if val == r.val:
+        if chave == r.chave:
             return True
-        elif val < r.val:
+        elif chave < r.chave:
             r = r.esq
-        else:  # val > r.val
+        else:  # chave > r.chave
             r = r.dir
     return False
 ```
@@ -989,24 +989,24 @@ def busca(t: Arvore, val: int) -> bool:
 \scriptsize
 
 ```python
-def busca(t: Arvore, val: int) -> bool:
+def busca(t: Arvore, chave: int) -> bool:
     if t is None:
         return False
-    elif val == t.val:
+    elif chave == t.chave:
         return True
-    elif val < t.val:
-        return busca(t.esq, val)
-    else:  # val > t.val
-        return busca(t.dir, val)
+    elif chave < t.chave:
+        return busca(t.esq, chave)
+    else:  # chave > t.chave
+        return busca(t.dir, chave)
 
-def busca(t: Arvore, val: int) -> bool:
+def busca(t: Arvore, chave: int) -> bool:
     r = t
     while r is not None:
-        if val == r.val:
+        if chave == r.chave:
             return True
-        elif val < r.val:
+        elif chave < r.chave:
             r = r.esq
-        else:  # val > r.val
+        else:  # chave > r.chave
             r = r.dir
     return False
 ```
@@ -1031,7 +1031,7 @@ O que podemos concluir sobre isso? \pause Para que a busca em uma ABB seja efici
 
 ## Complexidade de tempo da busca em ABB
 
-Fato: uma ABB criada com $n$ valores aleatórios tem altura média de $1.39 \lg n$. \pause
+Fato: uma ABB criada com $n$ chaves aleatórias tem altura média de $1.39 \lg n$. \pause
 
 Então, se as chaves usadas nas inserções e remoções tem uma distribuição aleatória, a ABB resultante tem uma altura pequena. \pause
 
@@ -1042,7 +1042,7 @@ Agora vamos ver como inserir e remover valores de uma ABB sem se preocupar com a
 
 ## Inserção em árvore binária de busca
 
-Projete uma função que insira um novo valor, se ainda não estiver presente, em uma árvore binária de busca. \pause
+Projete uma função que insira uma nova chave, se ainda não estiver presente, em uma árvore binária de busca. \pause
 
 Quais são os tipos dos parâmetros da função? \pause `Arvore`{.python} e `int`{.python}. \pause
 
@@ -1053,15 +1053,15 @@ Quais deve ser o tipo de saída da função? \pause `None`{.python}? \pause
 \scriptsize
 
 ```python
-def insere(t: Arvore, val: int) -> None:
+def insere(t: Arvore, chave: int) -> None:
     '''
-    Insere *val* em *t* mantendo as
+    Insere *chave* em *t* mantendo as
     propriedades de ABB.
     Requer que *t* seja uma ABB.
     >>> r = None
     >>> insere(r, 10)
     >>> r
-    No(esq=None, val=10, dir=None)
+    No(esq=None, chave=10, dir=None)
     '''
 ```
 
@@ -1087,18 +1087,18 @@ Como resolver essa questão? \pause Alterando o tipo de retorno para `No`{.pause
 \scriptsize
 
 ```python
-def insere(t: Arvore, val: int) -> No:
+def insere(t: Arvore, chave: int) -> No:
     '''
     Devolve a raiz da ABB que é o resultado
-    da inserção de *val* em *t*.
-    Se *val* já está em *t*, devolve *t*.
+    da inserção de *chave* em *t*.
+    Se *chave* já está em *t*, devolve *t*.
     Requer que *t* seja uma ABB.
 
     Exemplo
     >>> r = None
     >>> r = insere(r, 10)
     >>> r
-    No(esq=None, val=10, dir=None)
+    No(esq=None, chave=10, dir=None)
     '''
 ```
 
@@ -1171,20 +1171,20 @@ None   --->   7
 \scriptsize
 
 ```python
-def insere(t: Arvore, val: int) -> No:
+def insere(t: Arvore, chave: int) -> No:
     '''
     Devolve a raiz da ABB que é o resultado
-    da inserção de *val* em *t*.
-    Se *val* já está em *t*, devolve *t*.
+    da inserção de *chave* em *t*.
+    Se *chave* já está em *t*, devolve *t*.
     Requer que *t* seja uma ABB.
     '''
     if t is None:
-        return ... val
+        return ... chave
     else:
-        val ...
-        t.val ...
-        insere(t.esq, val) ...
-        insere(t.dir, val) ...
+        chave ...
+        t.chave ...
+        insere(t.esq, chave) ...
+        insere(t.dir, chave) ...
         return ...
 ```
 </div>
@@ -1239,20 +1239,20 @@ None   --->   7
 \scriptsize
 
 ```python
-def insere(t: Arvore, val: int) -> No:
+def insere(t: Arvore, chave: int) -> No:
     '''
     Devolve a raiz da ABB que é o resultado
-    da inserção de *val* em *t*.
-    Se *val* já está em *t*, devolve *t*.
+    da inserção de *chave* em *t*.
+    Se *chave* já está em *t*, devolve *t*.
     Requer que *t* seja uma ABB.
     '''
     if t is None:
-        return ... val
+        return ... chave
     else:
-        val ...
-        t.val ...
-        t.esq = insere(t.esq, val) ...
-        t.dir = insere(t.dir, val) ...
+        chave ...
+        t.chave ...
+        t.esq = insere(t.esq, chave) ...
+        t.dir = insere(t.dir, chave) ...
         return ...
 ```
 </div>
@@ -1307,20 +1307,20 @@ None   --->   7
 \scriptsize
 
 ```python
-def insere(t: Arvore, val: int) -> No:
+def insere(t: Arvore, chave: int) -> No:
     '''
     Devolve a raiz da ABB que é o resultado
-    da inserção de *val* em *t*.
-    Se *val* já está em *t*, devolve *t*.
+    da inserção de *chave* em *t*.
+    Se *chave* já está em *t*, devolve *t*.
     Requer que *t* seja uma ABB.
     '''
     if t is None:
-        return No(None, val, None)
+        return No(None, chave, None)
     else:
-        val ...
-        t.val ...
-        t.esq = insere(t.esq, val) ...
-        t.dir = insere(t.dir, val) ...
+        chave ...
+        t.chave ...
+        t.esq = insere(t.esq, chave) ...
+        t.dir = insere(t.dir, chave) ...
         return ...
 ```
 </div>
@@ -1375,21 +1375,21 @@ None   --->   7
 \scriptsize
 
 ```python
-def insere(t: Arvore, val: int) -> No:
+def insere(t: Arvore, chave: int) -> No:
     '''
     Devolve a raiz da ABB que é o resultado
-    da inserção de *val* em *t*.
-    Se *val* já está em *t*, devolve *t*.
+    da inserção de *chave* em *t*.
+    Se *chave* já está em *t*, devolve *t*.
     Requer que *t* seja uma ABB.
     '''
     if t is None:
-        return No(None, val, None)
+        return No(None, chave, None)
     else:
-        if val < t.val:
-            t.esq = insere(t.esq, val)
-        elif val > t.val:
-            t.dir = insere(t.dir, val)
-        else: # val == t.val
+        if chave < t.chave:
+            t.esq = insere(t.esq, chave)
+        elif chave > t.chave:
+            t.dir = insere(t.dir, chave)
+        else: # chave == t.chave
             pass
         return t
 ```
@@ -1405,21 +1405,21 @@ def insere(t: Arvore, val: int) -> No:
 \scriptsize
 
 ```python
-def insere(t: Arvore, val: int) -> No:
+def insere(t: Arvore, chave: int) -> No:
     '''
     Devolve a raiz da ABB que é o resultado
-    da inserção de *val* em *t*.
-    Se *val* já está em *t*, devolve *t*.
+    da inserção de *chave* em *t*.
+    Se *chave* já está em *t*, devolve *t*.
     Requer que *t* seja uma ABB.
     '''
     if t is None:
-        return No(None, val, None)
+        return No(None, chave, None)
     else:
-        if val < t.val:
-            t.esq = insere(t.esq, val)
-        elif val > t.val:
-            t.dir = insere(t.dir, val)
-        else: # val == t.val
+        if chave < t.chave:
+            t.esq = insere(t.esq, chave)
+        elif chave > t.chave:
+            t.dir = insere(t.dir, chave)
+        else: # chave == t.chave
             pass
         return t
 ```
@@ -1438,7 +1438,7 @@ $O(1)$ operações para cada nó analisado. No pior caso todos os nós de um cam
 
 ## Remoção em árvore binária de busca
 
-Projete uma função que remova um valor, se estiver presente, de uma árvore binária de busca.
+Projete uma função que remova uma chave, se estiver presente, de uma árvore binária de busca.
 
 \pause
 
@@ -1447,11 +1447,11 @@ Projete uma função que remova um valor, se estiver presente, de uma árvore bi
 \scriptsize
 
 ```python
-def remove(t: Arvore, val: int) -> Arvore:
+def remove(t: Arvore, chave: int) -> Arvore:
     '''
     Devolve a raiz da ABB que é o resultado
-    da remoção de *val* de *t*.
-    Se *val* não está em *t*, devolve *t*.
+    da remoção de *chave* de *t*.
+    Se *chave* não está em *t*, devolve *t*.
     Requer que *t* seja uma ABB.
 
     Exemplo
@@ -1531,20 +1531,20 @@ Remoção de nó com subárvore a esq e a dir
 \scriptsize
 
 ```python
-def remove(t: Arvore, val: int) -> Arvore:
+def remove(t: Arvore, chave: int) -> Arvore:
     '''
     Devolve a raiz da ABB que é o resultado
-    da remoção de *val* de *t*.
-    Se *val* não está em *t*, devolve *t*.
+    da remoção de *chave* de *t*.
+    Se *chave* não está em *t*, devolve *t*.
     Requer que *t* seja uma ABB.
     '''
     if t is None:
-        return ... val
+        return ... chave
     else:
-        val ...
-        t.val ...
-        remove(t.esq, val) ...
-        remove(t.dir, val) ...
+        chave ...
+        t.chave ...
+        remove(t.esq, chave) ...
+        remove(t.dir, chave) ...
         return ...
 ```
 </div>
@@ -1599,20 +1599,20 @@ Remoção de nó com subárvore a esq e a dir
 \scriptsize
 
 ```python
-def remove(t: Arvore, val: int) -> Arvore:
+def remove(t: Arvore, chave: int) -> Arvore:
     '''
     Devolve a raiz da ABB que é o resultado
-    da remoção de *val* de *t*.
-    Se *val* não está em *t*, devolve *t*.
+    da remoção de *chave* de *t*.
+    Se *chave* não está em *t*, devolve *t*.
     Requer que *t* seja uma ABB.
     '''
     if t is None:
         return None
     else:
-        val ...
-        t.val ...
-        t.esq = remove(t.esq, val) ...
-        t.dir = remove(t.dir, val) ...
+        chave ...
+        t.chave ...
+        t.esq = remove(t.esq, chave) ...
+        t.dir = remove(t.dir, chave) ...
         return ...
 ```
 </div>
@@ -1667,23 +1667,23 @@ Remoção de nó com subárvore a esq e a dir
 \scriptsize
 
 ```python
-def remove(t: Arvore, val: int) -> Arvore:
+def remove(t: Arvore, chave: int) -> Arvore:
     '''
     Devolve a raiz da ABB que é o resultado
-    da remoção de *val* de *t*.
-    Se *val* não está em *t*, devolve *t*.
+    da remoção de *chave* de *t*.
+    Se *chave* não está em *t*, devolve *t*.
     Requer que *t* seja uma ABB.
     '''
     if t is None:
         return None
-    elif val < t.val:
-        t.esq = remove(t.esq, val)
+    elif chave < t.chave:
+        t.esq = remove(t.esq, chave)
         return t
-    elif val > t.val:
-        t.dir = remove(t.dir, val)
+    elif chave > t.chave:
+        t.dir = remove(t.dir, chave)
         return t
-    else: # val == t.val
-        val, t.val, t.esq, t.dir
+    else: # chave == t.chave
+        chave, t.chave, t.esq, t.dir
         ... = remove(t.esq, ...) ...
         ... = remove(t.dir, ...) ...
         return ...
@@ -1740,22 +1740,22 @@ Remoção de nó com subárvore a esq e a dir
 \scriptsize
 
 ```python
-def remove(t: Arvore, val: int) -> Arvore:
+def remove(t: Arvore, chave: int) -> Arvore:
     if t is None:
         return None
-    elif val < t.val:
-        t.esq = remove(t.esq, val)
+    elif chave < t.chave:
+        t.esq = remove(t.esq, chave)
         return t
-    elif val > t.val:
-        t.dir = remove(t.dir, val)
+    elif chave > t.chave:
+        t.dir = remove(t.dir, chave)
         return t
-    else: # val == t.val
+    else: # chave == t.chave
         if t.esq is None:
             return t.dir
         elif t.dir is None:
             return t.esq
         else:
-            val, t.val, t.esq, t.dir ...
+            chave, t.chave, t.esq, t.dir ...
             ... = remove(t.esq, ...) ...
             ... = remove(t.dir, ...) ...
             return ...
@@ -1812,23 +1812,23 @@ Remoção de nó com subárvore a esq e a dir
 \scriptsize
 
 ```python
-def remove(t: Arvore, val: int) -> Arvore:
+def remove(t: Arvore, chave: int) -> Arvore:
     if t is None:
         return None
-    elif val < t.val:
-        t.esq = remove(t.esq, val)
+    elif chave < t.chave:
+        t.esq = remove(t.esq, chave)
         return t
-    elif val > t.val:
-        t.dir = remove(t.dir, val)
+    elif chave > t.chave:
+        t.dir = remove(t.dir, chave)
         return t
-    else: # val == t.val
+    else: # chave == t.chave
         if t.esq is None:
             return t.dir
         elif t.dir is None:
             return t.esq
         else:
             m = maximo(t.esq)
-            t.val = m
+            t.chave = m
             t.esq = remove(t.esq, m)
             return t
 ```
@@ -1844,23 +1844,23 @@ def remove(t: Arvore, val: int) -> Arvore:
 \scriptsize
 
 ```python
-def remove(t: Arvore, val: int) -> Arvore:
+def remove(t: Arvore, chave: int) -> Arvore:
     if t is None:
         return None
-    elif val < t.val:
-        t.esq = remove(t.esq, val)
+    elif chave < t.chave:
+        t.esq = remove(t.esq, chave)
         return t
-    elif val > t.val:
-        t.dir = remove(t.dir, val)
+    elif chave > t.chave:
+        t.dir = remove(t.dir, chave)
         return t
-    else: # val == t.val
+    else: # chave == t.chave
         if t.esq is None:
             return t.dir
         elif t.dir is None:
             return t.esq
         else:
             m = maximo(t.esq)
-            t.val = m
+            t.chave = m
             t.esq = remove(t.esq, m)
             return t
 ```

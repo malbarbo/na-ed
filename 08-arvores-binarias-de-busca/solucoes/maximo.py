@@ -5,7 +5,7 @@ from dataclasses import dataclass
 @dataclass
 class No:
     esq: Arvore
-    val: int
+    chave: int
     dir: Arvore
 
 
@@ -53,4 +53,4 @@ def maximo(t: Arvore) -> int | None:
     if t is None:
         return None
     else:
-        return _maximo(t.val, _maximo(maximo(t.esq), maximo(t.dir)))
+        return _maximo(t.chave, _maximo(maximo(t.esq), maximo(t.dir)))

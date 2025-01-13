@@ -5,6 +5,7 @@ title: |
        | Árvores binárias de busca
 numbersections: false
 urlcolor: Blue
+# TODO: adicionar soluções
 ---
 
 ## Introdução
@@ -15,9 +16,9 @@ urlcolor: Blue
 
 @) O que é a altura de uma árvore binária?
 
-@) Qual é a altura máxima de uma árvore binária com $n$ nós? Qual é a características das árvores binárias com altura máxima?
+@) Qual é a altura máxima de uma árvore binária com $n$ nós? Qual é a característica das árvores binárias com altura máxima?
 
-@) Qual é a altura mínima de uma árvore binária com $n$ nós? Qual é a características de árvores binárias com altura mínima?
+@) Qual é a altura mínima de uma árvore binária com $n$ nós? Qual é a característica de árvores binárias com altura mínima?
 
 @) O que é uma árvore binária de busca?
 

@@ -5,7 +5,7 @@ from dataclasses import dataclass
 @dataclass
 class No:
     esq: Arvore
-    val: int
+    chave: int
     dir: Arvore
 
 
@@ -63,7 +63,7 @@ def linhas(t: Arvore) -> list[str]:
     if t is None:
         return ['']
     elif t.esq is None and t.dir is None:
-        return [str(t.val)]
+        return [str(t.chave)]
     else:
         esq = linhas(t.esq)
         esq[0] = '├── ' + esq[0]
@@ -75,4 +75,4 @@ def linhas(t: Arvore) -> list[str]:
         for i in range(1, len(dir)):
             dir[i] = '    ' + dir[i]
 
-        return [str(t.val)] + esq + dir
+        return [str(t.chave)] + esq + dir

@@ -5,7 +5,7 @@ from dataclasses import dataclass
 @dataclass
 class No:
     esq: Arvore
-    val: int
+    chave: int
     dir: Arvore
 
 

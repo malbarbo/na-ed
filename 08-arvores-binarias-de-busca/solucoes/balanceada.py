@@ -5,7 +5,7 @@ from dataclasses import dataclass
 @dataclass
 class No:
     esq: Arvore
-    val: int
+    chave: int
     dir: Arvore
 
 
@@ -15,7 +15,7 @@ Arvore = No | None
 def balanceada(t: Arvore) -> bool:
     r'''
     Devolve True se *t* é balanceada, False caso contrário.
-    Uma árvore é balanceada se ela Vazia, ou se a altura
+    Uma árvore é balanceada se ela é vazia, ou se a altura
     das suas su árvores diferem em no máximo 1
 
     Exemplos

@@ -5,7 +5,7 @@ from dataclasses import dataclass
 @dataclass
 class No:
     esq: Arvore
-    val: int
+    chave: int
     dir: Arvore
 
     def __repr__(self) -> str:
@@ -30,15 +30,15 @@ class No:
             dir = ''
         else:
             dir = repr(self.dir)
-        return f'({esq} {self.val} {dir})'
+        return f'({esq} {self.chave} {dir})'
 
 
 Arvore = No | None
 
 
-def busca(t: Arvore, val: int) -> bool:
+def busca(t: Arvore, chave: int) -> bool:
     r'''
-    Devolve True se *val* está em *t*, False caso contrário.
+    Devolve True se *chave* está em *t*, False caso contrário.
 
     Requer que *t* seja uma ABB.
 
@@ -77,17 +77,17 @@ def busca(t: Arvore, val: int) -> bool:
     '''
     if t is None:
         return False
-    elif val == t.val:
+    elif chave == t.chave:
         return True
-    elif val < t.val:
-        return busca(t.esq, val)
-    else:  # val > t.val
-        return busca(t.dir, val)
+    elif chave < t.chave:
+        return busca(t.esq, chave)
+    else:  # chave > t.chave
+        return busca(t.dir, chave)
 
 
-def busca_iter(t: Arvore, val: int) -> bool:
+def busca_iter(t: Arvore, chave: int) -> bool:
     r'''
-    Devolve True se *val* está em *t*, False caso contrário.
+    Devolve True se *chave* está em *t*, False caso contrário.
 
     Requer que *t* seja uma ABB.
 
@@ -126,19 +126,19 @@ def busca_iter(t: Arvore, val: int) -> bool:
     '''
     r = t
     while r is not None:
-        if val == r.val:
+        if chave == r.chave:
             return True
-        elif val < r.val:
+        elif chave < r.chave:
             r = r.esq
-        else:  # val > r.val
+        else:  # chave > r.chave
             r = r.dir
     return False
 
 
-def insere(t: Arvore, val: int) -> No:
+def insere(t: Arvore, chave: int) -> No:
     '''
-    Devolve a raiz da ABB que é o resultado da inserção de *val* em *t*.
-    Se *val* já está em *t*, devolve *t*.
+    Devolve a raiz da ABB que é o resultado da inserção de *chave* em *t*.
+    Se *chave* já está em *t*, devolve *t*.
 
     Requer que *t* seja uma ABB.
 
@@ -163,21 +163,21 @@ def insere(t: Arvore, val: int) -> No:
     (( 3 ( 4 )) 7 (( 10 ) 12 ))
     '''
     if t is None:
-        return No(None, val, None)
-    elif val < t.val:
-        t.esq = insere(t.esq, val)
-    elif val > t.val:
-        t.dir = insere(t.dir, val)
-    else:  # val == t.val
+        return No(None, chave, None)
+    elif chave < t.chave:
+        t.esq = insere(t.esq, chave)
+    elif chave > t.chave:
+        t.dir = insere(t.dir, chave)
+    else:  # chave == t.chave
         pass
     return t
 
 
-def remove(t: Arvore, val: int) -> Arvore:
+def remove(t: Arvore, chave: int) -> Arvore:
     r'''
-    Devolve a raiz da ABB que é o resultado da remoção de *val* em *t*.
-    Se *val* não está em *t*, devolve *t*.
-    Se *t* só tem um nó e *val* está nesse nó, devolve None.
+    Devolve a raiz da ABB que é o resultado da remoção de *chave* em *t*.
+    Se *chave* não está em *t*, devolve *t*.
+    Se *t* só tem um nó e *chave* está nesse nó, devolve None.
 
     Requer que *t* seja uma ABB.
 
@@ -193,8 +193,8 @@ def remove(t: Arvore, val: int) -> Arvore:
     2   4     8
 
     >>> r = None
-    >>> for val in [5, 1, 3, 10, 6, 4, 8, 2]:
-    ...     r = insere(r, val)
+    >>> for chave in [5, 1, 3, 10, 6, 4, 8, 2]:
+    ...     r = insere(r, chave)
     >>> # Remoção de folha
     >>> r = remove(r, 4)
     >>> r
@@ -214,13 +214,13 @@ def remove(t: Arvore, val: int) -> Arvore:
     '''
     if t is None:
         return None
-    elif val < t.val:
-        t.esq = remove(t.esq, val)
+    elif chave < t.chave:
+        t.esq = remove(t.esq, chave)
         return t
-    elif val > t.val:
-        t.dir = remove(t.dir, val)
+    elif chave > t.chave:
+        t.dir = remove(t.dir, chave)
         return t
-    else:  # val == t.val
+    else:  # chave == t.chave
         if t.esq is None:
             # Se t.dir é None
             #  t    ->  None
@@ -241,13 +241,13 @@ def remove(t: Arvore, val: int) -> Arvore:
             return t.esq
         else:
             # Tem os dois filhos
-            #     t           t (val=max)
+            #     t           t (chave=max)
             #    / \    ->   / \
             #   E   D       E   D
             #  com         sem
             #  max         max
             m = maximo(t.esq)
-            t.val = m
+            t.chave = m
             t.esq = remove(t.esq, m)
             return t
 
@@ -260,11 +260,11 @@ def maximo(t: No) -> int:
 
     Exemplos
     >>> r = None
-    >>> for val in [5, 1, 2, 7, 6, 3, 8, 4]:
-    ...     r = insere(r, val)
+    >>> for chave in [5, 1, 2, 7, 6, 3, 8, 4]:
+    ...     r = insere(r, chave)
     >>> maximo(r)
     8
     '''
     while t.dir is not None:
         t = t.dir
-    return t.val
+    return t.chave

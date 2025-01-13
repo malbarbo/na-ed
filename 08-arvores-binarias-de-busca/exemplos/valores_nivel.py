@@ -5,14 +5,14 @@ from dataclasses import dataclass
 @dataclass
 class No:
     esq: Arvore
-    val: int
+    chave: int
     dir: Arvore
 
 
 Arvore = No | None
 
 
-def valores_nivel(t: Arvore, n: int) -> list[int]:
+def chaves_nivel(t: Arvore, n: int) -> list[int]:
     r'''
     Devolve os nós que estão no nível *n* de *t*.
 
@@ -31,20 +31,20 @@ def valores_nivel(t: Arvore, n: int) -> list[int]:
     >>> t2 = No(No(None, 4, None), 8, t1)
     >>> t3 = No(No(None, 5, None), 6, None)
     >>> t4 = No(t2, 4, t3)
-    >>> valores_nivel(None, 0)
+    >>> chaves_nivel(None, 0)
     []
-    >>> valores_nivel(t4, 0)
+    >>> chaves_nivel(t4, 0)
     [4]
-    >>> valores_nivel(t4, 1)
+    >>> chaves_nivel(t4, 1)
     [8, 6]
-    >>> valores_nivel(t4, 2)
+    >>> chaves_nivel(t4, 2)
     [4, 7, 5]
-    >>> valores_nivel(t4, 3)
+    >>> chaves_nivel(t4, 3)
     [1]
     '''
     if t is None:
         return []
     elif n == 0:
-        return [t.val]
+        return [t.chave]
     else:
-        return valores_nivel(t.esq, n - 1) + valores_nivel(t.dir, n - 1)
+        return chaves_nivel(t.esq, n - 1) + chaves_nivel(t.dir, n - 1)
