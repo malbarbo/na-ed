@@ -5,6 +5,7 @@ title: |
        | Árvores AVL
 numbersections: false
 urlcolor: Blue
+# TODO: adicionar exercícios sobre persistência. Comecar com estruturas persistentes e depois mudar para?
 ---
 
 ## Introdução
