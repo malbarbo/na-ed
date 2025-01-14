@@ -67,13 +67,15 @@ Considere as seguintes árvore, onde cada nó é representado pelo seu valor e a
 
 \scriptsize
 
+\ \
+
 ```
                   20:4  t0
                 /      \
             /             \
     t1  7:3              27:1  t2
       /     \           /   \
-t3  4:2    10:1      22:0  30:0
+    4:2    10:1      22:0  30:0
    /  \       \
  3:0   6:1    12:0
       /
@@ -87,8 +89,6 @@ t3  4:2    10:1      22:0  30:0
 A árvore t1 é AVL? \pause Sim. \pause
 
 A árvore t2 é AVL? \pause Sim. \pause
-
-A árvore t3 é AVL? \pause Sim. \pause
 
 A árvore t0 é AVL? \pause Não.
 
