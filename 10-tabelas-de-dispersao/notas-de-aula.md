@@ -29,14 +29,14 @@ Vimos que podemos implementar as operações de busca, inserção e remoção do
 
 Na definição do TAD as chaves eram strings, e se as chaves fossem inteiros? \pause
 
-E se as chaves estivem em um intervalo específico, com entre 0 e 10.000? \pause
+E se as chaves estivem em um intervalo específico, entre 0 e 10.000? \pause
 
 Como tirar proveito desse conhecimento sobre as chaves para fazer uma implementação eficiente?
 
 
 ## Endereçamento direto
 
-Podemos criar um arranjo com uma posição para cada possível chave da entrada, armazenamos na posição o valor associada com a chave, se houver um, ou `None`{.python} caso contrário. \pause
+Podemos criar um arranjo com uma posição para cada possível chave da entrada, armazenamos na posição o valor associada com a chave, se houver tal valor, ou `None`{.python} caso contrário. \pause
 
 Essa estratégia é chamada de **endereçamento direto**. \pause
 
@@ -70,7 +70,7 @@ class Dicionario:
         assert 0 <= m
         self.valores = [None] * m
 
-    def get(self, chave: int) -> str | None:
+    def busca(self, chave: int) -> str | None:
         return self.valores[chave]
 
     def associa(self, chave: int, valor: str):
@@ -107,7 +107,7 @@ Vamos isolar e tentar lidar com cada uma dessas questões.
 <div class="columns">
 <div class="column" width="48%">
 
-O que podemos fazer se as chaves puderem estar em um intervalo de $[A, B)$ qualquer? \pause
+O que podemos fazer se as chaves estão em um intervalo de $[A, B)$ qualquer? \pause
 
 Podemos _mapear_ cada chave para um valor distinto no intervalo  $[0, B - A)$:
 
@@ -408,7 +408,7 @@ Como implementar `get`?
 \scriptsize
 
 ```python
-def get(self, chave: str) -> int | None:
+def busca(self, chave: str) -> int | None:
     # procurar por chave em self.tabela[h(chave)]
 ```
 
@@ -806,7 +806,7 @@ def busca(self, chave: str) -> None | int:
 
 \normalsize
 
-Note que para a busca para no caso que a chave não é encontrada é preciso que exista pelo menos uma posição com `None`{.python}, ou seja, a quantidade de itens presentes mais os removidos deve ser menor o tamanho da tabela.
+Note que para a busca parar no caso que a chave não é encontrada é preciso que exista pelo menos uma posição com `None`{.python}, ou seja, a quantidade de itens presentes mais os removidos deve ser menor o tamanho da tabela.
 
 </div>
 </div>
