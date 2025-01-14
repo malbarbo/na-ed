@@ -83,9 +83,9 @@ def pre_ordem_r(r: Arvore):
 def pos_ordem_r(r: Arvore):
     r'''
     Exibe os valores de *r* usando um percurso pos-ordem, isto é:
-        - exibe pos-ordem os valores *r.esq*.
+        - exibe em pos-ordem os valores *r.esq*.
         - exibe *r.val*
-        - exibe pos-ordem os valores *r.dir*.
+        - exibe em pos-ordem os valores *r.dir*.
 
     Exemplo
 
@@ -167,9 +167,9 @@ def pre_ordem(r: Arvore):
 def pos_ordem(r: Arvore):
     r'''
     Exibe os valores de *r* usando um percurso pos-ordem, isto é:
-        - exibe pos-ordem os valores *r.esq*.
+        - exibe em pos-ordem os valores *r.esq*.
         - exibe *r.val*
-        - exibe pos-ordem os valores *r.dir*.
+        - exibe em pos-ordem os valores *r.dir*.
 
     A implementação é iterativa e usa uma pilha.
 
