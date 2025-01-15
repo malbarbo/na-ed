@@ -18,7 +18,7 @@ Para avaliarmos os algoritmos de ordenação, além da complexidade de tempo, co
 
 Um algoritmo é **in-loco** se a quantidade de memória que ele precisa para executar é $O(1)$, ou seja, não depende do tamanho da entrada. \pause
 
-Um algoritmo de ordenação é **estável** se a ordem relativamente dos elementos com a mesma chave é preservado.
+Um algoritmo de ordenação é **estável** se a ordem relativamente dos elementos com chave iguais é preservado.
 
 
 ## Introdução
@@ -54,7 +54,7 @@ Como projetar um algoritmo incremental para ordenar os elementos de um arranjo? 
 
 - Iniciamos com um subarranjo vazio já ordenado; \pause
 
-- Estendemos o subarranjo já ordenado selecionando um elemento por vez até que todos os elementos tenham sido selecionados.
+- Estendemos o subarranjo já ordenado com um elemento da parte restante por vez até que todos os elementos tenham sido selecionados.
 
 ![](imagens/ordenado-resto.pdf){width=6cm} \pause
 
@@ -163,7 +163,7 @@ Podemos melhor o tempo? \pause
 
 Temos dois custos, o de seleção, que é $O(1)$, e o de inserção, que é $O(j)$. \pause Podemos melhor o tempo da inserção? \pause
 
-Considerando que o subarranjo `lst[:j]`{.python} está ordenado, poderíamos usar uma busca binária para encontrar a posição de inserção em $O(\lg j)$. \pause No entanto, a inserção continuaria sendo $O(j)$, pois os elementos precisar ser deslocados. \pause
+Considerando que o subarranjo `lst[:j]`{.python} está ordenado, poderíamos usar uma busca binária para encontrar a posição de inserção em $O(\lg j)$. \pause No entanto, a inserção continuaria sendo $O(j)$, pois os elementos precisam ser deslocados. \pause
 
 Podemos fazer uma "inserção" sem fazer o deslocamento dos elementos? \pause Sim!
 
@@ -241,11 +241,11 @@ vice e versa… \pause Parece que não ganhamos nada! \pause
 
 Mas isso não é verdade, agora podemos abordar o problema por outro ângulo! \pause
 
-### Antes
+**Antes**
 
 Tentamos diminuir o tempo para inserir em um arranjo ordenado (parece muito rígido). \pause
 
-### Agora
+**Agora**
 
 Vamos tentar diminuir o tempo para selecionar o valor mínimo de um arranjo (parece mais flexível).
 
@@ -324,11 +324,11 @@ Como utilizar um heap máximo em um processo de ordenação incremental? \pause
 Como selecionar o próximo elemento? \pause
 
 - Pegamos o maior elemento do heap. \pause
-- Qual é o custo? \pause $O(\lg(heap-size))$ -- veremos isso a seguir. \pause
+- Qual é o custo? \pause $O(\lg(\text{heap-size}))$ -- veremos isso a seguir. \pause
 
 Como estender o subarranjo ordenado? \pause
 
-- Trocando de posição o maior elemento com o último do restante. \pause
+- Trocando de posição o maior elemento com o último do heap. \pause
 - Qual é o custo? \pause $O(1)$. \pause
 
 Este algoritmo é conhecido como **ordenação por heap** (_heap sort_).
@@ -977,7 +977,7 @@ Projete essa versão de `intercala`.
 
 ## Divisão e conquista
 
-No projeto de um algoritmo de divisão e conquista temos que tomar duas decisões: \pause
+No projeto de um algoritmo de divisão e conquista para ordenar um arranjo temos que tomar duas decisões: \pause
 
 - Como separar os elementos em dois subarranjos? \pause
 
@@ -1008,6 +1008,8 @@ Projetar uma função que **particione** um arranjo em duas partes, uma com os "
 
 Para isso precisamos de um "pivô" para determinar em que parte cada elemento deve ficar. \pause
 
+\ \
+
 \includegraphics[trim=8cm 79cm 0cm 2.5cm, clip, width=4cm]{imagens/Fig-7-1.pdf}
 
 \vspace{-0.5cm}
@@ -1027,6 +1029,7 @@ Faça a especificação da função que faz o particionamento de um arranjo. A f
 \scriptsize
 
 ```python
+
 def particiona(lst: list[int], ini: int, fim: int) -> int:
     '''
     Reorganiza os elementos de lst[ini:fim] e devolve um
@@ -1062,10 +1065,12 @@ Implemente a ordenação por particionamento.
 \scriptsize
 
 ```python
-def ordena_particionamento(lst: list[int], ini: int, fim: int):
+def ordena_particionamento(lst: list[int],
+                           ini: int,
+                           fim: int):
     '''
-    Ordena o subarranjo lst[ini:fim] em ordem não
-    decrescente.
+    Ordena o subarranjo lst[ini:fim] em ordem
+    não decrescente.
 
     Requer que 0 <= i <= fim <= len(lst).
     '''
@@ -1107,13 +1112,9 @@ def ordena_particionamento(lst: list[int], ini: int, fim: int):
 \scriptsize
 
 ```python
-
-
-
-
-
-
-def ordena_intercalacao(lst: list[int], ini: int, fim: int):
+def ordena_intercalacao(lst: list[int],
+                        ini: int,
+                        fim: int):
 ```
 
 \vspace{0.15cm}
@@ -1248,14 +1249,14 @@ A outra forma é o particionamento de Lomuto. \pause Nesse esquema tanta a parti
 
 <div class="columns">
 <div class="column" width="40%">
-\includegraphics[trim=6cm 79.0cm 0cm  0.0cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
-\includegraphics[trim=6cm 69.0cm 0cm  9.8cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
-\includegraphics[trim=6cm 59.0cm 0cm 19.7cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
-\includegraphics[trim=6cm 49.0cm 0cm 29.5cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
-\includegraphics[trim=6cm 39.1cm 0cm 39.6cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
-\includegraphics[trim=6cm 29.1cm 0cm 49.4cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
-\includegraphics[trim=6cm 19.2cm 0cm 59.3cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
-\includegraphics[trim=6cm  9.3cm 0cm 69.1cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \vspace{-0.2cm} \pause
+\includegraphics[trim=6cm 79.0cm 0cm  0.0cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \pause
+\includegraphics[trim=6cm 69.0cm 0cm  9.8cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \pause
+\includegraphics[trim=6cm 59.0cm 0cm 19.7cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \pause
+\includegraphics[trim=6cm 49.0cm 0cm 29.5cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \pause
+\includegraphics[trim=6cm 39.1cm 0cm 39.6cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \pause
+\includegraphics[trim=6cm 29.1cm 0cm 49.4cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \pause
+\includegraphics[trim=6cm 19.2cm 0cm 59.3cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \pause
+\includegraphics[trim=6cm  9.3cm 0cm 69.1cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \pause
 \includegraphics[trim=6cm  0.0cm 0cm 79.2cm, clip, width=3.5cm]{imagens/Fig-7-1.pdf} \pause
 </div>
 <div class="column" width="56%">
