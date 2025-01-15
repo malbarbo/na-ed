@@ -99,7 +99,7 @@ Quais as desvantagens/limitações dessa estratégia? \pause
 
 - As chaves são restritas a inteiros. \pause
 
-Vamos isolar e tentar lidar com cada uma dessas questões.
+Vamos isolar e tentar lidar com cada uma dessas questões separadamente.
 
 
 ## Intervalos quaisquer
@@ -208,11 +208,48 @@ Como mapear uma string para um inteiro?
 
 Cada elemento em uma posição de uma string é internamente representado por um número (_code point_), esse número pode ser obtido com a função `ord`{.python}. \pause
 
+<div class="columns">
+<div class="column" width="25%">
+\scriptsize
+
+```python
+>>> ord('a')
+97
+```
+</div>
+<div class="column" width="25%">
+\scriptsize
+
+```python
+>>> ord('z')
+122
+```
+</div>
+<div class="column" width="25%">
+\scriptsize
+
+```python
+>>> ord('7')
+55
+```
+</div>
+<div class="column" width="25%">
+\scriptsize
+
+```python
+>>> ord('%')
+37
+```
+</div>
+</div>
+
+\pause
+
 Então, podemos, por exemplo, mapear uma string para o _code point_ do seu primeiro caractere, ou zero se a string for vazia. \pause Ou ainda, somar todos os _code point_ de todos os caracteres. \pause
 
 Qual o problema dessas formas de mapeamento? \pause Geram muitas colisões! \pause
 
-Mas não vamos nos preocupar com isso, porque enquanto, basta sabermos que é possível mapear _qualquer_ tipo de valor para um número inteiro.
+Mas não vamos nos preocupar com isso por enquanto, basta sabermos que é possível mapear _qualquer_ tipo de valor para um número inteiro.
 
 
 ## Revisão
@@ -375,13 +412,14 @@ Quanto usamos uma lista encadeada em cada posição, chamamos a estratégia **en
 ## Encadeamento separado
 
 <div class="columns">
-<div class="column" width="48%">
+<div class="column" width="45%">
 
 Como definir os tipos para implementar um dicionário usando uma tabela de dispersão com encadeamento? \pause
 
 \scriptsize
 
 ```python
+
 @dataclass
 class No:
     chave: str
@@ -392,6 +430,7 @@ class No:
 \pause
 
 ```python
+
 class Dicionario:
     tabela: list[No | None]
     num_itens: int
@@ -400,8 +439,8 @@ class Dicionario:
 \pause
 
 </div>
-<div class="column" width="48%">
-Como implementar `get`?
+<div class="column" width="52%">
+Como implementar o método `busca`?
 
 \pause
 
@@ -443,12 +482,17 @@ def remove(self, chave: str):
     # remover (chave, valor) de self.tabela[h(chave)]
 ```
 
-</div>
-</div>
+\ \
 
 \pause
 
-Qual é a complexidade de tempo de `get`, `associa` e `remove`? \pause Depende da quantidade de itens no encadeamento...
+\normalsize
+
+
+Qual é a complexidade de tempo de `busca`, `associa` e `remove`? \pause Depende da quantidade de itens no encadeamento...
+
+</div>
+</div>
 
 
 ## Fator de carga e complexidade de tempo
@@ -766,6 +810,7 @@ Defina os tipos de dados para um dicionário implementado usando tabelas de disp
 \scriptsize
 
 ```python
+
 @dataclass
 class Removido:
     pass
@@ -787,11 +832,12 @@ class Dicionario:
 
 </div>
 <div class="column" width="48%">
-Projete a função `Dicionario.busca`. \pause
+Implemente o método `Dicionario.busca`. \pause
 
 \scriptsize
 
 ```python
+
 def busca(self, chave: str) -> None | int:
     p = hash(chave) % len(self.tabela)
     while self.tabela[p] is not None:
@@ -801,6 +847,8 @@ def busca(self, chave: str) -> None | int:
         p = (p + 1) % len(self.tabela)
     return None
 ```
+
+\ \
 
 \pause
 
