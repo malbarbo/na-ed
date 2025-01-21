@@ -59,9 +59,9 @@ def inicializa_heap(A: list[int]):
 
 def concerta_heap(A: list[int], n: int, i: int):
     r'''
-    Concer um heap... TODO: determine a descrição!
+    Concerta um heap... TODO: termine a descrição!
 
-    Requer que i <= n < len(A).
+    Requer que 0 <= i <= n < len(A).
     Requer que as árvores com raizes esq(i) e dir(i) sejam heaps máximos (se
     existirem).
 
