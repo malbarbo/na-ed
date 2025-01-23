@@ -28,7 +28,7 @@ urlcolor: Blue
 
 @) O arranjo `[23, 17, 14, 6, 13, 10, 1, 5, 7, 12]` representa um heap máximo?
 
-@) Mostre passo a passo a construção de um heap mínimo com a partir do arranjo `[5, 1, 7, 4, 9, 1, 3, 4, 8, 6]`.
+@) Mostre passo a passo a construção de um heap mínimo a partir do arranjo `[5, 1, 7, 4, 9, 1, 3, 4, 8, 6]`.
 
 @) Crie um exemplo de arranjo que mostre que a ordenação por heap não é estável.
 
@@ -64,4 +64,6 @@ urlcolor: Blue
 
 ## Avançando
 
-@) Projete uma função que implemente o esquema de particiona de Hoare.
+@) Projete a função `intercala(lst: list[int], ini: int, meio: int, fim: int)`{.python} que intercala os elementos de `lst[ini:meio]`{.python} (que está ordenado) com `lst[meio:fim]`{.python} (que está ordenado) de maneira que `lst[ini:fim]`{.python} fique ordenado. Dica: cria arranjos auxiliares.
+
+@) Projete uma função que implemente o esquema de particionamento de Hoare.
