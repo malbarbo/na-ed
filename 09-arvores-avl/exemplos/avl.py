@@ -25,6 +25,17 @@ def busca(r: Arvore, chave: str) -> bool:
     Devolve True se *chave* está em *r*, False caso contrário.
 
     Exemplos
+
+    >>> r = insere(None, 'c')
+    >>> r = insere(r, 'a')
+    >>> r = insere(r, 'd')
+    >>> busca(r, 'a')
+    True
+    >>> busca(r, 'b')
+    False
+
+    Teste de propriedade
+
     >>> r = None
     >>> for chave in range(0, 100, 2):
     ...     r = insere(r, str(chave))
