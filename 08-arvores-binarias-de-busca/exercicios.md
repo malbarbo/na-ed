@@ -6,6 +6,8 @@ title: |
 numbersections: false
 urlcolor: Blue
 # TODO: adicionar soluções
+# TODO: mudar a definição de cheia para estritamente binária
+# TODO: mudar a definição de cheia para Uma árvore completa é aquela em se n é um nó com alguma sub-árvores vazias, então n se localiza no penúltimo ou no último nível.
 ---
 
 ## Introdução
