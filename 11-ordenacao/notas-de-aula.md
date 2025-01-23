@@ -3,6 +3,9 @@
 title: Ordenação
 linkcolor: Black
 urlcolor: Blue
+# TODO: colocar imagens de heap com índices começando com 0
+# TODO: adicionar ordenação por árvore
+# TODO: revisar o conceito de heap (árvore completa?)
 ---
 
 ## Introdução
@@ -87,6 +90,7 @@ Este algoritmo é conhecido como **ordenação por inserção** (_insertion sort
 <div class="columns">
 <div class="column" width="25%">
 \includegraphics[trim=140pt 380pt 2000pt 50pt, clip, width=3.5cm]{imagens/Fig-2-2.pdf} \pause
+\ \
 </div>
 <div class="column" width="25%">
 \includegraphics[trim=1140pt 380pt 1000pt 50pt, clip, width=3.5cm]{imagens/Fig-2-2.pdf} \pause
@@ -118,6 +122,7 @@ Projete uma função que implemente o algoritmo de ordenação por inserção. \
 \scriptsize
 
 ```python
+
 def ordena_insercao(lst: list[int]):
     '''
     Ordena *lst* em ordem não decrescente usando
@@ -194,6 +199,7 @@ Projete uma função que implemente o algoritmo de ordenação por seleção. \p
 \scriptsize
 
 ```python
+
 def ordena_selecao(lst: list[int]):
     '''
     Ordena *lst* em ordem não decrescente usando
@@ -274,7 +280,7 @@ Como o heap pode ser visto como árvore, ele também tem uma altura, que é $O(\
 
 Para arranjos indexados a partir de 0, a raiz do heap está na posição 0. \pause Além disso, para cada nó no índice $i$, os índices do pai e dos filhos a direita e a esquerda podem ser caculado da seguinte forma: \pause
 
-$\proc{pai}(i) = \lfloor (i - 1) / 2 \rfloor$ \pause
+$\proc{pai}(i) = \lfloor (i - 1) / 2 \rfloor$ para $i \not = 0$ \pause
 
 $\proc{esq}(i) = 2 i + 1$ \pause
 
@@ -324,12 +330,12 @@ Como utilizar um heap máximo em um processo de ordenação incremental? \pause
 Como selecionar o próximo elemento? \pause
 
 - Pegamos o maior elemento do heap. \pause
-- Qual é o custo? \pause $O(\lg(\text{heap-size}))$ -- veremos isso a seguir. \pause
+- Qual é o custo? \pause $O(1)$. \pause
 
 Como estender o subarranjo ordenado? \pause
 
-- Trocando de posição o maior elemento com o último do heap. \pause
-- Qual é o custo? \pause $O(1)$. \pause
+- Trocando de posição o maior elemento com o último do heap e concertando o heap. \pause
+- Qual é o custo? \pause $O(\lg(\text{heap-size}))$ -- veremos isso a seguir. \pause
 
 Este algoritmo é conhecido como **ordenação por heap** (_heap sort_).
 
@@ -458,25 +464,7 @@ Este algoritmo é conhecido como **ordenação por heap** (_heap sort_).
 Que operações precisamos para implementar a ordenação por heap? \pause
 
 - Inicialização do heap \pause
-- Remoção do máximo \pause
-
-Para implementar essas funções, vamos precisar de uma operação auxiliar, que "concerta" um heap.
-
-
-## Concertando um heap
-
-<div class="columns">
-<div class="column" width="48%">
-\includegraphics[trim=0cm 42.2cm 55.55cm 0cm, clip, width=6cm]{imagens/Fig-6-2.pdf}
-</div>
-<div class="column" width="48%">
-Seja $A$ um arranjo que armazena um heap máximo.
-
-Considerando que o elemento da posição $i$ foi alterado, como podemos verificar se a propriedade do heap se mantém, e caso contrário, como podemos "concertar" o heap? \pause
-
-Verificamos se $A[i]$ é menor que algum dos dois filhos, \pause se sim, trocamos $A[i]$ de lugar com o maior filho,
-</div>
-</div>
+- Concertar o heap
 
 
 ## Concertando um heap
@@ -489,25 +477,9 @@ Verificamos se $A[i]$ é menor que algum dos dois filhos, \pause se sim, trocamo
 
 Seja $A$ um arranjo que armazena um heap máximo.
 
-Considerando que o elemento da posição $i$ foi alterado, como podemos verificar se a propriedade do heap se mantém, e caso contrário, como podemos "concertar" o heap?
+Considerando que o elemento da posição $i$ foi alterado, como podemos verificar se a propriedade do heap se mantém, e caso contrário, como podemos "concertar" o heap? \pause
 
-Verificamos se $A[i]$ é menor que algum dos dois filhos, se sim, trocamos $A[i]$ de lugar com o maior filho, \pause depois executamos o processo recursivamente para o filho que foi trocado.
-</div>
-</div>
-
-
-## Concertando um heap
-
-<div class="columns">
-<div class="column" width="48%">
-\includegraphics[trim=0cm 2.5cm 55.55cm 39.7cm, clip, width=6cm]{imagens/Fig-6-2.pdf}
-</div>
-<div class="column" width="48%">
-Seja $A$ um arranjo que armazena um heap máximo.
-
-Considerando que o elemento da posição $i$ foi alterado, como podemos verificar se a propriedade do heap se mantém, e caso contrário, como podemos "concertar" o heap?
-
-Verificamos se $A[i]$ é menor que algum dos dois filhos, se sim, trocamos $A[i]$ de lugar com o maior filho, depois executamos o processo recursivamente para o filho que foi trocado.
+Verificamos se $A[i]$ é menor que algum dos dois filhos, \pause se sim, trocamos $A[i]$ de lugar com o maior filho, \pause depois executamos o processo recursivamente para o filho que foi trocado.
 </div>
 </div>
 
@@ -616,7 +588,7 @@ def inicializa_heap(A: list[int]):
 
 Qual é a complexidade de tempo? \pause
 
-- Limite simples: a função é `concerta_heap` tem tempo $O(\lg n)$ e é chamada $n / 2$, portanto, $O(n \lg n)$; \pause
+- Limite simples: a função é `concerta_heap` tem tempo $O(\lg n)$ e é chamada $n / 2$ vezes, portanto, $O(n \lg n)$; \pause
 
 - Limite estrito: $O(n)$ -- discutido em sala.
 
@@ -636,26 +608,38 @@ Projete uma função que implemente a ordenação por heap.
 ```python
 def ordena_heap(lst: list[int]):
     inicializa_heap(lst)
-    for n in reversed(range(1, len(lst))):
+    for i in reversed(range(1, len(lst))):
         # Troca o maior do heap com
         # o elemento da última posição do heap
-        lst[0], lst[n] = lst[n], lst[0]
+        lst[0], lst[i] = lst[i], lst[0]
         # Concerta a raiz do heap
-        concerta_heap(lst, n, 0)
+        concerta_heap(lst, i, 0)
 ```
 
 </div>
 </div>
 
-\vspace{0.5cm}
+\vspace{-1.5cm}
 
 \pause
 
-Qual é a complexidade de tempo? \pause $O(n \lg n)$. \pause
+Qual é a complexidade de tempo? \pause
+
+- `inicializa_heap`: $O(n)$ \pause
+- `concerta_heap`: $\displaystyle \sum_{i=1}^{n-1}\lg(i) \pause = O(n \lg n)$ \pause
+- Total: $O(n \lg n)$ \pause
 
 A implementação é in-loco? \pause Sim (se `concerta_heap` não for recursiva) \pause
 
 A implementação é estável? \pause Não.
+
+## Comparação entre os algoritmo de ordenação incrementais
+
+Algoritmo      | Estável? | Local? | Melhor       | Médio        | Pior
+---------------|----------|--------|--------------|--------------|-----------
+Inserção       |  Sim     | Sim    | $O(n)$       | $O(n^2)$     | $O(n^2)$
+Seleção        |  Não     | Sim    | $O(n^2)$     | $O(n^2)$     | $O(n^2)$
+Heap           |  Não     | Sim    | $O(n \lg n)$ | $O(n \lg n)$ | $O(n \lg n)$
 
 
 ## Projeto de algoritmos de divisão e conquista
@@ -727,6 +711,7 @@ Projete uma função que implemente o algoritmo de ordenação por intercalaçã
 \scriptsize
 
 ```python
+
 def ordena_intercalacao(lst: list[int]):
     # Se o problema não é trivial
     if len(lst) > 1:
@@ -800,6 +785,7 @@ Projete uma função que implemente o algoritmo de ordenação por intercalaçã
 \scriptsize
 
 ```python
+
 def ordena_intercalacao(lst: list[int]):
     # Se o problema não é trivial
     if len(lst) > 1:
@@ -863,6 +849,7 @@ Projete uma função que implemente o algoritmo de ordenação por intercalaçã
 \scriptsize
 
 ```python
+
 def ordena_intercalacao(lst: list[int]):
     # Se o problema não é trivial
     if len(lst) > 1:
@@ -905,7 +892,7 @@ $$T(n) =
 
 \pause
 
-$T(n) = O(n \lg n)$
+$T(n) = O(n \lg n)$ -- discutido em sala.
 
 </div>
 </div>
@@ -1117,7 +1104,7 @@ def ordena_intercalacao(lst: list[int],
                         fim: int):
 ```
 
-\vspace{0.15cm}
+\vspace{2.3cm}
 
 ```python
     # Se o problema não é trivial
