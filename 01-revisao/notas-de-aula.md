@@ -1045,7 +1045,7 @@ Uso da nova função
 
 ## Memória e passagem de parâmetros
 
-Veja o material de Memória e passagem de parâmetros na página <https://malbarbo.pro.br/ensino/2024/6879/>.
+Veja o material de Memória e passagem de parâmetros na página <https://malbarbo.pro.br/ensino/2025/6879/>.
 
 Veja o arquivo `parametros.py` no arquivo com os exemplos para download na página da disciplina.
 
@@ -1431,7 +1431,7 @@ def indice_maximo(lst: list[int]) -> int:
 
 \ 
 
-Qual das duas soluções é mais simples? \pause A da direita! \pause
+Qual das duas soluções é mais simples? \pause A da direita!
 
 
 ## Repetição com "enquanto"
@@ -2400,7 +2400,7 @@ Test passed.
 
 A seguir vamos ver um problema e o projeto de uma função para resolver o problema.
 
-Para exemplos mais detalhados, veja [esse](https://malbarbo.pro.br/arquivos/2024/6879/03-projeto-de-programas-notas-de-aula.pdf) documento.
+Para exemplos mais detalhados, veja [esse](https://malbarbo.pro.br/arquivos/2025/6879/03-projeto-de-programas-notas-de-aula.pdf) documento.
 
 
 ## Exemplo
@@ -2579,6 +2579,6 @@ Test passed.
 
 ## Referências
 
-Veja o material da página \url{https://malbarbo.pro.br/ensino/2024/6879/}.
+Veja o material da página \url{https://malbarbo.pro.br/ensino/2025/6879/}.
 
-Faça os exercícios da página \url{https://malbarbo.pro.br/ensino/2024/6879/}.
+Faça os exercícios da página \url{https://malbarbo.pro.br/ensino/2025/6879/}.

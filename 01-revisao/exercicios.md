@@ -9,7 +9,7 @@ urlcolor: Blue
 
 # Conceitos básicos
 
-@) Veja o material sobre conceitos básicos na página \url{https://malbarbo.pro.br/ensino/2024/6879/}. Instale o Python, o mypy e o vscode conforme os passos a seguir e teste os exemplos do material.
+@) Veja o material sobre conceitos básicos na página \url{https://malbarbo.pro.br/ensino/2025/6879/}. Instale o Python, o mypy e o vscode conforme os passos a seguir e teste os exemplos do material.
 
     a) Faça o download e instale a última versão do [Python](https://www.python.org/). Se você estiver usando o Windows marque a opção "Add python.exe to PATH" na janela inicial de instalação.
 
@@ -59,7 +59,7 @@ urlcolor: Blue
 
 # Projeto de programas / Prática
 
-**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2024/6879/}.
+**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2025/6879/}.
 
 @) Implemente a função de acordo com a especificação a seguir. Corrija a especificação se necessário.
 
@@ -105,7 +105,7 @@ urlcolor: Blue
 
 # Seleção / Prática
 
-**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2024/6879/}.
+**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2025/6879/}.
 
 @) Projete uma função que determine o sinal de um número, produzindo `-1`{.python} para valores negativos, `1`{.python} para valores positivos e `0`{.python} para o `0`{.python}.
 
@@ -121,7 +121,7 @@ urlcolor: Blue
 
 # Enumeração e estrutura / Prática
 
-**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2024/6879/}.
+**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2025/6879/}.
 
 @) Projete uma enumeração para representar as direções norte, leste, sul e oeste. Em seguida,
 
@@ -153,7 +153,7 @@ urlcolor: Blue
 
 # Arranjos / Prática
 
-**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2024/6879/}.
+**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2025/6879/}.
 
 @) Projete uma função que concatene todos os elementos de uma lista de strings.
 
@@ -191,7 +191,7 @@ urlcolor: Blue
 
 # Repetição com "enquanto" / Prática
 
-**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2024/6879/}.
+**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2025/6879/}.
 
 @) Projete uma função que verifique se uma lista de número é dobrada, isto é, pode ser obtida pela concatenação de duas listas iguais (não use operações de sublista).
 
@@ -207,7 +207,7 @@ urlcolor: Blue
 
 # Memória e passagem de parâmetros / Prática
 
-**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2024/6879/}.
+**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2025/6879/}.
 
 @) Projete uma função que receba como parâmetros uma lista e um índice `i` e modifique a lista removendo o elemento do índice `i`.
 
@@ -244,7 +244,7 @@ urlcolor: Blue
 
 # Recursividade / Prática
 
-**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2024/6879/}.
+**Veja o material** na página \url{https://malbarbo.pro.br/ensino/2025/6879/}.
 
 @) Projete uma função recursiva que concatene todas as strings de uma lista de strings.
 

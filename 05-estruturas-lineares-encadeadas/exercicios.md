@@ -12,7 +12,7 @@ urlcolor: Blue
 # TODO: adicionar problemas (escolher a melhor estrutura, sistema de janelas, recebe um clique e deve trazer a janela pra frente da lista)
 ---
 
-O código inicial dos exercícios está disponível na página <https://malbarbo.pro.br/ensino/2024/6884/>.
+O código inicial dos exercícios está disponível na página <https://malbarbo.pro.br/ensino/2025/6884/>.
 
 ## Introdução
 
