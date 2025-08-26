@@ -13,11 +13,11 @@ Um sítio de conteúdo pretende fazer uma série de postagens com as palavras/ex
 
 \pause
 
-Para criar as listas foi levantado diversos corpus (coleções de textos) para cada possível postagem. Também foi contratado especialistas em cada idioma / área. Para ajudar os especialistas existe a necessidade de processar os textos e gerar uma lista preliminar das palavras/expressões mais frequentes.
+Para criar as listas foram levantados diversos corpus (coleções de textos) para cada possível postagem. Também foram contratados especialistas em cada idioma / área. Para ajudar os especialistas existe a necessidade de processar os textos e gerar uma lista preliminar das palavras/expressões mais frequentes.
 
 \pause
 
-Uma equipe já pré-processou os corpus e gerou arquivos textos contendo uma palavra/expressão em minúsculo por linha. Cada arquivo tem entre 1.000 e 1.000.000 de palavras. A equipe também já criou uma função para ler o arquivo e devolver uma lista com cada palavra/expressão de um arquivo.
+Uma equipe já pré-processou os corpus e gerou arquivos de texto contendo uma palavra/expressão em minúsculo por linha. Cada arquivo tem entre 1.000 e 1.000.000 de palavras. A equipe também já criou uma função para ler o arquivo e devolver uma lista com cada palavra/expressão de um arquivo.
 
 \pause
 
@@ -101,7 +101,7 @@ Abordagem incremental direta:
 - Temos uma lista de palavras e frequência (em ordem de maior frequência) e temos uma palavra. Precisamos atualizar a lista considerando a palavra: \pause
 
     - Se a palavra está na lista, aumentamos a frequência em 1 e "movemos" a palavra para manter a lista em ordem. \pause
-    - Senão adicionamos na lista a palavra com a frequência 1.
+    - Senão, adicionamos na lista a palavra com a frequência 1.
 
 
 # Implementação da abordagem incremental
@@ -131,11 +131,11 @@ def encontra_mais_frequentes(palavras: list[str], m: int) -> list[PalavraVezes]:
 
 # Estratégias
 
-Abordagem usado um plano (etapas): \pause
+Abordagem usando um plano (etapas): \pause
 
 - Calculamos a frequência de cada palavra \pause
 
-    - Podemos usar o método incremental: começamos sem nenhuma palavra e analisamos uma palavra por vez. Se a palavra já aparece, aumentamos sua frequência em 1, senão adiciona a palavra com frequência inicial de 1 \pause
+    - Podemos usar o método incremental: começamos sem nenhuma palavra e analisamos uma palavra por vez. Se a palavra já aparece, aumentamos sua frequência em 1, senão, adicionamos a palavra com frequência inicial de 1 \pause
 
 - Ordenamos as palavras em ordem de maior frequência \pause
 
@@ -255,7 +255,7 @@ Demorou muito para executar...
 
 # Considerações
 
-Nenhum das duas abordagens é viável... \pause
+Nenhuma das duas abordagens é viável... \pause
 
 Podemos fazer melhor? \pause Sim! \pause Mas precisamos de estruturas de dados e métodos de ordenação eficientes, que é o que vamos fazer nessa disciplina!
 
@@ -268,12 +268,12 @@ Dentre as várias estruturas de dados e algoritmos que vamos estudar podemos des
 
 - Tabelas de dispersão: mantêm uma coleção de itens que podem ser pesquisados e alterados de forma eficiente. \pause
 
-- Algoritmo de ordenação por particionamento: ordena uma coleção de itens de forma eficiente. Junto com tabelas de dispersão permitirá que o algoritmo por etapa que nós vimos seja implementado de forma eficiente.
+- Algoritmo de ordenação por particionamento: ordena uma coleção de itens de forma eficiente. Junto com tabelas de dispersão, permitirá que o algoritmo por etapa que nós vimos seja implementado de forma eficiente.
 
 
 # Considerações
 
-Tá, mas quão eficiente podemos deixar os algoritmos que implementados? \pause
+Tá, mas quão eficiente podemos deixar os algoritmos que implementamos? \pause
 
 A biblioteca do Python disponibiliza um tipo chamado `dict`{.python} (dicionário), que é implementado com uma tabela de dispersão. Além disso, também temos a função `sort`{.python}, que é implementada com um algoritmo mais eficiente do que aquele que fizemos. \pause
 
@@ -326,12 +326,10 @@ Tempo de execução: 0.037 segundos
 
 # Conclusões
 
-Conclusões
+Mesmo que um algoritmo funcione corretamente e seja rápido para algumas entradas, ele pode ser inviável devido ao seu tempo de execução para entradas maiores. \pause
 
-- Mesmo que um algoritmo funcione corretamente e seja rápido para algumas entradas, ele pode ser inviável devido ao seu tempo de execução para entradas maiores. \pause
+Precisamos de uma forma para determinar o tempo de execução de um algoritmo sem precisar implementá-lo. \pause
 
-- Precisamos de uma forma para determinar o tempo de execução de um algoritmo sem precisar implementá-lo. \pause
+As estruturas de dados são essenciais para algoritmos eficientes. \pause
 
-- As estruturas de dados são essenciais para algoritmos eficientes. \pause
-
-- Algoritmos de ordenação eficientes são importantes para a computação.
+Algoritmos de ordenação eficientes são importantes para a computação.
