@@ -45,7 +45,7 @@ urlcolor: Blue
 
 ## Praticando
 
-@) Faça uma implementação iterativa da função `concerta_heap`.
+@) Faça uma implementação iterativa da função `conserta_heap`.
 
 @) Um outro algoritmo de ordenação é a ordenação por flutuação (do inglês, _bubble-sort_). A ideia do algoritmo é percorrer os elementos da sequência diversas vezes e fazer o maior elemento "flutuar" para o final. Isto pode ser feito da seguinte forma: a cada passagem pelos elementos, cada par de elementos adjacentes e comparado e trocando de lugar se o primeiro for maior que o segundo. O algoritmo para quando uma passagem por todos os elementos não gerar nenhum troca (você consegue ver porque o algoritmo funciona?). Implemente o algoritmo de ordenação por flutuação para arranjos e listas encadeadas. Determine a complexidade de tempo, se ele é in-loco e se é estável.
 

@@ -1,6 +1,6 @@
-def concerta_heap(A: list[int], n: int, i: int):
+def conserta_heap(A: list[int], n: int, i: int):
     r'''
-    Concerta um heap... TODO: termine a descrição!
+    Conserta um heap... TODO: termine a descrição!
 
     Requer que 0 <= i <= n < len(A).
     Requer que as árvores com raizes esq(i) e dir(i) sejam heaps máximos (se
@@ -17,7 +17,7 @@ def concerta_heap(A: list[int], n: int, i: int):
     2   8 1                2   4 1
 
     >>> A = [16, 4, 10, 14, 7, 9, 3, 2, 8, 1]
-    >>> concerta_heap(A, 10, 1)
+    >>> conserta_heap(A, 10, 1)
     >>> A
     [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
     '''

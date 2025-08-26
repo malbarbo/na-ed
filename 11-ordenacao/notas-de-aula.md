@@ -12,7 +12,7 @@ urlcolor: Blue
 
 Junto com o problema de busca, o problema de ordenação é um dos mais estudados da Computação. \pause
 
-O problema de ordenação consiste em, dado uma sequência de $n$ números $\langle a_1, a_2, \ldots, a_n \rangle$, determinar uma permutação (reordenação) $\langle a_1', a_2', \ldots, a_n' \rangle$ da sequência de entrada tal que, $a_1' \leq a_2' \leq \dots \leq a_n'$.
+O problema de ordenação consiste em, dada uma sequência de $n$ números $\langle a_1, a_2, \ldots, a_n \rangle$, determinar uma permutação (reordenação) $\langle a_1', a_2', \ldots, a_n' \rangle$ da sequência de entrada tal que, $a_1' \leq a_2' \leq \dots \leq a_n'$.
 
 
 ## Introdução
@@ -21,7 +21,7 @@ Para avaliarmos os algoritmos de ordenação, além da complexidade de tempo, co
 
 Um algoritmo é **in-loco** se a quantidade de memória que ele precisa para executar é $O(1)$, ou seja, não depende do tamanho da entrada. \pause
 
-Um algoritmo de ordenação é **estável** se a ordem relativamente dos elementos com chave iguais é preservado.
+Um algoritmo de ordenação é **estável** se a ordem relativa dos elementos com chaves iguais é preservada.
 
 
 ## Introdução
@@ -164,9 +164,9 @@ A ordenação é estável? \pause Sim.
 
 ## Melhoria
 
-Podemos melhor o tempo? \pause
+Podemos melhorar o tempo? \pause
 
-Temos dois custos, o de seleção, que é $O(1)$, e o de inserção, que é $O(j)$. \pause Podemos melhor o tempo da inserção? \pause
+Temos dois custos, o de seleção, que é $O(1)$, e o de inserção, que é $O(j)$. \pause Podemos melhorar o tempo da inserção? \pause
 
 Considerando que o subarranjo `lst[:j]`{.python} está ordenado, poderíamos usar uma busca binária para encontrar a posição de inserção em $O(\lg j)$. \pause No entanto, a inserção continuaria sendo $O(j)$, pois os elementos precisam ser deslocados. \pause
 
@@ -278,7 +278,7 @@ Como o heap pode ser visto como árvore, ele também tem uma altura, que é $O(\
 
 ## Heap
 
-Para arranjos indexados a partir de 0, a raiz do heap está na posição 0. \pause Além disso, para cada nó no índice $i$, os índices do pai e dos filhos a direita e a esquerda podem ser caculado da seguinte forma: \pause
+Para arranjos indexados a partir de 0, a raiz do heap está na posição 0. \pause Além disso, para cada nó no índice $i$, os índices do pai e dos filhos à direita e à esquerda podem ser calculados da seguinte forma: \pause
 
 $\proc{pai}(i) = \lfloor (i - 1) / 2 \rfloor$ para $i \not = 0$ \pause
 
@@ -295,6 +295,7 @@ Um arranjo $A$ que representa um heap tem dois atributos
 - $\attrib{A}{heap-size}$, que é o número de elementos do heap ($0 \le \attrib{A}{heap-size} \le \attrib{A}{length}$)
 
 -->
+
 
 ## Propriedade do heap
 
@@ -334,7 +335,7 @@ Como selecionar o próximo elemento? \pause
 
 Como estender o subarranjo ordenado? \pause
 
-- Trocando de posição o maior elemento com o último do heap e concertando o heap. \pause
+- Trocando de posição o maior elemento com o último do heap e consertando o heap. \pause
 - Qual é o custo? \pause $O(\lg(\text{heap-size}))$ -- veremos isso a seguir. \pause
 
 Este algoritmo é conhecido como **ordenação por heap** (_heap sort_).
@@ -464,10 +465,10 @@ Este algoritmo é conhecido como **ordenação por heap** (_heap sort_).
 Que operações precisamos para implementar a ordenação por heap? \pause
 
 - Inicialização do heap \pause
-- Concertar o heap
+- Consertar o heap
 
 
-## Concertando um heap
+## Consertando um heap
 
 <div class="columns">
 <div class="column" width="48%">
@@ -477,18 +478,18 @@ Que operações precisamos para implementar a ordenação por heap? \pause
 
 Seja $A$ um arranjo que armazena um heap máximo.
 
-Considerando que o elemento da posição $i$ foi alterado, como podemos verificar se a propriedade do heap se mantém, e caso contrário, como podemos "concertar" o heap? \pause
+Considerando que o elemento da posição $i$ foi alterado, como podemos verificar se a propriedade do heap se mantém, e, caso contrário, como podemos "consertar" o heap? \pause
 
 Verificamos se $A[i]$ é menor que algum dos dois filhos, \pause se sim, trocamos $A[i]$ de lugar com o maior filho, \pause depois executamos o processo recursivamente para o filho que foi trocado.
 </div>
 </div>
 
 
-## Concertando um heap
+## Consertando um heap
 
 <div class="columns">
 <div class="column" width="48%">
-Projete uma função que receba com parâmetro um arranjo $A$, a quantidade de elementos $n$ de $A$ que estão sendo usados e um índice $i$, onde os elementos `esq(i)` e `dir(i)` são raízes de heap máximo, e "concerte" o arranjo, se necessário, para que a árvore com raiz $i$ seja um heap máximo. \pause
+Projete uma função que receba como parâmetro um arranjo $A$, a quantidade de elementos $n$ de $A$ que estão sendo usados e um índice $i$, onde os elementos `esq(i)` e `dir(i)` são raízes de heap máximo, e "conserte" o arranjo, se necessário, para que a árvore com raiz $i$ seja um heap máximo. \pause
 
 </div>
 <div class="column" width="48%">
@@ -496,7 +497,7 @@ Projete uma função que receba com parâmetro um arranjo $A$, a quantidade de e
 \scriptsize
 
 ```python
-def concerta_heap(A: list[int], n: int, i: int):
+def conserta_heap(A: list[int], n: int, i: int):
     assert i < n <= len(A)
     # Encontra o índice do maior entre
     # A[i], A[esq(i)] e A[dir(i)]
@@ -511,7 +512,7 @@ def concerta_heap(A: list[int], n: int, i: int):
     # o processo.
     if imax != i:
         A[i], A[imax] = A[imax], A[i]
-        concerta_heap(A, n, imax)
+        conserta_heap(A, n, imax)
 ```
 
 \pause
@@ -528,7 +529,7 @@ Como construir um heap? \pause Vamos começar com o que está certo e ir "conser
 
 \includegraphics[trim=0cm 81.7cm 55.55cm 7cm, clip, width=6cm]{imagens/Fig-6-3.pdf}
 
-Dado um arranjo qualquer, que vamos transformar em um heap, quais elementos sabemos que são raízes de heap válidos? \pause As folhas. \pause Note que em um heap o número de folhas nunca é menor do que o número de nós internos.
+Dado um arranjo qualquer, que vamos transformar em um heap, quais elementos sabemos que são raízes de heaps válidos? \pause As folhas. \pause Note que em um heap o número de folhas nunca é menor do que o número de nós internos.
 
 
 ## Construindo um heap
@@ -565,7 +566,7 @@ Dado um arranjo qualquer, que vamos transformar em um heap, quais elementos sabe
 
 <div class="columns">
 <div class="column" width="48%">
-Projete uma função que receba com parâmetro um arranjo $A$, e rearranje os elementos de $A$ para formar um heap máximo.
+Projete uma função que receba como parâmetro um arranjo $A$, e rearranje os elementos de $A$ para formar um heap máximo.
 
 \pause
 </div>
@@ -576,7 +577,7 @@ Projete uma função que receba com parâmetro um arranjo $A$, e rearranje os el
 ```python
 def inicializa_heap(A: list[int]):
     for i in reversed(range(len(A) // 2)):
-        concerta_heap(A, len(A), i)
+        conserta_heap(A, len(A), i)
 ```
 
 </div>
@@ -588,7 +589,7 @@ def inicializa_heap(A: list[int]):
 
 Qual é a complexidade de tempo? \pause
 
-- Limite simples: a função é `concerta_heap` tem tempo $O(\lg n)$ e é chamada $n / 2$ vezes, portanto, $O(n \lg n)$; \pause
+- Limite simples: a função é `conserta_heap` tem tempo $O(\lg n)$ e é chamada $n / 2$ vezes, portanto, $O(n \lg n)$; \pause
 
 - Limite estrito: $O(n)$ -- discutido em sala.
 
@@ -612,8 +613,8 @@ def ordena_heap(lst: list[int]):
         # Troca o maior do heap com
         # o elemento da última posição do heap
         lst[0], lst[i] = lst[i], lst[0]
-        # Concerta a raiz do heap
-        concerta_heap(lst, i, 0)
+        # Conserta a raiz do heap
+        conserta_heap(lst, i, 0)
 ```
 
 </div>
@@ -626,14 +627,14 @@ def ordena_heap(lst: list[int]):
 Qual é a complexidade de tempo? \pause
 
 - `inicializa_heap`: $O(n)$ \pause
-- `concerta_heap`: $\displaystyle \sum_{i=1}^{n-1}\lg(i) \pause = O(n \lg n)$ \pause
+- `conserta_heap`: $\displaystyle \sum_{i=1}^{n-1}\lg(i) \pause = O(n \lg n)$ \pause
 - Total: $O(n \lg n)$ \pause
 
-A implementação é in-loco? \pause Sim (se `concerta_heap` não for recursiva) \pause
+A implementação é in-loco? \pause Sim (se `conserta_heap` não for recursiva) \pause
 
 A implementação é estável? \pause Não.
 
-## Comparação entre os algoritmo de ordenação incrementais
+## Comparação entre os algoritmos de ordenação incrementais
 
 Algoritmo      | Estável? | Local? | Melhor       | Médio        | Pior
 ---------------|----------|--------|--------------|--------------|-----------
@@ -644,7 +645,7 @@ Heap           |  Não     | Sim    | $O(n \lg n)$ | $O(n \lg n)$ | $O(n \lg n)$
 
 ## Projeto de algoritmos de divisão e conquista
 
-A ideia de um algoritmo divisão e conquista é: \pause
+A ideia de um algoritmo de divisão e conquista é: \pause
 
 - Resolver o problema diretamente se ele for trivial, senão **dividir** o problema em dois ou mais subproblemas do mesmo tipo; \pause
 
@@ -653,7 +654,7 @@ A ideia de um algoritmo divisão e conquista é: \pause
 - **Combinar** as soluções dos subproblemas para obter a solução do problema original \pause
 
 
-Como projetar um algoritmo de divisão e conquista para somar os elementos de um arranjo? (Note que esse algoritmo não traz nenhum vantagem, é apenas uma ilustração) \pause
+Como projetar um algoritmo de divisão e conquista para somar os elementos de um arranjo? (Note que esse algoritmo não traz nenhuma vantagem, é apenas uma ilustração) \pause
 
 - Se o arranjo for vazio, a soma é 0. Senão dividir o arranjo na metade e calcular a soma de cada metade recursivamente; \pause
 
@@ -664,7 +665,7 @@ Como projetar um algoritmo de divisão e conquista para somar os elementos de um
 
 Como projetar um algoritmo de divisão e conquista para ordenar os elementos de um arranjo? \pause
 
-- Se o arranjo tiver mais que um elemento, separamos os elementos em dois subarranjos; \pause
+- Se o arranjo tiver mais de um elemento, separamos os elementos em dois subarranjos; \pause
 
 - Ordenamos cada subarranjo recursivamente; \pause
 
@@ -884,11 +885,7 @@ A implementação da ordenação por intercalação é in-loco? \pause Não. \pa
 
 Qual é a complexidade de tempo? \pause
 
-$$T(n) =
-    \begin{cases}
-      c               & \text{se $n \le 1$} \\
-      2T(n/2) + cn    & \text{caso contrário}
-    \end{cases}$$
+$$T(n) = \begin{cases} c & \text{se $n \le 1$} \\ 2T(n/2) + cn & \text{caso contrário} \end{cases}$$
 
 \pause
 
@@ -975,7 +972,7 @@ Na ordenação por intercalação, a etapa de divisão tem tempo constante e a c
 
 ## Divisão e conquista
 
-Como combinar dois arranjos ordenados sem precisar passar por todos os elementos? \pause Parece que não tem com... \pause
+Como combinar dois arranjos ordenados sem precisar passar por todos os elementos? \pause Parece que não tem como... \pause
 
 Se não podemos melhorar, será que podemos eliminar a etapa de combinação? \pause
 
@@ -995,7 +992,7 @@ Projetar uma função que **particione** um arranjo em duas partes, uma com os "
 
 Para isso precisamos de um "pivô" para determinar em que parte cada elemento deve ficar. \pause
 
-\ \
+\
 
 \includegraphics[trim=8cm 79cm 0cm 2.5cm, clip, width=4cm]{imagens/Fig-7-1.pdf}
 
@@ -1225,11 +1222,11 @@ def particiona(lst: list[int], ini: int, fim: int) -> int:
 
 ## Particionamento in-loco
 
-As duas formas mais comum de fazer o particionamento in-loco são: \pause
+As duas formas mais comuns de fazer o particionamento in-loco são: \pause
 
-A forma sugerida por Tony Hoare, criador do quick sort, é manter dois índices, um para a partição do início do arranjo com os menores, e outro para a partição no final com os maiores. Os índices movem em direção ao meio e os elementos são trocados de lugar quando necessário. \pause
+A forma sugerida por Tony Hoare, criador do quick sort, é manter dois índices, um para a partição do início do arranjo com os menores, e outro para a partição no final com os maiores. Os índices se movem em direção ao meio e os elementos são trocados de lugar quando necessário. \pause
 
-A outra forma é o particionamento de Lomuto. \pause Nesse esquema tanta a partição dos menores fica no início do arranjo e a dos maior logo em seguida.
+A outra forma é o particionamento de Lomuto. \pause Nesse esquema, tanto a partição dos menores fica no início do arranjo e a dos maior logo em seguida.
 
 
 ## Particionamento de Lomuto
@@ -1264,7 +1261,7 @@ def particiona(lst: list[int], ini: int, fim: int) -> int:
 </div>
 
 
-## Comparação entre os algoritmo de ordenação
+## Comparação entre os algoritmos de ordenação
 
 Algoritmo      | Estável? | Local? | Melhor       | Médio        | Pior
 ---------------|----------|--------|--------------|--------------|-----------
@@ -1285,7 +1282,7 @@ Os algoritmos de ordenação que vimos até agora são baseados em comparações
 
 \pause
 
-Um resultado conhecido diz que não existe algoritmo de ordenação baseado em comparação que tenha tempo melhor que $O(n \lg n)$, \pause então, já temos algoritmos ótimos. \pause
+Um resultado conhecido diz que não existe algoritmo de ordenação baseado em comparação que tenha tempo de execução melhor que $O(n \lg n)$, \pause então, já temos algoritmos ótimos. \pause
 
 Mas ainda podemos melhorar fazendo ordenação sem comparação!
 
@@ -1294,13 +1291,13 @@ Mas ainda podemos melhorar fazendo ordenação sem comparação!
 
 Cada um dos $n$ valores de entrada é uma sequência de tamanho $d$, onde cada valor da sequência pode ser um de $k$ valores distintos. \pause Exemplos: \pause
 
-- Nomes com 50 caracteres, onde cada caractere pode $a, b, \dots, z$ \pause ($d = 50$, $k = 26$) \pause
+- Nomes com 50 caracteres, onde cada caractere pode ser $a, b, \dots, z$ \pause ($d = 50$, $k = 26$) \pause
 
 - Números com 8 dígitos, onde cada dígito pode ser $0, 1, \dots, 9$ ($d = 8$, $k = 10$) \pause
 
 Podemos usar a restrição dos valores de entrada para projetar um algoritmo de ordenação mais eficiente? \pause Sim! \pause
 
-A ideia é ordenar os valores pelos dígitos, começando com o menos significativos.
+A ideia é ordenar os valores pelos dígitos, começando com os menos significativos.
 
 
 ## Ordenação por dígitos (radix)
@@ -1351,8 +1348,10 @@ Podemos usar a restrição dos valores de entrada para projetar um algoritmo de 
 A ideia é: \pause
 
 - Dividir o intervalo $[0, 1)$ em $n$ segmentos (baldes) e distribuir cada um dos $n$ elementos em seu respectivo segmento; \pause
+
 - Ordenar os elementos de cada segmento; \pause
-- Juntos os elementos de cada segmento
+
+- Juntar os elementos de cada segmento
 
 
 ## Ordenação por balde
@@ -1370,7 +1369,7 @@ A ideia é: \pause
 
 \pause
 
-Uma implementação direta da ordenação por balde tem tempo de execução no pior cado de $O(n^2)$, mas o tempo esperado é de $O(n)$.
+Uma implementação direta da ordenação por balde tem tempo de execução no pior caso de $O(n^2)$, mas o tempo esperado é de $O(n)$.
 
 
 ## Referências
