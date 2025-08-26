@@ -35,7 +35,7 @@ Quais são as principais atividades no projeto de um programa? \pause
 
 - Implementação \pause
 
-- Verificação (a implementação atende a especificação?)
+- Verificação (a implementação atende à especificação?)
 
 
 ## Projeto de funções
@@ -304,7 +304,7 @@ O símbolo `#`{.python} (cerquilha), é utilizado para indicar um **comentário*
 
 ```python
 >>> # Teto
->>> # menor inteiro >= ao númeo
+>>> # menor inteiro >= ao número
 >>> math.ceil(4.2)
 5
 >>> math.ceil(4.0)
@@ -323,7 +323,7 @@ Outro tipo de dado pré-definido em Python é a cadeia de caracteres (`str`{.pyt
 
 Geralmente usamos strings para armazenar informações simbólicas, como por exemplo palavras e textos. \pause
 
-Uma string em Python é escrita entre apóstrofo (`'`{.python}) ou aspas (`"`{.python}) \pause
+Uma string em Python é escrita entre apóstrofos (`'`{.python}) ou aspas (`"`{.python}) \pause
 
 \small
 
@@ -626,7 +626,7 @@ False
 
 \pause
 
-\ 
+\
 
 Quem tem maior prioridade, os operadores relacionais ou aritméticas? \pause Os aritméticos.
 
@@ -760,9 +760,9 @@ False
 </div>
 </div>
 
-\ 
+\
 
-Qual é precedência do `not`{.python} em relação aos operadores relacionais e aritméticos? \pause É menor.
+Qual é a precedência do `not`{.python} em relação aos operadores relacionais e aritméticos? \pause É menor.
 
 
 ## Operadores lógicos
@@ -976,7 +976,7 @@ IndexError: list index out of range
 \pause
 
 ```python
->>> # Acrésimo de um elemento
+>>> # Acréscimo de um elemento
 >>> y.append(5) # list.append(y, 5)
 >>> y
 [4, 7, 5]
@@ -1183,9 +1183,9 @@ O "para cada" funciona da seguinte maneira: \pause
 - O primeiro valor de `lista` é atribuído para `var` e as `instruções` são executadas; \pause
 - O segundo valor de `lista` é atribuído para `var` e as `instruções` são executadas; \pause
 - ... \pause
-- E assim por diante até que todos os valores de `lista` tenham sidos atribuídos para `var`. \pause
+- E assim por diante até que todos os valores de `lista` tenham sido atribuídos para `var`. \pause
 
-Ou seja, o "para cada" executa as mesmas instruções atribuindo cada valor de `lista` para `var`, por isso ele chama "para cada"!
+Ou seja, o "para cada" executa as mesmas instruções atribuindo cada valor de `lista` para `var`, por isso ele se chama "para cada"!
 
 
 ## Exemplo do "para cada"
@@ -1263,7 +1263,7 @@ soma([5, 1, 4])
 
 </div>
 <div class="column" width="48%">
-Qual é a ordem que as linhas são executadas? \pause
+Qual é a ordem em que as linhas são executadas? \pause
 
 \footnotesize
 
@@ -1386,7 +1386,7 @@ def soma(lst: list[int]) -> int:
 
 \normalsize
 
-\ 
+\
 
 Qual das duas formas é mais simples? \pause A da esquerda!
 
@@ -1429,7 +1429,7 @@ def indice_maximo(lst: list[int]) -> int:
 </div>
 </div>
 
-\ 
+\
 
 Qual das duas soluções é mais simples? \pause A da direita!
 
@@ -1525,7 +1525,7 @@ nao_decrescente([1, 3, 3, 2, 7, 8])
 
 </div>
 <div class="column" width="48%">
-Qual é a ordem que as linhas são executadas? \pause
+Qual é a ordem em que as linhas são executadas? \pause
 
 \small
 
@@ -1593,21 +1593,21 @@ Um **tipo de dado** é o conjunto de valores que uma variável pode assumir. \pa
 
 Exemplos \pause
 
-- `bool`{.python} $= \{$ `True`{.python} , `False`{.python} $\}$ \pause
-- `int`{.python} = $\{\dots, -2, -1, 0, 1, 2, \dots \}$ \pause
-- `float`{.python} = $\{\dots, -0.1, -0.0, 0.0, 0.1, \dots \}$ \pause
-- `str`{.python} = $\{$ `''`{.python}, `'a'`{.python}, `'b'`{.python}, $\dots \}$
+- `bool`{.python} $= \{$ `True`{.python} , `False`{.python} $\ \}$ \pause
+- `int`{.python} = {$\dots, -2, -1, 0, 1, 2, \dots \ \}$} \pause
+- `float`{.python} = {$\dots, -0.1, -0.0, 0.0, 0.1, \dots \ \}$} \pause
+- `str`{.python} = {$\ \{$ `''`{.python}, `'a'`{.python}, `'b'`{.python}, $\dots \ \}$}
 
 
 ## Tipo de dados
 
 Durante a etapa de definição de tipos de dados (do processo de projeto de funções) temos que determinar quais são as informações e como elas serão representadas. \pause
 
-Algumas informações podem ser representas diretamente com os tipos primitivos da linguagem. Para outras informações, precisamos definir novos tipos de dados. \pause
+Algumas informações podem ser representadas diretamente com os tipos primitivos da linguagem. Para outras informações, precisamos definir novos tipos de dados. \pause
 
 Quais características são desejáveis no projeto/definição de um tipo de dado? \pause
 
-- Que as informações válidas possam representadas.
+- Que as informações válidas possam ser representadas.
 
 - Que as informações inválidas não possam ser representadas.
 
@@ -1719,7 +1719,7 @@ def proxima_cor(atual: str) -> str:
 ```python
 def proxima_cor(atual: Cor) -> Cor:
     '''
-    Produz a próxima cor de uma semáfaro
+    Produz a próxima cor de um semáfaro
     que está na cor *atual*.
     '''
     if atual == Cor.VERDE:
@@ -1769,6 +1769,7 @@ Os segundos da entrada da função pode ser representados com um número inteiro
 Vamos relembrar alguns tipos de dados que utilizamos até agora:
 
 - Tipos atômicos pré-definidos na linguagem: `int, float, bool, str`{.python}
+
 - Tipos enumerados definidos pelo usuário: `Cor`
 
 \pause
@@ -1903,11 +1904,11 @@ def segundos_para_tempo(segundos: int) -> Tempo:
     Requer que segundos seja não negativo.
     '''
     assert segundos >= 0
-    h = segundos / 3600
+    h = segundos // 3600
     # segundos que não foram
     # convertidos para hora
     restantes = segundos % 3600
-    m = restantes / 60
+    m = restantes // 60
     s = restantes % 60
     return Tempo(h, m, s)
 ```
@@ -1997,7 +1998,6 @@ Como fazer a implementação se não sabemos exatamente o que precisa ser feito!
 
 <div class="columns">
 <div class="column" width="48%">
-
 A especificação de uma função consiste de \pause
 
 - Assinatura (nome, entradas e saída) \pause
@@ -2187,9 +2187,9 @@ O exemplos são escritos na forma de uma sessão iterativa do Python. Uma linha 
 
 Quantos exemplos escrever? \pause
 
-Pelo menos um exemplos para cada "forma" de calcular a saída. \pause
+Pelo menos um exemplo para cada "forma" de calcular a saída. \pause
 
-Note que devemos evitar escrever muitos exemplos "iguais". Por exemplo, para uma função que indica se um número natural é par ou ímpar, basta fazer um ou dois exemplos de número par e ímpar, não é preciso fazer cinco exemplos de números pares.
+Note que devemos evitar escrever muitos exemplos "iguais". Por exemplo, para uma função que indica se um número natural é par ou ímpar, basta fazer um ou dois exemplos de números pares e ímpares, não é preciso fazer cinco exemplos de números pares.
 
 
 ## Verificação em Python
@@ -2412,11 +2412,11 @@ Considere um jogo onde o personagem está em um tabuleiro (semelhante a um tabul
 
 **Objetivo**: identificar o problema que deve ser resolvido.
 
-Um personagem de um jogo está em um tabuleiro com 10 linhas e 10 colunas (enumeradas de 1 a 10) e está virado para das direções: norte, sul, leste ou oeste.
+Um personagem de um jogo está em um tabuleiro com 10 linhas e 10 colunas (enumeradas de 1 a 10) e está virado para uma das direções: norte, sul, leste ou oeste.
 
-Para o norte aumenta o número da linha (sul diminui) -- essa é uma decisão que tomamos pois não é informado no enunciado.
+Para o norte, aumenta o número da linha (sul diminui) -- essa é uma decisão que tomamos pois não é informado no enunciado.
 
-Para o leste aumenta o número da coluna (oeste diminui).
+Para o leste, aumenta o número da coluna (oeste diminui).
 
 Determinar quantas casas no máximo um personagem pode avançar a partir da sua posição e direção (o personagem não pode sair do tabuleiro)
 
@@ -2485,7 +2485,7 @@ class Personagem:
 
 **Objetivo**: especificar com precisão e com exemplos o que o programa deve fazer. \pause
 
-Para cada direção precisamos dois exemplos: um que é possível avançar e outro que não.
+Para cada direção, precisamos de dois exemplos: um em que é possível avançar e outro que não.
 
 
 ## Especificação
@@ -2544,7 +2544,7 @@ def maximo_casas(p: Personagem) -> int:
 
 **Objetivo**: verificar se a implementação está de acordo com a especificação. \pause
 
-Usamos o `mypy` para fazer um uma verificação estática:
+Usamos o `mypy` para fazer uma verificação estática:
 
 \scriptsize
 
