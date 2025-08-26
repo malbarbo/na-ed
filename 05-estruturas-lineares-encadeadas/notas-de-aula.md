@@ -15,7 +15,7 @@ urlcolor: Blue
 
 ## Introdução
 
-Como podemos implementar os TAD's Pilha, Fila, Fila Dupla e Lista sem usar arranjos? \pause
+Como podemos implementar os TADs Pilha, Fila, Fila Dupla e Lista sem usar arranjos? \pause
 
 Como podemos representar uma quantidade arbitrária de dados sem arranjos? \pause
 
@@ -26,7 +26,7 @@ Mas antes, vamos falar de valores opcionais.
 
 ## Valores opcionais
 
-Queremos representar uma pessoa com um nome e uma idade, sendo que a idade é opcional. Também queremos fazer uma função `faz_aniversario` que aumenta a idade de uma pessoa, se a idade está presente, em 1 ano. \pause
+Queremos representar uma pessoa com um nome e uma idade, sendo que a idade é opcional. Também queremos fazer uma função `faz_aniversario` que aumenta a idade de uma pessoa, se a idade estiver presente, em 1 ano. \pause
 
 \scriptsize
 
@@ -76,7 +76,7 @@ Agora temos que projetar a função `faz_aniversario`.
 def faz_aniversario(p: Pessoa):
     '''
     Aumenta a idade da pessoa *p* em
-    1 ano e a idade está presente.
+    1 ano se a idade está presente.
 
     Exemplos
     >>> p1 = Pessoa('Joao', 21)
@@ -116,9 +116,9 @@ Note que se a idade é opcional, sempre precisamos verificar se ele está presen
 
 ## Valores opcionais
 
-O que permite o programar executar sem verificar se a idade está presente? \pause
+O que permite ao programa executar sem verificar se a idade está presente? \pause
 
-O ponto é que estamos usando um valor do mesmo tipo para representar a ausência de valor, então, qualquer operação válida para os valores do tipo também é válida para o valor que representa a ausência de valor! \pause
+O ponto é que estamos usando um valor do mesmo tipo para representar a ausência de valor, então qualquer operação válida para os valores do tipo também é válida para o valor que representa a ausência de valor! \pause
 
 Existe mais algum problema com essa estratégia? \pause
 
@@ -129,9 +129,9 @@ Podemos fazer melhor? \pause Sim!
 
 ## Valores opcionais
 
-Em Python existe um valor especial chamado `None`{.python} (do tipo `None`{.python} -- sim, o tipo e o valor do tipo tem o mesmo nome!), que fica armazenado em uma célula de memória específica, que é usado para representar a ausência de um valor. \pause
+Em Python existe um valor especial chamado `None`{.python} (do tipo `None`{.python} -- sim, o tipo e o valor do tipo têm o mesmo nome!), que fica armazenado em uma célula de memória específica, que é usado para representar a ausência de um valor. \pause
 
-Para que uma variável possa referenciar o valor `None`{.python}, é preciso informar isso na declaração do tipo da variável, por exemplo `a: int | None`{.python}. Está declaração está dizendo que variável `a` pode referenciar uma célula com um inteiro ou com `None`{.python}. \pause
+Para que uma variável possa referenciar o valor `None`{.python}, é preciso informar isso na declaração do tipo da variável, por exemplo `a: int | None`{.python}. Esta declaração está dizendo que a variável `a` pode referenciar uma célula com um inteiro ou com `None`{.python}. \pause
 
 <div class="columns">
 <div class="column" width="48%">
@@ -241,7 +241,7 @@ def faz_aniversario(p: Pessoa):
 
 \normalsize
 
-O que aconteceria se esquecêssemos de fazer a verificação sem a idade está presente? \pause
+O que aconteceria se esquecêssemos de fazer a verificação se a idade está presente? \pause
 
 O `python` geraria um erro de execução:
 
@@ -283,7 +283,7 @@ Como podemos representar uma quantidade arbitrária de dados sem arranjos? \paus
 
 Suponha que queremos representar uma coleção de nomes de pessoas. \pause Podemos fazer isso usando estruturas. \pause A ideia é criar um **encadeamento** de instância de estruturas. \pause
 
-A estrutura têm um nome de uma pessoa e uma referência para outra instância da mesma estrutura, que contém o nome da próxima pessoa e uma referência para outra instância da mesma estrutura...
+A estrutura tem um nome de uma pessoa e uma referência para outra instância da mesma estrutura, que contém o nome da próxima pessoa e uma referência para outra instância da mesma estrutura...
 
 
 ## Encadeamento
@@ -357,14 +357,14 @@ class Seq:
 
 Note que na representação gráfica podemos utilizar `/` para indicar uma referência para `None`{.python}. \pause
 
-O que têm de diferente na declaração de `Seq` em relação as classes que definimos anteriormente? \pause  Uma **autorreferência**, ou seja, a utilização da classe em sua própria definição.
+O que tem de diferente na declaração de `Seq` em relação às classes que definimos anteriormente? \pause  Uma **autorreferência**, ou seja, a utilização da classe em sua própria definição.
 
 
 ## Encadeamento
 
-Os tipos com autorreferência (ou recursivos) permitem a representação de uma quantidade de dados arbitrárias pelo **encadeamento** de instâncias do tipo. \pause Usamos `None`{.python} para representar o fim do encadeamento. \pause
+Os tipos com autorreferência (ou recursivos) permitem a representação de uma quantidade de dados arbitrária pelo **encadeamento** de instâncias do tipo. \pause Usamos `None`{.python} para representar o fim do encadeamento. \pause
 
-O tipo utilizado no encadeamento é comumente chamado de `No`, dessa forma, usamos um encadeamento de nós para criar uma coleção de valores. \pause
+O tipo utilizado no encadeamento é comumente chamado de `Nó`, dessa forma, usamos um encadeamento de nós para criar uma coleção de valores. \pause
 
 <div class="columns">
 <div class="column" width="35%">
@@ -402,7 +402,7 @@ Antes de prosseguirmos, vamos revisar o uso de múltiplas referências para a me
 
 Vimos que em Python toda variável referencia uma célula de memória. Em algumas situações, como quando atribuímos uma variável para outra ou passamos uma variável como parâmetro, temos mais de uma variável referenciando a mesma célula de memória. \pause
 
-Essa situação pode gerar alguns dificuldades para a escrita e entendimento do código, mas é necessária para manipulação de encadeamentos. \pause
+Essa situação pode gerar algumas dificuldades para a escrita e entendimento do código, mas é necessária para manipulação de encadeamentos. \pause
 
 Vamos usar o [Python Tutor](https://pythontutor.com/) para visualizar algumas situações de múltiplas referências. \pause
 
@@ -450,7 +450,7 @@ class Retangulo:
 </div>
 </div>
 
-Acesse esse exemplos no [Python Tutor](https://pythontutor.com/render.html#code=class%20Ponto%3A%0A%20%20%20%20def%20__init__%28self,%20x%3A%20int,%20y%3A%20int%29%3A%0A%20%20%20%20%20%20%20%20self.x%20%3D%20x%0A%20%20%20%20%20%20%20%20self.y%20%3D%20y%0A%0Aclass%20Retangulo%3A%0A%20%20%20%20def%20__init__%28self,%20canto%3A%20Ponto,%20largura%3A%20int,%20altura%3A%20int%29%3A%0A%20%20%20%20%20%20%20%20self.canto%20%3D%20canto%0A%20%20%20%20%20%20%20%20self.largura%20%3D%20largura%0A%20%20%20%20%20%20%20%20self.altura%20%3D%20altura%0A%0Ap%20%3D%20Ponto%2810,%2050%29%0Al%20%3D%20200%0Aa%20%3D%20450%0A%0Ar1%20%3D%20Retangulo%28p,%20l,%20a%29%0Ar2%20%3D%20Retangulo%28p,%20l,%20a%29%0A%0A%23%20Quais%20valores%20ser%C3%A3o%20exibidos%3F%0Al%20%3D%20300%0Aprint%28r1.largura%29%0Aprint%28r2.largura%29%0A%0A%23%20Quais%20valores%20ser%C3%A3o%20exibidos%3F%0Ap.x%20%3D%2020%0Aprint%28r1.canto.x,%20r1.canto.y%29%0Aprint%28r2.canto.x,%20r2.canto.y%29%0A%0A%23%20Quais%20valores%20ser%C3%A3o%20exibidos%3F%0Ar1.canto.y%20%3D%2070%0Aprint%28p.x,%20p.y%29%0Aprint%28r2.canto.x,%20r2.canto.y%29%0A%0A%23%20Quais%20valores%20ser%C3%A3o%20exibidos%3F%0Ar2.canto%20%3D%20Ponto%283,%2017%29%0Aprint%28p.x,%20p.y%29%0Aprint%28r1.canto.x,%20r1.canto.y%29&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false).
+Acesse esses exemplos no [Python Tutor](https://pythontutor.com/render.html#code=class%20Ponto%3A%0A%20%20%20%20def%20__init__%28self,%20x%3A%20int,%20y%3A%20int%29%3A%0A%20%20%20%20%20%20%20%20self.x%20%3D%20x%0A%20%20%20%20%20%20%20%20self.y%20%3D%20y%0A%0Aclass%20Retangulo%3A%0A%20%20%20%20def%20__init__%28self,%20canto%3A%20Ponto,%20largura%3A%20int,%20altura%3A%20int%29%3A%0A%20%20%20%20%20%20%20%20self.canto%20%3D%20canto%0A%20%20%20%20%20%20%20%20self.largura%20%3D%20largura%0A%20%20%20%20%20%20%20%20self.altura%20%3D%20altura%0A%0Ap%20%3D%20Ponto%2810,%2050%29%0Al%20%3D%20200%0Aa%20%3D%20450%0A%0Ar1%20%3D%20Retangulo%28p,%20l,%20a%29%0Ar2%20%3D%20Retangulo%28p,%20l,%20a%29%0A%0A%23%20Quais%20valores%20ser%C3%A3o%20exibidos%3F%0Al%20%3D%20300%0Aprint%28r1.largura%29%0Aprint%28r2.largura%29%0A%0A%23%20Quais%20valores%20ser%C3%A3o%20exibidos%3F%0Ap.x%20%3D%2020%0Aprint%28r1.canto.x,%20r1.canto.y%29%0Aprint%28r2.canto.x,%20r2.canto.y%29%0A%0A%23%20Quais%20valores%20ser%C3%A3o%20exibidos%3F%0Ar1.canto.y%20%3D%2070%0Aprint%28p.x,%20p.y%29%0Aprint%28r2.canto.x,%20r2.canto.y%29%0A%0A%23%20Quais%20valores%20ser%C3%A3o%20exibidos%3F%0Ar2.canto%20%3D%20Ponto%283,%2017%29%0Aprint%28p.x,%20p.y%29%0Aprint%28r1.canto.x,%20r1.canto.y%29&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false).
 
 
 ## Múltiplas referências
@@ -626,7 +626,7 @@ Usando repetição!
 \pause
 
 ```python
->>> # q começa no início do encademaneto
+>>> # q começa no início do encadeamento
 >>> q = p
 >>> # avançamos q enquanto podemos
 >>> while q.prox is not None:
@@ -765,7 +765,7 @@ Qual a complexidade de tempo de `desenfileira`? \pause $O(1)$. \pause
 
 Qual a complexidade de tempo de `enfileira`? \pause $O(n)$... \pause
 
-Podemo fazer melhor? \pause Sim! \pause
+Podemos fazer melhor? \pause Sim! \pause
 
 Vamos manter uma variável `fim` que referencia o último nó do encadeamento ou é `None`{.python} se a fila estiver vazia. \pause Isso permite acessar o fim em tempo constante. \pause
 
@@ -1038,7 +1038,6 @@ def remove_inicio(self) -> str:
 \ \
 
 O nó azul está sendo inserido/removido.
-
 </div>
 <div class="column" width="52%">
 \scriptsize
@@ -1135,7 +1134,6 @@ def remove_fim(self) -> str:
 \ \
 
 O nó azul está sendo inserido/removido.
-
 </div>
 <div class="column" width="52%">
 
@@ -1176,9 +1174,9 @@ def remove_fim(self) -> str:
 
 Com encadeamento duplo e referência para início e fim, os métodos do TAD de fila dupla têm complexidade de tempo de $O(1)$. \pause
 
-No entanto, \pause a implementação parece complicada, cada um dos quadro métodos tem dois casos distintos. \pause
+No entanto, \pause a implementação parece complicada, cada um dos quatro métodos tem dois casos distintos. \pause
 
-Podemos simplificar o código? \pause O que faz com que seja necessário dois casos? \pause
+Podemos simplificar o código? \pause O que faz com que sejam necessários dois casos? \pause
 
 Vamos supor por um momento que todos os nós tenham antecessor e sucessor. \pause
 
@@ -1186,7 +1184,7 @@ Como remover um nó `p` sabendo que existe um antecessor e um sucessor de `p`? \
 
 Como inserir um nó `novo` após um nó `p` sabendo que `p` tem um sucessor? \pause
 
-Como inserir um nó `novo` antes de um nó `p` sabendo que `p` tem um antecessor?
+Como inserir um nó `novo` antes de um nó `p` sabendo que `p` tem um antecessor? 
 
 
 ## Fila dupla
@@ -1309,7 +1307,7 @@ def insere_antes(p: No, novo: No):
 
 Como podemos fazer para que cada nó tenha um antecessor e um sucessor? \pause
 
-Usamos uma **sentinela**, um nó especial, que é usando onde o valor `None`{.python} seria usado normalmente. Ou seja, a sentinela fica entre o primeiro e o último nó do encadeamento. \pause
+Usamos uma **sentinela**, um nó especial, que é usado onde o valor `None`{.python} seria usado normalmente. Ou seja, a sentinela fica entre o primeiro e o último nó do encadeamento. \pause
 
 O resultado é comumente chamado de **lista circular duplamente encadeada com sentinela**! \pause Na figura abaixo `L` é o `self` e a sentinela é o `nil`. \pause
 
@@ -1497,7 +1495,7 @@ Como implementar o TAD Lista utilizando encadeamento? \pause
 
 Devemos usar encadeamento simples ou duplo para implementar o TAD Lista? \pause
 
-Se o TAD de Lista não define função específica para remoção do fim, então o encadeamento simples é suficiente. \pause
+Se o TAD Lista não define função específica para remoção do fim, então o encadeamento simples é suficiente. \pause
 
 Qual o tempo de execução para operações de inserção e remoção em posição? \pause $O(n)$, pois é preciso seguir o encadeamento até a posição especificada, que pode ser a última. \pause
 
@@ -1506,7 +1504,7 @@ A implementação do TAD Lista fica como exercício!
 
 ## Revisão
 
-Vimos quatro TAD's e como implementá-los usando arranjos (alocação contígua) e encadeamento de nós (alocação encadeada)
+Vimos quatro TADs e como implementá-los usando arranjos (alocação contígua) e encadeamento de nós (alocação encadeada)
 
 - Pilha
 - Fila
@@ -1516,11 +1514,11 @@ Vimos quatro TAD's e como implementá-los usando arranjos (alocação contígua)
 
 ## Revisão
 
-Estrutura / Operação   | get/set | ins/rem início | ins/rem fim    | ins/rem       | busca |
+Estrutura / Operação   | get/set | ins/rem início | ins/rem fim    | ins/rem       | busca | 
 -------------------------|---------|----------------|----------------|---------------|-------|
-Encadeamento Simples   |  $O(n)$ | $O(1)$ / $O(1)$ | $O(1)$ / $O(n)$ | $O(n)$      | $O(n)$ |
-Encadeamento Duplo     |  $O(n)$ | $O(1)$ / $O(1)$ | $O(1)$ / $O(1)$ | $O(n)$ -- $O(1)$ [^1] | $O(n)$ |
-Arranjo Dinâmico       |  $O(1)$ | $O(n)$ / $O(n)$ | $O(1)$[^2] / $O(1)$ | $O(n)$  | $O(n)$ |
+Encadeamento Simples   |  $O(n)$ | $O(1)$ / $O(1)$ | $O(1)$ / $O(n)$ | $O(n)$      | $O(n)$ | 
+Encadeamento Duplo     |  $O(n)$ | $O(1)$ / $O(1)$ | $O(1)$ / $O(1)$ | $O(n)$ -- $O(1)$ [^1] | $O(n)$ | 
+Arranjo Dinâmico       |  $O(1)$ | $O(n)$ / $O(n)$ | $O(1)$[^2] / $O(1)$ | $O(n)$  | $O(n)$ | 
 
 [^1]: Com a referência para o nó
 [^2]: Amortizado
@@ -1541,6 +1539,6 @@ Arranjo Dinâmico       |  $O(1)$ | $O(n)$ / $O(n)$ | $O(1)$[^2] / $O(1)$ | $O(n
 
 Capítulo 7, 8, 9 - Pilhas, filas e listas - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na [Minha Biblioteca da UEM](https://dliportal.zbra.com.br/Login.aspx?key=UEM))
 
-Seção 10.2 - Listas ligadas - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
+Seção 10.2 - Listas ligadas - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. et al.
 
 Capítulo 3 - Linked Lists - [Open Data Structures](https://opendatastructures.org/ods-python.pdf).
