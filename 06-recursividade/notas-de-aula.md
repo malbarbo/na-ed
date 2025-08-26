@@ -17,20 +17,20 @@ A recursividade é uma técnica muito poderosa e bastante utilizada na Computaç
 
 De certa maneira a recursividade é um caso especial da decomposição de problemas. \pause
 
-De forma geral podemos resolver um problema decompondo-o em subproblemas mais simples, resolvendo os subproblemas e combinado as soluções para obter a solução do problema inicial. \pause
+De forma geral podemos resolver um problema decompondo-o em subproblemas mais simples, resolvendo os subproblemas e combinando as soluções para obter a solução do problema inicial. \pause
 
-A recursividade surge quando decompomos um problema em subproblemas do _mesmo tipo_, nesses casos podemos utilizar _o mesmo processo_ para resolver o problema inicial e os subproblemas. \pause Note que para que o processo funciona, devemos definir situações limites em que o problema seja resolvido diretamente, sem precisar ser decomposto, que são os casos bases.
+A recursividade surge quando decompomos um problema em subproblemas do _mesmo tipo_, nesses casos podemos utilizar _o mesmo processo_ para resolver o problema inicial e os subproblemas. \pause Note que, para que o processo funcione, devemos definir situações limites em que o problema seja resolvido diretamente, sem precisar ser decomposto, que são os casos-base.
 
 
 ## Formas de recursividade
 
-Dessa forma, para aplicarmos a recursividade é necessário decompor um problema em subproblemas do mesmo tipo. \pause Mas como fazer esse decomposição? \pause
+Dessa forma, para aplicarmos a recursividade é necessário decompor um problema em subproblemas do mesmo tipo. \pause Mas como fazer essa decomposição? \pause
 
-- Para algumas problemas pode ser necessário um momento "eureka" e inventar uma forma de fazer a decomposição, o que requer experiência. \pause
+- Para alguns problemas pode ser necessário um momento "eureka" e inventar uma forma de fazer a decomposição, o que requer experiência. \pause
 
 - Mas para a maioria dos problemas podemos fazer uma decomposição "direta", baseada na definição com autorreferência do dado (estrutura) que representa o problema. \pause
 
-A primeira forma gera **funções recursivas generativas**, já a segunda forma gerar **funções recursivas estruturais**. \pause
+A primeira forma gera **funções recursivas generativas**, já a segunda forma gera **funções recursivas estruturais**. \pause
 
 Vamos explorar agora essa segunda forma.
 
@@ -107,11 +107,11 @@ def fn_para_lista(lst: Lista) -> ...:
 
 Como o modelo guia a implementação da função? \pause
 
-O modelo indica que, para processarmos uma lista, temos que ter pelo menos dois casos, uma para a lista vazia, e outro para a lista não vazia. \pause
+O modelo indica que, para processarmos uma lista, temos que ter pelo menos dois casos, um para a lista vazia, e outro para a lista não vazia. \pause
 
 Além disso, no caso de lista não vazia, o modelo sugere chamar a função recursivamente para o resto da lista (por que?). \pause
 
-O nosso trabalho é determinar como combinar o valor do primeiro da lista com a resposta da chamada recursiva para obter a resposta da função. \pause
+O nosso trabalho é determinar como combinar o valor do primeiro item da lista com a resposta da chamada recursiva para obter a resposta da função. \pause
 
 Nos exemplos a seguir, partimos do modelo e fazemos a implementação de algumas funções.
 
@@ -122,7 +122,7 @@ Nos exemplos a seguir, partimos do modelo e fazemos a implementação de algumas
 
 \centering
 
-Tente completar as funções antes de ver as repostas.
+Tente completar as funções antes de ver as respostas.
 
 
 ## Soma
@@ -379,7 +379,6 @@ def todos_pares(lst: Lista) -> bool:
 
 
 
-
 ```
 
 </div>
@@ -413,7 +412,6 @@ def todos_pares(lst: Lista) -> bool:
 ```
 
 ```python
-
 
 
 
@@ -1279,7 +1277,7 @@ Um **número natural** é:
 
 \pause
 
-A partir dessa definição podemos criar um modelo de função para processar número naturais (que precisam ser decompostos):
+A partir dessa definição podemos criar um modelo de função para processar números naturais (que precisam ser decompostos):
 
 \scriptsize
 
@@ -1297,7 +1295,7 @@ def fn_para_n(n: int) -> ...:
 <div class="column" width="48%">
 \pause
 
-Projete uma função que some todos os número naturais até um dado $n$.
+Projete uma função que some todos os números naturais até um dado $n$.
 
 \scriptsize
 
@@ -1339,7 +1337,7 @@ Um **número natural** é:
 - 0; ou
 - $n + 1$, onde $n$ é um **número natural**.
 
-A partir dessa definição podemos criar um modelo de função para processar número naturais (que precisam ser decompostos):
+A partir dessa definição podemos criar um modelo de função para processar números naturais (que precisam ser decompostos):
 
 \scriptsize
 
@@ -1397,7 +1395,7 @@ Um **número natural** é:
 - 0; ou
 - $n + 1$, onde $n$ é um **número natural**.
 
-A partir dessa definição podemos criar um modelo de função para processar número naturais (que precisam ser decompostos):
+A partir dessa definição podemos criar um modelo de função para processar números naturais (que precisam ser decompostos):
 
 \scriptsize
 
@@ -1498,11 +1496,11 @@ def soma(lst: list[int]) -> int:
 
 \pause
 
-\ \
+\ \ 
 
 \normalsize
 
-Qual o problema com essa estratégia? \pause
+Qual é o problema com essa estratégia? \pause
 
 A operação de _slice_ cria um novo arranjo a cada chamada, o que é custoso. \pause
 
@@ -1580,14 +1578,14 @@ Esse exemplo de função recursiva com arranjo é ilustrativo e de fato não é 
 
 Na prática, recursividade em arranjo é feita em subarranjos quaisquer, e não em um subarranjo sem o último elemento. \pause
 
-Nesse caso, a função receba como parâmetro além do arranjo um índice de início e outro de fim, que define o subarranjo que vai ser processado. \pause
+Nesse caso, a função recebe como parâmetro além do arranjo um índice de início e outro de fim, que define o subarranjo que vai ser processado. \pause
 
 Note que dessa forma não temos mais recursão estrutural e sim recursão generativa. \pause É preciso determinar uma forma específica para o subarranjo.
 
 
 ## Palíndromo
 
-Projete uma função recursiva que determine se um arranjo de números é palíndromo, isto é, tem os mesmos elementos quando lido da direita para e esquerda e da esquerda para a direita. \pause
+Projete uma função recursiva que determine se um arranjo de números é palíndromo, isto é, tem os mesmos elementos quando lido da direita para a esquerda e da esquerda para a direita. \pause
 
 Para esse problema o principal desafio é definir como decompor o problema em subproblema(s) da mesma natureza. \pause
 
@@ -1663,7 +1661,7 @@ Quais os problemas dessa implementação? \pause
 - Requer argumentos extras; \pause
 - Verifica a validade dos parâmetros em todas as chamadas. \pause
 
-Como podemos melhorar? \pause Vamos criar um função auxiliar interna que recebe o inicio e o fim e deixar a função principal recebendo apenas um argumento.
+Como podemos melhorar? \pause Vamos criar uma função auxiliar interna que recebe o inicio e o fim e deixar a função principal recebendo apenas um argumento.
 </div>
 </div>
 
@@ -1704,11 +1702,10 @@ def palindromo(lst: list[int]) -> bool:
 
 Exemplos de execução passo a passo no [PythonTutor](https://pythontutor.com):
 
-- [Soma](https://pythontutor.com/render.html#code=def%20soma%28n%3A%20int%29%20-%3E%20int%3A%0A%20%20%20%20if%20n%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20return%200%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20n%20%2B%20soma%28n%20-%201%29%0A%0Aprint%28soma%284%29%29&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false) dos números naturais menores que um $n$.
+- [Soma](https://pythontutor.com/render.html#code=def%20soma%28n%3A%20int%29%20-%3E%20int%3A%0A%20%20%20%20if%20n%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20return%200%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20n%20%2B%20soma%28n%20-%201%29%0A%0Aprint%28soma%284%29%29&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false) dos números naturais menores que $n$.
 
 - [Soma](https://pythontutor.com/render.html#code=class%20No%3A%0A%20%20%20%20primeiro%3A%20int%0A%20%20%20%20resto%3A%20%22Lista%22%0A%20%20%20%20%0A%20%20%20%20def%20__init__%28self,%20primeiro%3A%20int,%20resto%3A%20%22Lista%22%29%3A%0A%20%20%20%20%20%20%20%20self.primeiro%20%3D%20primeiro%0A%20%20%20%20%20%20%20%20self.resto%20%3D%20resto%0A%0A%0ALista%20%3D%20No%20%7C%20None%0A%0A%0Adef%20soma%28lst%3A%20Lista%29%20-%3E%20int%3A%0A%20%20%20%20if%20lst%20is%20None%3A%0A%20%20%20%20%20%20%20%20return%200%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20lst.primeiro%20%2B%20soma%28lst.resto%29%0A%0Alst%20%3D%20No%2810,%20No%282,%20No%283,%20No%285,%20None%29%29%29%29%0A%0Aprint%28soma%28lst%29%29&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false) dos elementos de uma lista encadeada.
 
 - [Soma](https://pythontutor.com/render.html#code=def%20soma_slice%28lst%3A%20list%5Bint%5D%29%20-%3E%20int%3A%0A%20%20%20%20if%20lst%20%3D%3D%20%5B%5D%3A%0A%20%20%20%20%20%20%20%20return%200%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20lst%5B0%5D%20%2B%20soma_slice%28lst%5B1%3A%5D%29%0A%0Adef%20soma%28lst%3A%20list%5Bint%5D,%20n%3A%20int%29%20-%3E%20int%3A%0A%20%20%20%20if%20n%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20return%200%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20return%20lst%5Bn%20-%201%5D%20%2B%20soma%28lst,%20n%20-%201%29%0A%20%20%20%20%20%20%20%20%0A%0Aprint%28soma_slice%28%5B4,%201,%205,%202%5D%29%29%0A%0Aprint%28soma%28%5B4,%201,%205,%202%5D,%204%29%29&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false) dos elementos de um arranjo.
 
 - [Palíndromo](https://pythontutor.com/render.html#code=def%20palindromo%28lst%3A%20list%5Bint%5D%29%20-%3E%20bool%3A%0A%20%20%20%20def%20_palindromo%28lst%3A%20list%5Bint%5D,%20ini%3A%20int,%20fim%3A%20int%29%20-%3E%20bool%3A%0A%20%20%20%20%20%20%20%20return%20fim%20%3C%3D%20ini%20or%20lst%5Bini%5D%20%3D%3D%20lst%5Bfim%5D%20and%20_palindromo%28lst,%20ini%20%2B%201,%20fim%20-%201%29%0A%20%20%20%20return%20_palindromo%28lst,%200,%20len%28lst%29%20-%201%29%0A%0Aprint%28palindromo%28%5B4,%201,%203,%200,%203,%201,%204%5D%29%29&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-frontend.js&py=311&rawInputLstJSON=%5B%5D&textReferences=false) de arranjo.
-
