@@ -8,21 +8,21 @@ urlcolor: Blue
 
 ## Árvores binárias balanceadas
 
-Informalmente, uma árvore é **balanceada** (na altura), quando a diferença das alturas das suas subárvores é "pequena" e as subárvores são **balanceadas**. \pause Ou ainda, uma árvore que tem altura $O(\lg n)$. \pause
+Informalmente, uma árvore é **balanceada** (na altura), quando a diferença das alturas das suas subárvores é "pequena", e as subárvores são **balanceadas**. \pause Ou ainda, uma árvore que tem altura $O(\lg n)$. \pause
 
-Uma **árvore binária de busca auto balanceada** é aquela que se mantém balanceada após cada modificação. \pause
+Uma **árvore binária de busca auto-balanceada** é aquela que se mantém balanceada após cada modificação. \pause
 
-Existem diversos tipos de ABB auto balanceadas, entre elas: AVL, rubro-negra e treap.
+Existem diversos tipos de ABB auto-balanceadas, entre elas: AVL, rubro-negra e treap.
 
 
 ## Árvore AVL
 
-A árvore AVL (nomeada a partir do nome dos criadores - **A**delson-**V**elsky and **L**andis) foi a primeira árvore auto balanceada a ser criada (1962). \pause
+A árvore AVL (nomeada a partir do nome dos criadores -- **A**delson-**V**elsky and **L**andis) foi a primeira árvore auto-balanceada a ser criada (1962). \pause
 
-Uma **árvore AVL**, é uma ABB de busca, que quando não é vazia, tem uma raiz $t$ e: \pause
+Uma **árvore AVL** é uma ABB de busca, que quando não é vazia, tem uma raiz $t$ e: \pause
 
-- A diferença absoluta da altura das subárvores a direita e a esquerda de $t$ é no máximo 1; \pause
-- As subárvores a esquerda e direita de $t$ são **AVL**. \pause
+- A diferença absoluta da altura das subárvores à direita e à esquerda de $t$ é no máximo 1; \pause
+- As subárvores à esquerda e à direita de $t$ são **AVL**. \pause
 
 Para representar uma AVL, é preciso adicionar um atributo `altura` na classe `No`.
 
@@ -63,7 +63,7 @@ def altura(t: Arvore) -> Int:
 \pause
 </div>
 <div class="column" width="48%">
-Considere as seguintes árvore, onde cada nó é representado pelo seu valor e altura:
+Considere as seguintes árvores, onde cada nó é representado pelo seu valor e altura:
 
 \scriptsize
 
@@ -130,10 +130,10 @@ Na figura abaixo, $x$ e $y$ representam valores armazenados nos nós e $A$, $B$ 
 \scriptsize
 
 ```
-    y      rotação a direita       x
+    y      rotação à direita       x
    / \     ----------------->     / \
   x   C                          A   y
- / \       rotação a esquerda       / \
+ / \       rotação à esquerda       / \
 A   B      <-----------------      B   C
 
 
@@ -151,9 +151,9 @@ Note que $A < x < B < y < C$ nas duas figuras. Ou seja, essas rotações não al
 Veja uma [animação](https://en.wikipedia.org/wiki/Tree_rotation#/media/File:Tree_rotation_animation_250x250.gif) da rotação e outras informações na página [Tree rotation](https://en.wikipedia.org/wiki/Tree_rotation).
 
 
-## Rotação a esquerda
+## Rotação à esquerda
 
-Projete uma função para fazer a rotação a esquerda de uma árvore não vazia com raiz `r`.
+Projete uma função para fazer a rotação à esquerda de uma árvore não vazia com raiz `r`.
 
 \pause
 
@@ -200,14 +200,14 @@ def rotaciona_esq(r: No) -> No:
 
 \normalsize
 
-Exercício: projete a função para fazer a rotação a direita.
+Exercício: projete a função para fazer a rotação à direita.
 </div>
 </div>
 
 
 ## Exemplo de inserção em árvore AVL
 
-Crie uma árvore AVL inserindo os seguintes itens na ordem que eles aparecem: 20, 10, 5, 30, 40, 25, 8, 2, 6, 9, 12, 14.
+Crie uma árvore AVL inserindo os seguintes itens na ordem em que eles aparecem: 20, 10, 5, 30, 40, 25, 8, 2, 6, 9, 12, 14.
 
 \pause
 
@@ -215,12 +215,12 @@ Feito e discutido em sala.
 
 Você pode conferir o resultado usando [este](https://www.cs.usfca.edu/~galles/visualization/AVLtree.html) simulador. \pause
 
-Agora que vimos o funcionamento das operações de rotação, vamos sistematizar a forma que o rebalanceamento é feito a partir dessas operações.
+Agora que vimos o funcionamento das operações de rotação, vamos sistematizar a forma como o rebalanceamento é feito a partir dessas operações.
 
 
 ## Rebalanceamento
 
-Quando uma árvore AVL com raiz $r$ tem a subárvore a esquerda ou a direita alterada, é necessário verificar se a propriedade de balanceamento foi violada. \pause Como fazer essa verificação? \pause
+Quando uma árvore AVL com raiz $r$ tem a subárvore à esquerda ou à direita alterada, é necessário verificar se a propriedade de balanceamento foi violada. \pause Como fazer essa verificação? \pause
 
 \scriptsize
 
@@ -231,10 +231,10 @@ abs(altura(r.esq) - altura(r.dir)) == 2
 \pause
 
 ```python
-# Desbalanceamento a esquerda
+# Desbalanceamento à esquerda
 altura(r.esq) > altura(r.dir) + 1
 
-# Desbalanceamento a direita
+# Desbalanceamento à direita
 altura(r.dir) > altura(r.esq) + 1
 ```
 
@@ -250,26 +250,26 @@ Se existe violação, é necessário rebalancear a árvore usando rotações. \p
 
 ## Rebalanceamento
 
-Se a subárvore a esquerda tem altura maior que a subárvore a direita, então fazemos o rebalanceamento a esquerda, senão fazemos o rebalanceamento a direita. \pause
+Se a subárvore à esquerda tem altura maior que a da subárvore à direita, então fazemos o rebalanceamento à esquerda, senão fazemos o rebalanceamento à direita. \pause
 
-Como o rebalanceamento a esquerda afeta as alturas das subárvores? \pause
+Como o rebalanceamento à esquerda afeta as alturas das subárvores? \pause
 
-- Aumenta a altura da árvore a direita \pause
+- Aumenta a altura da árvore à direita \pause
 
-- Diminui a altura da árvore a esquerda \pause
-
-
-Como o rebalanceamento a direita afeta as alturas das subárvores? \pause
-
-- Aumenta a altura da árvore a esquerda \pause
-
-- Diminui a altura da árvore a direita
+- Diminui a altura da árvore à esquerda \pause
 
 
+Como o rebalanceamento à direita afeta as alturas das subárvores? \pause
 
-## Rebalanceamento a esquerda
+- Aumenta a altura da árvore à esquerda \pause
 
-A forma que o rebalanceamento a esquerda de uma árvore AVL com raiz `r` é feito depende de qual das subárvores de `r.esq` tem maior altura.
+- Diminui a altura da árvore à direita
+
+
+
+## Rebalanceamento à esquerda
+
+A forma como o rebalanceamento à esquerda de uma árvore AVL com raiz `r` é feito depende de qual das subárvores de `r.esq` têm maior altura.
 
 
 ## Rebalanceamento a esquerda-esquerda
@@ -328,7 +328,7 @@ A   B C   D
 
 \normalsize
 
-Note que a árvore tem uma nova raiz e que a altura da subárvore a esquerda diminui e a altura da subárvore a direita aumentou.
+Note que a árvore tem uma nova raiz e que a altura da subárvore à esquerda diminui e a altura da subárvore à direita aumentou.
 
 </div>
 </div>
@@ -399,25 +399,25 @@ A   B
 
 \normalsize
 
-Note que a árvore fica com uma nova raiz e que a altura da subárvore a esquerda diminui e a altura da subárvore a direita aumenta.
+Note que a árvore fica com uma nova raiz e que a altura da subárvore à esquerda diminui e a altura da subárvore à direita aumenta.
 
 </div>
 </div>
 
 
-## Rebalanceamento a esquerda - código
+## Rebalanceamento à esquerda - código
 
-Projete uma função que implemente o esquema de rebalanceamento a esquerda (e a correção da altura da árvore).
+Projete uma função que implemente o esquema de rebalanceamento à esquerda (e a correção da altura da árvore).
 
 
-## Rebalanceamento a esquerda - código
+## Rebalanceamento à esquerda - código
 
 \scriptsize
 
 ```python
 def rebalanceia_esq(r: No) -> No:
     '''
-    Verifica o balanceamento de *r*, considerando o caso da subárvore a esquerda com maior altura,
+    Verifica o balanceamento de *r*, considerando o caso da subárvore à esquerda com maior altura,
     e faz o rebalanceamento e atualização das alturas se necessário. Devolve a raiz da árvore balanceada.
     '''
 ```
@@ -427,7 +427,7 @@ def rebalanceia_esq(r: No) -> No:
 ```python
     assert r.esq is not None
     if altura(r.esq) - altura(r.dir) == 2:
-        # r está desbalaceada
+        # r está desbalanceada
         if altura(r.esq.esq) > altura(r.esq.dir):
             # Caso Esquerda-Esquerda
             return rotaciona_dir(r)
@@ -437,15 +437,15 @@ def rebalanceia_esq(r: No) -> No:
             r.esq = rotaciona_esq(r.esq)
             return rotaciona_dir(r)
     else:
-        # r está balaceada
+        # r está balanceada
         atualiza_altura(r)
         return r
 ```
 
 
-## Rebalanceamento a direita
+## Rebalanceamento à direita
 
-Projete uma função que implemente o esquema de rebalanceamento a direita (e a correção da altura da árvore). \pause
+Projete uma função que implemente o esquema de rebalanceamento à direita (e a correção da altura da árvore). \pause
 
 Fica como exercício.
 
@@ -535,7 +535,7 @@ Veja o arquivo `percursos.py`.
 
 Implementação do TAD dicionário: \pause
 
-- Com arranjos e lista encadeada com busca linear, as operações de busca inserção e remoção tem tempo $O(n)$; \pause
+- Com arranjos e lista encadeada com busca linear, as operações de busca, inserção e remoção tem tempo $O(n)$; \pause
 
 - Com arranjos ordenados e busca binária, a busca tem tempo $O(\lg n)$ e a inserção e remoção $O(n)$; \pause
 
