@@ -33,7 +33,7 @@ def robo_posicao(r: Robo) -> int:
     '''Devolve a posição atual do robo *r*.'''
 
 def robo_info(r: Robo) -> str:
-    '''Devolve um texto com o nome do robo *r* seguido da sua posição entre parêntes.'''
+    '''Devolve um texto com o nome do robo *r* seguido da sua posição entre parênteses.'''
 
 def robo_move(r: Robo, n: int):
     '''
@@ -213,7 +213,7 @@ De maneira mais formal, um **tipo abstrato de de dado** (TAD) é um modelo teór
 
 \pause
 
-Muitos tipos pré-definidos em Python são TAD's, como `list`{.python}, `dict`{.python} e até mesmo `int`{.python}.
+Muitos tipos pré-definidos em Python são TADs, como `list`{.python}, `dict`{.python} e até mesmo `int`{.python}.
 
 \pause
 
@@ -222,7 +222,7 @@ A especificação criada pelo Roberto define um TAD para um Robô!
 
 ## Especificação, implementação e uso
 
-Existem três papéis no desenvolvimento e uso de TAD's: \pause
+Existem três papéis no desenvolvimento e uso de TADs: \pause
 
 - Quem especifica; \pause
 
@@ -239,7 +239,7 @@ Qual é a diferença entre quem implementa e quem usa o TAD? \pause
 
 ## Vantagens e desvantagens
 
-Quais são as vantagens dos TAD's? \pause
+Quais são as vantagens dos TADs? \pause
 
 - Facilita o reuso criando abstrações; \pause
 
@@ -274,7 +274,7 @@ Por último, usamos uma classe para implementar o TAD especificado pelo Roberto.
 
 ## Métodos
 
-Apesar de podermos usar funções "livres" para implementar TAD's, o **comum em Python** é usar métodos. \pause
+Apesar de podermos usar funções "livres" para implementar TADs, o **comum em Python** é usar métodos. \pause
 
 Um **método** é uma função que está associada com uma classe particular. \pause
 
@@ -609,7 +609,7 @@ class Robo:
 
 ## Definição de métodos
 
-Daqui para frente, vamos usar essa última forma para implementar TAD's.
+Daqui para frente, vamos usar essa última forma para implementar TADs.
 
 
 ## `@dataclass`
@@ -618,7 +618,7 @@ Em geral, usamos `@dataclass`{.python} quando queremos um tipo concreto de dado.
 
 Quando usamos `@dataclass`{.python} um construtor que recebe um argumento para cada campo é criado, dessa forma não precisamos criar o método `__init__`{.python}. \pause
 
-Além do construtor as funções `__eq__`{.python}, `__repr__`{.python}, `__str__`{.python}, `__hash__`{.python} são criadas automaticamente.
+Além do construtor, as funções `__eq__`{.python}, `__repr__`{.python}, `__str__`{.python}, `__hash__`{.python} são criadas automaticamente.
 
 
 ## `@dataclass`
@@ -675,7 +675,7 @@ Porque queremos implementar um TAD e nem tudo que é gerado automaticamente pelo
 
 Pode parecer confuso quando usar ou não o `@dataclass`{.python}, mas não se preocupe, isso vai ficar mais claro com a prática! \pause
 
-O importante por enquanto é saber como usar classes para especificar e implementar TAD's.
+O importante por enquanto é saber como usar classes para especificar e implementar TADs.
 
 
 ## Referências
