@@ -7,16 +7,16 @@ urlcolor: Blue
 
 ## Introdução
 
-Vimos que algumas vezes informações sobre características da entrada nos permitem desenvolver algoritmos e estrutura de dados mais eficientes. \pause Por exemplo: \pause
+Vimos que algumas vezes informações sobre características da entrada nos permitem desenvolver algoritmos e estruturas de dados mais eficientes. \pause Por exemplo: \pause
 
-- Se um arranjo está ordenado, então podemos fazer uma busca binária ao invés de uma busca linear; \pause
+- Se um arranjo está ordenado, então podemos fazer uma busca binária em vez de uma busca linear; \pause
 
 - Se as chaves para inserção em uma ABB são uniformemente distribuídas, então a altura da árvore será pequena e as operações serão eficientes.
 
 
 ## Introdução
 
-Além disso, quando a entrada não tem aquelas características, ainda podemos tomar algumas providências: \pause
+Além disso, quando a entrada não tem essas características, ainda podemos tomar algumas providências: \pause
 
 - Modificar a entrada, como por exemplo, ordenar os valores para fazer a busca binária; \pause
 
@@ -25,18 +25,18 @@ Além disso, quando a entrada não tem aquelas características, ainda podemos t
 
 ## Desafio
 
-Vimos que podemos implementar as operações de busca, inserção e remoção do TAD Dicionario usando árvores AVL com tempo $O(\lg n)$. \pause Será que podemos fazer melhor se soubermos algo sobre as entradas (chaves)? \pause
+Vimos que podemos implementar as operações de busca, inserção e remoção do TAD Dicionário usando árvores AVL com tempo $O(\lg n)$. \pause Será que podemos fazer melhor se soubermos algo sobre as entradas (chaves)? \pause
 
 Na definição do TAD as chaves eram strings, e se as chaves fossem inteiros? \pause
 
-E se as chaves estivem em um intervalo específico, entre 0 e 10.000? \pause
+E se as chaves estiverem em um intervalo específico, entre 0 e 10.000? \pause
 
 Como tirar proveito desse conhecimento sobre as chaves para fazer uma implementação eficiente?
 
 
 ## Endereçamento direto
 
-Podemos criar um arranjo com uma posição para cada possível chave da entrada, armazenamos na posição o valor associada com a chave, se houver tal valor, ou `None`{.python} caso contrário. \pause
+Podemos criar um arranjo com uma posição para cada possível chave da entrada, armazenamos na posição o valor associado à chave, se houver tal valor, ou `None`{.python} caso contrário. \pause
 
 Essa estratégia é chamada de **endereçamento direto**. \pause
 
@@ -91,7 +91,7 @@ Qual é a complexidade de tempo das operações de dicionário usando endereçam
 
 ## Endereçamento direto
 
-Quais as desvantagens/limitações dessa estratégia? \pause
+Quais são as desvantagens/limitações dessa estratégia? \pause
 
 - Se a quantidade de chaves é muito menor que $M$, então existe um desperdício muito grande de memória. \pause Além disso, a quantidade de memória disponível pode não ser suficiente. \pause
 
@@ -107,9 +107,9 @@ Vamos isolar e tentar lidar com cada uma dessas questões separadamente.
 <div class="columns">
 <div class="column" width="48%">
 
-O que podemos fazer se as chaves estão em um intervalo de $[A, B)$ qualquer? \pause
+O que podemos fazer se as chaves estão em um intervalo $[A, B)$ qualquer? \pause
 
-Podemos _mapear_ cada chave para um valor distinto no intervalo  $[0, B - A)$:
+Podemos _mapear_ cada chave para um valor distinto no intervalo  $[0, B - A)$: 
 
 $A \rightarrow 0, (A + 1) \rightarrow 1, \dots, (B - 1) \rightarrow (B - A - 1)$.
 
@@ -179,7 +179,7 @@ Mapeie as chaves 734, 141, 8, 230, 554, 650 usando o esquema de divisão com $m 
 
 $734 \rightarrow 14$, \pause $141 \rightarrow 1$ \pause, $8 \rightarrow 8$, \pause $230 \rightarrow 10$, \pause $554 \rightarrow 14$, \pause $650 \rightarrow 10$. \pause
 
-Considerando que o resultado do mapeamento de uma chave é uma posição em um arranjo (onde o valor associado com a chave será armazenado), qual o problema que temos? \pause Colisões! \pause
+Considerando que o resultado do mapeamento de uma chave é uma posição em um arranjo (onde o valor associado com a chave será armazenado), qual é o problema que temos? \pause Colisões! \pause
 
 Uma **colisão** ocorre quando duas chaves são mapeadas para a mesma posição do arranjo.
 
@@ -190,7 +190,7 @@ Podemos evitar as colisões? \pause Sem conhecer as chaves, não. \pause
 
 Podemos lidar com as colisões? \pause Sim, de algumas maneiras que vamos ver depois. \pause
 
-Considerando o mapeamento por divisão, qual a característica das chaves para que as colisões sejam mais raras? \pause Elas devem estar uniformemente distribuídas. \pause
+Considerando o mapeamento por divisão, qual é a característica das chaves para que as colisões sejam mais raras? \pause Elas devem estar uniformemente distribuídas. \pause
 
 E para que as colisões sejam frequentes? \pause Que tenham o mesmo resto quando divididas por $m$.
 
@@ -256,7 +256,7 @@ Mas não vamos nos preocupar com isso por enquanto, basta sabermos que é possí
 
 Vimos que, se as chaves são inteiros em um intervalo de 0 a $M - 1$, então podemos implementar um dicionário usando endereçamento direto, onde as operações de busca, inserção e remoção tem complexidade de tempo de $O(1)$. \pause
 
-Vimos as limitações do endereçamento direto e discutimos estratégias de como superá-las. \pause O quê essas estratégias tinham em comum? \pause
+Vimos as limitações do endereçamento direto e discutimos estratégias de como superá-las. \pause O que essas estratégias tinham em comum? \pause
 
 - O mapeamento da chave para uma posição de um arranjo com tamanho conhecido
 
@@ -267,9 +267,9 @@ Em outras palavras, a estratégia é a mesma!
 
 ## Tabelas de dispersão
 
-Chamamos a função que mapeia a chaves para posições de um arranjo de **função de dispersão** ou **função _hash_**. \pause
+Chamamos a função que mapeia as chaves para posições de um arranjo de **função de dispersão** ou **função hash**. \pause
 
-Uma **tabela de dispersão** ou **tabela _hash_** é uma estrutura de dados que usa uma função de dispersão para calcular índices em um arranjo que fornece uma forma de armazenar pares de chave-valor.
+Uma **tabela de dispersão** ou **tabela hash** é uma estrutura de dados que usa uma função de dispersão para calcular índices em um arranjo que fornece uma forma de armazenar pares de chave-valor.
 
 \pause
 
@@ -284,7 +284,7 @@ Existem dois desafios no projeto e implementação de uma tabela de dispersão: 
 
 Criar uma boa função de dispersão, isto é, uma função que gere poucas colisões, requer conhecimentos avançados de probabilidade e estatística, por isso não vamos tratar desse assunto. \pause
 
-Como função de dispersão, vamos combinar a função `hash`{.python}, pré-defina em Python, com o resto da divisão. \pause Para uma chave $k$, vamos representar o resultado da função de dispersão por $h(k)$. \pause
+Como função de dispersão, vamos combinar a função `hash`{.python}, pré-definida em Python, com o resto da divisão. \pause Para uma chave $k$, vamos representar o resultado da função de dispersão por $h(k)$. \pause
 
 <div class="columns">
 <div class="column" width="48%">
@@ -335,21 +335,21 @@ Considere os pares de chave-valor: \footnotesize `(734, 'maça')`{.python}, `(14
 
 Considerando um tabela (arranjo) de $m = 10$ posições, calcule $h(k) = k \mod m$ para cada chave $k$ listada anteriormente. \pause
 
-Proponha uma forma de lidar com as colisões, isto é, uma maneira de armazenar, busca, inserir e remover os pares chave-valor na tabela.
+Proponha uma forma de lidar com as colisões, isto é, uma maneira de armazenar, buscar, inserir e remover os pares chave-valor na tabela.
 
 
 ## Encadeamento separado
 
-Podemos armazenar todas os pares chave-valor cuja a chave gerou o mesmo índice em um coleção: \pause
+Podemos armazenar todos os pares chave-valor cuja chave gerou o mesmo índice em um coleção: \pause
 
 - Arranjo dinâmico \pause
 - Lista encadeada \pause
 - Árvore AVL \pause
-- Outra tabela de dispersão!
+- Outra tabela de dispersão! 
 
 \pause
 
-Quanto usamos uma lista encadeada em cada posição, chamamos a estratégia **encadeamento separado**.
+Quando usamos uma lista encadeada em cada posição, chamamos a estratégia **encadeamento separado**.
 
 
 ## Encadeamento separado
@@ -503,9 +503,9 @@ Chamamos de **fator de carga** $\alpha$ de uma tabela de dispersão $T$ o valor 
 
 Qual é o pior caso para as operações? \pause Todos os $n$ elementos estão na mesma posição da tabela. \pause Nesse caso, o tempo das operações é $O(n)$. \pause
 
-E o caso médio? \pause Qual o tamanho médio de cada lista encadeada? \pause $n / m = \alpha$ \pause, ou seja, no caso médio, o tempo das operações é $O(1 + \alpha)$. \pause
+E o caso médio? \pause Qual é o tamanho médio de cada lista encadeada? \pause $n / m = \alpha$ \pause, ou seja, no caso médio, o tempo das operações é $O(1 + \alpha)$. \pause
 
-Se mantermos $n = O(m)$, então $\alpha = n / m = O(m) / m = O(1)$, e o tempo médio das operações fica $O(1)$.
+Se mantivermos $n = O(m)$, então $\alpha = n / m = O(m) / m = O(1)$, e o tempo médio das operações fica $O(1)$.
 
 
 ## Redispersão
@@ -514,16 +514,16 @@ Para manter o tempo médio em $O(1)$, temos que manter um fator de carga pequeno
 
 Sedgewick recomenda um valor entre 5 e 10. \pause
 
-Então quanto $\alpha$ fica maior que 10, temos que alocar uma tabela _maior_ e fazer a redispersão das chaves. \pause
+Então, quando $\alpha$ fica maior que 10, temos que alocar uma tabela _maior_ e fazer a redispersão das chaves. \pause
 
-Quanto $\alpha$ fica menor que 5, temos que alocar uma tabela _menor_ e fazer a redispersão das chaves.
+Quando $\alpha$ fica menor que 5, temos que alocar uma tabela _menor_ e fazer a redispersão das chaves.
 
 
 ## Endereçamento aberto
 
 **Endereçamento aberto** é uma técnica de resolução de colisão baseado em **sondagem**. \pause
 
-Nessa técnica todos os pares chave-valor são armazenados na própria tabela. \pause
+Nessa técnica, todos os pares chave-valor são armazenados na própria tabela. \pause
 
 Quando um novo par chave-valor precisa ser inserido na tabela e a posição já está ocupada, outras posições são sondadas até que uma posição livre seja encontra. \pause
 
@@ -536,7 +536,7 @@ A forma mais simples de sondagem é a linear. Nesse esquema, quando há colisão
 
 A sondagem para quando uma posição que nunca foi ocupada é encontrada. \pause
 
-Veremos que para esse esquema funcionar, a remoção deve marcar de forma especial a posição.
+Veremos que para esse esquema funcionar, a remoção deve marcar a posição de forma especial.
 
 
 ## Sondagem linear - inserção
@@ -720,7 +720,7 @@ Mostre passo a passo a inserção das chaves 734, 84, 236, 554, 141 em uma tabel
 
 ## Sondagem linear - remoção e busca
 
-Mostre passo a passo para a remoção da chave 236, e a busca das chave 742 e 141?.
+Mostre passo a passo para a remoção da chave 236, e a busca das chaves 742 e 141?.
 
 <div class="columns">
 <div class="column" width="15%">
@@ -751,7 +751,7 @@ Mostre passo a passo para a remoção da chave 236, e a busca das chave 742 e 14
 <div class="column" width="22%">
 Remoção do $236 \rightarrow 4, 5$.
 
-A posição de remoção deve ser marcada forma especial.
+A posição de remoção deve ser marcada de forma especial.
 
 \pause
 </div>
@@ -854,7 +854,7 @@ def busca(self, chave: str) -> None | int:
 
 \normalsize
 
-Note que para a busca parar no caso que a chave não é encontrada é preciso que exista pelo menos uma posição com `None`{.python}, ou seja, a quantidade de itens presentes mais os removidos deve ser menor o tamanho da tabela.
+Note que para a busca parar no caso em que a chave não é encontrada é preciso que exista pelo menos uma posição com `None`{.python}, ou seja, a quantidade de itens presentes mais os removidos deve ser menor que o tamanho da tabela.
 
 </div>
 </div>
@@ -862,7 +862,7 @@ Note que para a busca parar no caso que a chave não é encontrada é preciso qu
 
 ## Sondagem linear
 
-Qual o tempo de execução das operações de busca, inserção e remoção? \pause
+Qual é o tempo de execução das operações de busca, inserção e remoção? \pause
 
 No pior caso, $O(n)$. \pause
 
@@ -873,7 +873,7 @@ Mas se o fator de carga for mantido menor do que $0.7$, a complexidade de tempo 
 
 Capítulo 11 - Seção Estratégias de hashing - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na Minha Biblioteca na UEM).
 
-Capítulo 11 - Tabelas de Dispersão - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
+Capítulo 11 - Tabelas de Dispersão - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. et al.
 
 Capítulo 5 - Hash Tables - [Open Data Structures](https://opendatastructures.org/ods-python.pdf).
 
