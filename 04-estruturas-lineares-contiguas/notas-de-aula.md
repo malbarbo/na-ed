@@ -21,7 +21,7 @@ Usamos estruturas de dados para implementar TADs.
 
 ## Estrutura de dados lineares
 
-Em uma **estrutura de dados linear**, os elementos são organizados de forma sequencial, um após o outro. \pause Cada elemento possui no máximo um predecessor e um sucessor.\pause
+Em uma **estrutura de dados linear**, os elementos são organizados de forma sequencial, um após o outro. \pause Cada elemento possui, no máximo, um predecessor e um sucessor.\pause
 
 A estrutura de dados linear mais comum é o **arranjo**.
 
@@ -45,9 +45,9 @@ Os arranjos podem ser: \pause
 
 O tipo `list`{.python} do Python é de fato um arranjo dinâmico. \pause
 
-Diferente de outras linguagens, o Python não oferece um tipo pré-definido para arranjos estáticos. \pause
+Diferentemente de outras linguagens, o Python não oferece um tipo pré-definido para arranjos estáticos. \pause
 
-Por hora não vamos mais utilizar o tipo `list`{.python}, e sim o tipo `array`{.py}, que "simula" um arranjo de tamanho fixo. \pause
+Por ora não vamos mais utilizar o tipo `list`{.python}, e sim o tipo `array`{.py}, que "simula" um arranjo de tamanho fixo. \pause
 
 O tipo arranjo está definido na biblioteca `ed`, que está disponível para download na página da disciplina.
 
@@ -72,7 +72,7 @@ array([10, 0, 0, 0, 2])
 5
 >>> x[5]
 Traceback (most recent call last):
-...
+... 
 IndexError: list index out of range
 ```
 
@@ -98,7 +98,7 @@ IndexError: list index out of range
 ```python
 >>> x.append(10)
 Traceback (most recent call last):
-...
+... 
 AttributeError: 'array' object has no attribute 'append'
 ```
 
@@ -107,7 +107,7 @@ AttributeError: 'array' object has no attribute 'append'
 ```python
 >>> x.pop()
 Traceback (most recent call last):
-...
+... 
 AttributeError: 'array' object has no attribute 'pop'
 ```
 
@@ -122,7 +122,7 @@ A seguir veremos três TADs e como eles podem ser implementados usando arranjos.
 
 ## Exemplo parênteses
 
-Projete uma função que verifique se os parênteses em uma expressão aritmética (representada por uma string) estão corretos, isso é: \pause
+Projete uma função que verifique se os parênteses em uma expressão aritmética (representada por uma string) estão corretos, isto é: \pause
 
 - Cada `'('` tem um `')'` correspondente; \pause
 
@@ -173,8 +173,8 @@ Podemos utilizar a seguinte ideia: \pause
 
 - Analisar a string um caractere por vez. \pause
 - Manter um contador de parênteses que foram abertos mas ainda não foram fechados. \pause
-- Incrementar o contador a cada abre parênteses e decrementar a cada fecha parênteses (o contador não pode ficar negativo). \pause
-- No final, se o contador for 0 e não ficou negativo, os parênteses estão corretos.
+- Incrementar o contador a cada caractere '(' e decrementar a cada caractere ')' (o contador não pode ficar negativo). \pause
+- No final, se o contador for 0 e não se tornou negativo, os parênteses estão corretos.
 
 </div>
 </div>
@@ -336,7 +336,7 @@ De fato, o TAD que precisamos já é conhecido e é chamado de pilha.
 
 ## Pilha
 
-Uma **pilha** (_stack_ em inglês) é tipo abstrato de dados que representa uma coleção de itens que é mantida de acordo com a regra: \pause
+Uma **pilha** (_stack_ em inglês) é um tipo abstrato de dados que representa uma coleção de itens que é mantida de acordo com a regra: \pause
 
 - O elemento mais _recentemente inserido_ é o primeiro a ser removido. \pause
 
@@ -380,9 +380,9 @@ class Pilha:
 
 \small
 
-O método empilha é chamado de _push_ em inglês.
+O método empilha é chamado de *push* em inglês.
 
-O método desempilha é chamado de _pop_ em inglês.
+O método desempilha é chamado de *pop* em inglês.
 
 </div>
 </div>
@@ -418,6 +418,7 @@ class Pilha:
 
 </div>
 <div class="column" width="50%">
+
 \scriptsize
 
 ```python
@@ -582,7 +583,7 @@ def grupos_corretos(expr: str) -> bool:
 
 Como implementar uma pilha usando um arranjo estático? \pause
 
-Definimos um tamanho máximo para o arranjo e usamos um inteiro para armazenar o `topo` da pilha, isso é, o índice no arranjo do último elemento que foi inserido na pilha e que ainda não foi removido: \pause
+Definimos um tamanho máximo para o arranjo e usamos um inteiro para armazenar o `topo` da pilha, isto é, o índice no arranjo do último elemento que foi inserido na pilha e que ainda não foi removido: \pause
 
 - Construtor: \pause inicializa o arranjo e o `topo` com `-1`{.python}. \pause
 - Vazia: \pause verifica se `topo == -1`{.python}. \pause
@@ -659,7 +660,7 @@ Qual é a limitação dessa implementação? \pause
 
 Qual é a limitação da definição do TAD pilha? \pause
 
-- A possibilidade de estouro (negativo) da pilha (_stack underflow_), isso é, a tentativa de remover um elemento quando a pilha está vazia. \pause
+- A possibilidade de estouro (negativo) da pilha (_stack underflow_), isto é, a tentativa de remover um elemento quando a pilha está vazia. \pause
 
 Veremos posteriormente como superar essas limitações.
 
@@ -694,11 +695,11 @@ class Pilha:
 
 Podemos melhor o código? \pause
 
-Em geral, usamos o `assert`{.python} para verificar condições que devem ser verdadeiras durante a execução do programa e cuja a correção depende apenas do projetista do código. Adicionamos o `assert`{.python} como uma rede de segurança, mas esperamos que ele não falhe. \pause
+Em geral, usamos o `assert`{.python} para verificar condições que devem ser verdadeiras durante a execução do programa e cuja correção depende apenas do projetista do código. Adicionamos o `assert`{.python} como uma rede de segurança, mas esperamos que ele não falhe. \pause
 
 Para condições que devem ser verdadeiras mas a correção depende do usuário do código, usamos uma condicional para fazer a verificação e uma exceção para indicar erro. \pause
 
-O resultado final das duas abordagens é semelhante: a falha do programa. No entanto, o uso de exceções torna claro que o erro é esperado e permite a recuperação e a continuação de execução do programa (não veremos como fazer isso).
+O resultado final das duas abordagens é semelhante: a falha do programa. No entanto, o uso de exceções torna claro que o erro é esperado e permite a recuperação e a continuação da execução do programa (não veremos como fazer isso).
 
 </div>
 </div>
@@ -738,7 +739,7 @@ class Pilha:
 >>> p = Pilha()
 >>> p.desempilha()
 Traceback (most recent call last):
-...
+... 
 ValueError: a pilha está vazia
 ```
 
@@ -820,9 +821,9 @@ class Fila:
 
 \small
 
-O método enfileira é chamado de _enqueue_ em inglês.
+O método enfileira é chamado de *enqueue* em inglês.
 
-O método desenfileira é chamado de _dequeue_ em inglês.
+O método desenfileira é chamado de *dequeue* em inglês.
 
 </div>
 </div>
@@ -1001,9 +1002,9 @@ Podemos usar inteiros para indicar o `inicio` e o `fim` da fila da seguinte mane
 ```python
 class Fila:
     valores: array[str]
-    # Indíce do último elemento da fila
+    # Índice do último elemento da fila
     fim: int
-    # Indíce do primeiro elemento da fila
+    # Índice do primeiro elemento da fila
     inicio: int
 
     def enfileira(self, item: str):
@@ -1032,9 +1033,9 @@ class Fila:
 ```python
 class Fila:
     valores: array[str]
-    # Indíce do último elemento da fila
+    # Índice do último elemento da fila
     fim: int
-    # Indíce do primeiro elemento da fila
+    # Índice do primeiro elemento da fila
     inicio: int
 
     def enfileira(self, item: str):
@@ -1178,7 +1179,7 @@ Para uma lista que representa a sequência $x_0, x_1, ..., x_{n-1}$: \pause
 - O elemento $x_i$ está na posição (índice) $i$. \pause
 - Para $n > 0$, $x_0$ é o primeiro elemento e $x_{n-1}$ é o último elemento. \pause
 - $x_i$ precede (é o predecessor) de $x_{i+1}$ para $i = 0, 1, \dots, n - 2$. \pause
-- $x_i$ sucede (é sucessor) $x_{i - 1}$ para $i = 1, 2, \dots, n - 1$.
+- $x_i$ sucede (é sucessor) $x_{i - 1}$ para $i = 1, 2, \dots, n - 1$. 
 
 
 ## Operações com lista
@@ -1215,7 +1216,7 @@ class Lista:
 
     def insere(self, i: int, item: int):
         '''Insere *item* na posição *i* da lista. Os itens que estavam inicialmente
-        nas posiçõe i, i+1, ..., passam a ficar nas posições i+1, i+2, ...
+        nas posições i, i+1, ..., passam a ficar nas posições i+1, i+2, ...
         Requer que 0 <= i <= self.num_itens().'''
 ```
 
@@ -1375,7 +1376,7 @@ Para inserção e remoção (em uma posição) é preciso deslocar os elementos 
 
 A busca por um elemento e a representação por string é feita com uma repetição pelos elementos da lista. \pause
 
-Por fim, a remoção de um item pode ser feita com uma busca seguido da remoção por posição.
+Por fim, a remoção de um item pode ser feita com uma busca seguida da remoção por posição.
 
 
 
@@ -1430,7 +1431,7 @@ Agora vamos ver como superar essa limitação!
 
 ## Referências
 
-As variáveis em Python são referências para células de memórias. Quando atribuímos uma instância de um arranjo estático para uma variável, a variável passa a referenciar o bloco de células de memória do arranjo. \pause
+As variáveis em Python são referências para células de memória. Quando atribuímos uma instância de um arranjo estático para uma variável, a variável passa a referenciar o bloco de células de memória do arranjo. \pause
 
 Apesar do bloco de memória reservado para o arranjo não poder mudar de tamanho, a variável que referencia o bloco de memória pode referenciar outro bloco de memória, com mais ou menos células.
 
@@ -1495,7 +1496,7 @@ Essa é a forma mais comum utilizada para implementar arranjos dinâmicos. Essa 
 Algumas perguntas: \pause
 
 - Quanto maior? \pause Muitas implementações dobram o tamanho. \pause
-- Como isso afeta a complexidade de tempo das operações? \pause Inserir no fim, que era constante, fica com tempo _amortizado_ de $O(1)$ (a maior parte das inserções no final é constante, mas algumas -- quanto o arranjo está cheio -- são $O(n)$). \pause
+- Como isso afeta a complexidade de tempo das operações? \pause Inserir no fim, que era constante, fica com tempo _amortizado_ de $O(1)$ (a maior parte das inserções no final é constante, mas algumas -- quando o arranjo está cheio -- são $O(n)$). \pause
 - E se a coleção ficar com poucos itens? \pause Podemos substituir o arranjo por um novo com menor capacidade! (veja a lista de exercícios)
 
 
@@ -1535,7 +1536,7 @@ Veremos a seguir como fazer as implementações desses TADs de maneira que o tem
 
 Capítulo 7, 8, 9 - Pilhas, filas e listas - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na [Minha Biblioteca da UEM](https://dliportal.zbra.com.br/Login.aspx?key=UEM))
 
-Seção 10.1 - Pilhas e filas - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
+Seção 10.1 - Pilhas e filas - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. et al.
 
 Capítulo 2 - Array-Based Lists - [Open Data Structures](https://opendatastructures.org/ods-python.pdf).
 
