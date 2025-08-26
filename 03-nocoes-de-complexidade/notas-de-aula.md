@@ -13,9 +13,9 @@ urlcolor: Blue
 
 ## Introdução
 
-Quando fazemos o projeto de uma função ou de um tipo de dado separamos a especificação (o que) da implementação (como). \pause
+Quando fazemos o projeto de uma função ou de um tipo de dado, separamos a especificação (o que) da implementação (como). \pause
 
-Isso trás diversos benefícios, entre eles: \pause
+Isso traz diversos benefícios, entre eles: \pause
 
 - Oculta a complexidade da implementação (abstração); \pause
 
@@ -26,15 +26,15 @@ Isso trás diversos benefícios, entre eles: \pause
 
 ## Complexidade de algoritmos
 
-Se podemos fazer a implementação de diversas maneirais, quais critérios podemos utilizar para escolher uma implementação? \pause
+Se podemos fazer a implementação de diversas maneiras, quais critérios podemos utilizar para escolher uma implementação? \pause
 
 - Simplicidade; \pause
 
-- Consumo de recurso (tempo, memória, energia, etc).
+- Consumo de recursos (tempo, memória, energia, etc).
 
 \pause
 
-Formalmente, o consumo de recurso de um algoritmo é chamada de **complexidade do algoritmo**.
+Formalmente, o consumo de recursos de um algoritmo é chamada de **complexidade do algoritmo**.
 
 
 ## Análise de algoritmos
@@ -60,9 +60,9 @@ A análise de um algoritmo pode ser: \pause
 
 - Teórica;\pause
 
-A análise experimental é mais específica pois dependente da linguagem, do compilador / interpretador, do hardware, etc. \pause
+A análise experimental é mais específica, pois depende da linguagem, do compilador / interpretador, do hardware, etc. \pause
 
-A análise teórica (ou analítica) é mais geral e provê entendimento das propriedades e limitações inerentes ao algoritmo. \pause
+A análise teórica (ou analítica) é mais geral e provê o entendimento das propriedades e limitações inerentes ao algoritmo. \pause
 
 As duas formas de análise são complementares. \pause
 
@@ -126,7 +126,7 @@ def maximo(lst: list[int]) -> int:
 Vamos fazer a análise da função máximo para determinar a sua complexidade de tempo, isto é, determinar
 como o tempo de execução ($T(n)$) está relacionado com o tamanho da entrada ($n$ - quantidade de elementos de `lst`). \pause
 
-Quais são as operações mais executadas pela função? \pause O incremente e comparação de `i` (que estão implícitos) e a comparação de `max`. \pause
+Quais são as operações mais executadas pela função? \pause O incremento e a comparação de `i` (que estão implícitos) e a comparação de `max`. \pause
 
 Quantas vezes a operação `<` é executada? \pause $n - 1$. \pause
 
@@ -173,7 +173,7 @@ def contem(lst: list[int], x: int) -> bool:
 <div class="column" width="50%">
 Para uma entrada de tamanho $n$, quantas vezes a operação `==` é executada? \pause
 
-Depende dos valores entrada! \pause
+Depende dos valores de entrada! \pause
 
 - Melhor caso: `x` é o primeiro de `lst`, 1 vez \pause
 
@@ -235,6 +235,7 @@ $\displaystyle \sum_{k = 1}^{n} (n - k)
 \pause = \sum_{k = 1}^{n} n - \sum_{k = 1}^{n} k
 \pause = n^2 - \frac{n(n - 1)}{2} \pause$
 
+
 Portanto, a complexidade de tempo de `ordena_selecao` é $T(n) = \displaystyle \frac{n^2 - n}{2}$
 
 </div>
@@ -252,7 +253,7 @@ Para podermos determinar qual algoritmo é mais eficiente (tem menor complexidad
 
 - Comparar a complexidade. \pause
 
-Agora vamos ver a **notação assintótica**, que permite expressar e comparar mais facilmente complexidades de tempos. \pause Vamos ver três notações:
+Agora vamos ver a **notação assintótica**, que permite expressar e comparar mais facilmente complexidades de tempo. \pause Vamos ver três notações:
 
 - Notação $O$
 - Notação $\Omega$
@@ -263,7 +264,7 @@ Agora vamos ver a **notação assintótica**, que permite expressar e comparar m
 
 A notação $O$ descreve um **limite assintótico superior** para uma função. \pause
 
-Para uma função $g(n)$, denotamos por $O(g(n))$ o conjunto de funções $\{f(n)$: existem constantes positivas $c$ e $n_0$ tal que $0 \le f(n) \le c g(n)$ para todo $n \ge n_0\}$.
+Para uma função $g(n)$, denotamos por $O(g(n))$ o conjunto de funções {$f(n)$: existem constantes positivas $c$ e $n_0$ tal que $0 \le f(n) \le c g(n)$ para todo $n \ge n_0$ }.
 
 \includegraphics[trim=37cm 3cm 37cm 0pt,clip, width=4.5cm]{imagens/Fig-3-1.pdf}
 
@@ -274,7 +275,7 @@ Para uma função $g(n)$, denotamos por $O(g(n))$ o conjunto de funções $\{f(n
 
 ## Notação $O$ -- $O$ grande -- _Big-oh_
 
-Escrevemos $f(n) = O(g(n))$ para indicar que $f(n) \in O(g(n))$ \pause
+Escrevemos $f(n) = O(g(n))$ para indicar que $f(n) \in O(g(n))$. \pause
 
 Informalmente, dizemos que $f(n)$ cresce no máximo tão rapidamente quanto $g(n)$.
 
@@ -296,7 +297,7 @@ $n^3 = O(n^4)$? \pause Sim.
 
 A notação $\Omega$ descreve um **limite assintótico inferior** para uma função. \pause
 
-Para uma função $g(n)$, denotamos por $\Omega(g(n))$ o conjunto de funções $\{f(n)$: existem constantes positivas $c$ e $n_0$ tal que $0 \le c g(n) \le f(n)$ para todo $n \ge n_0\}$
+Para uma função $g(n)$, denotamos por $\Omega(g(n))$ o conjunto de funções {$f(n)$: existem constantes positivas $c$ e $n_0$ tal que $0 \le c g(n) \le f(n)$ para todo $n \ge n_0$ }
 
 \includegraphics[trim=79cm 3cm 0cm 0pt,clip, width=4.5cm]{imagens/Fig-3-1.pdf}
 
@@ -329,7 +330,7 @@ $n^2 = \Omega(n)$? \pause Sim.
 
 A notação $\Theta$ descreve um **limite assintótico restrito** (justo) para uma função. \pause
 
-Para uma função $g(n)$, denotamos por $\Theta(g(n))$ o conjunto de funções $\{f(n)$: existem constantes positivas $c_1$, $c_2$ e $n_0$ tal que $0 \le c_1 g(n) \le f(n) \le c_2 g(n)$ para todo $n \ge n_0\}$
+Para uma função $g(n)$, denotamos por $\Theta(g(n))$ o conjunto de funções {$f(n)$: existem constantes positivas $c_1$, $c_2$ e $n_0$ tal que $0 \le c_1 g(n) \le f(n) \le c_2 g(n)$ para todo $n \ge n_0$ }.
 
 \includegraphics[trim=0cm 3cm 79cm 0pt,clip, width=4.5cm]{imagens/Fig-3-1.pdf}
 
@@ -405,4 +406,4 @@ $f(n) = \Theta(g(n))$ semelhante a $a = b$
 
 Capítulo 3 - Pesquisa, ordenação e análise de complexidade - Fundamentos de Python: Estruturas de dados. Kenneth A. Lambert. (Disponível na [Minha Biblioteca da UEM](https://dliportal.zbra.com.br/Login.aspx?key=UEM))
 
-Seção 3.1 - Notação assintótica - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. at all.
+Seção 3.1 - Notação assintótica - Algoritmos: Teoria e Prática, 3a. edição, Cormen, T. et al.
