@@ -235,6 +235,7 @@ $\displaystyle \sum_{k = 1}^{n} (n - k)
 \pause = \sum_{k = 1}^{n} n - \sum_{k = 1}^{n} k
 \pause = n^2 - \frac{n(n - 1)}{2} \pause$
 
+\ \
 
 Portanto, a complexidade de tempo de `ordena_selecao` é $T(n) = \displaystyle \frac{n^2 - n}{2}$
 
