@@ -17,7 +17,7 @@ urlcolor: Blue
 
 @) O que acontece se uma busca binária for executada em um arranjo não ordenado?
 
-@) Porque o tempo de execução da busca binária é $O(lg(n))$?
+@) Por que o tempo de execução da busca binária é $O(lg(n))$?
 
 
 ## Começando
@@ -28,7 +28,7 @@ urlcolor: Blue
 
 @) Modifique a implementação da busca binária para funcionar com arranjos em ordem não crescente.
 
-@) Implemente o TAD Dicionario usando arranjo ordenado e busca binária.
+@) Implemente o TAD Dicionário usando arranjo ordenado e busca binária.
 
 
 ## Praticando
@@ -65,9 +65,9 @@ urlcolor: Blue
         return False
     ```
 
-    Enuncie uma invariante para o a função de busca binária vista em sala.
+    Enuncie uma invariante para a função de busca binária vista em sala.
 
 
 ## Desafios
 
-@) Implemente a busca binária de forma que haja apenas uma comparação (dentre do laço) entre a chave e o valor do meio do arranjo.
+@) Implemente a busca binária de forma que haja apenas uma comparação (dentro do laço) entre a chave e o valor do meio do arranjo.

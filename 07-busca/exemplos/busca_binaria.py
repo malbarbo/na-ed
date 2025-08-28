@@ -1,7 +1,7 @@
 def busca_binaria(valores: list[int], chave: int) -> int:
     '''
     Se *chave* está presente em *valores*, devolve o índice i tal que
-    *valores[i] == chave*. Senão devolve o índice i tal que a inserção de
+    *valores[i] == chave*. Senão, devolve o índice i tal que a inserção de
     *chave* na posição *i* de *valores* mantém *valores* em ordem não
     decrescente.
 

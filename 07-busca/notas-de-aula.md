@@ -11,9 +11,9 @@ urlcolor: Blue
 
 ## Introdução
 
-Os TAD's Pilha, Fila e FilaDupla, permitem o armazenamento e recuperação de itens independente do conteúdo. \pause
+Os TAD's Pilha, Fila e FilaDupla, permitem o armazenamento e a recuperação de itens independentemente do conteúdo. \pause
 
-O TAD Lista tem apenas uma operação que é dependente do conteúdo: `remove_item`. \pause
+O TAD Lista tem apenas uma operação que depende do conteúdo: `remove_item`. \pause
 
 Vamos estudar um TAD em que a maioria das operações depende do conteúdo dos itens armazenados.
 
@@ -22,7 +22,7 @@ Vamos estudar um TAD em que a maioria das operações depende do conteúdo dos i
 
 Um **dicionário**, também chamado de arranjo associativo ou mapa, é um tipo abstrato de dados que representa uma coleção de associações chave-valor, onde cada chave é única. \pause
 
-As operações comuns em um dicionário são a associação de uma chave com um valor, a busca do valor associado com uma chave e a exclusão de uma chave e o valor associado.
+As operações comuns em um dicionário são a associação de uma chave com um valor, a busca do valor associado a uma chave e a exclusão de uma chave e do valor associado.
 
 
 ## Dicionário
@@ -43,15 +43,15 @@ class Dicionario:
   def associa(self, chave: str, valor: int):
     '''Associa a *chave* com o *valor* no dicionário.
     Se *chave* já está associada com um valor, ele
-    é sustituído por *valor*.'''
+    é substituído por *valor*.'''
 
   def busca(self, chave: str) -> int | None:
-    '''Devolve o valor associado com *chave* no dicio-
-    nário ou None se a chave não está no dicionário.'''
+    '''Devolve o valor associado à *chave* no dicio-
+    nário ou None se a chave não estiver no dicionário.'''
 
   def remove(self, chave: str):
-    '''Remove a *chave* e o valor associado com ela do
-    dicionário. Não faz nada se a *chave* não está no
+    '''Remove a *chave* e o valor associado a ela do
+    dicionário. Não faz nada se a *chave* não estiver no
     dicionário.'''
 ```
 
@@ -118,9 +118,9 @@ True
 Como podemos implementar o TAD Dicionário utilizando arranjo? \pause
 
 - Armazenamos um par chave-valor em cada posição do arranjo. \pause
-- Busca:  \pause busca por todos os itens, se a chave está presente, devolve o valor associado, senão devolve `None`{.python}. \pause
-- Associação: \pause _busca_ por todos os itens, se a chave está presente, atualiza o valor, senão adiciona a nova associação chave-valor no final. \pause
-- Remoção: \pause _busca_ por todos os itens, se a chave está presente, troca pelo último item e remove o último. \pause
+- Busca:  \pause percorre todos os itens; se a chave está presente, devolve o valor associado; senão, devolve `None`{.python}. \pause
+- Associação: \pause _busca_ a chave; se estiver presente, atualiza o valor; senão, adiciona a nova associação chave-valor no final. \pause
+- Remoção: \pause _busca_ a chave; se estiver presente, troca o item com o último e remove o último. \pause
 
 </div>
 <div class="column" width="48%">
@@ -160,7 +160,7 @@ class Dicionario:
 ```python
     def __busca(self, chave: str) -> int | None:
         '''Devolve a posição da *chave* ou
-        None se a *chave* não está presente.'''
+        None se a *chave* não estiver presente.'''
 ```
 
 \pause
@@ -235,13 +235,13 @@ class Dicionario:
 
 Qual a complexidade de tempo das operações? \pause
 
-Todas têm tempo de execução $O(n)$ pois requerem uma busca que pode analisar todos os itens. \pause
+Todas têm tempo de execução $O(n)$, pois requerem uma busca que pode analisar todos os itens. \pause
 
 Será que podemos fazer melhor usando encadeamento linear? \pause
 
 Não... \pause A busca ainda precisaria analisar todos os elementos no pior caso. \pause
 
-Podemos fazer melhor? \pause As operações dependem do conteúdo do item mas não estamos usando o conteúdo para organizar os itens.
+Podemos fazer melhor? \pause As operações dependem do conteúdo do item, mas não estamos usando o conteúdo para organizar os itens.
 
 </div>
 </div>
@@ -249,11 +249,11 @@ Podemos fazer melhor? \pause As operações dependem do conteúdo do item mas n�
 
 ## Busca eficiente
 
-Como organizar uma coleção de cartas Pokémon em um monte de maneira que seja possível encontrar uma carta rapidamente, isso é, sem precisar olhar todas elas? \pause
+Como organizar uma coleção de cartas Pokémon em um monte de maneira que seja possível encontrar uma carta rapidamente, isto é, sem precisar olhar todas elas? \pause
 
 Se as cartas estiverem em ordem alfabética, dividimos o monte aproximadamente ao meio e olhamos para a carta que está no topo da segunda metade. Se for a carta que estamos procurando, ótimo, terminamos! Caso contrário:
 
-- Se a carta que estamos procurando vem antes, em ordem alfabética, repetidos o processo para a primeira metade;
+- Se a carta que estamos procurando vem antes, em ordem alfabética, repetimos o processo para a primeira metade;
 - Se a carta vem depois, repetimos o processo para a segunda metade descartando a carta que já verificamos;
 - Se o monte ficar vazio, concluímos que a carta não está presente.
 
@@ -483,7 +483,7 @@ A implementação fica como exercício. \pause
 
 Qual é a complexidade de tempo de `busca`? \pause $O(\lg n)$. \pause
 
-E a complexidade de tempo `associa` e `remove`? \pause Continua sendo $O(n)$!
+E a complexidade de tempo de `associa` e `remove`? \pause Continua sendo $O(n)$!
 
 
 ## Avaliação das implementações de dicionário

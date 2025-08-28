@@ -84,7 +84,7 @@ class Dicionario:
     def associa(self, chave: str, valor: int):
         '''
         Associa a *chave* com o *valor* no dicionário. Se *chave* já está
-        associada com um valor, ele é sustituído por *valor*.
+        associada com um valor, ele é substituído por *valor*.
         '''
         i = self.__busca(chave)
         if i is not None:
@@ -94,8 +94,8 @@ class Dicionario:
 
     def busca(self, chave: str) -> int | None:
         '''
-        Devolve o valor associado com *chave* no dicionário ou None se a chave
-        não está no dicionário.
+        Devolve o valor associado à *chave* no dicionário ou None se a chave
+        não estiver no dicionário.
         '''
         i = self.__busca(chave)
         if i is not None:
@@ -105,7 +105,7 @@ class Dicionario:
 
     def remove(self, chave: str):
         '''
-        Remove a *chave* e o valor associado com ela do dicionário. Não faz
+        Remove a *chave* e o valor associado a ela do dicionário. Não faz
         nada se a *chave* não está no dicionário.
         '''
         i = self.__busca(chave)

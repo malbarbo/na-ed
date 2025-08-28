@@ -42,7 +42,7 @@ class Dicionario:
     cria um dicionário adicionando cada número (string) como chave associada
     com o próprio número.
 
-    Em seguida, para cada número da lista o get é executado para verificar se a
+    Em seguida, para cada número da lista, o método get é executado para verificar se a
     associação está correta. Depois a associação é removida e todas as outras
     associações são verificadas.
 
@@ -84,7 +84,7 @@ class Dicionario:
     def associa(self, chave: str, valor: int):
         '''
         Associa a *chave* com o *valor* no dicionário. Se *chave* já está
-        associada com um valor, ele é sustituído por *valor*.
+        associada com um valor, ele é substituído por *valor*.
         '''
         i = self.__busca(chave)
         if i < len(self.itens) and self.itens[i].chave == chave:
@@ -94,8 +94,8 @@ class Dicionario:
 
     def get(self, chave: str) -> int | None:
         '''
-        Devolve o valor associado com *chave* no dicionário ou None se a chave
-        não está no dicionário.
+        Devolve o valor associado à *chave* no dicionário ou None se a chave
+        não estiver no dicionário.
         '''
         i = self.__busca(chave)
         if i < len(self.itens) and self.itens[i].chave == chave:
@@ -105,7 +105,7 @@ class Dicionario:
 
     def remove(self, chave: str):
         '''
-        Remove a *chave* e o valor associado com ela do dicionário. Não faz
+        Remove a *chave* e o valor associado a ela do dicionário. Não faz
         nada se a *chave* não está no dicionário.
         '''
         i = self.__busca(chave)
@@ -115,7 +115,7 @@ class Dicionario:
     def __busca(self, chave: str) -> int:
         '''
         Se *chave* está presente em *itens*, devolve o índice i tal que
-        *itens[i] == chave*. Senão devolve o índice i tal que a inserção de
+        *itens[i] == chave*. Senão, devolve o índice i tal que a inserção de
         *chave* na posição *i* de *itens* mantém *itens* em ordem não
         decrescente.
 
