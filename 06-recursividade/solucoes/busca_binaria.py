@@ -1,6 +1,6 @@
 def busca_binaria(lst: list[int], val: int) -> bool:
     '''
-    Devolve True se *val* está em *lst*, False caso contrário.
+    Devolve True se *val* está em *lst*, e False caso contrário.
 
     Requer que os elementos de *lst* estejam em ordem não decrescente.
 
@@ -11,7 +11,7 @@ def busca_binaria(lst: list[int], val: int) -> bool:
     True
     >>> lst = [3, 6, 8, 10, 12, 12, 16, 20]
     >>> for val in range(25):
-    ...     # o resultado da busca binária deve ser o mesmo que in
+    ...     # o resultado da busca binária deve ser o mesmo que o do operador in
     ...     assert busca_binaria(lst, val) == (val in lst)
     '''
     def _busca_binaria(lst: list[int], val: int, ini: int, fim: int) -> bool:

@@ -1,8 +1,8 @@
 def elevado(a: float, n: int) -> float:
     '''
-    Calcula o valor *a^n* (*a* elevado a potência *n*).
+    Calcula o valor *a^n* (*a* elevado à potência *n*).
 
-    Requer quer a != 0 e n >= 0:
+    Requer que a != 0 e n >= 0:
 
     Exemplos
     >>> elevado(2.0, 0)

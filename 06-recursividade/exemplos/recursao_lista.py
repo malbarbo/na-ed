@@ -33,7 +33,7 @@ def soma(lst: Lista) -> int:
 
 def num_itens(lst: Lista) -> int:
     '''
-    Devolve a quantidade de itens em *lst**.
+    Devolve a quantidade de itens em *lst*.
 
     Exemplos
     >>> num_itens(None)
@@ -102,7 +102,7 @@ def copia(lst: Lista) -> Lista:
     >>> lsta = No(10, No(20, No(30, None)))
     >>> lstb = copia(lsta)
     >>> # quando mudamos lsta,
-    >>> # lstb não é alterado pois é uma cópia
+    >>> # lstb não é alterada pois é uma cópia
     >>> lsta.primeiro = 1
     >>> lsta.resto.primeiro = 2
     >>> lsta.resto.resto.primeiro = 3
@@ -137,15 +137,15 @@ def soma1(lst: Lista) -> None:
 
 def duplica(lst: Lista) -> None:
     '''
-    Modifica *lst* criando uma cópia de cada nó que é colocado após o nó copiado.
+    Modifica *lst*, inserindo uma cópia de cada nó após o nó original.
 
     Exemplos
     >>> lst = No(1, No(2, None))
     >>> duplica(lst)
     >>> lst
     No(primeiro=1, resto=No(primeiro=1, resto=No(primeiro=2, resto=No(primeiro=2, resto=None))))
-    >>> # A modificação do primeiro
-    >>> # não pode alterar o segundo!
+    >>> # A modificação do primeiro nó
+    >>> # não pode alterar o nó copiado!
     >>> lst.primeiro = 20
     >>> lst.resto.primeiro
     1

@@ -13,7 +13,7 @@ Lista = No | None
 
 def maximo(lst: Lista) -> int | None:
     '''
-    Devolve o valor máximo de *lst* ou None se *lst* é None.
+    Devolve o valor máximo de *lst* ou None se a lista for vazia.
 
     Exemplos
     >>> maximo(None) is None

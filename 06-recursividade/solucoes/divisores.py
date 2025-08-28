@@ -2,7 +2,7 @@ def divisores(n: int, x: int) -> list[int]:
     '''
     Devolve uma lista com os divisores de *n* que são *<= x*.
 
-    Requer quer 0 <= x <= n
+    Requer que 0 <= x <= n
 
     Exemplos
     >>> divisores(0, 0)

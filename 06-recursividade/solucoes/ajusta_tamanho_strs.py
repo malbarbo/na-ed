@@ -14,7 +14,7 @@ Lista = No | None
 def ajusta_tamanho_str(s: str, n: int) -> str:
     '''
     Devolve uma string baseada em *s* com *n* caracteres.
-    Se *n < len(s)*, devolve uma string com os primeiro *n* caracteres de *s*
+    Se *n < len(s)*, devolve uma string com os primeiros *n* caracteres de *s*
     Se *n > len(s)*, devolve a string *s* seguida de espaços em branco.
     Se *n == len(s)*, devolve *s*.
 

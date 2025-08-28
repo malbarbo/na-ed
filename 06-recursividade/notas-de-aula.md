@@ -11,15 +11,15 @@ urlcolor: Blue
 
 ## Introdução
 
-Uma função é **recursiva** quando ela chama a si mesmo de forma direta ou indireta. \pause
+Uma função é **recursiva** quando ela chama a si mesma de forma direta ou indireta. \pause
 
 A recursividade é uma técnica muito poderosa e bastante utilizada na Computação e Matemática. \pause
 
-De certa maneira a recursividade é um caso especial da decomposição de problemas. \pause
+De certa maneira, a recursividade é um caso especial da decomposição de problemas. \pause
 
-De forma geral podemos resolver um problema decompondo-o em subproblemas mais simples, resolvendo os subproblemas e combinando as soluções para obter a solução do problema inicial. \pause
+De forma geral, podemos resolver um problema decompondo-o em subproblemas mais simples, resolvendo os subproblemas e combinando as soluções para obter a solução do problema inicial. \pause
 
-A recursividade surge quando decompomos um problema em subproblemas do _mesmo tipo_, nesses casos podemos utilizar _o mesmo processo_ para resolver o problema inicial e os subproblemas. \pause Note que, para que o processo funcione, devemos definir situações limites em que o problema seja resolvido diretamente, sem precisar ser decomposto, que são os casos-base.
+A recursividade surge quando decompomos um problema em subproblemas do _mesmo tipo_, nesses casos, podemos utilizar _o mesmo processo_ para resolver o problema inicial e os subproblemas. \pause Note que, para que o processo funcione, devemos definir situações limites em que o problema seja resolvido diretamente, sem precisar ser decomposto, que são os casos-base.
 
 
 ## Formas de recursividade
@@ -37,7 +37,7 @@ Vamos explorar agora essa segunda forma.
 
 ## Restrições
 
-Para escrever os próximos exemplos não vamos usar
+Para escrever os próximos exemplos, não vamos usar
 
 - Arranjos; e
 
@@ -360,7 +360,7 @@ Projete uma função que verifique se todos os elementos de uma lista são pares
 ```python
 def todos_pares(lst: Lista) -> bool:
     '''Devolve True se todos os elementos
-    de *lst* são pares, False caso contrário.
+    de *lst* são pares, e False caso contrário.
 
                         lst
              /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
@@ -397,7 +397,7 @@ def todos_pares(lst: Lista) -> bool:
 ```python
 def todos_pares(lst: Lista) -> bool:
     '''Devolve True se todos os elementos
-    de *lst* são pares, False caso contrário.
+    de *lst* são pares, e False caso contrário.
 
                         lst
              /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
@@ -434,7 +434,7 @@ def todos_pares(lst: Lista) -> bool:
 ```python
 def todos_pares(lst: Lista) -> bool:
     '''Devolve True se todos os elementos
-    de *lst* são pares, False caso contrário.
+    de *lst* são pares, e False caso contrário.
 
                         lst
              /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
@@ -474,7 +474,7 @@ def todos_pares(lst: Lista) -> bool:
 ```python
 def todos_pares(lst: Lista) -> bool:
     '''Devolve True se todos os elementos
-    de *lst* são pares, False caso contrário.
+    de *lst* são pares, e False caso contrário.
 
                         lst
              /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
@@ -512,7 +512,7 @@ def todos_pares(lst: Lista) -> bool:
 ```python
 def todos_pares(lst: Lista) -> bool:
     '''Devolve True se todos os elementos
-    de *lst* são pares, False caso contrário.
+    de *lst* são pares, e False caso contrário.
 
                         lst
              /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
@@ -543,7 +543,7 @@ def todos_pares(lst: Lista) -> bool:
 ```python
 def todos_pares(lst: Lista) -> bool:
     '''Devolve True se todos os elementos
-    de *lst* são pares, False caso contrário.
+    de *lst* são pares, e False caso contrário.
 
                         lst
              /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
@@ -580,7 +580,7 @@ def todos_pares(lst: Lista) -> bool:
 ```python
 def todos_pares(lst: Lista) -> bool:
     '''Devolve True se todos os elementos
-    de *lst* são pares, False caso contrário.
+    de *lst* são pares, e False caso contrário.
 
                         lst
              /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
@@ -609,7 +609,7 @@ def todos_pares(lst: Lista) -> bool:
 ```python
 def todos_pares(lst: Lista) -> bool:
     '''Devolve True se todos os elementos
-    de *lst* são pares, False caso contrário.
+    de *lst* são pares, e False caso contrário.
 
                         lst
              /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
@@ -645,7 +645,7 @@ def todos_pares(lst: Lista) -> bool:
 ```python
 def todos_pares(lst: Lista) -> bool:
     '''Devolve True se todos os elementos
-    de *lst* são pares, False caso contrário.
+    de *lst* são pares, e False caso contrário.
 
                         lst
              /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
@@ -674,7 +674,7 @@ def todos_pares(lst: Lista) -> bool:
 ```python
 def todos_pares(lst: Lista) -> bool:
     '''Devolve True se todos os elementos
-    de *lst* são pares, False caso contrário.
+    de *lst* são pares, e False caso contrário.
 
                         lst
              /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\
@@ -716,7 +716,7 @@ Projete uma função que verifique se um item está em uma lista.
 ```python
 def contem(lst: Lista, v: int) -> bool:
     '''Devolve True se *v* está em *lst*,
-    False caso contrário.
+    e False caso contrário.
 
                       lst              v
            /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
@@ -756,7 +756,7 @@ def contem(lst: Lista, v: int) -> bool:
 ```python
 def contem(lst: Lista, v: int) -> bool:
     '''Devolve True se *v* está em *lst*,
-    False caso contrário.
+    e False caso contrário.
 
                       lst              v
            /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
@@ -794,7 +794,7 @@ def contem(lst: Lista, v: int) -> bool:
 ```python
 def contem(lst: Lista, v: int) -> bool:
     '''Devolve True se *v* está em *lst*,
-    False caso contrário.
+    e False caso contrário.
 
                       lst              v
            /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
@@ -825,7 +825,7 @@ def contem(lst: Lista, v: int) -> bool:
 ```python
 def contem(lst: Lista, v: int) -> bool:
     '''Devolve True se *v* está em *lst*,
-    False caso contrário.
+    e False caso contrário.
 
                       lst              v
            /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
@@ -862,7 +862,7 @@ def contem(lst: Lista, v: int) -> bool:
 ```python
 def contem(lst: Lista, v: int) -> bool:
     '''Devolve True se *v* está em *lst*,
-    False caso contrário.
+    e False caso contrário.
 
                       lst              v
            /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
@@ -891,7 +891,7 @@ def contem(lst: Lista, v: int) -> bool:
 ```python
 def contem(lst: Lista, v: int) -> bool:
     '''Devolve True se *v* está em *lst*,
-    False caso contrário.
+    e False caso contrário.
 
                       lst              v
            /¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯\  |
@@ -1143,8 +1143,8 @@ Projete uma função que modifique uma lista criando uma cópia de cada item da 
 ```python
 def duplica(lst: Lista):
     '''
-    Modifica *lst* criando uma cópia de cada nó
-    que é colocado após o nó copiado.
+    Modifica *lst*, inserindo uma cópia de cada nó
+    após o nó original.
 
     Como implementar duplica(lst) usando
     lst.primeiro e duplica(lst.resto)?
@@ -1178,8 +1178,8 @@ def duplica(lst: Lista):
 ```python
 def duplica(lst: Lista):
     '''
-    Modifica *lst* criando uma cópia de cada nó
-    que é colocado após o nó copiado.
+    Modifica *lst*, inserindo uma cópia de cada nó
+    após o nó original.
 
     Como implementar duplica(lst) usando
     lst.primeiro e duplica(lst.resto)?
@@ -1211,8 +1211,8 @@ def duplica(lst: Lista):
 ```python
 def duplica(lst: Lista):
     '''
-    Modifica *lst* criando uma cópia de cada nó
-    que é colocado após o nó copiado.
+    Modifica *lst*, inserindo uma cópia de cada nó
+    após o nó original.
 
     Como implementar duplica(lst) usando
     lst.primeiro e duplica(lst.resto)?
@@ -1236,8 +1236,8 @@ def duplica(lst: Lista):
 ```python
 def duplica(lst: Lista):
     '''
-    Modifica *lst* criando uma cópia de cada nó
-    que é colocado após o nó copiado.
+    Modifica *lst*, inserindo uma cópia de cada nó
+    após o nó original.
 
     Como duplicar um nó p e atualizar p?
     '''
@@ -1261,7 +1261,7 @@ Projetar uma função recursiva pode ser um desafio se for preciso "inventar" um
 
 No entanto, se fizermos a decomposição estrutural, isto é, decompor o problema conforme a estrutura do dado que representa o problema, então o projeto de funções recursivas se torna um processo mais sistemático. \pause
 
-Podemos aplicar a o processo de projeto de funções recursivas baseada na decomposição estrutural em dados que não sejam listas? \pause Sim, podemos aplicar em qualquer dado que tenha autorreferência!
+Podemos aplicar o processo de projeto de funções recursivas baseada na decomposição estrutural em dados que não sejam listas? \pause Sim, podemos aplicar em qualquer dado que tenha autorreferência!
 
 
 ## Recursão com número natural {.t}
@@ -1305,7 +1305,7 @@ Projete uma função que some todos os números naturais até um dado $n$.
 def soma(n: int) -> int:
     '''
     Devolve a soma de todos os números
-    naturais até *n*. Requer que n >=0.
+    naturais até *n*. Requer que n >= 0.
     Exemplos
     >>> soma(0)
     0
@@ -1502,7 +1502,7 @@ def soma(lst: list[int]) -> int:
 
 Qual é o problema com essa estratégia? \pause
 
-A operação de _slice_ cria um novo arranjo a cada chamada, o que é custoso. \pause
+A operação de fatiamento (_slice_) cria um novo arranjo a cada chamada, o que é custoso. \pause
 
 Podemos fazer melhor? \pause Sim!
 </div>
@@ -1516,7 +1516,7 @@ Podemos fazer melhor? \pause Sim!
 
 \small
 
-Ao invés de "diminuir" o arranjo do início, vamos diminuir do fim usando um "tamanho virtual". \pause
+Em vez de "diminuir" o arranjo do início, vamos diminuir do fim usando um "tamanho virtual". \pause
 
 Junto com o arranjo passamos também um valor $n$, que representa quantos elementos a partir do início do arranjo devem ser considerados. \pause Na chamada recursiva, passamos o arranjo inalterado e o valor $n - 1$, que representa a diminuição do arranjo. \pause O modelo fica assim:
 
@@ -1576,22 +1576,22 @@ Não parece melhor que um laço de repetição... \pause Além disso, a função
 
 Esse exemplo de função recursiva com arranjo é ilustrativo e de fato não é muito útil. \pause
 
-Na prática, recursividade em arranjo é feita em subarranjos quaisquer, e não em um subarranjo sem o último elemento. \pause
+Na prática, a recursividade em arranjos é aplicada a subarranjos quaisquer, e não em um subarranjo sem o último elemento. \pause
 
-Nesse caso, a função recebe como parâmetro além do arranjo um índice de início e outro de fim, que define o subarranjo que vai ser processado. \pause
+Nesse caso, a função recebe como parâmetros, além do arranjo, um índice de início e outro de fim, que define o subarranjo que vai ser processado. \pause
 
 Note que dessa forma não temos mais recursão estrutural e sim recursão generativa. \pause É preciso determinar uma forma específica para o subarranjo.
 
 
 ## Palíndromo
 
-Projete uma função recursiva que determine se um arranjo de números é palíndromo, isto é, tem os mesmos elementos quando lido da direita para a esquerda e da esquerda para a direita. \pause
+Projete uma função recursiva que determine se um arranjo de números é um palíndromo, ou seja, se possui os mesmos elementos quando lido da esquerda para a direita e vice-versa. \pause
 
-Para esse problema o principal desafio é definir como decompor o problema em subproblema(s) da mesma natureza. \pause
+Para esse problema o principal desafio é definir como decompor o problema em subproblema(s) do mesmo tipo. \pause
 
-Por exemplo, para o arranjo `[4, 1, 3, 3, 1, 4]`{.python}, que subproblema (subarranjo) podemos resolver de forma recursiva que nos ajude a resolver o problema para o arranjo todo? \pause
+Por exemplo, para o arranjo `[4, 1, 3, 3, 1, 4]`{.python}, que subproblema (subarranjo) podemos resolver de forma recursiva que nos ajude a resolver o problema para o arranjo inteiro? \pause
 
-Se determinamos que `[1, 3, 3, 1]`{.python} (arranjo original sem o primeiro e último) é palíndromo, então podemos utilizar esse fato para determinar se o arranjo original é palíndromo verificando se o primeiro e último elementos são iguais. \pause
+Se determinamos que `[1, 3, 3, 1]`{.python} (arranjo original sem o primeiro e o último elemento) é palíndromo, então podemos utilizar esse fato para determinar se o arranjo original é palíndromo verificando se o primeiro e último elementos são iguais. \pause
 
 Em que situação não precisamos decompor o problema original? \pause Se o subarranjo é vazio ou tem apenas um elemento.
 
@@ -1605,9 +1605,9 @@ Em que situação não precisamos decompor o problema original? \pause Se o suba
 ```python
 def palindromo(lst: list[int], ini: int, fim: int) -> bool:
     '''
-    Devolve True se o subarranjo *lst[ini:fim+1]* é palíndromo,
-    isto é, o subarranjo tem os mesmos elementos quando visto
-    da direita para esquerda e da esquerda para a direita.
+    Devolve True se o subarranjo *lst[ini:fim+1]* palíndromo,
+    ou seja, se possui os mesmos elementos quando lido da
+    esquerda para a direita e vice-versa.
     Requer que 0 <= ini < len(lst) e 0 <= fim < len(lst)
     Exemplos
     >>> palindromo([1, 1, 3, 4, 3, 1], 1, 5)
@@ -1637,9 +1637,9 @@ def palindromo(lst: list[int], ini: int, fim: int) -> bool:
 ```python
 def palindromo(lst: list[int], ini: int, fim: int) -> bool:
     '''
-    Devolve True se o subarranjo *lst[ini:fim+1]* é palíndromo,
-    isto é, o subarranjo tem os mesmos elementos quando visto
-    da direita para esquerda e da esquerda para a direita.
+    Devolve True se o subarranjo *lst[ini:fim+1]* palíndromo,
+    ou seja, se possui os mesmos elementos quando lido da
+    esquerda para a direita e vice-versa.
     Requer que 0 <= ini < len(lst) e 0 <= fim < len(lst)
     Exemplos
     >>> palindromo([1, 1, 3, 4, 3, 1], 1, 5)
@@ -1661,7 +1661,7 @@ Quais os problemas dessa implementação? \pause
 - Requer argumentos extras; \pause
 - Verifica a validade dos parâmetros em todas as chamadas. \pause
 
-Como podemos melhorar? \pause Vamos criar uma função auxiliar interna que recebe o inicio e o fim e deixar a função principal recebendo apenas um argumento.
+Como podemos melhorar? \pause Vamos criar uma função auxiliar interna que recebe o início e o fim e deixar a função principal recebendo apenas um argumento.
 </div>
 </div>
 
@@ -1675,8 +1675,8 @@ Como podemos melhorar? \pause Vamos criar uma função auxiliar interna que rece
 ```python
 def palindromo(lst: list[int]) -> bool:
     '''
-    Devolve True se o lst é palíndromo, isto é, tem os mesmos elementos quando
-    visto da direita para esquerda e da esquerda para a direita.
+    Devolve True se lst é um palíndromo, ou seja, se possui os mesmos elementos quando
+    lido da esquerda para a direita e vice-versa.
     Exemplos
     >>> palindromo([1, 1])
     True

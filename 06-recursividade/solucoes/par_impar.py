@@ -1,8 +1,8 @@
 def par(n: int) -> bool:
     '''
-    Devolve True se *n* é par, False caso contrário.
+    Devolve True se *n* é par, e False caso contrário.
 
-    Requer quer n >= 0.
+    Requer que n >= 0.
 
     Exemplos
     >>> par(0)
@@ -24,9 +24,9 @@ def par(n: int) -> bool:
 
 def impar(n: int) -> bool:
     '''
-    Devolve True se *n* é ímpar, False caso contrário.
+    Devolve True se *n* é ímpar, e False caso contrário.
 
-    Requer quer n >= 0.
+    Requer que n >= 0.
 
     Exemplos
     >>> impar(0)

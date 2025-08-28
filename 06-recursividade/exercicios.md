@@ -11,7 +11,7 @@ urlcolor: Blue
 
 @) O que é uma função recursiva?
 
-@) Qual é a relação entre decomposição de problema e recursividade?
+@) Qual é a relação entre decomposição de um problema e recursividade?
 
 @) Qual é a relação entre tipos com autorreferência e funções recursivas?
 
@@ -37,7 +37,7 @@ urlcolor: Blue
 
 
 <!-- lista - modificação -->
-@) Projete uma função recursiva que receba como entrada uma lista encadeada de strings e um número natural $n$, e modifique as strings da lista para que todas fiquem com tamanho $n$. Se um string tem tamanho maior que $n$, os caracteres do final devem ser descartados. Se uma string tem tamanho menor que $n$, espaços em branco devem ser adicionados ao final da string.
+@) Projete uma função recursiva que receba como entrada uma lista encadeada de strings e um número natural $n$, e modifique as strings da lista para que todas fiquem com tamanho $n$. Se uma string tem tamanho maior que $n$, os caracteres do final devem ser descartados. Se uma string tem tamanho menor que $n$, espaços em branco devem ser adicionados ao final da string.
 
 <!-- natural, repetição -->
 @) Projete uma função recursiva que receba como entrada um número $a$ (diferente de 0) e um número natural $n$ e
@@ -53,13 +53,13 @@ calcule o valor $a^n$.
 ## Avançando
 
 <!-- natural, par, impar -->
-@) Recursão indireta é quando duas ou mais funções chamam uma a outra. Defina duas funções `impar` e `par`, uma em termos da outra, isto é, a função `impar` deve chamar a função `par` e a função `par` deve chama a função `impar` (a recursão para no caso base).
+@) Recursão indireta é quando duas ou mais funções chamam uma a outra. Defina duas funções `impar` e `par`, uma em termos da outra, isto é, a função `impar` deve chamar a função `par` e a função `par` deve chamar a função `impar` (a recursão para no caso base).
 
 <!-- arranjo, verificação ordenação -->
 @) Projete uma função recursiva que verifique se um arranjo de números está em ordem não decrescente. Dica: use dois casos base.
 
 <!-- lista - filter in loco-->
-@) Projete uma função recursiva que receba como entrada uma lista encadeada de números é remova todas as ocorrências no valor 0.
+@) Projete uma função recursiva que receba como entrada uma lista encadeada de números e remova todas as ocorrências do valor 0.
 
 <!-- natural, cria lista -->
 @) Projete uma função recursiva que receba como entrada dois números naturais, $n$ e $x$, onde $x \le n$ e devolva um arranjo com os divisores de $n$ que são menores ou iguais a $x$. Por exemplo, para $n = 16$ e $x = 7$, a função deve produzir `[1, 2, 4]`{.python}.
@@ -67,6 +67,6 @@ calcule o valor $a^n$.
 
 ## Desafios
 
-@) Dados duas listas encadeadas `lsta` e `lstb`, projete uma função recursiva que verifique se `lsta` é prefixo de `lstb`, isto é `lstb` começa com `lsta`.
+@) Dados duas listas encadeadas `lsta` e `lstb`, projete uma função recursiva que verifique se `lsta` é prefixo de `lstb`, isto é, se `lstb` começa com `lsta`.
 
-@) Projete uma função recursiva que altere um arranjo de números ordenando em ordem não decrescente os seus elementos.
+@) Projete uma função recursiva que altere um arranjo de números, ordenando os seus elementos em ordem não decrescente.

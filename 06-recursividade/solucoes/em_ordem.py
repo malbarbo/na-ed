@@ -1,6 +1,6 @@
 def em_ordem(lst: list[int]) -> bool:
     '''
-    Devolve True se os elementos de *lst* estão em ordem não decrescente, False
+    Devolve True se os elementos de *lst* estão em ordem não decrescente, e False
     caso contrário.
 
     Exemplos
@@ -18,7 +18,7 @@ def em_ordem(lst: list[int]) -> bool:
     False
     '''
     def _em_ordem(lst: list[int], n: int) -> bool:
-        # Verifica se os últimos len(lst) - n elementos de lst estão em ordem
+        # Verifica se os elementos de lst a partir do índice n estão em ordem
         if n >= len(lst) - 1:
             return True
         else:
