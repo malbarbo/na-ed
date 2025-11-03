@@ -13,13 +13,16 @@ urlcolor: Blue
 
 Uma função é **recursiva** quando ela chama a si mesma de forma direta ou indireta. \pause
 
-A recursividade é uma técnica muito poderosa e bastante utilizada na Computação e Matemática. \pause
+A recursividade é uma técnica muito poderosa e bastante utilizada na Computação e Matemática.
+
+
+## Introdução
 
 De certa maneira, a recursividade é um caso especial da decomposição de problemas. \pause
 
 De forma geral, podemos resolver um problema decompondo-o em subproblemas mais simples, resolvendo os subproblemas e combinando as soluções para obter a solução do problema inicial. \pause
 
-A recursividade surge quando decompomos um problema em subproblemas do _mesmo tipo_, nesses casos, podemos utilizar _o mesmo processo_ para resolver o problema inicial e os subproblemas. \pause Note que, para que o processo funcione, devemos definir situações limites em que o problema seja resolvido diretamente, sem precisar ser decomposto, que são os casos-base.
+A recursividade surge quando decompomos um problema em subproblemas do _mesmo tipo_, nesses casos, podemos utilizar _o mesmo processo_ para resolver o problema inicial e os subproblemas. \pause Note que, para que o processo funcione, devemos definir situações limites em que o problema seja resolvido diretamente, sem precisar ser decomposto, que são os casos base.
 
 
 ## Formas de recursividade
@@ -113,8 +116,7 @@ Além disso, no caso de lista não vazia, o modelo sugere chamar a função recu
 
 O nosso trabalho é determinar como combinar o valor do primeiro item da lista com a resposta da chamada recursiva para obter a resposta da função. \pause
 
-Nos exemplos a seguir, partimos do modelo e fazemos a implementação de algumas funções.
-
+Nos exemplos a seguir, partimos do modelo e fazemos a implementação recursiva de algumas funções. \pause Também vamos mostrar a implementação usando iteração.
 
 ## Projeto de funções que processam listas
 
